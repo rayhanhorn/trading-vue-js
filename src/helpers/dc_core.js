@@ -119,7 +119,7 @@ export default class DCCore extends DCEvents {
     update_overlays(data, t) {
         for (var k in data) {
             if (k === 'price' || k === 'volume' ||
-                k === 'candle') {
+                k === 'candle' || k === 'oi') {
                 continue
             }
             if (!Array.isArray(data[k])) {
