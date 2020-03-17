@@ -108,12 +108,20 @@ export default class DataCube extends DCCore {
         let ohlcv = this.data.chart.data
         let last = ohlcv[ohlcv.length - 1]
         let tick = data['price']
+        let oiTick = data['oi']
         let volume = data['volume'] || 0
         let candle = data['candle']
         let tf = Utils.detect_interval(ohlcv)
         let t_next = last[0] + tf
         let now = Utils.now()
         let t = now >= t_next ? (now - now % tf) : last[0]
+
+        let oi = this.data.offchart.data
+        let lastOi = oi[oi.length - 1]
+        let oiTick = data['oi']
+        let oiTf = Utils.detect_interval(oi)
+        let oi_t_next = lastOi[0] + oiTf
+        let t = now >= oi_t_next ? (now - now % oiTf) : lastOi[0]
 
         if (candle) {
             // Update the entire candle
@@ -135,6 +143,12 @@ export default class DataCube extends DCCore {
             last[4] = tick
             last[5] += volume
             this.merge('chart.data', [last])
+        } else if (oiTick !== undefined) {
+            // Update an existing one
+            lastOi[2] = Math.max(oiTick, lastOi[2])
+            lastOi[3] = Math.min(oiTick, lastOi[3])
+            lastOi[4] = oiTick
+            this.merge('offchart.data', [lastOi])
         }
 
         this.update_overlays(data, t)
