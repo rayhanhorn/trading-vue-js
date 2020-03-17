@@ -108,7 +108,6 @@ export default class DataCube extends DCCore {
         let ohlcv = this.data.chart.data
         let last = ohlcv[ohlcv.length - 1]
         let tick = data['price']
-        let oiTick = data['oi']
         let volume = data['volume'] || 0
         let candle = data['candle']
         let tf = Utils.detect_interval(ohlcv)
