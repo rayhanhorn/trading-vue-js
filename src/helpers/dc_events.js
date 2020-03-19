@@ -1,8 +1,8 @@
 
 // DataCube event handlers
 
-import Utils from '../stuff/utils.js'
-import Icons from '../stuff/icons.json'
+import Utils from 'trading-vue-js';
+import Icons from 'trading-vue-js';
 
 export default class DCEvents {
 
@@ -58,7 +58,7 @@ export default class DCEvents {
         let list = [{
             type: 'Cursor', icon: Icons['cursor.png']
         }]
-        for (var tool of tools) {
+        for (tool of tools) {
             var proto = Object.assign({}, tool.info)
             let type = tool.info.type || 'Default'
             proto.type = `${tool.use_for}:${type}`
@@ -170,7 +170,7 @@ export default class DCEvents {
 
         if (!args.length) return
 
-        var q = this.layer_query(args[0], args[1])
+        q = this.layer_query(args[0], args[1])
         this.tv.$set(this.data, 'selected', q)
         this.merge(`${q}.settings`, {
             $selected: true

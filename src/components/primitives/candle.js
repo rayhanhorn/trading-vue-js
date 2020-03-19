@@ -6,7 +6,7 @@ export default class CandleExt {
     constructor(overlay, ctx, data) {
         this.ctx = ctx
         this.self = overlay
-        this.style = data.raw[6] || this.self
+        this.style = data.raw[5] || this.self
         this.draw(data)
     }
 
@@ -42,17 +42,16 @@ export default class CandleExt {
 
         this.ctx.stroke()
 
-        if (data.w > 1.5 || data.o === data.c) {
+        if (data.w > 1.5) {
 
             this.ctx.fillStyle = body_color
 
             // TODO: Move common calculations to layout.js
-            let s = data.c >= data.o ? 1 : -1
             this.ctx.fillRect(
-                Math.floor(data.x - hw -1),
-                Math.floor(data.o - 1),
+				Math.floor(data.x - hw -1),
+                Math.floor(Math.min(data.o, data.c)),
                 Math.floor(hw * 2 + 1),
-                Math.floor(s * Math.max(h, max_h))
+                Math.floor(Math.max(h, max_h))
             )
 
         } else {

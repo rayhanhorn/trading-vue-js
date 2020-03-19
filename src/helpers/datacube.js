@@ -104,7 +104,12 @@ export default class DataCube extends DCCore {
 
     // Update/append data point, depending on timestamp
     update(data) {
-
+		//console.log('offchart')
+		//console.log(this.data.offchart[0].data)
+		//console.log('onchart')
+		//console.log(this.data.chart)
+		//console.log(data)
+		
         let ohlcv = this.data.chart.data
         let last = ohlcv[ohlcv.length - 1]
         let tick = data['price']
@@ -114,14 +119,7 @@ export default class DataCube extends DCCore {
         let t_next = last[0] + tf
         let now = Utils.now()
         let t = now >= t_next ? (now - now % tf) : last[0]
-
-        let oi = this.data.offchart.data
-        let lastOi = oi[oi.length - 1]
-        let oiTick = data['oi']
-        let oiTf = Utils.detect_interval(oi)
-        let oi_t_next = lastOi[0] + oiTf
-        let t = now >= oi_t_next ? (now - now % oiTf) : lastOi[0]
-
+		
         if (candle) {
             // Update the entire candle
             if (candle.length >= 6) {
@@ -142,14 +140,38 @@ export default class DataCube extends DCCore {
             last[4] = tick
             last[5] += volume
             this.merge('chart.data', [last])
-        } else if (oiTick !== undefined) {
-            // Update an existing one
-            lastOi[2] = Math.max(oiTick, lastOi[2])
-            lastOi[3] = Math.min(oiTick, lastOi[3])
-            lastOi[4] = oiTick
-            this.merge('offchart.data', [lastOi])
         }
 
+        this.update_overlays(data, t)
+        return t >= t_next
+    }
+	// Update/append data point, depending on timestamp
+    oiupdate(data) {
+        let ohlc = this.data.offchart[0].data
+        let last = ohlc[ohlc.length - 1]
+        let tick = data['oi']
+        let tf = Utils.detect_interval(ohlc)
+        let t_next = last[0] + tf
+        let now = Utils.now()
+        let t = now >= t_next ? (now - now % tf) : last[0]
+
+		//console.log(ohlc)
+		//console.log(last)        
+		//console.log(tick)
+
+		if (t >= t_next && tick !== undefined) {
+            // And new zero-height candle
+            this.merge('offchart.OpenInterest.data', [[
+                t, tick, tick, tick, tick
+            ]])
+        } else if (tick !== undefined) {
+            // Update an existing one
+            last[2] = Math.max(tick, last[2])
+            last[3] = Math.min(tick, last[3])
+            last[4] = tick
+            this.merge('offchart.OpenInterest.data', [last])
+        }
+		
         this.update_overlays(data, t)
         return t >= t_next
     }

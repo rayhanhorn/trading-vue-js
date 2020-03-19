@@ -11,7 +11,6 @@ export default class Price {
     // Defines an inline shader (has access to both
     // target & overlay's contexts)
     init_shader() {
-
         let layout = this.comp.$props.layout
         let config = this.comp.$props.config
         let comp = this.comp
@@ -19,7 +18,6 @@ export default class Price {
 
         this.comp.$emit('new-shader', {
             target: 'sidebar', draw: ctx => {
-
                 if (!last_bar()) return
 
                 let bar = last_bar()
@@ -47,10 +45,11 @@ export default class Price {
         if (!this.shader) this.init_shader()
 
         let layout = this.comp.$props.layout
-        let last = this.comp.$props.meta.last
+        let last = this.comp.$props.data[this.comp.$props.data.length - 1]
+        // let last = this.comp.$props.data.map(x => x[4])
 
         let color = last[4] >= last[1] ? this.green() : this.red()
-        let y = layout.$2screen(last[4]) - 1
+        let y = layout.$2screen(last[4])
 
         ctx.strokeStyle = color
         ctx.setLineDash([1, 1])
@@ -65,19 +64,23 @@ export default class Price {
 
         if (!this.data.length) return undefined
         let layout = this.comp.$props.layout
-        let last = this.data[this.data.length - 1]
+        let last = this.comp.$props.data[this.comp.$props.data.length - 1]
         let y = layout.$2screen(last[4])
         let cndl = layout.c_magnet(last[0])
+        
         return {
-            y: Math.floor(cndl.c) - 1.5,
+            y,
             price: last[4],
-            color: last[4] >= last[1] ? this.green() : this.red()
+            color: last[4] >= last[1] ? this.green() : this.red()	
+			
         }
+		
     }
 
     last_price() {
-        return this.comp.$props.meta.last ?
-            this.comp.$props.meta.last[4] : undefined
+        return this.comp.$props.data[this.comp.$props.data.length - 1][4]
+        // return this.comp.$props.data.map(x => x[4]) ?
+            // this.comp.$props.meta.last[4] : undefined
     }
 
     green() {

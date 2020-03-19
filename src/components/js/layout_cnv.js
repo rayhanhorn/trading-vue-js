@@ -17,7 +17,7 @@ export function layout_cnv(self) {
     // the chart's height (VOLSCALE)
     let maxv = Math.max(...sub.map(x => x[5]))
     let vs =  $p.config.VOLSCALE * layout.height / maxv
-    var x1, x2, w, avg_w, mid, prev = undefined
+    var x1, x2, mid, prev = undefined
 
     // Subset interval against main interval
     let interval2 = Utils.detect_interval(sub)
