@@ -1,7 +1,7 @@
 
 // DataCube private methods
 
-import Utils from 'trading-vue-js';
+import Utils from '../stuff/utils.js'
 import DCEvents from './dc_events.js'
 
 export default class DCCore extends DCEvents {
