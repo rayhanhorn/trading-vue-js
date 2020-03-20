@@ -7965,6 +7965,8 @@ function layout_cnv(self) {
   var vs = $p.config.VOLSCALE * layout.height / maxv;
   var x1,
       x2,
+      w,
+      avg_w,
       mid,
       prev = undefined; // Subset interval against main interval
 
@@ -8075,7 +8077,7 @@ function () {
 
     this.ctx = ctx;
     this.self = overlay;
-    this.style = data.raw[5] || this.self;
+    this.style = data.raw[6] || this.self;
     this.draw(data);
   }
 
@@ -8095,10 +8097,11 @@ function () {
       this.ctx.lineTo(Math.floor(data.x) - 0.5, Math.floor(data.l));
       this.ctx.stroke();
 
-      if (data.w > 1.5) {
+      if (data.w > 1.5 || data.o === data.c) {
         this.ctx.fillStyle = body_color; // TODO: Move common calculations to layout.js
 
-        this.ctx.fillRect(Math.floor(data.x - hw - 1), Math.floor(Math.min(data.o, data.c)), Math.floor(hw * 2 + 1), Math.floor(Math.max(h, max_h)));
+        var s = data.c >= data.o ? 1 : -1;
+        this.ctx.fillRect(Math.floor(data.x - hw - 1), Math.floor(data.o - 1), Math.floor(hw * 2 + 1), Math.floor(s * Math.max(h, max_h)));
       } else {
         this.ctx.strokeStyle = body_color;
         this.ctx.beginPath();
@@ -8202,10 +8205,9 @@ function () {
       if (!this.comp.$props.meta.last) return;
       if (!this.shader) this.init_shader();
       var layout = this.comp.$props.layout;
-      var last = this.comp.$props.data[this.comp.$props.data.length - 1]; // let last = this.comp.$props.data.map(x => x[4])
-
+      var last = this.comp.$props.meta.last;
       var color = last[4] >= last[1] ? this.green() : this.red();
-      var y = layout.$2screen(last[4]);
+      var y = layout.$2screen(last[4]) - 1;
       ctx.strokeStyle = color;
       ctx.setLineDash([1, 1]);
       ctx.beginPath();
@@ -8219,11 +8221,11 @@ function () {
     value: function last_bar() {
       if (!this.data.length) return undefined;
       var layout = this.comp.$props.layout;
-      var last = this.comp.$props.data[this.comp.$props.data.length - 1];
+      var last = this.data[this.data.length - 1];
       var y = layout.$2screen(last[4]);
       var cndl = layout.c_magnet(last[0]);
       return {
-        y: y,
+        y: Math.floor(cndl.c) - 1.5,
         price: last[4],
         color: last[4] >= last[1] ? this.green() : this.red()
       };
@@ -8231,8 +8233,7 @@ function () {
   }, {
     key: "last_price",
     value: function last_price() {
-      return this.comp.$props.data[this.comp.$props.data.length - 1][4]; // return this.comp.$props.data.map(x => x[4]) ?
-      // this.comp.$props.meta.last[4] : undefined
+      return this.comp.$props.meta.last ? this.comp.$props.meta.last[4] : undefined;
     }
   }, {
     key: "green",
@@ -12191,7 +12192,7 @@ function () {
 
       try {
         for (var _iterator2 = tools[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          tool = _step2.value;
+          var tool = _step2.value;
           var proto = Object.assign({}, tool.info);
           var type = tool.info.type || 'Default';
           proto.type = "".concat(tool.use_for, ":").concat(type);
@@ -12326,7 +12327,7 @@ function () {
 
       this.tv.$set(this.data, 'selected', null);
       if (!args.length) return;
-      q = this.layer_query(args[0], args[1]);
+      var q = this.layer_query(args[0], args[1]);
       this.tv.$set(this.data, 'selected', q);
       this.merge("".concat(q, ".settings"), {
         $selected: true
@@ -12561,7 +12562,7 @@ function (_DCEvents) {
 
           var i = count[ov.type]++;
           ov.id = "onchart.".concat(ov.type).concat(i);
-          if (!ov.name) ov.name = ov.id;
+          if (!ov.name) ov.name = ov.type + " ".concat(i);
           if (!ov.settings) ov.settings = {};
         }
       } catch (err) {
@@ -12586,7 +12587,7 @@ function (_DCEvents) {
 
       try {
         for (var _iterator2 = this.data.offchart[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          ov = _step2.value;
+          var ov = _step2.value;
 
           if (count[ov.type] === undefined) {
             count[ov.type] = 0;
@@ -12595,7 +12596,7 @@ function (_DCEvents) {
           var _i = count[ov.type]++;
 
           ov.id = "offchart.".concat(ov.type).concat(_i);
-          if (!ov.name) ov.name = ov.id;
+          if (!ov.name) ov.name = ov.type + " ".concat(_i);
           if (!ov.settings) ov.settings = {};
         }
       } catch (err) {
@@ -12792,7 +12793,7 @@ function (_DCEvents) {
         ts[a1[i][0]] = a1[i];
       }
 
-      for (i = 0; i < a2.length; i++) {
+      for (var i = 0; i < a2.length; i++) {
         ts[a2[i][0]] = a2[i];
       }
 
