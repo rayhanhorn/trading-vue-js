@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.4 - Sat Jan 25 2020
+ * TradingVue.JS - v0.4.4 - Sat Mar 21 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -6309,7 +6309,7 @@ function () {
       });
       mc.on('panmove', function (event) {
         if (_this.drug) {
-          _this.mousedrug(_this.drug.x + event.deltaX, _this.drug.y + event.deltaY);
+          _this.mousedrag(_this.drug.x + event.deltaX, _this.drug.y + event.deltaY);
 
           _this.comp.$emit('cursor-changed', {
             grid_id: _this.id,
@@ -6561,12 +6561,23 @@ function () {
       if (delta < 0 && this.data.length <= this.MIN_ZOOM) return;
       if (delta > 0 && this.data.length > this.MAX_ZOOM) return;
       var k = this.interval / 1000;
-      this.range[0] -= delta * k * this.data.length;
+      var diff = delta * k * this.data.length;
+
+      if (event.originalEvent.ctrlKey) {
+        var offset = event.originalEvent.offsetX;
+        var diff_x = offset / (this.canvas.width - 1) * diff;
+        var diff_y = diff - diff_x;
+        this.range[0] -= diff_x;
+        this.range[1] += diff_y;
+      } else {
+        this.range[0] -= diff;
+      }
+
       this.change_range();
     }
   }, {
-    key: "mousedrug",
-    value: function mousedrug(x, y) {
+    key: "mousedrag",
+    value: function mousedrag(x, y) {
       var dt = this.drug.t * (this.drug.x - x) / this.layout.width;
       var d$ = this.layout.$_hi - this.layout.$_lo;
       d$ *= (this.drug.y - y) / this.layout.height;
@@ -7954,8 +7965,6 @@ function layout_cnv(self) {
   var vs = $p.config.VOLSCALE * layout.height / maxv;
   var x1,
       x2,
-      w,
-      avg_w,
       mid,
       prev = undefined; // Subset interval against main interval
 
@@ -8066,7 +8075,7 @@ function () {
 
     this.ctx = ctx;
     this.self = overlay;
-    this.style = data.raw[6] || this.self;
+    this.style = data.raw[5] || this.self;
     this.draw(data);
   }
 
@@ -8086,11 +8095,10 @@ function () {
       this.ctx.lineTo(Math.floor(data.x) - 0.5, Math.floor(data.l));
       this.ctx.stroke();
 
-      if (data.w > 1.5 || data.o === data.c) {
+      if (data.w > 1.5) {
         this.ctx.fillStyle = body_color; // TODO: Move common calculations to layout.js
 
-        var s = data.c >= data.o ? 1 : -1;
-        this.ctx.fillRect(Math.floor(data.x - hw - 1), Math.floor(data.o - 1), Math.floor(hw * 2 + 1), Math.floor(s * Math.max(h, max_h)));
+        this.ctx.fillRect(Math.floor(data.x - hw - 1), Math.floor(Math.min(data.o, data.c)), Math.floor(hw * 2 + 1), Math.floor(Math.max(h, max_h)));
       } else {
         this.ctx.strokeStyle = body_color;
         this.ctx.beginPath();
@@ -8194,9 +8202,10 @@ function () {
       if (!this.comp.$props.meta.last) return;
       if (!this.shader) this.init_shader();
       var layout = this.comp.$props.layout;
-      var last = this.comp.$props.meta.last;
+      var last = this.comp.$props.data[this.comp.$props.data.length - 1]; // let last = this.comp.$props.data.map(x => x[4])
+
       var color = last[4] >= last[1] ? this.green() : this.red();
-      var y = layout.$2screen(last[4]) - 1;
+      var y = layout.$2screen(last[4]);
       ctx.strokeStyle = color;
       ctx.setLineDash([1, 1]);
       ctx.beginPath();
@@ -8210,11 +8219,11 @@ function () {
     value: function last_bar() {
       if (!this.data.length) return undefined;
       var layout = this.comp.$props.layout;
-      var last = this.data[this.data.length - 1];
+      var last = this.comp.$props.data[this.comp.$props.data.length - 1];
       var y = layout.$2screen(last[4]);
       var cndl = layout.c_magnet(last[0]);
       return {
-        y: Math.floor(cndl.c) - 1.5,
+        y: y,
         price: last[4],
         color: last[4] >= last[1] ? this.green() : this.red()
       };
@@ -8222,7 +8231,8 @@ function () {
   }, {
     key: "last_price",
     value: function last_price() {
-      return this.comp.$props.meta.last ? this.comp.$props.meta.last[4] : undefined;
+      return this.comp.$props.data[this.comp.$props.data.length - 1][4]; // return this.comp.$props.data.map(x => x[4]) ?
+      // this.comp.$props.meta.last[4] : undefined
     }
   }, {
     key: "green",
@@ -10935,7 +10945,7 @@ function () {
   }, {
     key: "format_date",
     value: function format_date(t) {
-      t += new Date().getTimezoneOffset() * botbar_MINUTE;
+      t += new Date(t).getTimezoneOffset() * botbar_MINUTE;
       var d = new Date(t);
       if (utils.year_start(t) === t) return d.getFullYear();
       if (utils.month_start(t) === t) return botbar_MONTHMAP[d.getMonth()];
@@ -10949,7 +10959,7 @@ function () {
     value: function format_cursor_x() {
       var t = this.$p.cursor.t;
       var ti = this.$p.interval;
-      t += new Date().getTimezoneOffset() * botbar_MINUTE;
+      t += new Date(t).getTimezoneOffset() * botbar_MINUTE;
       var d = new Date(t);
 
       if (ti === botbar_YEAR) {
@@ -12181,7 +12191,7 @@ function () {
 
       try {
         for (var _iterator2 = tools[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var tool = _step2.value;
+          tool = _step2.value;
           var proto = Object.assign({}, tool.info);
           var type = tool.info.type || 'Default';
           proto.type = "".concat(tool.use_for, ":").concat(type);
@@ -12316,7 +12326,7 @@ function () {
 
       this.tv.$set(this.data, 'selected', null);
       if (!args.length) return;
-      var q = this.layer_query(args[0], args[1]);
+      q = this.layer_query(args[0], args[1]);
       this.tv.$set(this.data, 'selected', q);
       this.merge("".concat(q, ".settings"), {
         $selected: true
@@ -12551,7 +12561,7 @@ function (_DCEvents) {
 
           var i = count[ov.type]++;
           ov.id = "onchart.".concat(ov.type).concat(i);
-          if (!ov.name) ov.name = ov.type + " ".concat(i);
+          if (!ov.name) ov.name = ov.id;
           if (!ov.settings) ov.settings = {};
         }
       } catch (err) {
@@ -12576,7 +12586,7 @@ function (_DCEvents) {
 
       try {
         for (var _iterator2 = this.data.offchart[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var ov = _step2.value;
+          ov = _step2.value;
 
           if (count[ov.type] === undefined) {
             count[ov.type] = 0;
@@ -12585,7 +12595,7 @@ function (_DCEvents) {
           var _i = count[ov.type]++;
 
           ov.id = "offchart.".concat(ov.type).concat(_i);
-          if (!ov.name) ov.name = ov.type + " ".concat(_i);
+          if (!ov.name) ov.name = ov.id;
           if (!ov.settings) ov.settings = {};
         }
       } catch (err) {
@@ -12608,7 +12618,7 @@ function (_DCEvents) {
     key: "update_overlays",
     value: function update_overlays(data, t) {
       for (var k in data) {
-        if (k === 'price' || k === 'volume' || k === 'candle') {
+        if (k === 'price' || k === 'volume' || k === 'candle' || k === 'oi') {
           continue;
         }
 
@@ -12782,7 +12792,7 @@ function (_DCEvents) {
         ts[a1[i][0]] = a1[i];
       }
 
-      for (var i = 0; i < a2.length; i++) {
+      for (i = 0; i < a2.length; i++) {
         ts[a2[i][0]] = a2[i];
       }
 
@@ -13026,6 +13036,11 @@ function (_DCCore) {
   }, {
     key: "update",
     value: function update(data) {
+      //console.log('offchart')
+      //console.log(this.data.offchart[0].data)
+      //console.log('onchart')
+      //console.log(this.data.chart)
+      //console.log(data)
       var ohlcv = this.data.chart.data;
       var last = ohlcv[ohlcv.length - 1];
       var tick = data['price'];
@@ -13054,6 +13069,34 @@ function (_DCCore) {
         last[4] = tick;
         last[5] += volume;
         this.merge('chart.data', [last]);
+      }
+
+      this.update_overlays(data, t);
+      return t >= t_next;
+    } // Update/append data point, depending on timestamp
+
+  }, {
+    key: "oiupdate",
+    value: function oiupdate(data) {
+      var ohlc = this.data.offchart[0].data;
+      var last = ohlc[ohlc.length - 1];
+      var tick = data['oi'];
+      var tf = utils.detect_interval(ohlc);
+      var t_next = last[0] + tf;
+      var now = utils.now();
+      var t = now >= t_next ? now - now % tf : last[0]; //console.log(ohlc)
+      //console.log(last)        
+      //console.log(tick)
+
+      if (t >= t_next && tick !== undefined) {
+        // And new zero-height candle
+        this.merge('offchart.OpenInterest.data', [[t, tick, tick, tick, tick]]);
+      } else if (tick !== undefined) {
+        // Update an existing one
+        last[2] = Math.max(tick, last[2]);
+        last[3] = Math.min(tick, last[3]);
+        last[4] = tick;
+        this.merge('offchart.OpenInterest.data', [last]);
       }
 
       this.update_overlays(data, t);
