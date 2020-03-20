@@ -1,8 +1,8 @@
 
 // DataCube event handlers
 
-import Utils from 'trading-vue-js';
-import Icons from 'trading-vue-js';
+import Utils from '../stuff/utils.js'
+import Icons from '../stuff/icons.json'
 
 export default class DCEvents {
 
