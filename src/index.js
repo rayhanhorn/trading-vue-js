@@ -3,6 +3,8 @@ import DataCube from './helpers/datacube.js'
 import Overlay from './mixins/overlay.js'
 import Utils from './stuff/utils.js'
 import Constants from './stuff/constants.js'
+import OIPrice from './components/primitives/oi_price.js'
+import OICandle from './components/primitives/oi_candle.js'
 import Candle from './components/primitives/candle.js'
 import Volbar from './components/primitives/volbar.js'
 import { layout_cnv, layout_vol } from
@@ -18,7 +20,7 @@ if (typeof window !== 'undefined' && window.Vue) {
     window.TradingVueLib = {
         TradingVue, Overlay, Utils, Constants,
         Candle, Volbar, layout_cnv, layout_vol,
-        DataCube
+        DataCube, OICandle, OIPrice
     }
 }
 
@@ -27,5 +29,5 @@ export default TradingVue
 export {
     TradingVue, Overlay, Utils, Constants,
     Candle, Volbar, layout_cnv, layout_vol,
-    DataCube
+    DataCube, OICandle, OIPrice
 }

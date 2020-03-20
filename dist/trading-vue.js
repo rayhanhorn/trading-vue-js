@@ -13172,6 +13172,162 @@ function (_DCCore) {
 }(dc_core_DCCore);
 
 
+// CONCATENATED MODULE: ./src/components/primitives/oi_price.js
+
+
+
+// OI Price bar & price line (shader)
+var oi_price_OIPrice =
+/*#__PURE__*/
+function () {
+  function OIPrice(comp) {
+    classCallCheck_default()(this, OIPrice);
+
+    this.comp = comp;
+    this.data = comp.$props.data;
+  } // Defines an inline shader (has access to both
+  // target & overlay's contexts)
+
+
+  createClass_default()(OIPrice, [{
+    key: "init_shader",
+    value: function init_shader() {
+      var _this = this;
+
+      var layout = this.comp.$props.layout;
+      var config = this.comp.$props.config;
+      var comp = this.comp;
+
+      var last_bar = function last_bar() {
+        return _this.last_bar();
+      };
+
+      this.comp.$emit('new-shader', {
+        target: 'sidebar',
+        draw: function draw(ctx) {
+          if (!last_bar()) return;
+          var bar = last_bar();
+          var w = ctx.canvas.width;
+          var h = config.PANHEIGHT;
+          var lbl = bar.price.toFixed(layout.prec);
+          ctx.fillStyle = bar.color;
+          var x = -0.5;
+          var y = bar.y - h * 0.5 - 0.5;
+          var a = 7;
+          ctx.fillRect(x - 0.5, y, w + 1, h);
+          ctx.fillStyle = comp.$props.colors.colorTextHL;
+          ctx.textAlign = 'left';
+          ctx.fillText(lbl, a, y + 15);
+        }
+      });
+      this.shader = true;
+    } // Regular draw call for overaly
+
+  }, {
+    key: "draw",
+    value: function draw(ctx) {
+      if (!this.comp.$props.meta.last) return;
+      if (!this.shader) this.init_shader();
+      var layout = this.comp.$props.layout;
+      var last = this.comp.$props.data[this.comp.$props.data.length - 1]; // let last = this.comp.$props.data.map(x => x[4])
+
+      var color = last[4] >= last[1] ? this.green() : this.red();
+      var y = layout.$2screen(last[4]);
+      ctx.strokeStyle = color;
+      ctx.setLineDash([1, 1]);
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(layout.width, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }, {
+    key: "last_bar",
+    value: function last_bar() {
+      if (!this.data.length) return undefined;
+      var layout = this.comp.$props.layout;
+      var last = this.comp.$props.data[this.comp.$props.data.length - 1];
+      var y = layout.$2screen(last[4]);
+      var cndl = layout.c_magnet(last[0]);
+      return {
+        y: y,
+        price: last[4],
+        color: last[4] >= last[1] ? this.green() : this.red()
+      };
+    }
+  }, {
+    key: "last_price",
+    value: function last_price() {
+      return this.comp.$props.data[this.comp.$props.data.length - 1][4]; // return this.comp.$props.data.map(x => x[4]) ?
+      // this.comp.$props.meta.last[4] : undefined
+    }
+  }, {
+    key: "green",
+    value: function green() {
+      return this.comp.colorCandleUp;
+    }
+  }, {
+    key: "red",
+    value: function red() {
+      return this.comp.colorCandleDw;
+    }
+  }]);
+
+  return OIPrice;
+}();
+
+
+// CONCATENATED MODULE: ./src/components/primitives/oi_candle.js
+
+
+
+// OI Candle object for OI Candles overlay
+var oi_candle_OICandleExt =
+/*#__PURE__*/
+function () {
+  function OICandleExt(overlay, ctx, data) {
+    classCallCheck_default()(this, OICandleExt);
+
+    this.ctx = ctx;
+    this.self = overlay;
+    this.style = data.raw[5] || this.self;
+    this.draw(data);
+  }
+
+  createClass_default()(OICandleExt, [{
+    key: "draw",
+    value: function draw(data) {
+      var body_color = data.c <= data.o ? this.style.colorCandleUp : this.style.colorCandleDw;
+      var wick_color = data.c <= data.o ? this.style.colorWickUp : this.style.colorWickDw;
+      var wick_color_sm = this.style.colorWickSm;
+      var w = Math.max(data.w, 1);
+      var hw = Math.max(Math.floor(w * 0.5), 1);
+      var h = Math.abs(data.o - data.c);
+      var max_h = data.c === data.o ? 1 : 2;
+      this.ctx.strokeStyle = w > 1 ? wick_color : wick_color_sm;
+      this.ctx.beginPath();
+      this.ctx.moveTo(Math.floor(data.x) - 0.5, Math.floor(data.h));
+      this.ctx.lineTo(Math.floor(data.x) - 0.5, Math.floor(data.l));
+      this.ctx.stroke();
+
+      if (data.w > 1.5) {
+        this.ctx.fillStyle = body_color; // TODO: Move common calculations to layout.js
+
+        this.ctx.fillRect(Math.floor(data.x - hw - 1), Math.floor(Math.min(data.o, data.c)), Math.floor(hw * 2 + 1), Math.floor(Math.max(h, max_h)));
+      } else {
+        this.ctx.strokeStyle = body_color;
+        this.ctx.beginPath();
+        this.ctx.moveTo(Math.floor(data.x) - 0.5, Math.floor(Math.min(data.o, data.c)));
+        this.ctx.lineTo(Math.floor(data.x) - 0.5, Math.floor(Math.max(data.o, data.c)));
+        this.ctx.stroke();
+      }
+    }
+  }]);
+
+  return OICandleExt;
+}();
+
+
 // CONCATENATED MODULE: ./src/index.js
 /* concated harmony reexport TradingVue */__webpack_require__.d(__webpack_exports__, "TradingVue", function() { return TradingVue; });
 /* concated harmony reexport Overlay */__webpack_require__.d(__webpack_exports__, "Overlay", function() { return mixins_overlay; });
@@ -13182,6 +13338,10 @@ function (_DCCore) {
 /* concated harmony reexport layout_cnv */__webpack_require__.d(__webpack_exports__, "layout_cnv", function() { return layout_cnv; });
 /* concated harmony reexport layout_vol */__webpack_require__.d(__webpack_exports__, "layout_vol", function() { return layout_vol; });
 /* concated harmony reexport DataCube */__webpack_require__.d(__webpack_exports__, "DataCube", function() { return datacube_DataCube; });
+/* concated harmony reexport OICandle */__webpack_require__.d(__webpack_exports__, "OICandle", function() { return oi_candle_OICandleExt; });
+/* concated harmony reexport OIPrice */__webpack_require__.d(__webpack_exports__, "OIPrice", function() { return oi_price_OIPrice; });
+
+
 
 
 
@@ -13206,7 +13366,9 @@ if (typeof window !== 'undefined' && window.Vue) {
     Volbar: volbar_VolbarExt,
     layout_cnv: layout_cnv,
     layout_vol: layout_vol,
-    DataCube: datacube_DataCube
+    DataCube: datacube_DataCube,
+    OICandle: oi_candle_OICandleExt,
+    OIPrice: oi_price_OIPrice
   };
 }
 
