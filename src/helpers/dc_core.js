@@ -99,18 +99,18 @@ export default class DCCore extends DCEvents {
             }
             let i = count[ov.type]++
             ov.id = `onchart.${ov.type}${i}`
-            if (!ov.name) ov.name = ov.id
+            if (!ov.name) ov.name = ov.type + ` ${i}`
             if (!ov.settings) ov.settings = {}
 
         }
         count = {}
-        for (ov of this.data.offchart) {
+        for (var ov of this.data.offchart) {
             if (count[ov.type] === undefined) {
                 count[ov.type] = 0
             }
             let i = count[ov.type]++
             ov.id = `offchart.${ov.type}${i}`
-            if (!ov.name) ov.name = ov.id
+            if (!ov.name) ov.name = ov.type + ` ${i}`
             if (!ov.settings) ov.settings = {}
         }
     }
@@ -293,7 +293,7 @@ export default class DCCore extends DCEvents {
             ts[a1[i][0]] = a1[i]
         }
 
-        for (i = 0; i < a2.length; i++) {
+        for (var i = 0; i < a2.length; i++) {
             ts[a2[i][0]] = a2[i]
         }
 

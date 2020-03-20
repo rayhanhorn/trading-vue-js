@@ -45,11 +45,10 @@ export default class Price {
         if (!this.shader) this.init_shader()
 
         let layout = this.comp.$props.layout
-        let last = this.comp.$props.data[this.comp.$props.data.length - 1]
-        // let last = this.comp.$props.data.map(x => x[4])
+        let last = this.comp.$props.meta.last
 
         let color = last[4] >= last[1] ? this.green() : this.red()
-        let y = layout.$2screen(last[4])
+        let y = layout.$2screen(last[4]) - 1
 
         ctx.strokeStyle = color
         ctx.setLineDash([1, 1])
@@ -64,12 +63,12 @@ export default class Price {
 
         if (!this.data.length) return undefined
         let layout = this.comp.$props.layout
-        let last = this.comp.$props.data[this.comp.$props.data.length - 1]
+        let last = this.data[this.data.length - 1]
         let y = layout.$2screen(last[4])
         let cndl = layout.c_magnet(last[0])
         
         return {
-            y,
+            y: Math.floor(cndl.c) - 1.5,
             price: last[4],
             color: last[4] >= last[1] ? this.green() : this.red()	
 			
@@ -78,9 +77,7 @@ export default class Price {
     }
 
     last_price() {
-        return this.comp.$props.data[this.comp.$props.data.length - 1][4]
-        // return this.comp.$props.data.map(x => x[4]) ?
-            // this.comp.$props.meta.last[4] : undefined
+        return this.comp.$props.meta.last ? this.comp.$props.meta.last[4] : undefined
     }
 
     green() {
