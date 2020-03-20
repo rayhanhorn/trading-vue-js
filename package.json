@@ -9,6 +9,9 @@
     "dev": "webpack-dev-server --config webpack/dev.config.js --mode development --progress --hot",
     "build": "webpack  --config webpack/build.config.js --mode production --progress"
   },
+  "precommit": [
+    "build"
+  ],
   "author": "C451",
   "license": "MIT",
   "files": [
