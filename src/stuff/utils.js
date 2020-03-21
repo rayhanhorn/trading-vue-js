@@ -152,16 +152,6 @@ export default {
             return (200 + Math.log(abs)) * Math.sign(delta)
         }
         return delta
-    },
-
-    // Parse the original mouse event to find deltaX
-    get_deltaX(event) {
-        return event.originalEvent.deltaX / 12
-    },
-
-    // Parse the original mouse event to find deltaY
-    get_deltaY(event) {
-        return event.originalEvent.deltaY / 12
     }
 
 }

@@ -36,7 +36,7 @@ export default class Grid {
     listeners() {
 
         var hamster = Hamster(this.canvas)
-        hamster.wheel((event, delta) => this.mousezoom(-delta * 50, event))
+        hamster.wheel((event, delta) => this.mousezoom(delta * -80, event))
 
         var mc = new Hammer.Manager(this.canvas)
         mc.add(new Hammer.Pan())
@@ -145,7 +145,7 @@ export default class Grid {
         this.propagate('mouseout', event)
     }
 
-    mouseup(event) {
+     mouseup(event) {
         this.drug = null
     //    this.pinch = null
         this.comp.$emit('cursor-locked', false)
@@ -253,11 +253,12 @@ export default class Grid {
 
     mousezoom(delta, event) {
 
-        event.originalEvent.preventDefault()
-        event.preventDefault()
-
-        event.deltaX = event.deltaX || Utils.get_deltaX(event)
-        event.deltaY = event.deltaY || Utils.get_deltaY(event)
+		let deltaX = event.deltaX / 100;
+		let deltaY = -(event.deltaY / 100);
+		
+		if (event.cancelable) {
+			event.preventDefault();
+		}
 
         if (Math.abs(event.deltaX) > 0) {
             this.trackpad = true
@@ -269,11 +270,11 @@ export default class Grid {
 
         if (this.trackpad) delta *= 0.032
 
-        delta = Utils.smart_wheel(delta)
+        //delta = Utils.smart_wheel(delta)
 
         // TODO: mouse zooming is a little jerky,
         // needs to follow f(mouse_wheel_speed) and
-        // if speed is low, scroll shoud be slower
+        // if speed is low, scroll shoud be slower		
         if (delta < 0 && this.data.length <= this.MIN_ZOOM) return
         if (delta > 0 && this.data.length > this.MAX_ZOOM) return
 
@@ -345,7 +346,7 @@ export default class Grid {
 
     }
 
-    change_range() {
+    async change_range() {
 
         // TODO: better way to limit the view. Problem:
         // when you are at the dead end of the data,
@@ -377,7 +378,7 @@ export default class Grid {
         // the lag. No smooth movement and it's annoying.
         // Solution: we could try to calc the layout immediatly
         // somewhere here. Still will hurt the sidebar & bottombar
-        this.comp.$emit('range-changed', range)
+        await this.comp.$emit('range-changed', range)
     }
 
     // Propagate mouse event to overlays
