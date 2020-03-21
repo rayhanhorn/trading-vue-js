@@ -15,7 +15,9 @@ export default class Grid {
         this.MAX_ZOOM = comp.config.MAX_ZOOM
 
         this.canvas = canvas
-        this.ctx = canvas.getContext('2d')
+        //this.ctx = canvas.getContext('2d')
+		//Turn off transparency
+		this.ctx = canvas.getContext('2d', { alpha: false });
         this.comp = comp
         this.$p = comp.$props
         this.data = this.$p.sub

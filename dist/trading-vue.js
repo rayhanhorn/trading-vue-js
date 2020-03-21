@@ -6382,8 +6382,12 @@ var grid_Grid = /*#__PURE__*/function () {
 
     this.MIN_ZOOM = comp.config.MIN_ZOOM;
     this.MAX_ZOOM = comp.config.MAX_ZOOM;
-    this.canvas = canvas;
-    this.ctx = canvas.getContext('2d');
+    this.canvas = canvas; //this.ctx = canvas.getContext('2d')
+    //Turn off transparency
+
+    this.ctx = canvas.getContext('2d', {
+      alpha: false
+    });
     this.comp = comp;
     this.$p = comp.$props;
     this.data = this.$p.sub;
@@ -8189,10 +8193,12 @@ var candle_CandleExt = /*#__PURE__*/function () {
     value: function draw(data) {
       var body_color = data.c <= data.o ? this.style.colorCandleUp : this.style.colorCandleDw;
       var wick_color = data.c <= data.o ? this.style.colorWickUp : this.style.colorWickDw;
-      var wick_color_sm = this.style.colorWickSm;
-      var w = Math.max(data.w, 1);
+      var wick_color_sm = this.style.colorWickSm; //Avoid floating-point coordinates and use integers instead
+      //Saving the browser to do extra calculations to create the anti-aliasing effect. 
+
+      var w = Math.round(Math.max(data.w, 1));
       var hw = Math.max(Math.floor(w * 0.5), 1);
-      var h = Math.abs(data.o - data.c);
+      var h = Math.round(Math.abs(data.o - data.c));
       var max_h = data.c === data.o ? 1 : 2;
       this.ctx.strokeStyle = w > 1 ? wick_color : wick_color_sm;
       this.ctx.beginPath();
@@ -13291,7 +13297,7 @@ var oi_candle_OICandleExt = /*#__PURE__*/function () {
 
     this.ctx = ctx;
     this.self = overlay;
-    this.style = data.raw[5] || this.self;
+    this.style = data.raw[6] || this.self;
     this.draw(data);
   }
 
@@ -13300,10 +13306,12 @@ var oi_candle_OICandleExt = /*#__PURE__*/function () {
     value: function draw(data) {
       var body_color = data.c <= data.o ? this.style.colorCandleUp : this.style.colorCandleDw;
       var wick_color = data.c <= data.o ? this.style.colorWickUp : this.style.colorWickDw;
-      var wick_color_sm = this.style.colorWickSm;
-      var w = Math.max(data.w, 1);
+      var wick_color_sm = this.style.colorWickSm; //Avoid floating-point coordinates and use integers instead
+      //Saving the browser to do extra calculations to create the anti-aliasing effect. 
+
+      var w = Math.round(Math.max(data.w, 1));
       var hw = Math.max(Math.floor(w * 0.5), 1);
-      var h = Math.abs(data.o - data.c);
+      var h = Math.round(Math.abs(data.o - data.c));
       var max_h = data.c === data.o ? 1 : 2;
       this.ctx.strokeStyle = w > 1 ? wick_color : wick_color_sm;
       this.ctx.beginPath();
@@ -13311,10 +13319,11 @@ var oi_candle_OICandleExt = /*#__PURE__*/function () {
       this.ctx.lineTo(Math.floor(data.x) - 0.5, Math.floor(data.l));
       this.ctx.stroke();
 
-      if (data.w > 1.5) {
+      if (data.w > 1.5 || data.o === data.c) {
         this.ctx.fillStyle = body_color; // TODO: Move common calculations to layout.js
 
-        this.ctx.fillRect(Math.floor(data.x - hw - 1), Math.floor(Math.min(data.o, data.c)), Math.floor(hw * 2 + 1), Math.floor(Math.max(h, max_h)));
+        var s = data.c >= data.o ? 1 : -1;
+        this.ctx.fillRect(Math.floor(data.x - hw - 1), Math.floor(data.o - 1), Math.floor(hw * 2 + 1), Math.floor(s * Math.max(h, max_h)));
       } else {
         this.ctx.strokeStyle = body_color;
         this.ctx.beginPath();

@@ -22,11 +22,12 @@ export default class CandleExt {
 
         const wick_color_sm = this.style.colorWickSm
 
-        let w = Math.max(data.w, 1)
+		//Avoid floating-point coordinates and use integers instead
+		//Saving the browser to do extra calculations to create the anti-aliasing effect. 
+        let w = Math.round(Math.max(data.w, 1))
         let hw = Math.max(Math.floor(w * 0.5), 1)
-        let h = Math.abs(data.o - data.c)
+        let h = Math.round(Math.abs(data.o - data.c))
         let max_h = data.c === data.o ? 1 : 2
-
 
         this.ctx.strokeStyle = w > 1 ? wick_color : wick_color_sm
 

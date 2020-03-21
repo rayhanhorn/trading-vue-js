@@ -6,7 +6,7 @@ export default class OICandleExt {
     constructor(overlay, ctx, data) {
         this.ctx = ctx
         this.self = overlay
-        this.style = data.raw[5] || this.self
+        this.style = data.raw[6] || this.self
         this.draw(data)
     }
 
@@ -22,11 +22,12 @@ export default class OICandleExt {
 
         const wick_color_sm = this.style.colorWickSm
 
-        let w = Math.max(data.w, 1)
+		//Avoid floating-point coordinates and use integers instead
+		//Saving the browser to do extra calculations to create the anti-aliasing effect. 
+        let w = Math.round(Math.max(data.w, 1))
         let hw = Math.max(Math.floor(w * 0.5), 1)
-        let h = Math.abs(data.o - data.c)
+        let h = Math.round(Math.abs(data.o - data.c))
         let max_h = data.c === data.o ? 1 : 2
-
 
         this.ctx.strokeStyle = w > 1 ? wick_color : wick_color_sm
 
@@ -42,16 +43,17 @@ export default class OICandleExt {
 
         this.ctx.stroke()
 
-        if (data.w > 1.5) {
+        if (data.w > 1.5 || data.o === data.c) {
 
             this.ctx.fillStyle = body_color
 
             // TODO: Move common calculations to layout.js
+            let s = data.c >= data.o ? 1 : -1
             this.ctx.fillRect(
-				Math.floor(data.x - hw -1),
-                Math.floor(Math.min(data.o, data.c)),
+                Math.floor(data.x - hw -1),
+                Math.floor(data.o - 1),
                 Math.floor(hw * 2 + 1),
-                Math.floor(Math.max(h, max_h))
+                Math.floor(s * Math.max(h, max_h))
             )
 
         } else {
