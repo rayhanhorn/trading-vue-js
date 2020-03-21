@@ -9894,7 +9894,11 @@ var sidebar_Sidebar = /*#__PURE__*/function () {
 
     PANHEIGHT = comp.config.PANHEIGHT;
     this.canvas = canvas;
-    this.ctx = canvas.getContext('2d');
+    this.ctx = canvas.getContext('2d', {
+      alpha: false,
+      desynchronized: true,
+      preserveDrawingBuffer: true
+    });
     this.comp = comp;
     this.$p = comp.$props;
     this.data = this.$p.sub;
@@ -10896,7 +10900,11 @@ var botbar_Botbar = /*#__PURE__*/function () {
     classCallCheck_default()(this, Botbar);
 
     this.canvas = canvas;
-    this.ctx = canvas.getContext('2d');
+    this.ctx = canvas.getContext('2d', {
+      alpha: false,
+      desynchronized: true,
+      preserveDrawingBuffer: true
+    });
     this.comp = comp;
     this.$p = comp.$props;
     this.data = this.$p.sub;
