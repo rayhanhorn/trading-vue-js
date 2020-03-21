@@ -17,7 +17,7 @@ export default class Grid {
         this.canvas = canvas
         //this.ctx = canvas.getContext('2d')
 		//Turn off transparency
-		this.ctx = canvas.getContext('2d', { alpha: false });
+		this.ctx = canvas.getContext('2d', { alpha: false, desynchronized: true, preserveDrawingBuffer: true });
         this.comp = comp
         this.$p = comp.$props
         this.data = this.$p.sub

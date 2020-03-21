@@ -6386,7 +6386,9 @@ var grid_Grid = /*#__PURE__*/function () {
     //Turn off transparency
 
     this.ctx = canvas.getContext('2d', {
-      alpha: false
+      alpha: false,
+      desynchronized: true,
+      preserveDrawingBuffer: true
     });
     this.comp = comp;
     this.$p = comp.$props;
