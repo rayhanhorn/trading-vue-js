@@ -97,23 +97,21 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 60);
+/******/ 	return __webpack_require__(__webpack_require__.s = 57);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithoutHoles = __webpack_require__(34);
+var arrayWithoutHoles = __webpack_require__(31);
 
-var iterableToArray = __webpack_require__(35);
+var iterableToArray = __webpack_require__(32);
 
-var unsupportedIterableToArray = __webpack_require__(29);
-
-var nonIterableSpread = __webpack_require__(36);
+var nonIterableSpread = __webpack_require__(33);
 
 function _toConsumableArray(arr) {
-  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
 }
 
 module.exports = _toConsumableArray;
@@ -154,28 +152,10 @@ module.exports = _createClass;
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayWithHoles = __webpack_require__(37);
-
-var iterableToArrayLimit = __webpack_require__(38);
-
-var unsupportedIterableToArray = __webpack_require__(29);
-
-var nonIterableRest = __webpack_require__(39);
-
-function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
-}
-
-module.exports = _slicedToArray;
-
-/***/ }),
-/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _freeGlobal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
+/* harmony import */ var _freeGlobal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
 
 
 /** Detect free variable `self`. */
@@ -188,13 +168,36 @@ var root = _freeGlobal_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"] || fre
 
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(34);
+
+var iterableToArrayLimit = __webpack_require__(35);
+
+var nonIterableRest = __webpack_require__(36);
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
+
+/***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(40);
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module) {
 
 module.exports = JSON.parse("{\"extended.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAQMAAAD+JxcgAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAATU1NkJ+rOQAAAAJ0Uk5TAP9bkSK1AAAANElEQVR4nGNggABGEMEEIlhABAeI+AASF0AlHmAqA4kzKAAx8wGQuAMKwd6AoYzBAWonAwAcLwTgNfJ3RQAAAABJRU5ErkJggg==\",\"segment.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAgMAAAC5h23wAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAlQTFRFAAAATU1NJCQkCxcHIQAAAAN0Uk5TAP8SmutI5AAAACxJREFUeJxjYMACGAMgNAsLdpoVKi8AVe8A1QblQlWRKt0AoULw2w1zGxoAABdiAviQhF/mAAAAAElFTkSuQmCC\",\"add.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAH5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAACgoKBgYGGxsbKioqPz8/Pj4+BQUFCQkJAQEBZGRkh4eHAgICEBAQNjY2g4ODgYGBAAAAAwMDeXl5d3d3GBgYERERgICAgICANDQ0PDw8Y2NjCAgIhYWFGhoaJycnOjo6YWFhgICAdXV14Y16sQAAACp0Uk5TAAILDxIKESEnJiYoKCgTKSkpKCAnKSkFKCkpJiDl/ycpKSA2JyYpKSkpOkQ+xgAAARdJREFUeJzllNt2gyAQRTWiRsHLoDU0GpPYmMv//2BMS+sgl6Z9bM8bi73gnJkBz/sn8lcBIUHofwtG8TpJKUuTLI6cYF7QEqRKynP71VX9AkhNXVlsbMQrLLQVGyPZLsGHWgPrCxMJwHUPlXa79NBp2et5d9f3u3m1XxatQNn7SagOXCUjCjYUDuqxcWlHj4MSfw12FDJchFViRN8+1qcQoUH6lR1L1mEMEErofB6WzEUwylzomfzOQGiOJdXiWH7mQoUyMa4WXJQWOBvLFvPCGxt6FSr5kyH0qi0YddNG2/pgCsOjff4ZTizXPNwKIzl56OoGg9d9Z/+5cs6On+CFCfevFQ3ZaTycx1YMbvDdRvjkp/lHdAcPXzokxcwfDwAAAABJRU5ErkJggg==\",\"cursor.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAgMAAAC5h23wAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAxQTFRFAAAATU1NTU1NTU1NwlMHHwAAAAR0Uk5TAOvhxbpPrUkAAAAkSURBVHicY2BgYHBggAByabxg1WoGBq2pRCk9AKUbcND43AEAufYHlSuusE4AAAAASUVORK5CYII=\",\"display_off.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAU1QTFRFAAAAh4eHh4eHAAAAAAAAAAAAAwMDAAAAAAAAhoaGGBgYgYGBAAAAPz8/AgICg4ODCQkJhISEh4eHh4eHPj4+NjY2gYGBg4ODgYGBgYGBgoKCAQEBJycngoKChYWFEBAQg4ODCAgIKioqZGRkCgoKBQUFERERd3d3gYGBGxsbNDQ0hISEgYGBPDw8gYGBgYGBh4eHh4eHhYWFh4eHgoKChYWFgYGBgYGBg4ODhoaGg4ODYWFhgoKCBgYGdXV1goKCg4ODgYGBgICAgYGBAAAAg4ODhYWFhISEh4eHgoKChYWFOjo6goKCGhoah4eHh4eHh4eHgoKCh4eHeXl5hoaGgoKChISEgYGBgYGBgoKCY2NjgYGBgoKCh4eHgoKCgYGBhoaGg4ODhoaGhYWFh4eHgYGBhoaGhoaGhoaGg4ODgoKChISEgoKChYWFh4eHfKktUwAAAG90Uk5TACn/AhEFKA8SLCbxCigoVBNKUTYoJ/lh3PyAKSaTNiBtICYpISggKSkmJ0LEKef3lGxA8rn//+pcMSkpnCcptHPJKe0LUjnx5LzKKaMnX73hl64pLnhkzNSgKeLv17LQ+liIzaLe7PfTw5tFpz3K1fXR/gAAAgBJREFUeJzllNdXwjAUxknB0lIoCKVsGTIFQRAZ7r333nuv///R3LZ4mlDQZ/0ekp7b37n5bnITk+mfyDxv5Tir3fwjaElO5BIOKZFLJS1dQVfI0Y809TtEV+elo95RpFPWG+1go4fdQ5QybI8haaNBkM2ANbM09bnrwaPY7iFKrz7EMBdu7CHdVruXIt0M1hb+GKA3LTRKkp5lTA6Dg6xIkhaHhvQ1IlW/UCouQdJNJTRIpk1qO7+wUpcfpl537oBc7VNip3Gi/AmVPBAC1UrL6HXtSGVT+k2Yz0Focad07OMRf3P5BEbd63PFQx7HN+w61JoAm+uBlV48O/0jkLSMmtPCmQ8HwlYdykFV4/LJPp7e3hVyFdapHNehLk6PSjhSkBvwu/cFyJGIYvOyhoc1jjYQFGbygD4CWjoAMla/og3YoSw+KPhjPNoFcim4iFD+pFYA8zZ9WeYU5OBjZ3ORWyCfG03E+47kKpCIJTpGO4KP8XMgtw990xG/PBNTgmPEEXwf7P42oOdFIRAoBCtqTKL6Rcwq4Xsgh5xYC/mmSs6yJKk1YbnVeTq1NaEpmlHbmVn2EORkW2trF2ZzmHGTSUMGl1a9hp4ySRpdQ8yKGURpMmRIYg9pb1YPzg6kO79cLlE6bYFjEtv91bLEUxvhwbWwjY13BxUb9l8+mn9EX8x3Nki8ff5wAAAAAElFTkSuQmCC\",\"display_on.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAR1QTFRFAAAAh4eHgYGBAAAAAAAAgYGBAAAAAwMDAAAAAAAAgYGBg4ODGBgYgYGBhISEAAAAPz8/AgIChoaGCQkJhYWFPj4+NjY2goKCgYGBAQEBJycngYGBgoKCEBAQCAgIhISEKioqZGRkCgoKBQUFERERd3d3gYGBg4ODgYGBGxsbNDQ0hISEgoKCgoKChYWFPDw8gYGBgYGBhoaGgoKCg4ODgoKCgYGBgoKCgoKCgoKCg4ODgoKChoaGgoKCgYGBhoaGg4ODYWFhBgYGdXV1gYGBg4ODgoKCgICAg4ODg4ODhISEAAAAg4ODOjo6gYGBGhoaeXl5goKCgYGBgoKChYWFgoKChISEgoKCY2NjgYGBg4ODgYGBgYGBg4ODgYGBo8n54AAAAF90Uk5TACn/AhH3BSgPEuhUJvFACigoLBM2KCeA6ykm+pMgIEkmKSEoICn9XCkmJ0u6nDop4sUypGuEzLZ6vmCYLZ/dLykpJynUYa8pcllCC1Ip2ycpisl1PadFsintbsPQZdi/bTW7AAAB4UlEQVR4nOWUZ1fCMBSGSSGWFiq0UDbIkr2XbBwMxS0b1P//M0xK9XSiftX7oel585zkvfcmMRj+SRhvzRRlthm/BU3Ry3TYzofTsajpIOjw2iNAjIiddehvHXSdA0mkXEEdG0fkE1DEKXmkSVqVIA6rBmsktUgAWLWHoGp30UNclbtLmwQgoyya91wPTbFy0mQXJ5zJQO6BgXRjfH0iSkX5stHIXr5r0bB/lu8syjR8rzsFbR2SpX+5J2eMP3csLtYsEY2K8BeTFuE2jaVCBw7bHOBuxq16AXmpbui3LtIfbRLUHMY2q4lcFo2WB4KA1SUAlWumNEKCzyxBKZxVHvYGaFguCBx1vM/x0IPzoqQoj5SdP4mns2cCGhBsrgj0uaeUBtzMyxQN8w4mYROTW8+r0oANp8W5mf6WQw5aCYJ2o7ymPaKMi2uVpmWM4TW6tdImgGo1bT4nK6DbbsCc0AZSdmLEFszzHrh6riVvRrNA3/9SE8QLWQu+Gjto9+gE9NBMwr9zi83gFeeFTe11zpm1CHE3HeyVCSknf3MIDcFTbfJKdbR1L4xX49L+/BoillV5uPJqkshD3JWSgpNMXP/lcrD8+hO84MnDr5YpFHv0Fe99VjJ0GBRs2H74aP6R+ACr+TFvZNAQ1wAAAABJRU5ErkJggg==\",\"down.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAKVQTFRFAAAAg4ODgICAAAAAAAAAAAAACAgIAAAAAAAAAAAAAAAAOTk5hYWFEBAQfHx8ODg4dnZ2NDQ0XV1dGxsbKCgogICAFBQUIiIiZGRkgICAgICAFRUVAAAAgICAgICAgICAf39/Li4ugICAcHBwgoKCgICAgoKCgICAg4ODgYGBPj4+goKCgICAhISEgYGBgICAgoKCgICAgYGBgYGBf39/gICAgICAIdPQHAAAADd0Uk5TACn/KAIRIBMFDwooKyApKSknKSYmzCcmKfL7JRCUi2L3J7IpcLUrr0VbKXntNEnkMbxrUcG56CMpi50AAAFZSURBVHic5ZRpf4MgDIeFKFatWm/tfW091u7evv9Hm1Acoujm2y0vFPH5Jf+EEE37J6bblmlatv4jaBCI4rMfR0CMXtAEJ0fccgfM7tAkQHXzArdDxggmqGETGCnJWROkNlOwOqhIhKCtgbSicw1uK/dATSK0aRatIzytA8ik4XSiyJnLSm+VPxULgeyLI3uHRJH+qcB4WZGrKb4c20WwI7b3iUt74OS6XD+xZWrXUCtme0uKTvfcJ65CZFa9VOebqwXmft+oT8yF+/VymT4XeGB+Xx8L+j4gBcoFIDT+oMz6Qp93Y74pCeBpUXaLuW0rUk6r1iv3nP322ewYkgv2nZIvgpSPQDrY5wTjRJDNg9XAE/+uSXIVX812GdKEmtvR2rtWaw+5MAOuofJy79SXu9TgBl4d9DZdI0NjgyiswNCB/qk1J5Bmvp+lQOa9IJNhW4bxm6H5R+wLQYMSQXZNzbcAAAAASUVORK5CYII=\",\"price_range.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAQMAAAD+JxcgAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAATU1NkJ+rOQAAAAJ0Uk5TAP9bkSK1AAAAIUlEQVR4nGNggAPm/w9gTA4QIQMitECEJ1yMEgLNDiAAADfgBMRu78GgAAAAAElFTkSuQmCC\",\"remove.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAK5QTFRFAAAAh4eHgICAAAAAAAAAh4eHAAAAAwMDAAAAAAAAgICAGBgYAAAAPz8/AgICgICACQkJhoaGhoaGgICAPj4+NjY2gYGBg4ODgYGBAQEBJycngoKCEBAQgICAgICACAgIKioqZGRkCgoKBQUFERERd3d3gYGBGxsbNDQ0gICAPDw8YWFhBgYGdXV1gICAg4ODgICAAAAAOjo6GhoaeXl5gICAhYWFY2NjhYWFgICA9O0oCgAAADp0Uk5TACn/AhErBSgPEvEmCigowxMuMcgoJ7hWrCkmdCD6vSAmKSEoICkpJie6KSknKSkp0wspJynCMik11rrLte8AAAFwSURBVHic5ZTXkoIwFIZNAAPSpKkoRQV7Wcva3v/FFiRmEwise7t7bs7MP98k/ylJq/VPQjjKiiJrwo+gON0uxro7XiRTsRHs+voE4JjoRrf+6sD7AFTMvaDGRht9glLMUJtLqmUwD5XDCohHAmBUPQSV27GHtFK7xycBWJab5uPaR+Hlmue7GfZxHwyWFHVMQghXFgD2A8IOZtfssdNJIXcyFEaSfchzp9BuMVP+Fhvr5Qh0nGfqYTGhm3BcYFUaQBKOhMWzRqHyGFRY03ppQ5lCFZ30RloVZGQTaa3QqEt0OyrQnkSkk8I1YJkvAwPCMgY0UpbzXRZhVbosIWGbZTLNQszGMCM42FJEjWDDjIAMtp+xj6x2K+/DqNDc0r4Yc8yGl3uer2aIyT1iyd8sYSuY8cldZbVrH4zPebTvP8OMNSoedj6XzDyk3pwG98u0/ufqGu7tBW5c1PxriXFyHq5PQxXFzeDThvbmp/lH4gt6WxfZ03H8DwAAAABJRU5ErkJggg==\",\"settings.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAW5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAACgoKBgYGGxsbKioqQEBAPj4+BQUFCAgIAQEBPz8/ZWVlh4eHZGRkAgICCQkJDw8PNjY2g4ODgoKCNTU1EBAQAAAAAwMDeXl5d3d3AAAAGBgYAAAAERERioqKgoKCgoKCgoKCgYGBgoKChISEhoaGNDQ0g4ODgICAgICAgICAgYGBgYGBhYWFgICAgICAPT09AAAAgYGBgICAgICAgICAgICAY2NjCAgIgICAgICAhYWFhYWFgYGBHBwcgICAhYWFGhoagYGBgYGBg4ODhoaGJycnAAAAhISEgICAg4ODPDw8AAAAgoKCgICAhISEOjo6h4eHgoKCgYGBgICAf39/gYGBgoKCgICAGBgYgYGBg4ODg4ODgICACwsLgYGBgICAgYGBgYGBgYGBgICAgYGBYWFhf39/g4ODPj4+gYGBg4ODgICAhYWFgoKCgYGBgICAgYGBgoKCdXV1T0kC9QAAAHp0Uk5TAAILDxMKESEnJiYpKSgTKSgpKSkoEyAnKSknIAYoKSkFJQEgKl94jYVvVC4nU9f/+K8pOu71KBCi3NPq/ikg0e01Nokm1UUnsZVqQSYOT9lrKRJz5lIpK12jyu+sesgnhGVLxCG55a6Um+GaKfJCKKRgKUt8ocergymDQ9knAAABsElEQVR4nOWUV1vCMBSGg1AQpBZrcVdE3KJxo4LgnuCoe4F7orjHv7doTk3bgF7rd5OnX94nZ+SkCP0TWQqsNpuVs/wI2h2FTleR2+XkHfa8YLHgKRGJSj2SN3fosvIKkVJlVXWONGrkWtEgn1zHJP1GMCs/g7XILFIUpXoTWmaKTnIImGovh72Gxqbmlta2dvgOGpsmQO0dnfhTXd3E6JH0pN1DNnr7MFE/HDsQ0qEO6Pxg9sCh4XDkGx2J6sovBD+G8eiYuo5PxLTKeLoJBZNgT2EcnjY0YYajUKsL7Fk1gcjU3PwChcYTFGorAnsRqlpa1tAVhUbdmr+6RtjIOlgbCjMBUdzc2t7ZzbJ7zAQ4p6GSfRVNwkeKLsvCg31w2JBdjlT0GDxZNzEnpcQ+xWfnFxeXVyp6Tay07gq+L/YUOoBvbomV0V8skiq//DutWfeEfJD1JPLCED4+Pb8kX986tApNQ4iqfSJT76bRzvlgBPODQXW/foYqK5lyeBeYJEL1gaoeGnwIBhjRoQ9SZgTAdEbO/9cKRfmZ+MpGPCVHQ3nBzzS4hKIkuNyh/5g+ALiAXSSas9hwAAAAAElFTkSuQmCC\",\"trash.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAQMAAAD+JxcgAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAATU1NkJ+rOQAAAAJ0Uk5TAP9bkSK1AAAALUlEQVR4nGNgAIN6ENHQACX4//9gYBBgYIESYC4LkA0lPEkmGFAI5v8PILYCAHygDJxlK0RUAAAAAElFTkSuQmCC\",\"up.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAMZQTFRFAAAAh4eHgICAAAAAAAAAAAAAAwMDAAAAAAAAGBgYAAAAPz8/AgICCQkJgICAh4eHPj4+NjY2AQEBJycnEBAQgICAgICACAgIKioqZGRkCgoKBQUFgYGBERERd3d3gYGBGxsbNDQ0gICAgYGBPDw8gYGBh4eHgICAYWFhBgYGgYGBdXV1goKCg4ODhYWFgICAgoKCAAAAhISEOjo6gICAGhoagYGBeXl5hoaGgICAY2Njg4ODgoKCgoKCgYGBgoKCg4ODgoKC64uw1gAAAEJ0Uk5TACn/AhEFKA8SJgooKBP7KignKSYg9c0gJikhKLQgKSkmJ7ywKY8s5SknlClxKTMpXwtFKe0neiku8ClKWmSbbFFjM5GHSgAAAW5JREFUeJzllGd/gjAQxk3AMFWWOHDvVa2rVbu//5cqhJWQQO3b9nkVjv/v7rnLKJX+iYS9JMuSKvwIiu3loKkZzYHXFgvBiqW1QKSWplfySzvmAyDUN50cG2X0DDLqoTKXVLJgIIXDCohHAqCzHhymeuShy/Ru8kkAhtmhWUTvW9fdEnPQaVLU0n8XF0L3kn5P6LTtZPKgNoK+RrUkcGtQ7S9TsgOxxinrkUPYD+LwLCIh7CTsWSVQqRmTuPqpitlZFLQlApXjrsYBc335wOw47ksmUSMMrgKi/gnAE/awCqNHmTUwDf5X34LlBuedsgbUsK15kPMxTIXzzvFSIdsSPBw7nGD1K+7bL3F9xStEnZhoCw71TbpL71GBBbUF1MZmZWTOi97PI3eIJn9zCEtOj0+umaOde2EszqW9/xr6rM54WFtc0vfQNak57Ibd/Jerohu3GFwYqPjVEhve2Z4cbQU1ikFsQ73z0fwj+ga3VBezGuggFQAAAABJRU5ErkJggg==\"}");
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*! Hammer.JS - v2.0.7 - 2016-04-22
@@ -2840,13 +2843,6 @@ if (true) {
 
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(43);
-
-
-/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2876,32 +2872,14 @@ module.exports = function (useSourceMap) {
   // eslint-disable-next-line func-names
 
 
-  list.i = function (modules, mediaQuery, dedupe) {
+  list.i = function (modules, mediaQuery) {
     if (typeof modules === 'string') {
       // eslint-disable-next-line no-param-reassign
       modules = [[null, modules, '']];
     }
 
-    var alreadyImportedModules = {};
-
-    if (dedupe) {
-      for (var i = 0; i < this.length; i++) {
-        // eslint-disable-next-line prefer-destructuring
-        var id = this[i][0];
-
-        if (id != null) {
-          alreadyImportedModules[id] = true;
-        }
-      }
-    }
-
-    for (var _i = 0; _i < modules.length; _i++) {
-      var item = [].concat(modules[_i]);
-
-      if (dedupe && alreadyImportedModules[item[0]]) {
-        // eslint-disable-next-line no-continue
-        continue;
-      }
+    for (var i = 0; i < modules.length; i++) {
+      var item = [].concat(modules[i]);
 
       if (mediaQuery) {
         if (!item[2]) {
@@ -2930,7 +2908,7 @@ function cssWithMappingToString(item, useSourceMap) {
   if (useSourceMap && typeof btoa === 'function') {
     var sourceMapping = toComment(cssMapping);
     var sourceURLs = cssMapping.sources.map(function (source) {
-      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot).concat(source, " */");
     });
     return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
   }
@@ -2951,11 +2929,7 @@ function toComment(sourceMap) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ addStylesClient; });
 
 // CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/listToStyles.js
 /**
@@ -2987,6 +2961,7 @@ function listToStyles (parentId, list) {
 }
 
 // CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/addStylesClient.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return addStylesClient; });
 /*
   MIT License http://www.opensource.org/licenses/mit-license.php
   Author Tobias Koppers @sokra
@@ -3236,22 +3211,7 @@ module.exports = _defineProperty;
 /* 11 */
 /***/ (function(module, exports) {
 
-function _getPrototypeOf(o) {
-  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
-module.exports = _getPrototypeOf;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
 function _typeof(obj) {
-  "@babel/helpers - typeof";
-
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     module.exports = _typeof = function _typeof(obj) {
       return typeof obj;
@@ -3268,46 +3228,36 @@ function _typeof(obj) {
 module.exports = _typeof;
 
 /***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(42);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(9).default
+var update = add("68f243ea", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
 /* 13 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-module.exports = _asyncToGenerator;
+// load the styles
+var content = __webpack_require__(44);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(9).default
+var update = add("9895d3a6", content, false, {});
+// Hot Module Replacement
+if(false) {}
 
 /***/ }),
 /* 14 */
@@ -3316,12 +3266,12 @@ module.exports = _asyncToGenerator;
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(45);
+var content = __webpack_require__(46);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(9).default
-var update = add("68f243ea", content, false, {});
+var update = add("1db01c0b", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3332,12 +3282,12 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(47);
+var content = __webpack_require__(48);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(9).default
-var update = add("9895d3a6", content, false, {});
+var update = add("12d2309d", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3348,12 +3298,12 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(49);
+var content = __webpack_require__(50);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(9).default
-var update = add("1db01c0b", content, false, {});
+var update = add("1b34bfeb", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3364,12 +3314,12 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(51);
+var content = __webpack_require__(52);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(9).default
-var update = add("12d2309d", content, false, {});
+var update = add("604bf5ef", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3380,39 +3330,7 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(53);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(9).default
-var update = add("1b34bfeb", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(55);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(9).default
-var update = add("604bf5ef", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(57);
+var content = __webpack_require__(54);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -3422,12 +3340,12 @@ var update = add("f32fd36e", content, false, {});
 if(false) {}
 
 /***/ }),
-/* 21 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = __webpack_require__(12);
+var _typeof = __webpack_require__(11);
 
-var assertThisInitialized = __webpack_require__(22);
+var assertThisInitialized = __webpack_require__(20);
 
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
@@ -3440,7 +3358,7 @@ function _possibleConstructorReturn(self, call) {
 module.exports = _possibleConstructorReturn;
 
 /***/ }),
-/* 22 */
+/* 20 */
 /***/ (function(module, exports) {
 
 function _assertThisInitialized(self) {
@@ -3454,10 +3372,23 @@ function _assertThisInitialized(self) {
 module.exports = _assertThisInitialized;
 
 /***/ }),
-/* 23 */
+/* 21 */
+/***/ (function(module, exports) {
+
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+
+/***/ }),
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var setPrototypeOf = __webpack_require__(58);
+var setPrototypeOf = __webpack_require__(55);
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
@@ -3477,7 +3408,7 @@ function _inherits(subClass, superClass) {
 module.exports = _inherits;
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3486,15 +3417,15 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 
 /* harmony default export */ __webpack_exports__["a"] = (freeGlobal);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(59)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(56)))
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _root_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
-/* harmony import */ var _stubFalse_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(32);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _root_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var _stubFalse_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(29);
 
 
 
@@ -3534,10 +3465,10 @@ var isBuffer = nativeIsBuffer || _stubFalse_js__WEBPACK_IMPORTED_MODULE_1__[/* d
 
 /* harmony default export */ __webpack_exports__["a"] = (isBuffer);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(26)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(25)(module)))
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = function(originalModule) {
@@ -3567,11 +3498,11 @@ module.exports = function(originalModule) {
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _freeGlobal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _freeGlobal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
 
 
 /** Detect free variable `exports`. */
@@ -3603,43 +3534,10 @@ var nodeUtil = (function() {
 
 /* harmony default export */ __webpack_exports__["a"] = (nodeUtil);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(26)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(25)(module)))
 
 /***/ }),
-/* 28 */
-/***/ (function(module, exports) {
-
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
-  return arr2;
-}
-
-module.exports = _arrayLikeToArray;
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayLikeToArray = __webpack_require__(28);
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(n);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
-}
-
-module.exports = _unsupportedIterableToArray;
-
-/***/ }),
-/* 30 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3649,9 +3547,9 @@ module.exports = _unsupportedIterableToArray;
 /**
  * Dependencies
  */
-var util = __webpack_require__(40),
-    cmp = __webpack_require__(41),
-    bin = __webpack_require__(42);
+var util = __webpack_require__(37),
+    cmp = __webpack_require__(38),
+    bin = __webpack_require__(39);
 
 /**
  * Module interface definition
@@ -3863,7 +3761,7 @@ IndexedArray.prototype.getRange = function (begin, end) {
 
 
 /***/ }),
-/* 31 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -4193,7 +4091,7 @@ if (typeof window.define === 'function' && window.define.amd) {
 
 
 /***/ }),
-/* 32 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4218,11 +4116,11 @@ function stubFalse() {
 
 
 /***/ }),
-/* 33 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _root_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _root_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 
 
 /** Detect free variable `exports`. */
@@ -4259,42 +4157,46 @@ function cloneBuffer(buffer, isDeep) {
 
 /* harmony default export */ __webpack_exports__["a"] = (cloneBuffer);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(26)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(25)(module)))
 
 /***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayLikeToArray = __webpack_require__(28);
+/* 31 */
+/***/ (function(module, exports) {
 
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return arrayLikeToArray(arr);
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
 }
 
 module.exports = _arrayWithoutHoles;
 
 /***/ }),
-/* 35 */
+/* 32 */
 /***/ (function(module, exports) {
 
 function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
 }
 
 module.exports = _iterableToArray;
 
 /***/ }),
-/* 36 */
+/* 33 */
 /***/ (function(module, exports) {
 
 function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
 }
 
 module.exports = _nonIterableSpread;
 
 /***/ }),
-/* 37 */
+/* 34 */
 /***/ (function(module, exports) {
 
 function _arrayWithHoles(arr) {
@@ -4304,11 +4206,14 @@ function _arrayWithHoles(arr) {
 module.exports = _arrayWithHoles;
 
 /***/ }),
-/* 38 */
+/* 35 */
 /***/ (function(module, exports) {
 
 function _iterableToArrayLimit(arr, i) {
-  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
+    return;
+  }
+
   var _arr = [];
   var _n = true;
   var _d = false;
@@ -4337,17 +4242,17 @@ function _iterableToArrayLimit(arr, i) {
 module.exports = _iterableToArrayLimit;
 
 /***/ }),
-/* 39 */
+/* 36 */
 /***/ (function(module, exports) {
 
 function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  throw new TypeError("Invalid attempt to destructure non-iterable instance");
 }
 
 module.exports = _nonIterableRest;
 
 /***/ }),
-/* 40 */
+/* 37 */
 /***/ (function(module, exports) {
 
 /**
@@ -4392,7 +4297,7 @@ module.exports.isSortableArrayLike = function (o) {
 
 
 /***/ }),
-/* 41 */
+/* 38 */
 /***/ (function(module, exports) {
 
 /**
@@ -4427,7 +4332,7 @@ module.exports = {
 
 
 /***/ }),
-/* 42 */
+/* 39 */
 /***/ (function(module, exports) {
 
 /**
@@ -4489,7 +4394,7 @@ module.exports.search = search;
 
 
 /***/ }),
-/* 43 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4624,7 +4529,7 @@ var runtime = (function (exports) {
     return { __await: arg };
   };
 
-  function AsyncIterator(generator, PromiseImpl) {
+  function AsyncIterator(generator) {
     function invoke(method, arg, resolve, reject) {
       var record = tryCatch(generator[method], generator, arg);
       if (record.type === "throw") {
@@ -4635,14 +4540,14 @@ var runtime = (function (exports) {
         if (value &&
             typeof value === "object" &&
             hasOwn.call(value, "__await")) {
-          return PromiseImpl.resolve(value.__await).then(function(value) {
+          return Promise.resolve(value.__await).then(function(value) {
             invoke("next", value, resolve, reject);
           }, function(err) {
             invoke("throw", err, resolve, reject);
           });
         }
 
-        return PromiseImpl.resolve(value).then(function(unwrapped) {
+        return Promise.resolve(value).then(function(unwrapped) {
           // When a yielded Promise is resolved, its final value becomes
           // the .value of the Promise<{value,done}> result for the
           // current iteration.
@@ -4660,7 +4565,7 @@ var runtime = (function (exports) {
 
     function enqueue(method, arg) {
       function callInvokeWithMethodAndArg() {
-        return new PromiseImpl(function(resolve, reject) {
+        return new Promise(function(resolve, reject) {
           invoke(method, arg, resolve, reject);
         });
       }
@@ -4700,12 +4605,9 @@ var runtime = (function (exports) {
   // Note that simple async functions are implemented on top of
   // AsyncIterator objects; they just return a Promise for the value of
   // the final result produced by the iterator.
-  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
-    if (PromiseImpl === void 0) PromiseImpl = Promise;
-
+  exports.async = function(innerFn, outerFn, self, tryLocsList) {
     var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList),
-      PromiseImpl
+      wrap(innerFn, outerFn, self, tryLocsList)
     );
 
     return exports.isGeneratorFunction(outerFn)
@@ -5224,168 +5126,154 @@ try {
 
 
 /***/ }),
-/* 44 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 45 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.t-vue-lbtn {\n    z-index: 100;\n    width: 21px;\n    height: 21px;\n    margin-bottom: -6px;\n    pointer-events: all;\n    cursor: pointer;\n}\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 46 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 47 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.t-vue-lbtn-grp {\n    margin-left: 0.5em;\n}\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 48 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 49 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-legend {\n    position: relative;\n    z-index: 100;\n    font-size: 1.25em;\n    margin-left: 10px;\n    pointer-events: none;\n}\n.trading-vue-ohlcv {\n    pointer-events: none;\n    margin-bottom: 0.5em;\n}\n.t-vue-lspan {\n    font-variant-numeric: tabular-nums;\n    font-weight: 100;\n    font-size: 0.95em;\n    color: #999999; /* TODO: move => params */\n    margin-left: 0.1em;\n    margin-right: 0.2em;\n}\n.t-vue-title {\n    margin-right: 0.25em;\n    font-size: 1.45em;\n    font-weight: 200;\n}\n.t-vue-ind {\n    margin-left: 0.2em;\n    margin-bottom: 0.5em;\n    font-weight: 200;\n    font-size: 1.0em;\n}\n.t-vue-ivalue {\n    margin-left: 0.5em;\n}\n.t-vue-unknown {\n    color: #999999; /* TODO: move => params */\n}\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 50 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(17);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 51 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-section {\n    height: 0;\n    position: absolute;\n}\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 52 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 53 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-botbar {\n    position: relative !important;\n}\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 54 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(17);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 55 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-tbitem {\n}\n.trading-vue-tbitem:hover {\n    background-color: #76878319;\n}\n.trading-vue-tbicon {\n    position: absolute;\n}\n.trading-vue-tbitem.selected-item .trading-vue-tbicon {\n     filter: brightness(1.45) sepia(1) hue-rotate(90deg) saturate(4.5) !important;\n}\n.pixelated {\n    -ms-interpolation-mode: nearest-neighbor;\n    image-rendering: -webkit-optimize-contrast;\n    image-rendering: -webkit-crisp-edges;\n    image-rendering: -moz-crisp-edges;\n    image-rendering: -o-crisp-edges;\n    image-rendering: pixelated;\n}\n\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 56 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 57 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-toolbar {\n    position: absolute;\n    border-right: 1px solid black;\n    z-index: 100;\n    padding-top: 3px;\n}\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 58 */
+/* 55 */
 /***/ (function(module, exports) {
 
 function _setPrototypeOf(o, p) {
@@ -5400,7 +5288,7 @@ function _setPrototypeOf(o, p) {
 module.exports = _setPrototypeOf;
 
 /***/ }),
-/* 59 */
+/* 56 */
 /***/ (function(module, exports) {
 
 var g;
@@ -5426,25 +5314,11 @@ module.exports = g;
 
 
 /***/ }),
-/* 60 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "TradingVue", function() { return /* reexport */ TradingVue; });
-__webpack_require__.d(__webpack_exports__, "Overlay", function() { return /* reexport */ mixins_overlay; });
-__webpack_require__.d(__webpack_exports__, "Utils", function() { return /* reexport */ utils; });
-__webpack_require__.d(__webpack_exports__, "Constants", function() { return /* reexport */ constants; });
-__webpack_require__.d(__webpack_exports__, "Candle", function() { return /* reexport */ candle_CandleExt; });
-__webpack_require__.d(__webpack_exports__, "Volbar", function() { return /* reexport */ volbar_VolbarExt; });
-__webpack_require__.d(__webpack_exports__, "layout_cnv", function() { return /* reexport */ layout_cnv; });
-__webpack_require__.d(__webpack_exports__, "layout_vol", function() { return /* reexport */ layout_vol; });
-__webpack_require__.d(__webpack_exports__, "DataCube", function() { return /* reexport */ datacube_DataCube; });
-__webpack_require__.d(__webpack_exports__, "OICandle", function() { return /* reexport */ oi_candle_OICandleExt; });
-__webpack_require__.d(__webpack_exports__, "OIPrice", function() { return /* reexport */ oi_price_OIPrice; });
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/TradingVue.vue?vue&type=template&id=235c0ade&
 var TradingVuevue_type_template_id_235c0ade_render = function() {
@@ -5648,11 +5522,11 @@ function Context($p) {
 
 /* harmony default export */ var context = (Context);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
-var slicedToArray = __webpack_require__(3);
+var slicedToArray = __webpack_require__(4);
 var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // EXTERNAL MODULE: ./node_modules/arrayslicer/lib/index.js
-var lib = __webpack_require__(30);
+var lib = __webpack_require__(27);
 var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 
 // CONCATENATED MODULE: ./src/stuff/utils.js
@@ -5930,13 +5804,24 @@ function GridMaker(id, params) {
       self.$_hi = y_t.range[0];
       self.$_lo = y_t.range[1];
     } else {
-      self.$_hi = hi + (hi - lo) * $p.config.EXPAND;
-      self.$_lo = lo - (hi - lo) * $p.config.EXPAND;
+      if (hi < 0 && lo < 0) {
+        self.$_hi = hi + (hi - lo) * $p.config.EXPAND;
+        self.$_lo = lo - (hi - lo) * $p.config.EXPAND;
 
-      if (self.$_hi === self.$_lo) {
-        self.$_hi *= 1.05; // Expand if height range === 0
+        if (self.$_hi === self.$_lo) {
+          self.$_hi *= 0.95; // Expand if height range === 0
 
-        self.$_lo *= 0.95;
+          self.$_lo *= 1.05;
+        }
+      } else {
+        self.$_hi = hi + (hi - lo) * $p.config.EXPAND;
+        self.$_lo = lo - (hi - lo) * $p.config.EXPAND;
+
+        if (self.$_hi === self.$_lo) {
+          self.$_hi *= 1.05; // Expand if height range === 0
+
+          self.$_lo *= 0.95;
+        }
       }
     }
   }
@@ -5972,38 +5857,29 @@ function GridMaker(id, params) {
         max_l = 0; // Get max lengths of integer and fractional parts
 
     data.forEach(function (x) {
-      var str = x[1].toString();
+      var str = x[1].toString(); // Edit: Ray (No need to check for exponential data, change all to regular format)
+      // if (x[1] < 0.000001) {
+      //     // Parsing the exponential form. Gosh this
+      //     // smells trickily
+      //     var [ls, rs] = str.split('e-')
+      //     var [l, r] = ls.split('.')
+      //     if (!r) r = ''
+      //     r = { length: r.length + parseInt(rs) || 0 }
+      // } else {
 
-      if (x[1] < 0.000001) {
-        // Parsing the exponential form. Gosh this
-        // smells trickily
-        var _str$split = str.split('e-'),
-            _str$split2 = slicedToArray_default()(_str$split, 2),
-            ls = _str$split2[0],
-            rs = _str$split2[1];
+      var _str$split = str.split('.'),
+          _str$split2 = slicedToArray_default()(_str$split, 2),
+          l = _str$split2[0],
+          r = _str$split2[1]; // }
 
-        var _ls$split = ls.split('.'),
-            _ls$split2 = slicedToArray_default()(_ls$split, 2),
-            l = _ls$split2[0],
-            r = _ls$split2[1];
-
-        if (!r) r = '';
-        r = {
-          length: r.length + parseInt(rs) || 0
-        };
-      } else {
-        var _str$split3 = str.split('.'),
-            _str$split4 = slicedToArray_default()(_str$split3, 2),
-            l = _str$split4[0],
-            r = _str$split4[1];
-      }
 
       if (r && r.length > max_r) {
         max_r = r.length;
       }
 
       if (l && l.length > max_l) {
-        max_l = l.length;
+        var absL = Math.abs(parseInt(l)).toString();
+        max_l = absL.length;
       }
     }); // Select precision scheme depending
     // on the left and right part lengths
@@ -6049,7 +5925,7 @@ function GridMaker(id, params) {
 
   function dollar_step() {
     var yrange = self.$_hi - self.$_lo;
-    var m = yrange * ($p.config.GRIDY / height);
+    var m = Math.abs(yrange * ($p.config.GRIDY / height));
     var p = parseInt(yrange.toExponential().split('e')[1]);
     var d = Math.pow(10, p);
     var s = grid_maker_$SCALES.map(function (x) {
@@ -6126,7 +6002,13 @@ function GridMaker(id, params) {
     var m = Math.pow(10, -self.prec);
     self.$_step = Math.max(m, dollar_step());
     self.ys = [];
-    var y1 = self.$_lo - self.$_lo % self.$_step;
+    var y1 = 0;
+
+    if (self.$_lo < 0) {
+      y1 = self.$_lo + self.$_lo % self.$_step;
+    } else {
+      y1 = self.$_lo - self.$_lo % self.$_step;
+    }
 
     for (var y$ = y1; y$ <= self.$_hi; y$ += self.$_step) {
       var y = Math.floor(y$ * self.A + self.B);
@@ -6175,13 +6057,6 @@ function GridMaker(id, params) {
 /* harmony default export */ var grid_maker = (GridMaker);
 // CONCATENATED MODULE: ./src/components/js/layout.js
 
-
-
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 // Calculates all necessary s*it to build the chart
 // Heights, widths, transforms, ... = everything
@@ -6316,11 +6191,12 @@ function Layout(params) {
   };
   var gms = [new grid_maker(0, specs)]; // Sub grids
 
-  var _iterator = _createForOfIteratorHelper(offsub.entries()),
-      _step;
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
 
   try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+    for (var _iterator = offsub.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var _step$value = slicedToArray_default()(_step.value, 2),
           i = _step$value[0],
           data = _step$value[1].data;
@@ -6332,9 +6208,18 @@ function Layout(params) {
     } // Max sidebar among all grinds
 
   } catch (err) {
-    _iterator.e(err);
+    _didIteratorError = true;
+    _iteratorError = err;
   } finally {
-    _iterator.f();
+    try {
+      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+        _iterator["return"]();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
   }
 
   var sb = Math.max.apply(Math, toConsumableArray_default()(gms.map(function (x) {
@@ -6376,18 +6261,13 @@ var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 // CONCATENATED MODULE: ./src/components/js/updater.js
 
 
-
-function updater_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = updater_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function updater_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return updater_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return updater_arrayLikeToArray(o, minLen); }
-
-function updater_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Cursor updater: calculates current values for
 // OHLCV and all other indicators
 
 
-var updater_CursorUpdater = /*#__PURE__*/function () {
+var updater_CursorUpdater =
+/*#__PURE__*/
+function () {
   function CursorUpdater(comp) {
     classCallCheck_default()(this, CursorUpdater);
 
@@ -6399,12 +6279,12 @@ var updater_CursorUpdater = /*#__PURE__*/function () {
     value: function sync(e) {
       this.cursor.grid_id = e.grid_id;
       var once = true;
-
-      var _iterator = updater_createForOfIteratorHelper(this.grids),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.grids[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var grid = _step.value;
           var c = this.cursor_data(grid, e);
 
@@ -6426,9 +6306,18 @@ var updater_CursorUpdater = /*#__PURE__*/function () {
           this.cursor.y$ = c.y$;
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
     }
   }, {
@@ -6441,12 +6330,12 @@ var updater_CursorUpdater = /*#__PURE__*/function () {
       var t = grid.screen2t(e.x);
       var ids = {},
           res = {};
-
-      var _iterator2 = updater_createForOfIteratorHelper(data),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = data[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var d = _step2.value;
           var ts = d.data.map(function (x) {
             return x[0];
@@ -6456,9 +6345,18 @@ var updater_CursorUpdater = /*#__PURE__*/function () {
           res["".concat(d.type, "_").concat(ids[d.type])] = d.data[i];
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
 
       return res;
@@ -6575,32 +6473,20 @@ Sectionvue_type_template_id_8fbe9336_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Section.vue?vue&type=template&id=8fbe9336&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
-var regenerator = __webpack_require__(7);
+var regenerator = __webpack_require__(5);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__(13);
-var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
-
 // EXTERNAL MODULE: ./node_modules/hammerjs/hammer.js
-var hammer = __webpack_require__(6);
+var hammer = __webpack_require__(7);
 
 // EXTERNAL MODULE: ./node_modules/hamsterjs/hamster.js
-var hamsterjs_hamster = __webpack_require__(31);
+var hamsterjs_hamster = __webpack_require__(28);
 var hamster_default = /*#__PURE__*/__webpack_require__.n(hamsterjs_hamster);
 
 // CONCATENATED MODULE: ./src/components/js/grid.js
 
 
 
-
-
-
-function grid_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = grid_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function grid_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return grid_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return grid_arrayLikeToArray(o, minLen); }
-
-function grid_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 // Grid.js listens to various user-generated events,
 // emits Vue-events if something has changed (e.g. range)
@@ -6609,7 +6495,9 @@ function grid_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) 
 
  // Grid is good.
 
-var grid_Grid = /*#__PURE__*/function () {
+var grid_Grid =
+/*#__PURE__*/
+function () {
   function Grid(canvas, comp) {
     classCallCheck_default()(this, Grid);
 
@@ -6834,12 +6722,12 @@ var grid_Grid = /*#__PURE__*/function () {
       this.ctx.strokeStyle = this.$p.colors.colorGrid;
       this.ctx.beginPath();
       var ymax = this.layout.height;
-
-      var _iterator = grid_createForOfIteratorHelper(this.layout.xs),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.layout.xs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var _step$value = slicedToArray_default()(_step.value, 2),
               x = _step$value[0],
               p = _step$value[1];
@@ -6848,16 +6736,26 @@ var grid_Grid = /*#__PURE__*/function () {
           this.ctx.lineTo(x - 0.5, ymax);
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
-      var _iterator2 = grid_createForOfIteratorHelper(this.layout.ys),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = this.layout.ys[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var _step2$value = slicedToArray_default()(_step2.value, 2),
               y = _step2$value[0],
               y$ = _step2$value[1];
@@ -6866,9 +6764,18 @@ var grid_Grid = /*#__PURE__*/function () {
           this.ctx.lineTo(this.layout.width, y - 0.5);
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
 
       this.ctx.stroke();
@@ -6965,67 +6872,60 @@ var grid_Grid = /*#__PURE__*/function () {
     }
   }, {
     key: "change_range",
-    value: function () {
-      var _change_range = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-        var l, data, range;
-        return regenerator_default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!(!this.range.length || this.data.length < 2)) {
-                  _context.next = 2;
-                  break;
-                }
+    value: function change_range() {
+      var l, data, range;
+      return regenerator_default.a.async(function change_range$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (!(!this.range.length || this.data.length < 2)) {
+                _context.next = 2;
+                break;
+              }
 
-                return _context.abrupt("return");
+              return _context.abrupt("return");
 
-              case 2:
-                l = this.data.length - 1;
-                data = this.data;
-                range = this.range;
-                _context.next = 7;
-                return utils.clamp(range[0], -Infinity, data[l][0] - this.interval * 5.5);
+            case 2:
+              l = this.data.length - 1;
+              data = this.data;
+              range = this.range;
+              _context.next = 7;
+              return regenerator_default.a.awrap(utils.clamp(range[0], -Infinity, data[l][0] - this.interval * 5.5));
 
-              case 7:
-                range[0] = _context.sent;
-                _context.next = 10;
-                return utils.clamp(range[1], data[0][0] + this.interval * 5.5, Infinity);
+            case 7:
+              range[0] = _context.sent;
+              _context.next = 10;
+              return regenerator_default.a.awrap(utils.clamp(range[1], data[0][0] + this.interval * 5.5, Infinity));
 
-              case 10:
-                range[1] = _context.sent;
-                // TODO: IMPORTANT scrolling is jerky The Problem caused
-                // by the long round trip of 'range-changed' event.
-                // First it propagates up to update layout in Chart.vue,
-                // then it moves back as watch() update. It takes 1-5 ms.
-                // And because the delay is different each time we see
-                // the lag. No smooth movement and it's annoying.
-                // Solution: we could try to calc the layout immediatly
-                // somewhere here. Still will hurt the sidebar & bottombar
-                this.comp.$emit('range-changed', range);
+            case 10:
+              range[1] = _context.sent;
+              // TODO: IMPORTANT scrolling is jerky The Problem caused
+              // by the long round trip of 'range-changed' event.
+              // First it propagates up to update layout in Chart.vue,
+              // then it moves back as watch() update. It takes 1-5 ms.
+              // And because the delay is different each time we see
+              // the lag. No smooth movement and it's annoying.
+              // Solution: we could try to calc the layout immediatly
+              // somewhere here. Still will hurt the sidebar & bottombar
+              this.comp.$emit('range-changed', range);
 
-              case 12:
-              case "end":
-                return _context.stop();
-            }
+            case 12:
+            case "end":
+              return _context.stop();
           }
-        }, _callee, this);
-      }));
-
-      function change_range() {
-        return _change_range.apply(this, arguments);
-      }
-
-      return change_range;
-    }() // Propagate mouse event to overlays
+        }
+      }, null, this);
+    } // Propagate mouse event to overlays
 
   }, {
     key: "propagate",
     value: function propagate(name, event) {
-      var _iterator3 = grid_createForOfIteratorHelper(this.overlays),
-          _step3;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        for (var _iterator3 = this.overlays[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
           var layer = _step3.value;
 
           if (layer.renderer.hasOwnProperty(name) && typeof layer.renderer[name] === 'function') {
@@ -7045,9 +6945,18 @@ var grid_Grid = /*#__PURE__*/function () {
           }
         }
       } catch (err) {
-        _iterator3.e(err);
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
-        _iterator3.f();
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+            _iterator3["return"]();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
       }
     }
   }]);
@@ -7139,7 +7048,9 @@ var grid_Grid = /*#__PURE__*/function () {
 
 
 
-var crosshair_Crosshair = /*#__PURE__*/function () {
+var crosshair_Crosshair =
+/*#__PURE__*/
+function () {
   function Crosshair(comp) {
     classCallCheck_default()(this, Crosshair);
 
@@ -7317,7 +7228,7 @@ function normalizeComponent (
       // for template-only hot-reload because in that case the render fn doesn't
       // go through the normalizer
       options._injectStyles = hook
-      // register for functional component in vue file
+      // register for functioal component in vue file
       var originalRender = options.render
       options.render = function renderWithStyleInjection (h, context) {
         hook.call(context)
@@ -7425,14 +7336,10 @@ KeyboardListener_component.options.__file = "src/components/KeyboardListener.vue
 
 
 
-function mouse_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = mouse_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function mouse_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return mouse_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return mouse_arrayLikeToArray(o, minLen); }
-
-function mouse_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Mouse event handler for overlay
-var mouse_Mouse = /*#__PURE__*/function () {
+var mouse_Mouse =
+/*#__PURE__*/
+function () {
   function Mouse(comp) {
     classCallCheck_default()(this, Mouse);
 
@@ -7469,18 +7376,28 @@ var mouse_Mouse = /*#__PURE__*/function () {
       var l = this.comp.layout;
 
       if (this.map.hasOwnProperty(name)) {
-        var _iterator = mouse_createForOfIteratorHelper(this.map[name]),
-            _step;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
         try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          for (var _iterator = this.map[name][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var f = _step.value;
             f(event);
           }
         } catch (err) {
-          _iterator.e(err);
+          _didIteratorError = true;
+          _iteratorError = err;
         } finally {
-          _iterator.f();
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
         }
       }
 
@@ -7592,12 +7509,6 @@ var mouse_Mouse = /*#__PURE__*/function () {
   }
 });
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Spline.vue?vue&type=script&lang=js&
-function Splinevue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Splinevue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Splinevue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Splinevue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Splinevue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Splinevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Spline renderer. (SMAs, EMAs, TEMAs...
 // you know what I mean)
 // TODO: make a real spline, not a bunch of lines...
@@ -7637,21 +7548,30 @@ function Splinevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == n
       ctx.beginPath();
       var layout = this.$props.layout;
       var i = this.data_index;
-
-      var _iterator = Splinevue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var p = _step.value;
           var x = layout.t2screen(p[0]);
           var y = layout.$2screen(p[i]);
           ctx.lineTo(x, y);
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       ctx.stroke();
@@ -7720,12 +7640,6 @@ if (false) { var Spline_api; }
 Spline_component.options.__file = "src/components/overlays/Spline.vue"
 /* harmony default export */ var Spline = (Spline_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Splines.vue?vue&type=script&lang=js&
-function Splinesvue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Splinesvue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Splinesvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Splinesvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Splinesvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Splinesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Channel renderer. (Keltner, Bollinger)
 
 /* harmony default export */ var Splinesvue_type_script_lang_js_ = ({
@@ -7745,21 +7659,30 @@ function Splinesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == 
         ctx.strokeStyle = this.clrx[i];
         ctx.lineWidth = this.widths[i] || this.line_width;
         ctx.beginPath();
-
-        var _iterator = Splinesvue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
-            _step;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
         try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var p = _step.value;
             var x = layout.t2screen(p[0]);
             var y = layout.$2screen(p[i + 1]);
             ctx.lineTo(x, y);
           }
         } catch (err) {
-          _iterator.e(err);
+          _didIteratorError = true;
+          _iteratorError = err;
         } finally {
-          _iterator.f();
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
         }
 
         ctx.stroke();
@@ -7832,12 +7755,6 @@ if (false) { var Splines_api; }
 Splines_component.options.__file = "src/components/overlays/Splines.vue"
 /* harmony default export */ var Splines = (Splines_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Range.vue?vue&type=script&lang=js&
-function Rangevue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Rangevue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Rangevue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Rangevue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Rangevue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Rangevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // R S I . Because we love it
 // Adds all necessary stuff for you.
 
@@ -7877,21 +7794,30 @@ function Rangevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == nu
       ctx.lineWidth = this.line_width;
       ctx.strokeStyle = this.color;
       ctx.beginPath();
-
-      var _iterator = Rangevue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var p = _step.value;
           var x = layout.t2screen(p[0]);
           var y = layout.$2screen(p[1]);
           ctx.lineTo(x, y);
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       ctx.stroke();
@@ -7977,12 +7903,6 @@ if (false) { var Range_api; }
 Range_component.options.__file = "src/components/overlays/Range.vue"
 /* harmony default export */ var Range = (Range_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Trades.vue?vue&type=script&lang=js&
-function Tradesvue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Tradesvue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Tradesvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Tradesvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Tradesvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Tradesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 
 /* harmony default export */ var Tradesvue_type_script_lang_js_ = ({
   name: 'Trades',
@@ -7998,12 +7918,12 @@ function Tradesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == n
       var layout = this.$props.layout;
       ctx.lineWidth = 1.5;
       ctx.strokeStyle = 'black';
-
-      var _iterator = Tradesvue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var p = _step.value;
           ctx.fillStyle = p[1] ? this.buy_color : this.sell_color;
           ctx.beginPath();
@@ -8020,9 +7940,18 @@ function Tradesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == n
           }
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
     },
     draw_label: function draw_label(ctx, x, y, p) {
@@ -8431,7 +8360,9 @@ function layout_vol(self) {
 
 
 // Candle object for Candles overlay
-var candle_CandleExt = /*#__PURE__*/function () {
+var candle_CandleExt =
+/*#__PURE__*/
+function () {
   function CandleExt(overlay, ctx, data) {
     classCallCheck_default()(this, CandleExt);
 
@@ -8482,7 +8413,9 @@ var candle_CandleExt = /*#__PURE__*/function () {
 
 
 
-var volbar_VolbarExt = /*#__PURE__*/function () {
+var volbar_VolbarExt =
+/*#__PURE__*/
+function () {
   function VolbarExt(overlay, ctx, data) {
     classCallCheck_default()(this, VolbarExt);
 
@@ -8513,7 +8446,9 @@ var volbar_VolbarExt = /*#__PURE__*/function () {
 
 
 // Price bar & price line (shader)
-var price_Price = /*#__PURE__*/function () {
+var price_Price =
+/*#__PURE__*/
+function () {
   function Price(comp) {
     classCallCheck_default()(this, Price);
 
@@ -8611,13 +8546,6 @@ var price_Price = /*#__PURE__*/function () {
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Candles.vue?vue&type=script&lang=js&
 
-
-function Candlesvue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Candlesvue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Candlesvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Candlesvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Candlesvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Candlesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Renedrer for candlesticks + volume (optional)
 // It can be used as the main chart or an indicator
 
@@ -8651,33 +8579,53 @@ function Candlesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == 
       }
 
       if (this.show_volume) {
-        var _iterator = Candlesvue_type_script_lang_js_createForOfIteratorHelper(cnv.volume),
-            _step;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
         try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          for (var _iterator = cnv.volume[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var v = _step.value;
             new volbar_VolbarExt(this, ctx, v);
           }
         } catch (err) {
-          _iterator.e(err);
+          _didIteratorError = true;
+          _iteratorError = err;
         } finally {
-          _iterator.f();
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
         }
       }
 
-      var _iterator2 = Candlesvue_type_script_lang_js_createForOfIteratorHelper(cnv.candles),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = cnv.candles[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var c = _step2.value;
           new candle_CandleExt(this, ctx, c);
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
 
       if (this.price_line) this.price.draw(ctx);
@@ -8760,13 +8708,6 @@ Candles_component.options.__file = "src/components/overlays/Candles.vue"
 /* harmony default export */ var Candles = (Candles_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Volume.vue?vue&type=script&lang=js&
 
-
-function Volumevue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Volumevue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Volumevue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Volumevue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Volumevue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Volumevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Standalone renedrer for the volume
 
 
@@ -8784,18 +8725,28 @@ function Volumevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == n
     draw: function draw(ctx) {
       // TODO: volume average
       // TODO: Y-axis scaling
-      var _iterator = Volumevue_type_script_lang_js_createForOfIteratorHelper(layout_vol(this)),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = layout_vol(this)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var v = _step.value;
           new volbar_VolbarExt(this, ctx, v);
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
     },
     use_for: function use_for() {
@@ -8988,14 +8939,10 @@ Splitters_component.options.__file = "src/components/overlays/Splitters.vue"
 
 
 
-function keys_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = keys_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function keys_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return keys_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return keys_arrayLikeToArray(o, minLen); }
-
-function keys_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Keyboard event handler for overlay
-var keys_Keys = /*#__PURE__*/function () {
+var keys_Keys =
+/*#__PURE__*/
+function () {
   function Keys(comp) {
     classCallCheck_default()(this, Keys);
 
@@ -9018,18 +8965,28 @@ var keys_Keys = /*#__PURE__*/function () {
     key: "emit",
     value: function emit(name, event) {
       if (name in this.map) {
-        var _iterator = keys_createForOfIteratorHelper(this.map[name]),
-            _step;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
         try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          for (var _iterator = this.map[name][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var f = _step.value;
             f(event);
           }
         } catch (err) {
-          _iterator.e(err);
+          _didIteratorError = true;
+          _iteratorError = err;
         } finally {
-          _iterator.f();
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
         }
       }
 
@@ -9057,12 +9014,6 @@ var keys_Keys = /*#__PURE__*/function () {
 
 
 // CONCATENATED MODULE: ./src/mixins/tool.js
-function tool_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = tool_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function tool_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return tool_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return tool_arrayLikeToArray(o, minLen); }
-
-function tool_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Usuful stuff for creating tools. Include as mixin
 
 /* harmony default export */ var mixins_tool = ({
@@ -9130,18 +9081,28 @@ function tool_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) 
       // If layer $uuid is changed, then re-init
       // pins & collisions
       if (n.$uuid !== p.$uuid) {
-        var _iterator = tool_createForOfIteratorHelper(this.pins),
-            _step;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
         try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          for (var _iterator = this.pins[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var p = _step.value;
             p.re_init();
           }
         } catch (err) {
-          _iterator.e(err);
+          _didIteratorError = true;
+          _iteratorError = err;
         } finally {
-          _iterator.f();
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
         }
 
         this.collisions = [];
@@ -9188,7 +9149,7 @@ function tool_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) 
   }
 });
 // EXTERNAL MODULE: ./src/stuff/icons.json
-var icons = __webpack_require__(5);
+var icons = __webpack_require__(6);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
 var defineProperty = __webpack_require__(10);
@@ -9200,7 +9161,9 @@ var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 
 // Semi-automatic pin object. For stretching things.
-var pin_Pin = /*#__PURE__*/function () {
+var pin_Pin =
+/*#__PURE__*/
+function () {
   // (Comp reference, a name in overlay settings,
   // pin parameters)
   function Pin(comp, name) {
@@ -9460,7 +9423,9 @@ var pin_Pin = /*#__PURE__*/function () {
 // Draws a segment, adds corresponding collision f-n
 
 
-var seg_Seg = /*#__PURE__*/function () {
+var seg_Seg =
+/*#__PURE__*/
+function () {
   // Overlay ref, canvas ctx
   function Seg(overlay, ctx) {
     classCallCheck_default()(this, Seg);
@@ -9505,7 +9470,9 @@ var seg_Seg = /*#__PURE__*/function () {
 // Draws a line, adds corresponding collision f-n
 
 
-var line_Line = /*#__PURE__*/function () {
+var line_Line =
+/*#__PURE__*/
+function () {
   // Overlay ref, canvas ctx
   function Line(overlay, ctx) {
     classCallCheck_default()(this, Line);
@@ -9852,12 +9819,6 @@ if (false) { var RangeTool_api; }
 RangeTool_component.options.__file = "src/components/overlays/RangeTool.vue"
 /* harmony default export */ var RangeTool = (RangeTool_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Grid.vue?vue&type=script&lang=js&
-function Gridvue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Gridvue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Gridvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Gridvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Gridvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Gridvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Sets up all layers/overlays for the grid with 'grid_id'
 
 
@@ -9972,12 +9933,12 @@ function Gridvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == nul
       // to this._registry; returns compo list
       var comp_list = [],
           count = {};
-
-      var _iterator = Gridvue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var d = _step.value;
           var comp = this._list[this._registry[d.type]];
 
@@ -9992,9 +9953,18 @@ function Gridvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == nul
           }
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       return comp_list.map(function (x, i) {
@@ -10127,17 +10097,12 @@ Grid_component.options.__file = "src/components/Grid.vue"
 
 
 
-function sidebar_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = sidebar_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function sidebar_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return sidebar_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return sidebar_arrayLikeToArray(o, minLen); }
-
-function sidebar_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-
 
 var PANHEIGHT;
 
-var sidebar_Sidebar = /*#__PURE__*/function () {
+var sidebar_Sidebar =
+/*#__PURE__*/
+function () {
   function Sidebar(canvas, comp) {
     var side = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'right';
 
@@ -10265,12 +10230,12 @@ var sidebar_Sidebar = /*#__PURE__*/function () {
 
       this.ctx.fillStyle = this.$p.colors.colorText;
       this.ctx.beginPath();
-
-      var _iterator = sidebar_createForOfIteratorHelper(points),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = points[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var p = _step.value;
           if (p[0] > this.layout.height) continue;
           var x1 = side === 'left' ? w - 0.5 : x - 0.5;
@@ -10283,9 +10248,18 @@ var sidebar_Sidebar = /*#__PURE__*/function () {
           this.ctx.fillText(p[1].toFixed(d), x1 + offst, p[0] + 4);
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       this.ctx.stroke();
@@ -10296,20 +10270,30 @@ var sidebar_Sidebar = /*#__PURE__*/function () {
   }, {
     key: "apply_shaders",
     value: function apply_shaders() {
-      var _iterator2 = sidebar_createForOfIteratorHelper(this.$p.shaders),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = this.$p.shaders[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var s = _step2.value;
           this.ctx.save();
           s.draw(this.ctx);
           this.ctx.restore();
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
     }
   }, {
@@ -10678,7 +10662,7 @@ LegendButtonvue_type_template_id_1ad87362_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/LegendButton.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_LegendButtonvue_type_script_lang_js_ = (LegendButtonvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/LegendButton.vue?vue&type=style&index=0&lang=css&
-var LegendButtonvue_type_style_index_0_lang_css_ = __webpack_require__(44);
+var LegendButtonvue_type_style_index_0_lang_css_ = __webpack_require__(41);
 
 // CONCATENATED MODULE: ./src/components/LegendButton.vue
 
@@ -10736,7 +10720,7 @@ LegendButton_component.options.__file = "src/components/LegendButton.vue"
 // CONCATENATED MODULE: ./src/components/ButtonGroup.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_ButtonGroupvue_type_script_lang_js_ = (ButtonGroupvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/ButtonGroup.vue?vue&type=style&index=0&lang=css&
-var ButtonGroupvue_type_style_index_0_lang_css_ = __webpack_require__(46);
+var ButtonGroupvue_type_style_index_0_lang_css_ = __webpack_require__(43);
 
 // CONCATENATED MODULE: ./src/components/ButtonGroup.vue
 
@@ -10888,7 +10872,7 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
 // CONCATENATED MODULE: ./src/components/Legend.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Legendvue_type_script_lang_js_ = (Legendvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Legend.vue?vue&type=style&index=0&lang=css&
-var Legendvue_type_style_index_0_lang_css_ = __webpack_require__(48);
+var Legendvue_type_style_index_0_lang_css_ = __webpack_require__(45);
 
 // CONCATENATED MODULE: ./src/components/Legend.vue
 
@@ -11098,7 +11082,7 @@ Legend_component.options.__file = "src/components/Legend.vue"
 // CONCATENATED MODULE: ./src/components/Section.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Sectionvue_type_script_lang_js_ = (Sectionvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Section.vue?vue&type=style&index=0&lang=css&
-var Sectionvue_type_style_index_0_lang_css_ = __webpack_require__(50);
+var Sectionvue_type_style_index_0_lang_css_ = __webpack_require__(47);
 
 // CONCATENATED MODULE: ./src/components/Section.vue
 
@@ -11128,13 +11112,6 @@ Section_component.options.__file = "src/components/Section.vue"
 
 
 
-function botbar_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = botbar_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function botbar_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return botbar_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return botbar_arrayLikeToArray(o, minLen); }
-
-function botbar_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-
 
 var botbar_MINUTE15 = constants.MINUTE15,
     botbar_MINUTE = constants.MINUTE,
@@ -11144,7 +11121,9 @@ var botbar_MINUTE15 = constants.MINUTE15,
     botbar_YEAR = constants.YEAR,
     botbar_MONTHMAP = constants.MONTHMAP;
 
-var botbar_Botbar = /*#__PURE__*/function () {
+var botbar_Botbar =
+/*#__PURE__*/
+function () {
   function Botbar(canvas, comp) {
     classCallCheck_default()(this, Botbar);
 
@@ -11178,12 +11157,12 @@ var botbar_Botbar = /*#__PURE__*/function () {
       this.ctx.stroke();
       this.ctx.fillStyle = this.$p.colors.colorText;
       this.ctx.beginPath();
-
-      var _iterator = botbar_createForOfIteratorHelper(this.layout.botbar.xs),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.layout.botbar.xs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var p = _step.value;
           var lbl = this.format_date(p[1][0]);
           if (p[0] > width - sb) continue;
@@ -11199,9 +11178,18 @@ var botbar_Botbar = /*#__PURE__*/function () {
           this.ctx.globalAlpha = 1;
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       this.ctx.stroke();
@@ -11211,20 +11199,30 @@ var botbar_Botbar = /*#__PURE__*/function () {
   }, {
     key: "apply_shaders",
     value: function apply_shaders() {
-      var _iterator2 = botbar_createForOfIteratorHelper(this.$p.shaders),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = this.$p.shaders[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var s = _step2.value;
           this.ctx.save();
           s.draw(this.ctx);
           this.ctx.restore();
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
     }
   }, {
@@ -11375,7 +11373,7 @@ var botbar_Botbar = /*#__PURE__*/function () {
 // CONCATENATED MODULE: ./src/components/Botbar.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Botbarvue_type_script_lang_js_ = (Botbarvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Botbar.vue?vue&type=style&index=0&lang=css&
-var Botbarvue_type_style_index_0_lang_css_ = __webpack_require__(52);
+var Botbarvue_type_style_index_0_lang_css_ = __webpack_require__(49);
 
 // CONCATENATED MODULE: ./src/components/Botbar.vue
 var Botbar_render, Botbar_staticRenderFns
@@ -11957,7 +11955,7 @@ ToolbarItemvue_type_template_id_227b3c2e_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/ToolbarItem.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_ToolbarItemvue_type_script_lang_js_ = (ToolbarItemvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/ToolbarItem.vue?vue&type=style&index=0&lang=css&
-var ToolbarItemvue_type_style_index_0_lang_css_ = __webpack_require__(54);
+var ToolbarItemvue_type_style_index_0_lang_css_ = __webpack_require__(51);
 
 // CONCATENATED MODULE: ./src/components/ToolbarItem.vue
 
@@ -12054,7 +12052,7 @@ ToolbarItem_component.options.__file = "src/components/ToolbarItem.vue"
 // CONCATENATED MODULE: ./src/components/Toolbar.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Toolbarvue_type_script_lang_js_ = (Toolbarvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Toolbar.vue?vue&type=style&index=0&lang=css&
-var Toolbarvue_type_style_index_0_lang_css_ = __webpack_require__(56);
+var Toolbarvue_type_style_index_0_lang_css_ = __webpack_require__(53);
 
 // CONCATENATED MODULE: ./src/components/Toolbar.vue
 
@@ -12361,40 +12359,35 @@ if (false) { var TradingVue_api; }
 TradingVue_component.options.__file = "src/TradingVue.vue"
 /* harmony default export */ var TradingVue = (TradingVue_component.exports);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
-var helpers_typeof = __webpack_require__(12);
+var helpers_typeof = __webpack_require__(11);
 var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(21);
+var possibleConstructorReturn = __webpack_require__(19);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(11);
+var getPrototypeOf = __webpack_require__(21);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(23);
+var inherits = __webpack_require__(22);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
-var assertThisInitialized = __webpack_require__(22);
+var assertThisInitialized = __webpack_require__(20);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
 // CONCATENATED MODULE: ./src/helpers/dc_events.js
 
 
-
-function dc_events_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = dc_events_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function dc_events_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return dc_events_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return dc_events_arrayLikeToArray(o, minLen); }
-
-function dc_events_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // DataCube event handlers
 
 
 
-var dc_events_DCEvents = /*#__PURE__*/function () {
+var dc_events_DCEvents =
+/*#__PURE__*/
+function () {
   function DCEvents() {
     classCallCheck_default()(this, DCEvents);
   }
@@ -12463,20 +12456,29 @@ var dc_events_DCEvents = /*#__PURE__*/function () {
     key: "register_tools",
     value: function register_tools(tools) {
       var preset = {};
-
-      var _iterator = dc_events_createForOfIteratorHelper(this.data.tools || []),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = (this.data.tools || [])[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var tool = _step.value;
           preset[tool.type] = tool;
           delete tool.type;
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       this.data.tools = [];
@@ -12484,12 +12486,12 @@ var dc_events_DCEvents = /*#__PURE__*/function () {
         type: 'Cursor',
         icon: icons['cursor.png']
       }];
-
-      var _iterator2 = dc_events_createForOfIteratorHelper(tools),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = tools[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var tool = _step2.value;
           var proto = Object.assign({}, tool.info);
           var type = tool.info.type || 'Default';
@@ -12509,9 +12511,18 @@ var dc_events_DCEvents = /*#__PURE__*/function () {
           }
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
 
       this.tv.$set(this.data, 'tools', list);
@@ -12960,7 +12971,7 @@ function stackHas(key) {
 /* harmony default export */ var _stackHas = (stackHas);
 
 // EXTERNAL MODULE: ./node_modules/lodash-es/_root.js
-var _root = __webpack_require__(4);
+var _root = __webpack_require__(3);
 
 // CONCATENATED MODULE: ./node_modules/lodash-es/_Symbol.js
 
@@ -13801,7 +13812,7 @@ var baseFor = _createBaseFor();
 /* harmony default export */ var _baseFor = (baseFor);
 
 // EXTERNAL MODULE: ./node_modules/lodash-es/_cloneBuffer.js
-var _cloneBuffer = __webpack_require__(33);
+var _cloneBuffer = __webpack_require__(30);
 
 // CONCATENATED MODULE: ./node_modules/lodash-es/_Uint8Array.js
 
@@ -14191,7 +14202,7 @@ function isArrayLikeObject(value) {
 /* harmony default export */ var lodash_es_isArrayLikeObject = (isArrayLikeObject);
 
 // EXTERNAL MODULE: ./node_modules/lodash-es/isBuffer.js
-var isBuffer = __webpack_require__(25);
+var isBuffer = __webpack_require__(24);
 
 // CONCATENATED MODULE: ./node_modules/lodash-es/isPlainObject.js
 
@@ -14336,7 +14347,7 @@ function baseUnary(func) {
 /* harmony default export */ var _baseUnary = (baseUnary);
 
 // EXTERNAL MODULE: ./node_modules/lodash-es/_nodeUtil.js
-var _nodeUtil = __webpack_require__(27);
+var _nodeUtil = __webpack_require__(26);
 
 // CONCATENATED MODULE: ./node_modules/lodash-es/isTypedArray.js
 
@@ -15161,29 +15172,19 @@ var mergeWith = _createAssigner(function(object, source, srcIndex, customizer) {
 
 
 
-
-
-function dc_core_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = dc_core_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function dc_core_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return dc_core_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return dc_core_arrayLikeToArray(o, minLen); }
-
-function dc_core_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _createSuper(Derived) { return function () { var Super = getPrototypeOf_default()(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
 // DataCube private methods
 
 
 
 
-var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
+var dc_core_DCCore =
+/*#__PURE__*/
+function (_DCEvents) {
   inherits_default()(DCCore, _DCEvents);
 
-  var _super = _createSuper(DCCore);
-
   function DCCore() {
+    var _getPrototypeOf2;
+
     var _this;
 
     classCallCheck_default()(this, DCCore);
@@ -15192,15 +15193,15 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
       args[_key] = arguments[_key];
     }
 
-    _this = _super.call.apply(_super, [this].concat(args));
+    _this = possibleConstructorReturn_default()(this, (_getPrototypeOf2 = getPrototypeOf_default()(DCCore)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    defineProperty_default()(assertThisInitialized_default()(_this), "_pauseRangeLogic", /*#__PURE__*/asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-      return regenerator_default.a.wrap(function _callee$(_context) {
+    defineProperty_default()(assertThisInitialized_default()(_this), "_pauseRangeLogic", function _callee() {
+      return regenerator_default.a.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return utils.pause(500);
+              return regenerator_default.a.awrap(utils.pause(500));
 
             case 2:
               if (!_this.dynamicData.cursorLock) {
@@ -15209,7 +15210,7 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
               }
 
               _context.next = 5;
-              return utils.pause(50);
+              return regenerator_default.a.awrap(utils.pause(50));
 
             case 5:
               _context.next = 2;
@@ -15220,8 +15221,8 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
               return _context.stop();
           }
         }
-      }, _callee);
-    })));
+      });
+    });
 
     defineProperty_default()(assertThisInitialized_default()(_this), "_merge_customizer", function (obj_val, src_val, key) {
       if (Array.isArray(obj_val) && obj_val[0] && obj_val[0].length >= 2 && isFinite(obj_val[0][0])) {
@@ -15282,92 +15283,84 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
   }, {
     key: "range_changed",
     // Range change callback (called by TradingVue)
-    value: function () {
-      var _range_changed = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee2(range, tf) {
-        var _this2 = this;
+    value: function range_changed(range, tf) {
+      var _this2 = this;
 
-        var first, prom, d;
-        return regenerator_default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                if (!(typeof this.loader !== 'function')) {
-                  _context2.next = 2;
-                  break;
-                }
+      var first, prom, d;
+      return regenerator_default.a.async(function range_changed$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              if (!(typeof this.loader !== 'function')) {
+                _context2.next = 2;
+                break;
+              }
 
-                return _context2.abrupt("return");
+              return _context2.abrupt("return");
 
-              case 2:
-                if (this.loading) {
-                  _context2.next = 23;
-                  break;
-                }
-
-                // avoid simultaneous fetches
-                first = this.data.chart.data[0][0];
-
-                if (!(range[0] < first)) {
-                  _context2.next = 23;
-                  break;
-                }
-
-                this.loading = true; //  TODO: if I understand correctly, then sleep is not what we want here!
-                // consider lodash.debounce instead (w/ options.trailing = true);
-                // note there might be some issues considering it's async fun;
-                // eg see https://stackoverflow.com/a/50837389;
-                // (perhaps debounce this.loader instead?)
-                //
-                // maybe https://github.com/szchenghuang/debounce-async#readme ?
-                //await Utils.pause(250) // Load bigger chunks
-
-                _context2.next = 8;
-                return this._pauseRangeLogic();
-
-              case 8:
-                range = range.slice(0); // copy
-
-                range[0] = Math.floor(range[0]);
-                range[1] = Math.floor(first);
-                prom = this.loader(range, tf, function (d) {
-                  // Callback way
-                  _this2.chunk_loaded(d);
-                });
-
-                if (!(prom !== null && typeof_default()(prom) === 'object' && typeof prom.then === 'function')) {
-                  _context2.next = 23;
-                  break;
-                }
-
-                _context2.prev = 13;
-                _context2.next = 16;
-                return prom;
-
-              case 16:
-                d = _context2.sent;
-                this.chunk_loaded(d);
+            case 2:
+              if (this.loading) {
                 _context2.next = 23;
                 break;
+              }
 
-              case 20:
-                _context2.prev = 20;
-                _context2.t0 = _context2["catch"](13);
-                this.loading = false;
+              // avoid simultaneous fetches
+              first = this.data.chart.data[0][0];
 
-              case 23:
-              case "end":
-                return _context2.stop();
-            }
+              if (!(range[0] < first)) {
+                _context2.next = 23;
+                break;
+              }
+
+              this.loading = true; //  TODO: if I understand correctly, then sleep is not what we want here!
+              // consider lodash.debounce instead (w/ options.trailing = true);
+              // note there might be some issues considering it's async fun;
+              // eg see https://stackoverflow.com/a/50837389;
+              // (perhaps debounce this.loader instead?)
+              //
+              // maybe https://github.com/szchenghuang/debounce-async#readme ?
+              //await Utils.pause(250) // Load bigger chunks
+
+              _context2.next = 8;
+              return regenerator_default.a.awrap(this._pauseRangeLogic());
+
+            case 8:
+              range = range.slice(0); // copy
+
+              range[0] = Math.floor(range[0]);
+              range[1] = Math.floor(first);
+              prom = this.loader(range, tf, function (d) {
+                // Callback way
+                _this2.chunk_loaded(d);
+              });
+
+              if (!(prom !== null && typeof_default()(prom) === 'object' && typeof prom.then === 'function')) {
+                _context2.next = 23;
+                break;
+              }
+
+              _context2.prev = 13;
+              _context2.next = 16;
+              return regenerator_default.a.awrap(prom);
+
+            case 16:
+              d = _context2.sent;
+              this.chunk_loaded(d);
+              _context2.next = 23;
+              break;
+
+            case 20:
+              _context2.prev = 20;
+              _context2.t0 = _context2["catch"](13);
+              this.loading = false;
+
+            case 23:
+            case "end":
+              return _context2.stop();
           }
-        }, _callee2, this, [[13, 20]]);
-      }));
-
-      function range_changed(_x, _x2) {
-        return _range_changed.apply(this, arguments);
-      }
-
-      return range_changed;
-    }() // A new chunk of data is loaded
+        }
+      }, null, this, [[13, 20]]);
+    } // A new chunk of data is loaded
     // TODO: bulletproof fetch
 
   }, {
@@ -15396,12 +15389,12 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
     value: function update_ids() {
       this.data.chart.id = "chart.".concat(this.data.chart.type);
       var count = {};
-
-      var _iterator = dc_core_createForOfIteratorHelper(this.data.onchart),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.data.onchart[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var ov = _step.value;
 
           if (count[ov.type] === undefined) {
@@ -15414,18 +15407,27 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
           if (!ov.settings) ov.settings = {};
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       count = {};
-
-      var _iterator2 = dc_core_createForOfIteratorHelper(this.data.offchart),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = this.data.offchart[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var ov = _step2.value;
 
           if (count[ov.type] === undefined) {
@@ -15439,9 +15441,18 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
           if (!ov.settings) ov.settings = {};
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
     } // Updates all overlays with given values.
 
@@ -15515,14 +15526,14 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
     }
   }, {
     key: "query_search",
-    value: function query_search(query, _ref2) {
+    value: function query_search(query, _ref) {
       var _this3 = this;
 
-      var _ref3 = slicedToArray_default()(_ref2, 3),
-          side = _ref3[0],
-          _ref3$ = _ref3[1],
-          path = _ref3$ === void 0 ? '' : _ref3$,
-          field = _ref3[2];
+      var _ref2 = slicedToArray_default()(_ref, 3),
+          side = _ref2[0],
+          _ref2$ = _ref2[1],
+          path = _ref2$ === void 0 ? '' : _ref2$,
+          field = _ref2[2];
 
       var arr = this.data[side].filter(function (x) {
         return x.id && x.name && (x.id === query || x.id.includes(path) || x.name === query || x.name.includes(path));
@@ -15607,10 +15618,10 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
 
   }, {
     key: "ts_overlap",
-    value: function ts_overlap(arr1, arr2, _ref4) {
-      var _ref5 = slicedToArray_default()(_ref4, 2),
-          t1 = _ref5[0],
-          t2 = _ref5[1];
+    value: function ts_overlap(arr1, arr2, _ref3) {
+      var _ref4 = slicedToArray_default()(_ref3, 2),
+          t1 = _ref4[0],
+          t2 = _ref4[1];
 
       var filter_mutual_overlap = function filter_mutual_overlap(x) {
         return x[0] >= t1 && x[0] <= t2;
@@ -15620,32 +15631,52 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
       var arr2_overlap = arr2.filter(filter_mutual_overlap);
       var ts = {}; // overlap range timestamp-to-datapoint map; note arr2 overrides timestamps of arr1
 
-      var _iterator3 = dc_core_createForOfIteratorHelper(arr1_overlap),
-          _step3;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        for (var _iterator3 = arr1_overlap[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
           var data_point = _step3.value;
           ts[data_point[0]] = data_point;
         }
       } catch (err) {
-        _iterator3.e(err);
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
-        _iterator3.f();
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+            _iterator3["return"]();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
       }
 
-      var _iterator4 = dc_core_createForOfIteratorHelper(arr2_overlap),
-          _step4;
+      var _iteratorNormalCompletion4 = true;
+      var _didIteratorError4 = false;
+      var _iteratorError4 = undefined;
 
       try {
-        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        for (var _iterator4 = arr2_overlap[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
           var _data_point = _step4.value;
           ts[_data_point[0]] = _data_point;
         }
       } catch (err) {
-        _iterator4.e(err);
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
       } finally {
-        _iterator4.f();
+        try {
+          if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
+            _iterator4["return"]();
+          }
+        } finally {
+          if (_didIteratorError4) {
+            throw _iteratorError4;
+          }
+        }
       }
 
       var ts_sorted = Object.keys(ts).sort(); // Indices of segments
@@ -15727,26 +15758,15 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
 
 
 
-
-function datacube_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = datacube_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function datacube_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return datacube_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return datacube_arrayLikeToArray(o, minLen); }
-
-function datacube_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function datacube_createSuper(Derived) { return function () { var Super = getPrototypeOf_default()(Derived), result; if (datacube_isNativeReflectConstruct()) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
-
-function datacube_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
 // Main DataHelper class. A container for data,
 // which works as a proxy and CRUD interface
 
  // Interface methods. Private methods in dc_core.js
 
-var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
+var datacube_DataCube =
+/*#__PURE__*/
+function (_DCCore) {
   inherits_default()(DataCube, _DCCore);
-
-  var _super = datacube_createSuper(DataCube);
 
   function DataCube() {
     var _this;
@@ -15755,7 +15775,7 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
 
     classCallCheck_default()(this, DataCube);
 
-    _this = _super.call(this);
+    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(DataCube).call(this));
     _this.data = data;
     return _this;
   } // Add new overlay
@@ -15791,12 +15811,12 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
     key: "set",
     value: function set(query, data) {
       var objects = this.get_by_query(query);
-
-      var _iterator = datacube_createForOfIteratorHelper(objects),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = objects[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var obj = _step.value;
           var i = obj.i !== undefined ? obj.i : obj.p.indexOf(obj.v);
 
@@ -15805,9 +15825,18 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
           }
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       this.update_ids();
@@ -15817,12 +15846,12 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
     key: "merge",
     value: function merge(query, data) {
       var objects = this.get_by_query(query);
-
-      var _iterator2 = datacube_createForOfIteratorHelper(objects),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = objects[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var obj = _step2.value;
 
           if (Array.isArray(obj.v)) {
@@ -15839,9 +15868,18 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
           }
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
 
       this.update_ids();
@@ -15851,12 +15889,12 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
     key: "del",
     value: function del(query) {
       var objects = this.get_by_query(query);
-
-      var _iterator3 = datacube_createForOfIteratorHelper(objects),
-          _step3;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        for (var _iterator3 = objects[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
           var obj = _step3.value;
           // Find current index of the field (if not defined)
           var i = obj.i !== undefined ? obj.i : obj.p.indexOf(obj.v);
@@ -15866,9 +15904,18 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
           }
         }
       } catch (err) {
-        _iterator3.e(err);
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
-        _iterator3.f();
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+            _iterator3["return"]();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
       }
 
       this.update_ids();
@@ -16011,7 +16058,9 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
 
 
 // OI Price bar & price line (shader)
-var oi_price_OIPrice = /*#__PURE__*/function () {
+var oi_price_OIPrice =
+/*#__PURE__*/
+function () {
   function OIPrice(comp) {
     classCallCheck_default()(this, OIPrice);
 
@@ -16114,7 +16163,9 @@ var oi_price_OIPrice = /*#__PURE__*/function () {
 
 
 // OI Candle object for OI Candles overlay
-var oi_candle_OICandleExt = /*#__PURE__*/function () {
+var oi_candle_OICandleExt =
+/*#__PURE__*/
+function () {
   function OICandleExt(overlay, ctx, data) {
     classCallCheck_default()(this, OICandleExt);
 
@@ -16162,6 +16213,17 @@ var oi_candle_OICandleExt = /*#__PURE__*/function () {
 
 
 // CONCATENATED MODULE: ./src/index.js
+/* concated harmony reexport TradingVue */__webpack_require__.d(__webpack_exports__, "TradingVue", function() { return TradingVue; });
+/* concated harmony reexport Overlay */__webpack_require__.d(__webpack_exports__, "Overlay", function() { return mixins_overlay; });
+/* concated harmony reexport Utils */__webpack_require__.d(__webpack_exports__, "Utils", function() { return utils; });
+/* concated harmony reexport Constants */__webpack_require__.d(__webpack_exports__, "Constants", function() { return constants; });
+/* concated harmony reexport Candle */__webpack_require__.d(__webpack_exports__, "Candle", function() { return candle_CandleExt; });
+/* concated harmony reexport Volbar */__webpack_require__.d(__webpack_exports__, "Volbar", function() { return volbar_VolbarExt; });
+/* concated harmony reexport layout_cnv */__webpack_require__.d(__webpack_exports__, "layout_cnv", function() { return layout_cnv; });
+/* concated harmony reexport layout_vol */__webpack_require__.d(__webpack_exports__, "layout_vol", function() { return layout_vol; });
+/* concated harmony reexport DataCube */__webpack_require__.d(__webpack_exports__, "DataCube", function() { return datacube_DataCube; });
+/* concated harmony reexport OICandle */__webpack_require__.d(__webpack_exports__, "OICandle", function() { return oi_candle_OICandleExt; });
+/* concated harmony reexport OIPrice */__webpack_require__.d(__webpack_exports__, "OIPrice", function() { return oi_price_OIPrice; });
 
 
 

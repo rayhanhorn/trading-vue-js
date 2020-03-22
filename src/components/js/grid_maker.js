@@ -49,12 +49,22 @@ function GridMaker(id, params, master_grid = null) {
             self.$_hi = y_t.range[0]
             self.$_lo = y_t.range[1]
         } else {
-            self.$_hi = hi + (hi - lo) * $p.config.EXPAND
-            self.$_lo = lo - (hi - lo) * $p.config.EXPAND
-
-            if (self.$_hi === self.$_lo) {
-                self.$_hi *= 1.05  // Expand if height range === 0
-                self.$_lo *= 0.95
+            if (hi < 0 && lo < 0) {
+                self.$_hi = hi + (hi - lo) * $p.config.EXPAND
+                self.$_lo = lo - (hi - lo) * $p.config.EXPAND
+    
+                if (self.$_hi === self.$_lo) {
+                    self.$_hi *= 0.95  // Expand if height range === 0
+                    self.$_lo *= 1.05
+                }
+            } else {
+                self.$_hi = hi + (hi - lo) * $p.config.EXPAND
+                self.$_lo = lo - (hi - lo) * $p.config.EXPAND
+    
+                if (self.$_hi === self.$_lo) {
+                    self.$_hi *= 1.05  // Expand if height range === 0
+                    self.$_lo *= 0.95
+                }
             }
         }
 
@@ -94,21 +104,24 @@ function GridMaker(id, params, master_grid = null) {
         // Get max lengths of integer and fractional parts
         data.forEach(x => {
             var str = x[1].toString()
-            if (x[1] < 0.000001) {
-                // Parsing the exponential form. Gosh this
-                // smells trickily
-                var [ls, rs] = str.split('e-')
-                var [l, r] = ls.split('.')
-                if (!r) r = ''
-                r = { length: r.length + parseInt(rs) || 0 }
-            } else {
-                var [l, r] = str.split('.')
-            }
+            // Edit: Ray (No need to check for exponential data, change all to regular format)
+            // if (x[1] < 0.000001) {
+            //     // Parsing the exponential form. Gosh this
+            //     // smells trickily
+            //     var [ls, rs] = str.split('e-')
+            //     var [l, r] = ls.split('.')
+            //     if (!r) r = ''
+            //     r = { length: r.length + parseInt(rs) || 0 }
+            // } else {
+            var [l, r] = str.split('.')
+            // }
+
             if (r && r.length > max_r) {
                 max_r = r.length
             }
             if (l && l.length > max_l) {
-                max_l = l.length
+                const absL = Math.abs(parseInt(l)).toString()
+                max_l = absL.length
             }
         })
 
@@ -161,7 +174,7 @@ function GridMaker(id, params, master_grid = null) {
     // Select nearest good-loking $ step (m is target scale)
     function dollar_step() {
         let yrange = self.$_hi - self.$_lo
-        let m = yrange * ($p.config.GRIDY / height)
+        let m = Math.abs(yrange * ($p.config.GRIDY / height))
         let p = parseInt(yrange.toExponential().split('e')[1])
         let d = Math.pow(10, p)
         let s = $SCALES.map(x => x * d)
@@ -237,19 +250,24 @@ function GridMaker(id, params, master_grid = null) {
     }
 
     function grid_y() {
-
         // Prevent duplicate levels
         let m = Math.pow(10, -self.prec)
         self.$_step = Math.max(m, dollar_step())
         self.ys = []
 
-        let y1 = self.$_lo - self.$_lo % self.$_step
+        let y1 = 0
+
+        if (self.$_lo < 0) {
+            y1 = self.$_lo + self.$_lo % self.$_step
+        } else {
+            y1 = self.$_lo - self.$_lo % self.$_step
+        }
+        
         for (var y$ = y1; y$ <= self.$_hi; y$ += self.$_step) {
             let y = Math.floor(y$ * self.A + self.B)
             if (y > height) continue
             self.ys.push([y, Utils.strip(y$)])
         }
-
     }
 
     function apply_sizes() {
