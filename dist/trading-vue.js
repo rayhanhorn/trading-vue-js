@@ -7222,10 +7222,15 @@ var mouse_Mouse = /*#__PURE__*/function () {
   createClass_default()(Mouse, [{
     key: "on",
     value: function on(name, handler) {
-      var dir = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "unshift";
-      if (!handler) return;
-      this.map[name] = this.map[name] || [];
-      this.map[name][dir](handler);
+      var dir = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'unshift';
+      if (typeof handler !== 'function') return;
+
+      if (!this.map.hasOwnProperty(name)) {
+        this.map[name] = [handler];
+      } else {
+        this.map[name][dir](handler);
+      }
+
       this.listeners++;
     } // Called by grid.js
 
@@ -7234,7 +7239,7 @@ var mouse_Mouse = /*#__PURE__*/function () {
     value: function emit(name, event) {
       var l = this.comp.layout;
 
-      if (name in this.map) {
+      if (this.map.hasOwnProperty(name)) {
         var _iterator = mouse_createForOfIteratorHelper(this.map[name]),
             _step;
 
@@ -7250,19 +7255,21 @@ var mouse_Mouse = /*#__PURE__*/function () {
         }
       }
 
-      if (name === 'mousemove') {
-        this.x = event.layerX;
-        this.y = event.layerY;
-        this.t = l.screen2t(this.x);
-        this.y$ = l.screen2$(this.y);
-      }
+      switch (name) {
+        case 'mousemove':
+          this.x = event.layerX;
+          this.y = event.layerY;
+          this.t = l.screen2t(this.x);
+          this.y$ = l.screen2$(this.y);
+          break;
 
-      if (name === 'mousedown') {
-        this.pressed = true;
-      }
+        case 'mousedown':
+          this.pressed = true;
+          break;
 
-      if (name === 'mouseup') {
-        this.pressed = false;
+        case 'mouseup':
+          this.pressed = false;
+          break;
       }
     }
   }]);
