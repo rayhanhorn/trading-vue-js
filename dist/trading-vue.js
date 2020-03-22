@@ -5408,7 +5408,11 @@ Chartvue_type_template_id_4d06a4de_render._withStripped = true
 // Canvas context for text measurments
 function Context($p) {
   var el = document.createElement('canvas');
-  var ctx = el.getContext("2d");
+  var ctx = el.getContext('2d', {
+    alpha: false,
+    desynchronized: true,
+    preserveDrawingBuffer: false
+  });
   ctx.font = $p.font;
   return ctx;
 }
@@ -6243,7 +6247,8 @@ var updater_CursorUpdater = /*#__PURE__*/function () {
       return {
         x: Math.floor(xs[i]) - 0.5,
         y: Math.floor(e.y - 2) - 0.5 - grid.offset,
-        y$: grid.screen2$(e.y - 2 - grid.offset),
+        //round y$ value, no need to have 10 decimals
+        y$: Math.round(grid.screen2$(e.y - 2 - grid.offset)),
         t: (data[i] || [])[0],
         values: Object.assign({
           ohlcv: grid.id === 0 ? data[i] : undefined
@@ -6386,9 +6391,9 @@ var grid_Grid = /*#__PURE__*/function () {
     //Turn off transparency
 
     this.ctx = canvas.getContext('2d', {
-      alpha: false,
+      alpha: true,
       desynchronized: true,
-      preserveDrawingBuffer: true
+      preserveDrawingBuffer: false
     });
     this.comp = comp;
     this.$p = comp.$props;
@@ -6492,6 +6497,7 @@ var grid_Grid = /*#__PURE__*/function () {
   }, {
     key: "mousemove",
     value: function mousemove(event) {
+      //MouseEvent {isTrusted: true, screenX: 224, screenY: 455, clientX: 224, clientY: 385, …}
       this.comp.$emit('cursor-changed', {
         grid_id: this.id,
         x: event.layerX,
@@ -6671,8 +6677,8 @@ var grid_Grid = /*#__PURE__*/function () {
         this.trackpad_scroll(event);
       }
 
-      if (this.trackpad) delta *= 0.032; //delta = Utils.smart_wheel(delta)
-      // TODO: mouse zooming is a little jerky,
+      if (this.trackpad) delta *= 0.032;
+      delta = utils.smart_wheel(delta); // TODO: mouse zooming is a little jerky,
       // needs to follow f(mouse_wheel_speed) and
       // if speed is low, scroll shoud be slower		
 
@@ -6751,8 +6757,17 @@ var grid_Grid = /*#__PURE__*/function () {
                 l = this.data.length - 1;
                 data = this.data;
                 range = this.range;
-                range[0] = utils.clamp(range[0], -Infinity, data[l][0] - this.interval * 5.5);
-                range[1] = utils.clamp(range[1], data[0][0] + this.interval * 5.5, Infinity); // TODO: IMPORTANT scrolling is jerky The Problem caused
+                _context.next = 7;
+                return utils.clamp(range[0], -Infinity, data[l][0] - this.interval * 5.5);
+
+              case 7:
+                range[0] = _context.sent;
+                _context.next = 10;
+                return utils.clamp(range[1], data[0][0] + this.interval * 5.5, Infinity);
+
+              case 10:
+                range[1] = _context.sent;
+                // TODO: IMPORTANT scrolling is jerky The Problem caused
                 // by the long round trip of 'range-changed' event.
                 // First it propagates up to update layout in Chart.vue,
                 // then it moves back as watch() update. It takes 1-5 ms.
@@ -6760,11 +6775,9 @@ var grid_Grid = /*#__PURE__*/function () {
                 // the lag. No smooth movement and it's annoying.
                 // Solution: we could try to calc the layout immediatly
                 // somewhere here. Still will hurt the sidebar & bottombar
+                this.comp.$emit('range-changed', range);
 
-                _context.next = 9;
-                return this.comp.$emit('range-changed', range);
-
-              case 9:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -6835,7 +6848,11 @@ var grid_Grid = /*#__PURE__*/function () {
         var rect = canvas.getBoundingClientRect();
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
-        var ctx = canvas.getContext('2d');
+        var ctx = canvas.getContext('2d', {
+          alpha: false,
+          desynchronized: true,
+          preserveDrawingBuffer: false
+        });
         ctx.scale(dpr, dpr);
 
         _this.redraw();
@@ -6920,8 +6937,8 @@ var crosshair_Crosshair = /*#__PURE__*/function () {
       this.layout = this.$p.layout;
       if (!this.visible) return; // Adjust x here cuz there is a delay between
       // update() and draw()
+      //this.x = this.$p.cursor.x
 
-      this.x = this.$p.cursor.x;
       ctx.save();
       ctx.strokeStyle = this.$p.colors.colorCross;
       ctx.beginPath();
@@ -9895,9 +9912,7 @@ var sidebar_Sidebar = /*#__PURE__*/function () {
     PANHEIGHT = comp.config.PANHEIGHT;
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d', {
-      alpha: false,
-      desynchronized: true,
-      preserveDrawingBuffer: true
+      desynchronized: true
     });
     this.comp = comp;
     this.$p = comp.$props;
@@ -10901,9 +10916,9 @@ var botbar_Botbar = /*#__PURE__*/function () {
 
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d', {
-      alpha: false,
+      alpha: true,
       desynchronized: true,
-      preserveDrawingBuffer: true
+      preserveDrawingBuffer: false
     });
     this.comp = comp;
     this.$p = comp.$props;

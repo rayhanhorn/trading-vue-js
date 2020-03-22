@@ -64,7 +64,8 @@ class CursorUpdater {
         return {
             x: Math.floor(xs[i]) - 0.5,
             y: Math.floor(e.y - 2) - 0.5 - grid.offset,
-            y$: grid.screen2$(e.y - 2 - grid.offset),
+			//round y$ value, no need to have 10 decimals
+            y$: Math.round(grid.screen2$(e.y - 2 - grid.offset)),
             t: (data[i] || [])[0],
             values: Object.assign({
                 ohlcv: grid.id === 0 ? data[i] : undefined

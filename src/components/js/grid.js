@@ -17,7 +17,7 @@ export default class Grid {
         this.canvas = canvas
         //this.ctx = canvas.getContext('2d')
 		//Turn off transparency
-		this.ctx = canvas.getContext('2d', { alpha: false, desynchronized: true, preserveDrawingBuffer: true });
+		this.ctx = canvas.getContext('2d', { alpha: true, desynchronized: true, preserveDrawingBuffer: false });
         this.comp = comp
         this.$p = comp.$props
         this.data = this.$p.sub
@@ -125,7 +125,7 @@ export default class Grid {
     }
 
     mousemove(event) {
-
+	//MouseEvent {isTrusted: true, screenX: 224, screenY: 455, clientX: 224, clientY: 385, …}
         this.comp.$emit('cursor-changed', {
             grid_id: this.id,
             x: event.layerX,
@@ -133,11 +133,8 @@ export default class Grid {
         })
         // TODO: Temp solution, need to implement
         // a proper way to get the chart el offset
-        this.offset_x = event.layerX - event.pageX
-            + window.scrollX
-        this.offset_y = event.layerY - event.pageY
-            + this.layout.offset
-            + window.scrollY
+        this.offset_x = event.layerX - event.pageX + window.scrollX
+        this.offset_y = event.layerY - event.pageY + this.layout.offset + window.scrollY
 
         this.propagate('mousemove', event)
     }
@@ -272,7 +269,7 @@ export default class Grid {
 
         if (this.trackpad) delta *= 0.032
 
-        //delta = Utils.smart_wheel(delta)
+        delta = Utils.smart_wheel(delta)
 
         // TODO: mouse zooming is a little jerky,
         // needs to follow f(mouse_wheel_speed) and
@@ -292,7 +289,7 @@ export default class Grid {
             this.range[0] -= diff
         }
 
-        this.change_range()
+		this.change_range();
 
     }
 
@@ -317,7 +314,7 @@ export default class Grid {
         this.range[0] = this.drug.r[0] + dt
         this.range[1] = this.drug.r[1] + dt
 
-        this.change_range()
+	this.change_range();
 
     }
 
@@ -332,7 +329,7 @@ export default class Grid {
         this.range[0] = this.pinch.r[0] - (nt - t) * 0.5
         this.range[1] = this.pinch.r[1] + (nt - t) * 0.5
 
-        this.change_range()
+	this.change_range();
 
     }
 
@@ -343,7 +340,8 @@ export default class Grid {
         this.range[0] += event.deltaX * dt * 0.011
         this.range[1] += event.deltaX * dt * 0.011
 
-        this.change_range()
+        
+	this.change_range();
 
 
     }
@@ -362,12 +360,12 @@ export default class Grid {
         let data = this.data
         let range = this.range
 
-        range[0] = Utils.clamp(
+        range[0] = await Utils.clamp(
             range[0],
             -Infinity, data[l][0] - this.interval * 5.5,
         )
 
-        range[1] = Utils.clamp(
+        range[1] = await Utils.clamp(
             range[1],
             data[0][0] + this.interval * 5.5, Infinity
         )
@@ -380,7 +378,7 @@ export default class Grid {
         // the lag. No smooth movement and it's annoying.
         // Solution: we could try to calc the layout immediatly
         // somewhere here. Still will hurt the sidebar & bottombar
-        await this.comp.$emit('range-changed', range)
+        this.comp.$emit('range-changed', range)
     }
 
     // Propagate mouse event to overlays

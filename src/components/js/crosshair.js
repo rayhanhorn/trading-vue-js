@@ -27,7 +27,7 @@ export default class Crosshair {
 
         // Adjust x here cuz there is a delay between
         // update() and draw()
-        this.x = this.$p.cursor.x
+        //this.x = this.$p.cursor.x
 
         ctx.save()
         ctx.strokeStyle = this.$p.colors.colorCross

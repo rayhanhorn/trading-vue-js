@@ -10,7 +10,7 @@ export default class Sidebar {
         PANHEIGHT = comp.config.PANHEIGHT
 
         this.canvas = canvas
-        this.ctx = canvas.getContext('2d', { alpha: false, desynchronized: true, preserveDrawingBuffer: true });
+        this.ctx = canvas.getContext('2d', { desynchronized: true });
         this.comp = comp
         this.$p = comp.$props
         this.data = this.$p.sub
