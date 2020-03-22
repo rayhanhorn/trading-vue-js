@@ -175,7 +175,7 @@ module.exports = _slicedToArray;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _freeGlobal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
+/* harmony import */ var _freeGlobal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
 
 
 /** Detect free variable `self`. */
@@ -2843,6 +2843,13 @@ if (true) {
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(43);
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -2940,7 +2947,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3205,27 +3212,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(43);
-
-
-/***/ }),
 /* 10 */
-/***/ (function(module, exports) {
-
-function _getPrototypeOf(o) {
-  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
-module.exports = _getPrototypeOf;
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports) {
 
 function _defineProperty(obj, key, value) {
@@ -3246,119 +3233,42 @@ function _defineProperty(obj, key, value) {
 module.exports = _defineProperty;
 
 /***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+
+/***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
+function _typeof(obj) {
+  "@babel/helpers - typeof";
 
-// load the styles
-var content = __webpack_require__(45);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(8).default
-var update = add("68f243ea", content, false, {});
-// Hot Module Replacement
-if(false) {}
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(47);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(8).default
-var update = add("9895d3a6", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(49);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(8).default
-var update = add("1db01c0b", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(51);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(8).default
-var update = add("12d2309d", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(53);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(8).default
-var update = add("1b34bfeb", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(55);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(8).default
-var update = add("604bf5ef", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(57);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(8).default
-var update = add("f32fd36e", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-/* 19 */
 /***/ (function(module, exports) {
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -3400,12 +3310,124 @@ function _asyncToGenerator(fn) {
 module.exports = _asyncToGenerator;
 
 /***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(45);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(9).default
+var update = add("68f243ea", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(47);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(9).default
+var update = add("9895d3a6", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(49);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(9).default
+var update = add("1db01c0b", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(51);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(9).default
+var update = add("12d2309d", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(53);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(9).default
+var update = add("1b34bfeb", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(55);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(9).default
+var update = add("604bf5ef", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = __webpack_require__(25);
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-var assertThisInitialized = __webpack_require__(26);
+// load the styles
+var content = __webpack_require__(57);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(9).default
+var update = add("f32fd36e", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(12);
+
+var assertThisInitialized = __webpack_require__(22);
 
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
@@ -3418,7 +3440,21 @@ function _possibleConstructorReturn(self, call) {
 module.exports = _possibleConstructorReturn;
 
 /***/ }),
-/* 21 */
+/* 22 */
+/***/ (function(module, exports) {
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized;
+
+/***/ }),
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var setPrototypeOf = __webpack_require__(58);
@@ -3441,7 +3477,7 @@ function _inherits(subClass, superClass) {
 module.exports = _inherits;
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3453,7 +3489,7 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(59)))
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3498,10 +3534,10 @@ var isBuffer = nativeIsBuffer || _stubFalse_js__WEBPACK_IMPORTED_MODULE_1__[/* d
 
 /* harmony default export */ __webpack_exports__["a"] = (isBuffer);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(24)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(26)(module)))
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = function(originalModule) {
@@ -3531,47 +3567,11 @@ module.exports = function(originalModule) {
 
 
 /***/ }),
-/* 25 */
-/***/ (function(module, exports) {
-
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
-}
-
-module.exports = _typeof;
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports) {
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-module.exports = _assertThisInitialized;
-
-/***/ }),
 /* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _freeGlobal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _freeGlobal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
 
 
 /** Detect free variable `exports`. */
@@ -3603,7 +3603,7 @@ var nodeUtil = (function() {
 
 /* harmony default export */ __webpack_exports__["a"] = (nodeUtil);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(24)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(26)(module)))
 
 /***/ }),
 /* 28 */
@@ -3867,339 +3867,327 @@ IndexedArray.prototype.getRange = function (begin, end) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
- * Hamster.js v1.1.4
+ * Hamster.js v1.1.2
  * (c) 2013 Monospaced http://monospaced.com
  * License: MIT
- */
-
- /*
- MODIFIED FOR PASSIVE EVENT LISTENERS
- BY KENSINGTON TECHNOLOGY ASSOCIATES
  */
 
 (function(window, document){
 'use strict';
 
+/**
+ * Hamster
+ * use this to create instances
+ * @returns {Hamster.Instance}
+ * @constructor
+ */
+var Hamster = function(element) {
+  return new Hamster.Instance(element);
+};
+
+// default event name
+Hamster.SUPPORT = 'wheel';
+
+// default DOM methods
+Hamster.ADD_EVENT = 'addEventListener';
+Hamster.REMOVE_EVENT = 'removeEventListener';
+Hamster.PREFIX = '';
+
+// until browser inconsistencies have been fixed...
+Hamster.READY = false;
+
+Hamster.Instance = function(element){
+  if (!Hamster.READY) {
+    // fix browser inconsistencies
+    Hamster.normalise.browser();
+
+    // Hamster is ready...!
+    Hamster.READY = true;
+  }
+
+  this.element = element;
+
+  // store attached event handlers
+  this.handlers = [];
+
+  // return instance
+  return this;
+};
+
+/**
+ * create new hamster instance
+ * all methods should return the instance itself, so it is chainable.
+ * @param   {HTMLElement}       element
+ * @returns {Hamster.Instance}
+ * @constructor
+ */
+Hamster.Instance.prototype = {
   /**
-   * Hamster
-   * use this to create instances
+   * bind events to the instance
+   * @param   {Function}    handler
+   * @param   {Boolean}     useCapture
    * @returns {Hamster.Instance}
-   * @constructor
    */
-  var Hamster = function(element, passive) {
-    return new Hamster.Instance(element, passive);
-  };
+  wheel: function onEvent(handler, useCapture){
+    Hamster.event.add(this, Hamster.SUPPORT, handler, useCapture);
 
-  // default event name
-  Hamster.SUPPORT = 'wheel';
-
-  // default DOM methods
-  Hamster.ADD_EVENT = 'addEventListener';
-  Hamster.REMOVE_EVENT = 'removeEventListener';
-  Hamster.PREFIX = '';
-
-  // until browser inconsistencies have been fixed...
-  Hamster.READY = false;
-
-  Hamster.Instance = function(element, passive){
-    if (!Hamster.READY) {
-      // fix browser inconsistencies
-      Hamster.normalise.browser();
-
-      // Hamster is ready...!
-      Hamster.READY = true;
+    // handle MozMousePixelScroll in older Firefox
+    if (Hamster.SUPPORT === 'DOMMouseScroll') {
+      Hamster.event.add(this, 'MozMousePixelScroll', handler, useCapture);
     }
 
-    this.element = element;
-
-    this.passive = passive || false;
-
-    // store attached event handlers
-    this.handlers = [];
-
-    // return instance
     return this;
-  };
+  },
 
   /**
-   * create new hamster instance
-   * all methods should return the instance itself, so it is chainable.
-   * @param   {HTMLElement}       element
+   * unbind events to the instance
+   * @param   {Function}    handler
+   * @param   {Boolean}     useCapture
    * @returns {Hamster.Instance}
-   * @constructor
    */
-  Hamster.Instance.prototype = {
-    /**
-     * bind events to the instance
-     * @param   {Function}    handler
-     * @param   {Boolean}     useCapture
-     * @returns {Hamster.Instance}
-     */
-    wheel: function onEvent(handler, useCapture){
-      Hamster.event.add(this, Hamster.SUPPORT, handler, useCapture);
-
-      // handle MozMousePixelScroll in older Firefox
-      if (Hamster.SUPPORT === 'DOMMouseScroll') {
-        Hamster.event.add(this, 'MozMousePixelScroll', handler, useCapture);
-      }
-
-      return this;
-    },
-
-    /**
-     * unbind events to the instance
-     * @param   {Function}    handler
-     * @param   {Boolean}     useCapture
-     * @returns {Hamster.Instance}
-     */
-    unwheel: function offEvent(handler, useCapture){
-      // if no handler argument,
-      // unbind the last bound handler (if exists)
-      if (handler === undefined && (handler = this.handlers.slice(-1)[0])) {
-        handler = handler.original;
-      }
-
-      Hamster.event.remove(this, Hamster.SUPPORT, handler, useCapture);
-
-      // handle MozMousePixelScroll in older Firefox
-      if (Hamster.SUPPORT === 'DOMMouseScroll') {
-        Hamster.event.remove(this, 'MozMousePixelScroll', handler, useCapture);
-      }
-
-      return this;
+  unwheel: function offEvent(handler, useCapture){
+    // if no handler argument,
+    // unbind the last bound handler (if exists)
+    if (handler === undefined && (handler = this.handlers.slice(-1)[0])) {
+      handler = handler.original;
     }
-  };
 
-  Hamster.event = {
-    /**
-     * cross-browser 'addWheelListener'
-     * @param   {Instance}    hamster
-     * @param   {String}      eventName
-     * @param   {Function}    handler
-     * @param   {Boolean}     useCapture
-     */
-    add: function add(hamster, eventName, handler, useCapture){
-      // store the original handler
-      var originalHandler = handler;
+    Hamster.event.remove(this, Hamster.SUPPORT, handler, useCapture);
 
-      // redefine the handler
-      handler = function(originalEvent){
-
-        if (!originalEvent) {
-          originalEvent = window.event;
-        }
-
-        // create a normalised event object,
-        // and normalise "deltas" of the mouse wheel
-        var event = Hamster.normalise.event(originalEvent),
-            delta = Hamster.normalise.delta(originalEvent);
-
-        // fire the original handler with normalised arguments
-        return originalHandler(event, delta[0], delta[1], delta[2]);
-
-      };
-
-      // cross-browser addEventListener
-      if (!hamster.passive) {
-        hamster.element[Hamster.ADD_EVENT](Hamster.PREFIX + eventName, handler, useCapture || false);
-      }
-      else {
-        hamster.element[Hamster.ADD_EVENT](Hamster.PREFIX + eventName, handler, { passive: true } );
-      }
-
-      // store original and normalised handlers on the instance
-      hamster.handlers.push({
-        original: originalHandler,
-        normalised: handler
-      });
-    },
-
-    /**
-     * removeWheelListener
-     * @param   {Instance}    hamster
-     * @param   {String}      eventName
-     * @param   {Function}    handler
-     * @param   {Boolean}     useCapture
-     */
-    remove: function remove(hamster, eventName, handler, useCapture){
-      // find the normalised handler on the instance
-      var originalHandler = handler,
-          lookup = {},
-          handlers;
-      for (var i = 0, len = hamster.handlers.length; i < len; ++i) {
-        lookup[hamster.handlers[i].original] = hamster.handlers[i];
-      }
-      handlers = lookup[originalHandler];
-      handler = handlers.normalised;
-
-      // cross-browser removeEventListener
-      hamster.element[Hamster.REMOVE_EVENT](Hamster.PREFIX + eventName, handler, useCapture || false);
-
-      // remove original and normalised handlers from the instance
-      for (var h in hamster.handlers) {
-        if (hamster.handlers[h] == handlers) {
-          hamster.handlers.splice(h, 1);
-          break;
-        }
-      }
+    // handle MozMousePixelScroll in older Firefox
+    if (Hamster.SUPPORT === 'DOMMouseScroll') {
+      Hamster.event.remove(this, 'MozMousePixelScroll', handler, useCapture);
     }
-  };
+
+    return this;
+  }
+};
+
+Hamster.event = {
+  /**
+   * cross-browser 'addWheelListener'
+   * @param   {Instance}    hamster
+   * @param   {String}      eventName
+   * @param   {Function}    handler
+   * @param   {Boolean}     useCapture
+   */
+  add: function add(hamster, eventName, handler, useCapture){
+    // store the original handler
+    var originalHandler = handler;
+
+    // redefine the handler
+    handler = function(originalEvent){
+
+      if (!originalEvent) {
+        originalEvent = window.event;
+      }
+
+      // create a normalised event object,
+      // and normalise "deltas" of the mouse wheel
+      var event = Hamster.normalise.event(originalEvent),
+          delta = Hamster.normalise.delta(originalEvent);
+
+      // fire the original handler with normalised arguments
+      return originalHandler(event, delta[0], delta[1], delta[2]);
+
+    };
+
+    // cross-browser addEventListener
+    hamster.element[Hamster.ADD_EVENT](Hamster.PREFIX + eventName, handler, useCapture || false);
+
+    // store original and normalised handlers on the instance
+    hamster.handlers.push({
+      original: originalHandler,
+      normalised: handler
+    });
+  },
 
   /**
-   * these hold the lowest deltas,
-   * used to normalise the delta values
-   * @type {Number}
+   * removeWheelListener
+   * @param   {Instance}    hamster
+   * @param   {String}      eventName
+   * @param   {Function}    handler
+   * @param   {Boolean}     useCapture
    */
-  var lowestDelta,
-      lowestDeltaXY;
-
-  Hamster.normalise = {
-    /**
-     * fix browser inconsistencies
-     */
-    browser: function normaliseBrowser(){
-      // detect deprecated wheel events
-      if (!('onwheel' in document || document.documentMode >= 9)) {
-        Hamster.SUPPORT = document.onmousewheel !== undefined ?
-                          'mousewheel' : // webkit and IE < 9 support at least "mousewheel"
-                          'DOMMouseScroll'; // assume remaining browsers are older Firefox
-      }
-
-      // detect deprecated event model
-      if (!window.addEventListener) {
-        // assume IE < 9
-        Hamster.ADD_EVENT = 'attachEvent';
-        Hamster.REMOVE_EVENT = 'detachEvent';
-        Hamster.PREFIX = 'on';
-      }
-
-    },
-
-    /**
-     * create a normalised event object
-     * @param   {Function}    originalEvent
-     * @returns {Object}      event
-     */
-    event: function normaliseEvent(originalEvent){
-      var event = {
-            // keep a reference to the original event object
-            originalEvent: originalEvent,
-            target: originalEvent.target || originalEvent.srcElement,
-            type: 'wheel',
-            deltaMode: originalEvent.type === 'MozMousePixelScroll' ? 0 : 1,
-            deltaX: 0,
-            deltaZ: 0,
-            preventDefault: function(){
-              if (originalEvent.preventDefault) {
-                originalEvent.preventDefault();
-              } else {
-                originalEvent.returnValue = false;
-              }
-            },
-            stopPropagation: function(){
-              if (originalEvent.stopPropagation) {
-                originalEvent.stopPropagation();
-              } else {
-                originalEvent.cancelBubble = false;
-              }
-            }
-          };
-
-      // calculate deltaY (and deltaX) according to the event
-
-      // 'mousewheel'
-      if (originalEvent.wheelDelta) {
-        event.deltaY = - 1/40 * originalEvent.wheelDelta;
-      }
-      // webkit
-      if (originalEvent.wheelDeltaX) {
-        event.deltaX = - 1/40 * originalEvent.wheelDeltaX;
-      }
-
-      // 'DomMouseScroll'
-      if (originalEvent.detail) {
-        event.deltaY = originalEvent.detail;
-      }
-
-      return event;
-    },
-
-    /**
-     * normalise 'deltas' of the mouse wheel
-     * @param   {Function}    originalEvent
-     * @returns {Array}       deltas
-     */
-    delta: function normaliseDelta(originalEvent){
-      var delta = 0,
-        deltaX = 0,
-        deltaY = 0,
-        absDelta = 0,
-        absDeltaXY = 0,
-        fn;
-
-      // normalise deltas according to the event
-
-      // 'wheel' event
-      if (originalEvent.deltaY) {
-        deltaY = originalEvent.deltaY * -1;
-        delta  = deltaY;
-      }
-      if (originalEvent.deltaX) {
-        deltaX = originalEvent.deltaX;
-        delta  = deltaX * -1;
-      }
-
-      // 'mousewheel' event
-      if (originalEvent.wheelDelta) {
-        delta = originalEvent.wheelDelta;
-      }
-      // webkit
-      if (originalEvent.wheelDeltaY) {
-        deltaY = originalEvent.wheelDeltaY;
-      }
-      if (originalEvent.wheelDeltaX) {
-        deltaX = originalEvent.wheelDeltaX * -1;
-      }
-
-      // 'DomMouseScroll' event
-      if (originalEvent.detail) {
-        delta = originalEvent.detail * -1;
-      }
-
-      // Don't return NaN
-      if (delta === 0) {
-        return [0, 0, 0];
-      }
-
-      // look for lowest delta to normalize the delta values
-      absDelta = Math.abs(delta);
-      if (!lowestDelta || absDelta < lowestDelta) {
-        lowestDelta = absDelta;
-      }
-      absDeltaXY = Math.max(Math.abs(deltaY), Math.abs(deltaX));
-      if (!lowestDeltaXY || absDeltaXY < lowestDeltaXY) {
-        lowestDeltaXY = absDeltaXY;
-      }
-
-      // convert deltas to whole numbers
-      fn = delta > 0 ? 'floor' : 'ceil';
-      delta  = Math[fn](delta / lowestDelta);
-      deltaX = Math[fn](deltaX / lowestDeltaXY);
-      deltaY = Math[fn](deltaY / lowestDeltaXY);
-
-      return [delta, deltaX, deltaY];
+  remove: function remove(hamster, eventName, handler, useCapture){
+    // find the normalised handler on the instance
+    var originalHandler = handler,
+        lookup = {},
+        handlers;
+    for (var i = 0, len = hamster.handlers.length; i < len; ++i) {
+      lookup[hamster.handlers[i].original] = hamster.handlers[i];
     }
-  };
+    handlers = lookup[originalHandler];
+    handler = handlers.normalised;
 
-  if (typeof window.define === 'function' && window.define.amd) {
-    // AMD
-    window.define('hamster', [], function(){
-      return Hamster;
-    });
-  } else if (true) {
-    // CommonJS
-    module.exports = Hamster;
-  } else {}
+    // cross-browser removeEventListener
+    hamster.element[Hamster.REMOVE_EVENT](Hamster.PREFIX + eventName, handler, useCapture || false);
+
+    // remove original and normalised handlers from the instance
+    for (var h in hamster.handlers) {
+      if (hamster.handlers[h] == handlers) {
+        hamster.handlers.splice(h, 1);
+        break;
+      }
+    }
+  }
+};
+
+/**
+ * these hold the lowest deltas,
+ * used to normalise the delta values
+ * @type {Number}
+ */
+var lowestDelta,
+    lowestDeltaXY;
+
+Hamster.normalise = {
+  /**
+   * fix browser inconsistencies
+   */
+  browser: function normaliseBrowser(){
+    // detect deprecated wheel events
+    if (!('onwheel' in document || document.documentMode >= 9)) {
+      Hamster.SUPPORT = document.onmousewheel !== undefined ?
+                        'mousewheel' : // webkit and IE < 9 support at least "mousewheel"
+                        'DOMMouseScroll'; // assume remaining browsers are older Firefox
+    }
+
+    // detect deprecated event model
+    if (!window.addEventListener) {
+      // assume IE < 9
+      Hamster.ADD_EVENT = 'attachEvent';
+      Hamster.REMOVE_EVENT = 'detachEvent';
+      Hamster.PREFIX = 'on';
+    }
+
+  },
+
+  /**
+   * create a normalised event object
+   * @param   {Function}    originalEvent
+   * @returns {Object}      event
+   */
+   event: function normaliseEvent(originalEvent){
+    var event = {
+          // keep a reference to the original event object
+          originalEvent: originalEvent,
+          target: originalEvent.target || originalEvent.srcElement,
+          type: 'wheel',
+          deltaMode: originalEvent.type === 'MozMousePixelScroll' ? 0 : 1,
+          deltaX: 0,
+          deltaZ: 0,
+          preventDefault: function(){
+            if (originalEvent.preventDefault) {
+              originalEvent.preventDefault();
+            } else {
+              originalEvent.returnValue = false;
+            }
+          },
+          stopPropagation: function(){
+            if (originalEvent.stopPropagation) {
+              originalEvent.stopPropagation();
+            } else {
+              originalEvent.cancelBubble = false;
+            }
+          }
+        };
+
+    // calculate deltaY (and deltaX) according to the event
+
+    // 'mousewheel'
+    if (originalEvent.wheelDelta) {
+      event.deltaY = - 1/40 * originalEvent.wheelDelta;
+    }
+    // webkit
+    if (originalEvent.wheelDeltaX) {
+      event.deltaX = - 1/40 * originalEvent.wheelDeltaX;
+    }
+
+    // 'DomMouseScroll'
+    if (originalEvent.detail) {
+      event.deltaY = originalEvent.detail;
+    }
+
+    return event;
+  },
+
+  /**
+   * normalise 'deltas' of the mouse wheel
+   * @param   {Function}    originalEvent
+   * @returns {Array}       deltas
+   */
+  delta: function normaliseDelta(originalEvent){
+    var delta = 0,
+      deltaX = 0,
+      deltaY = 0,
+      absDelta = 0,
+      absDeltaXY = 0,
+      fn;
+
+    // normalise deltas according to the event
+
+    // 'wheel' event
+    if (originalEvent.deltaY) {
+      deltaY = originalEvent.deltaY * -1;
+      delta  = deltaY;
+    }
+    if (originalEvent.deltaX) {
+      deltaX = originalEvent.deltaX;
+      delta  = deltaX * -1;
+    }
+
+    // 'mousewheel' event
+    if (originalEvent.wheelDelta) {
+      delta = originalEvent.wheelDelta;
+    }
+    // webkit
+    if (originalEvent.wheelDeltaY) {
+      deltaY = originalEvent.wheelDeltaY;
+    }
+    if (originalEvent.wheelDeltaX) {
+      deltaX = originalEvent.wheelDeltaX * -1;
+    }
+
+    // 'DomMouseScroll' event
+    if (originalEvent.detail) {
+      delta = originalEvent.detail * -1;
+    }
+
+    // Don't return NaN
+    if (delta === 0) {
+      return [0, 0, 0];
+    }
+
+    // look for lowest delta to normalize the delta values
+    absDelta = Math.abs(delta);
+    if (!lowestDelta || absDelta < lowestDelta) {
+      lowestDelta = absDelta;
+    }
+    absDeltaXY = Math.max(Math.abs(deltaY), Math.abs(deltaX));
+    if (!lowestDeltaXY || absDeltaXY < lowestDeltaXY) {
+      lowestDeltaXY = absDeltaXY;
+    }
+
+    // convert deltas to whole numbers
+    fn = delta > 0 ? 'floor' : 'ceil';
+    delta  = Math[fn](delta / lowestDelta);
+    deltaX = Math[fn](deltaX / lowestDeltaXY);
+    deltaY = Math[fn](deltaY / lowestDeltaXY);
+
+    return [delta, deltaX, deltaY];
+  }
+};
+
+if (typeof window.define === 'function' && window.define.amd) {
+  // AMD
+  window.define('hamster', [], function(){
+    return Hamster;
+  });
+} else if (true) {
+  // CommonJS
+  module.exports = Hamster;
+} else {}
 
 })(window, window.document);
 
@@ -4271,7 +4259,7 @@ function cloneBuffer(buffer, isDeep) {
 
 /* harmony default export */ __webpack_exports__["a"] = (cloneBuffer);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(24)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(26)(module)))
 
 /***/ }),
 /* 34 */
@@ -5240,7 +5228,7 @@ try {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
@@ -5250,7 +5238,7 @@ try {
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.t-vue-lbtn {\n    z-index: 100;\n    width: 21px;\n    height: 21px;\n    margin-bottom: -6px;\n    pointer-events: all;\n    cursor: pointer;\n}\n", ""]);
@@ -5263,7 +5251,7 @@ module.exports = exports;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
@@ -5273,7 +5261,7 @@ module.exports = exports;
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.t-vue-lbtn-grp {\n    margin-left: 0.5em;\n}\n", ""]);
@@ -5286,7 +5274,7 @@ module.exports = exports;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
@@ -5296,7 +5284,7 @@ module.exports = exports;
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-legend {\n    position: relative;\n    z-index: 100;\n    font-size: 1.25em;\n    margin-left: 10px;\n    pointer-events: none;\n}\n.trading-vue-ohlcv {\n    pointer-events: none;\n    margin-bottom: 0.5em;\n}\n.t-vue-lspan {\n    font-variant-numeric: tabular-nums;\n    font-weight: 100;\n    font-size: 0.95em;\n    color: #999999; /* TODO: move => params */\n    margin-left: 0.1em;\n    margin-right: 0.2em;\n}\n.t-vue-title {\n    margin-right: 0.25em;\n    font-size: 1.45em;\n    font-weight: 200;\n}\n.t-vue-ind {\n    margin-left: 0.2em;\n    margin-bottom: 0.5em;\n    font-weight: 200;\n    font-size: 1.0em;\n}\n.t-vue-ivalue {\n    margin-left: 0.5em;\n}\n.t-vue-unknown {\n    color: #999999; /* TODO: move => params */\n}\n", ""]);
@@ -5309,7 +5297,7 @@ module.exports = exports;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(17);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
@@ -5319,7 +5307,7 @@ module.exports = exports;
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-section {\n    height: 0;\n    position: absolute;\n}\n", ""]);
@@ -5332,7 +5320,7 @@ module.exports = exports;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
@@ -5342,7 +5330,7 @@ module.exports = exports;
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-botbar {\n    position: relative !important;\n}\n", ""]);
@@ -5355,7 +5343,7 @@ module.exports = exports;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(17);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
@@ -5365,7 +5353,7 @@ module.exports = exports;
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-tbitem {\n}\n.trading-vue-tbitem:hover {\n    background-color: #76878319;\n}\n.trading-vue-tbicon {\n    position: absolute;\n}\n.trading-vue-tbitem.selected-item .trading-vue-tbicon {\n     filter: brightness(1.45) sepia(1) hue-rotate(90deg) saturate(4.5) !important;\n}\n.pixelated {\n    -ms-interpolation-mode: nearest-neighbor;\n    image-rendering: -webkit-optimize-contrast;\n    image-rendering: -webkit-crisp-edges;\n    image-rendering: -moz-crisp-edges;\n    image-rendering: -o-crisp-edges;\n    image-rendering: pixelated;\n}\n\n", ""]);
@@ -5378,7 +5366,7 @@ module.exports = exports;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
@@ -5388,7 +5376,7 @@ module.exports = exports;
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(8);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-toolbar {\n    position: absolute;\n    border-right: 1px solid black;\n    z-index: 100;\n    padding-top: 3px;\n}\n", ""]);
@@ -6587,11 +6575,11 @@ Sectionvue_type_template_id_8fbe9336_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Section.vue?vue&type=template&id=8fbe9336&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
-var regenerator = __webpack_require__(9);
+var regenerator = __webpack_require__(7);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__(19);
+var asyncToGenerator = __webpack_require__(13);
 var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
 
 // EXTERNAL MODULE: ./node_modules/hammerjs/hammer.js
@@ -9203,7 +9191,7 @@ function tool_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) 
 var icons = __webpack_require__(5);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(11);
+var defineProperty = __webpack_require__(10);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // CONCATENATED MODULE: ./src/components/primitives/pin.js
@@ -11576,6 +11564,7 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
     cursor_locked: function cursor_locked(state) {
       if (this.cursor.scroll_lock && state) return;
       this.cursor.locked = state;
+      this.$emit('cursor-locked', state);
     },
     calc_interval: function calc_interval() {
       if (this.ohlcv.length < 2) return;
@@ -11801,7 +11790,7 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
 
         if (n.scrollLock && this.cursor.locked) {
           this.cursor.locked = false;
-        } // TODO: update legend values for overalys
+        } // TODO: update legend values for overlays
 
 
         this.rerender++;
@@ -12372,23 +12361,23 @@ if (false) { var TradingVue_api; }
 TradingVue_component.options.__file = "src/TradingVue.vue"
 /* harmony default export */ var TradingVue = (TradingVue_component.exports);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
-var helpers_typeof = __webpack_require__(25);
+var helpers_typeof = __webpack_require__(12);
 var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(20);
+var possibleConstructorReturn = __webpack_require__(21);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(10);
+var getPrototypeOf = __webpack_require__(11);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(21);
+var inherits = __webpack_require__(23);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
-var assertThisInitialized = __webpack_require__(26);
+var assertThisInitialized = __webpack_require__(22);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
 // CONCATENATED MODULE: ./src/helpers/dc_events.js
@@ -14202,7 +14191,7 @@ function isArrayLikeObject(value) {
 /* harmony default export */ var lodash_es_isArrayLikeObject = (isArrayLikeObject);
 
 // EXTERNAL MODULE: ./node_modules/lodash-es/isBuffer.js
-var isBuffer = __webpack_require__(23);
+var isBuffer = __webpack_require__(25);
 
 // CONCATENATED MODULE: ./node_modules/lodash-es/isPlainObject.js
 
@@ -15173,6 +15162,7 @@ var mergeWith = _createAssigner(function(object, source, srcIndex, customizer) {
 
 
 
+
 function dc_core_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = dc_core_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function dc_core_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return dc_core_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return dc_core_arrayLikeToArray(o, minLen); }
@@ -15204,6 +15194,35 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
 
     _this = _super.call.apply(_super, [this].concat(args));
 
+    defineProperty_default()(assertThisInitialized_default()(_this), "_pauseRangeLogic", /*#__PURE__*/asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
+      return regenerator_default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return utils.pause(500);
+
+            case 2:
+              if (!_this.dynamicData.cursorLock) {
+                _context.next = 7;
+                break;
+              }
+
+              _context.next = 5;
+              return utils.pause(50);
+
+            case 5:
+              _context.next = 2;
+              break;
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })));
+
     defineProperty_default()(assertThisInitialized_default()(_this), "_merge_customizer", function (obj_val, src_val, key) {
       if (Array.isArray(obj_val) && obj_val[0] && obj_val[0].length >= 2 && isFinite(obj_val[0][0])) {
         return _this.merge_ts(obj_val, src_val);
@@ -15226,73 +15245,87 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
 
   }, {
     key: "init_data",
-    value: function init_data($root) {
-      if (!('chart' in this.data)) {
+    value: function init_data() {
+      if (!this.data.hasOwnProperty('chart')) {
         this.tv.$set(this.data, 'chart', {
           type: 'Candles',
-          data: this.data.ohlcv || []
+          data: this.data.ohlcv || [],
+          // TODO remove 'this.data.ohlcv' once old data format is fully deprecated
+          settings: {}
         });
+      } else if (!this.data.chart.hasOwnProperty('settings')) {
+        this.tv.$set(this.data.chart, 'settings', {});
       }
 
-      if (!('onchart' in this.data)) {
+      if (!this.data.hasOwnProperty('onchart')) {
         this.tv.$set(this.data, 'onchart', []);
       }
 
-      if (!('offchart' in this.data)) {
+      if (!this.data.hasOwnProperty('offchart')) {
         this.tv.$set(this.data, 'offchart', []);
-      }
-
-      if (!this.data.chart.settings) {
-        this.tv.$set(this.data.chart, 'settings', {});
       } // Remove ohlcv cuz we have Data v1.1
+      // TODO: remove this line at one point once old data format is fully deprecated:
 
 
       delete this.data.ohlcv;
-    } // Range change callback (called by TradingVue)
+    }
+    /**
+         * Provides a debouncing logic over our onRangeChanged function
+         * so it doesn't fire downstream logic too rapidly.
+         *
+         * First we wait for a base delay time, and then continue sleeping
+         * while cursor-lock is enabled.
+         * @returns {Promise<void>}
+         * @private
+         */
 
   }, {
     key: "range_changed",
+    // Range change callback (called by TradingVue)
     value: function () {
-      var _range_changed = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee(range, tf) {
+      var _range_changed = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee2(range, tf) {
         var _this2 = this;
 
-        var check,
-            first,
-            prom,
-            _args = arguments;
-        return regenerator_default.a.wrap(function _callee$(_context) {
+        var first, prom, d;
+        return regenerator_default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                check = _args.length > 2 && _args[2] !== undefined ? _args[2] : false;
-
-                if (this.loader) {
-                  _context.next = 3;
+                if (!(typeof this.loader !== 'function')) {
+                  _context2.next = 2;
                   break;
                 }
 
-                return _context.abrupt("return");
+                return _context2.abrupt("return");
 
-              case 3:
+              case 2:
                 if (this.loading) {
-                  _context.next = 19;
+                  _context2.next = 23;
                   break;
                 }
 
+                // avoid simultaneous fetches
                 first = this.data.chart.data[0][0];
 
                 if (!(range[0] < first)) {
-                  _context.next = 19;
+                  _context2.next = 23;
                   break;
                 }
 
-                this.loading = true;
-                _context.next = 9;
-                return utils.pause(250);
+                this.loading = true; //  TODO: if I understand correctly, then sleep is not what we want here!
+                // consider lodash.debounce instead (w/ options.trailing = true);
+                // note there might be some issues considering it's async fun;
+                // eg see https://stackoverflow.com/a/50837389;
+                // (perhaps debounce this.loader instead?)
+                //
+                // maybe https://github.com/szchenghuang/debounce-async#readme ?
+                //await Utils.pause(250) // Load bigger chunks
 
-              case 9:
-                // Load bigger chunks
-                range = range.slice(); // copy
+                _context2.next = 8;
+                return this._pauseRangeLogic();
+
+              case 8:
+                range = range.slice(0); // copy
 
                 range[0] = Math.floor(range[0]);
                 range[1] = Math.floor(first);
@@ -15301,29 +15334,32 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
                   _this2.chunk_loaded(d);
                 });
 
-                if (!(prom && prom.then)) {
-                  _context.next = 19;
+                if (!(prom !== null && typeof_default()(prom) === 'object' && typeof prom.then === 'function')) {
+                  _context2.next = 23;
                   break;
                 }
 
-                _context.t0 = this;
-                _context.next = 17;
+                _context2.prev = 13;
+                _context2.next = 16;
                 return prom;
 
-              case 17:
-                _context.t1 = _context.sent;
-
-                _context.t0.chunk_loaded.call(_context.t0, _context.t1);
-
-              case 19:
-                if (!check) this.last_chunk = [range, tf];
+              case 16:
+                d = _context2.sent;
+                this.chunk_loaded(d);
+                _context2.next = 23;
+                break;
 
               case 20:
+                _context2.prev = 20;
+                _context2.t0 = _context2["catch"](13);
+                this.loading = false;
+
+              case 23:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
+        }, _callee2, this, [[13, 20]]);
       }));
 
       function range_changed(_x, _x2) {
@@ -15478,14 +15514,14 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
     }
   }, {
     key: "query_search",
-    value: function query_search(query, _ref) {
+    value: function query_search(query, _ref2) {
       var _this3 = this;
 
-      var _ref2 = slicedToArray_default()(_ref, 3),
-          side = _ref2[0],
-          _ref2$ = _ref2[1],
-          path = _ref2$ === void 0 ? '' : _ref2$,
-          field = _ref2[2];
+      var _ref3 = slicedToArray_default()(_ref2, 3),
+          side = _ref3[0],
+          _ref3$ = _ref3[1],
+          path = _ref3$ === void 0 ? '' : _ref3$,
+          field = _ref3[2];
 
       var arr = this.data[side].filter(function (x) {
         return x.id && x.name && (x.id === query || x.id.includes(path) || x.name === query || x.name.includes(path));
@@ -15570,10 +15606,10 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
 
   }, {
     key: "ts_overlap",
-    value: function ts_overlap(arr1, arr2, _ref3) {
-      var _ref4 = slicedToArray_default()(_ref3, 2),
-          t1 = _ref4[0],
-          t2 = _ref4[1];
+    value: function ts_overlap(arr1, arr2, _ref4) {
+      var _ref5 = slicedToArray_default()(_ref4, 2),
+          t1 = _ref5[0],
+          t2 = _ref5[1];
 
       var filter_mutual_overlap = function filter_mutual_overlap(x) {
         return x[0] >= t1 && x[0] <= t2;
@@ -15747,9 +15783,7 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
   }, {
     key: "get_one",
     value: function get_one(query) {
-      return this.get_by_query(query).map(function (x) {
-        return x.v;
-      })[0];
+      return this.get_by_query(query)[0].v;
     } // Set data (reactively)
 
   }, {
