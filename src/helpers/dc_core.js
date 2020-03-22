@@ -254,21 +254,23 @@ export default class DCCore extends DCEvents {
 
             // If dst is totally contained in src
             if (!obj.v.length) { obj.v = data.splice(d2[0]) }
+			
+			this.combine(obj.v, od, data)
 
-            this.tv.$set(
-                obj.p, obj.i, this.combine(obj.v, od, data)
-            )
+            //this.tv.$set(
+            //   obj.p, obj.i, this.combine(obj.v, od, data)
+            //)
 
         } else {
 
-            this.tv.$set(
-                obj.p, obj.i, this.combine(obj.v, [], data)
-            )
+            //this.tv.$set(
+            //    obj.p, obj.i, this.combine(obj.v, [], data)
+            //)
+			this.combine(obj.v, [], data)
 
         }
 
         return obj.v
-
     }
 
     // TODO: review performance, move to worker

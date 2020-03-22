@@ -15555,9 +15555,14 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
           obj.v = data.splice(d2[0]);
         }
 
-        this.tv.$set(obj.p, obj.i, this.combine(obj.v, od, data));
+        this.combine(obj.v, od, data); //this.tv.$set(
+        //   obj.p, obj.i, this.combine(obj.v, od, data)
+        //)
       } else {
-        this.tv.$set(obj.p, obj.i, this.combine(obj.v, [], data));
+        //this.tv.$set(
+        //    obj.p, obj.i, this.combine(obj.v, [], data)
+        //)
+        this.combine(obj.v, [], data);
       }
 
       return obj.v;
