@@ -68,7 +68,7 @@ export default {
         return t ? new Date(t).getDate() : null
     },
 
-    // Update array keeping the same reference
+// Update array keeping the same reference
     overwrite(arr, new_arr) {
         arr.splice(0, arr.length, ...new_arr)
     },
@@ -141,8 +141,8 @@ export default {
 
     now() { return (new Date()).getTime() },
 
-    pause(delay) {
-        return new Promise((rs, rj) => setTimeout(rs, delay))
+    pause(delayMs) {
+        return new Promise((rs, rj) => setTimeout(rs, delayMs))
     },
 
     // Limit crazy wheel delta values

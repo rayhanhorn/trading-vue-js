@@ -5785,9 +5785,9 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
   now: function now() {
     return new Date().getTime();
   },
-  pause: function pause(delay) {
+  pause: function pause(delayMs) {
     return new Promise(function (rs, rj) {
-      return setTimeout(rs, delay);
+      return setTimeout(rs, delayMs);
     });
   },
   // Limit crazy wheel delta values
@@ -15468,7 +15468,8 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
 
   }, {
     key: "get_by_query",
-    value: function get_by_query(query, chuck) {
+    value: function get_by_query(query) {
+      var chuck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var tuple = query.split('.');
 
       switch (tuple[0]) {
@@ -15494,8 +15495,8 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
           break;
       }
 
-      return result.filter(function (x) {
-        return !x.v.locked || chuck;
+      return chuck ? result : result.filter(function (x) {
+        return !x.v.locked;
       });
     }
   }, {

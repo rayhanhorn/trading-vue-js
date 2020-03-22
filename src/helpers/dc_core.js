@@ -164,7 +164,7 @@ export default class DCCore extends DCEvents {
     // Returns array of objects matching query.
     // Object contains { parent, index, value }
     // TODO: query caching
-    get_by_query(query, chuck) {
+        get_by_query(query, chuck = false) {
 
         let tuple = query.split('.')
 
@@ -196,7 +196,7 @@ export default class DCCore extends DCEvents {
                 break
         }
 
-        return result.filter(x => !x.v.locked || chuck)
+		return chuck ? result : result.filter(x => !x.v.locked)
     }
 
     chart_as_piv(tuple) {
