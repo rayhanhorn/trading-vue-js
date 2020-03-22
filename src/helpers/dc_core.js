@@ -45,8 +45,9 @@ export default class DCCore extends DCEvents {
     // Range change callback (called by TradingVue)
     async range_changed(range, tf, check=false) {
 
-        if (!this.loader) return
-        if (!this.loading) {
+
+        if (typeof this.loader !== 'function') return
+        if (!this.loading) {  // avoid simultaneous fetches
             let first = this.data.chart.data[0][0]
             if (range[0] < first) {
                 this.loading = true
@@ -58,7 +59,7 @@ export default class DCCore extends DCEvents {
                     // Callback way
                     this.chunk_loaded(d)
                 })
-                if (prom && prom.then) {
+                if (prom !== null && typeof prom === 'object' && typeof prom.then === 'function') {
                     // Promise way
                     this.chunk_loaded(await prom)
                 }
@@ -89,29 +90,28 @@ export default class DCCore extends DCEvents {
 
     }
 
-    // Update ids for all overlays
+   // Update ids for all overlays
     update_ids() {
-        this.data.chart.id = `chart.${this.data.chart.type}`
-        var count = {}
-        for (var ov of this.data.onchart) {
-            if (count[ov.type] === undefined) {
-                count[ov.type] = 0
+        const process = (ov, onOrOffChart) => {
+            if (!typeCounts.hasOwnProperty(ov.type)) {
+                typeCounts[ov.type] = 0
             }
-            let i = count[ov.type]++
-            ov.id = `onchart.${ov.type}${i}`
+            const i = typeCounts[ov.type]++
+            ov.id = `${onOrOffChart}.${ov.type}${i}`
             if (!ov.name) ov.name = ov.type + ` ${i}`
             if (!ov.settings) ov.settings = {}
-
         }
-        count = {}
-        for (var ov of this.data.offchart) {
-            if (count[ov.type] === undefined) {
-                count[ov.type] = 0
-            }
-            let i = count[ov.type]++
-            ov.id = `offchart.${ov.type}${i}`
-            if (!ov.name) ov.name = ov.type + ` ${i}`
-            if (!ov.settings) ov.settings = {}
+
+        this.data.chart.id = `chart.${this.data.chart.type}`
+
+        let typeCounts = {}
+        for (const ov of this.data.onchart) {
+            process(ov, 'onchart')
+        }
+
+        typeCounts = {}  // reset
+        for (const ov of this.data.offchart) {
+            process(ov, 'offchart')
         }
     }
 
@@ -122,11 +122,8 @@ export default class DCCore extends DCEvents {
                 k === 'candle' || k === 'oi') {
                 continue
             }
-            if (!Array.isArray(data[k])) {
-                var val = [data[k]]
-            } else {
-                val = data[k]
-            }
+            const i = data[k]
+            const val = Array.isArray(i) ? i : [i]
             if (!k.includes('.data')) k += '.data'
             this.merge(k, [[t, ...val]])
         }
@@ -153,17 +150,17 @@ export default class DCCore extends DCEvents {
                     'chart',
                     tuple[1]
                 ])*/
-                let on = this.query_search(query, [
+                const onChart = this.query_search(query, [
                     'onchart',
                     tuple[0],
                     tuple[1]
                 ])
-                let off = this.query_search(query, [
+                const offChart = this.query_search(query, [
                     'offchart',
                     tuple[0],
                     tuple[1]
                 ])
-                result = [/*ch[0],*/ ...on, ...off]
+                result = [/*ch[0],*/ ...onChart, ...offChart]
                 break
         }
 
