@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.4 - Sat Mar 21 2020
+ * TradingVue.JS - v0.4.4 - Sun Mar 22 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -6367,7 +6367,6 @@ var hamster_default = /*#__PURE__*/__webpack_require__.n(hamsterjs_hamster);
 
 
 
-
 function grid_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = grid_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function grid_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return grid_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return grid_arrayLikeToArray(o, minLen); }
@@ -6578,21 +6577,19 @@ var grid_Grid = /*#__PURE__*/function () {
       if (!this.layout) return;
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.grid();
-      var overlays = [];
-      overlays.push.apply(overlays, toConsumableArray_default()(this.overlays)); // z-index sorting
-
-      overlays.sort(function (l1, l2) {
+      this.overlays.slice(0) // copy
+      .sort(function (l1, l2) {
         return l1.z - l2.z;
-      });
-      overlays.forEach(function (l) {
+      }) // z-index sorting
+      .forEach(function (l) {
         if (!l.display) return;
 
         _this2.ctx.save();
 
         var r = l.renderer;
-        if (r.pre_draw) r.pre_draw(_this2.ctx);
+        if (r.hasOwnProperty('pre_draw') && typeof r.pre_draw === 'function') r.pre_draw(_this2.ctx);
         r.draw(_this2.ctx);
-        if (r.post_draw) r.post_draw(_this2.ctx);
+        if (r.hasOwnProperty('post_draw') && typeof r.post_draw === 'function') r.post_draw(_this2.ctx);
 
         _this2.ctx.restore();
       });
@@ -6667,7 +6664,7 @@ var grid_Grid = /*#__PURE__*/function () {
         event.preventDefault();
       }
 
-      if (Math.abs(event.deltaX) > 0) {
+      if (event.deltaX !== 0) {
         this.trackpad = true;
 
         if (Math.abs(event.deltaX) >= Math.abs(event.deltaY)) {
@@ -6802,16 +6799,17 @@ var grid_Grid = /*#__PURE__*/function () {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
           var layer = _step3.value;
 
-          if (layer.renderer[name]) {
+          if (layer.renderer.hasOwnProperty(name) && typeof layer.renderer[name] === 'function') {
             layer.renderer[name](event);
           }
 
           var mouse = layer.renderer.mouse;
-          var keys = layer.renderer.keys;
 
           if (mouse.listeners) {
             mouse.emit(name, event);
           }
+
+          var keys = layer.renderer.keys;
 
           if (keys && keys.listeners) {
             keys.emit(name, event);
