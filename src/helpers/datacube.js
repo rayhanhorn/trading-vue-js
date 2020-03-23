@@ -125,7 +125,8 @@ export default class DataCube extends DCCore {
             }
         } else if (t >= t_next && tick !== undefined) {
             // And new zero-height candle
-            this.merge('chart.data', [[
+			//console.log(tick+' merge1')
+            this.merge('chart.data', [[				
                 t, tick, tick, tick, tick, volume
             ]])
         } else if (tick !== undefined) {
@@ -134,6 +135,7 @@ export default class DataCube extends DCCore {
             last[3] = Math.min(tick, last[3])
             last[4] = tick
             last[5] += volume
+			//console.log(last+' merge2')
             this.merge('chart.data', [last])
         }
 

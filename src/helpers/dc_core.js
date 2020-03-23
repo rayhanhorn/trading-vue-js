@@ -246,6 +246,7 @@ export default class DCCore extends DCEvents {
     }
 
     merge_objects(obj, data) {
+	//console.log('merge_objects '+data)
         const new_obj = Array.isArray(obj.v) ? [] : {}
         this.tv.$set(obj.p, obj.i, mergeWith(new_obj, obj.v, data, this._merge_customizer))
     }
@@ -253,6 +254,7 @@ export default class DCCore extends DCEvents {
 	
     // Merge overlapping time series
     merge_ts(obj, data) {
+	//console.log('merge_ts '+data)
 
         // Assume that both arrays are pre-sorted
 

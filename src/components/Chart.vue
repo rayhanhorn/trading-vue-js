@@ -81,7 +81,7 @@ export default {
         cursor_locked(state) {
             if (this.cursor.scroll_lock && state) return
             this.cursor.locked = state
-            this.$emit('cursor-locked', state)
+		    this.$emit('cursor-locked', state)
         },
         calc_interval() {
             if (this.ohlcv.length < 2) return
@@ -194,6 +194,10 @@ export default {
         remove_kb(event) {
             if (!this.$refs.keyboard) return
             this.$refs.keyboard.remove(event)
+        },
+        update_last_candle() {
+            this.last_candle = this.ohlcv ?
+                this.ohlcv[this.ohlcv.length - 1] : undefined
         }
     },
     computed: {
@@ -244,10 +248,6 @@ export default {
             let w = this.$props.toolbar ? this.$props.config.TOOLBAR : 0
             return { 'margin-left': `${w}px` }
         },
-        last_candle() {
-            return (this.ohlcv && this.ohlcv.length) ?
-                this.ohlcv[this.ohlcv.length - 1] : undefined
-        },
         meta() {
             return {
                 last: this.last_candle
@@ -285,7 +285,9 @@ export default {
             settings_ohlcv: {},
 
             // Default overlay settings
-            settings_ov: {}
+            settings_ov: {},
+
+            last_candle: []
         }
     },
     watch: {
@@ -313,7 +315,8 @@ export default {
                 if (n.scrollLock && this.cursor.locked) {
                     this.cursor.locked = false
                 }
-                // TODO: update legend values for overlays
+                this.update_last_candle()
+                // TODO: update legend values for overalys
                 this.rerender++
             },
             deep: true
