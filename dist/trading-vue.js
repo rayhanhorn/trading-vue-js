@@ -5622,7 +5622,13 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
   },
   // Detects candles interval
   detect_interval: function detect_interval(ohlcv) {
-    return 86400000; //24h
+    var len = Math.min(ohlcv.length - 1, 99);
+    var min = Infinity;
+    ohlcv.slice(0, len).forEach(function (x, i) {
+      var d = ohlcv[i + 1][0] - x[0];
+      if (d === d && d < min) min = d;
+    });
+    return min;
   },
   // Detects candles interval. (old version, slightly slower)
 

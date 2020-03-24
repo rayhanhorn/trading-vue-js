@@ -102,7 +102,13 @@ export default {
 
     // Detects candles interval
     detect_interval(ohlcv) {
-        return 86400000 //24h (https://github.com/C451/trading-vue-js/issues/59#issuecomment-531532238)
+        let len = Math.min(ohlcv.length - 1, 99)
+        let min = Infinity
+        ohlcv.slice(0, len).forEach((x, i) => {
+            let d = ohlcv[i+1][0] - x[0]
+            if (d === d && d < min) min = d
+        })
+        return min
     },
 
     // Detects candles interval. (old version, slightly slower)
