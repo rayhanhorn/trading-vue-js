@@ -27,7 +27,7 @@ export default class Crosshair {
 
         // Adjust x here cuz there is a delay between
         // update() and draw()
-        //this.x = this.$p.cursor.x
+        this.x = this.$p.cursor.x
 
         ctx.save()
         ctx.strokeStyle = this.$p.colors.colorCross
@@ -39,8 +39,13 @@ export default class Crosshair {
             ctx.moveTo(0, this.y)
             ctx.lineTo(this.layout.width - 0.5, this.y)
         }
-
+		ctx.stroke()
+		ctx.restore()
         // V
+		ctx.save()
+		ctx.beginPath()
+		ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)'
+		ctx.lineWidth = 5
         ctx.moveTo(this.x, 0)
         ctx.lineTo(this.x, this.layout.height)
         ctx.stroke()
