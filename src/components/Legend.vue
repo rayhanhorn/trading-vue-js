@@ -159,13 +159,12 @@ export default {
 .t-vue-ind {
     margin-left: 0.2em;
     margin-bottom: 0.5em;
-    font-weight: 200;
-    font-size: 1.0em;
+    font-size: 1.2em;
     color: steelblue;
 }
 .t-vue-ivalue {
     margin-left: 0.5em;
-    font-size: 1.0em;
+    font-size: 0.8em;
 }
 .t-vue-unknown {
     color: #999999; /* TODO: move => params */
