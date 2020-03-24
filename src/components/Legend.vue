@@ -53,14 +53,15 @@ export default {
                 return Array(6).fill('n/a')
             }
             const prec = this.layout.prec
+			const format = (n, d) => parseFloat(n.toFixed(d))
 
             return [
-                this.$props.values.ohlcv[1].toFixed(prec),
-                this.$props.values.ohlcv[2].toFixed(prec),
-                this.$props.values.ohlcv[3].toFixed(prec),
-                this.$props.values.ohlcv[4].toFixed(prec),
+                format(this.$props.values.ohlcv[1], prec),
+                format(this.$props.values.ohlcv[2], prec),
+                format(this.$props.values.ohlcv[3], prec),
+                format(this.$props.values.ohlcv[4], prec),
                 this.$props.values.ohlcv[5] ?
-                    this.$props.values.ohlcv[5].toFixed(2):
+                    format(this.$props.values.ohlcv[5], 2) :
                     'n/a'
             ]
         },
@@ -139,18 +140,20 @@ export default {
 .trading-vue-ohlcv {
     pointer-events: none;
     margin-bottom: 0.5em;
+    font-size: 1.0em;
+    color: steelblue;
 }
 .t-vue-lspan {
     font-variant-numeric: tabular-nums;
     font-weight: 100;
-    font-size: 0.95em;
-    color: #999999; /* TODO: move => params */
+    font-size: 1.2em;
+    color: #EEE; /* TODO: move => params */
     margin-left: 0.1em;
     margin-right: 0.2em;
 }
 .t-vue-title {
     margin-right: 0.25em;
-    font-size: 1.45em;
+    font-size: 2em;
     font-weight: 200;
 }
 .t-vue-ind {
@@ -158,9 +161,11 @@ export default {
     margin-bottom: 0.5em;
     font-weight: 200;
     font-size: 1.0em;
+    color: steelblue;
 }
 .t-vue-ivalue {
     margin-left: 0.5em;
+    font-size: 1.0em;
 }
 .t-vue-unknown {
     color: #999999; /* TODO: move => params */
