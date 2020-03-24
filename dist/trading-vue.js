@@ -7078,8 +7078,8 @@ function () {
       this.layout = this.$p.layout;
       if (!this.visible) return; // Adjust x here cuz there is a delay between
       // update() and draw()
-      //this.x = this.$p.cursor.x
 
+      this.x = this.$p.cursor.x;
       ctx.save();
       ctx.strokeStyle = this.$p.colors.colorCross;
       ctx.beginPath();
@@ -7088,9 +7088,15 @@ function () {
       if (this.$p.cursor.grid_id === this.layout.id) {
         ctx.moveTo(0, this.y);
         ctx.lineTo(this.layout.width - 0.5, this.y);
-      } // V
+      }
 
+      ctx.stroke();
+      ctx.restore(); // V
 
+      ctx.save();
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.lineWidth = 5;
       ctx.moveTo(this.x, 0);
       ctx.lineTo(this.x, this.layout.height);
       ctx.stroke();
@@ -11544,6 +11550,7 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
     this._layout = new js_layout(this); // Updates current cursor values
 
     this.updater = new updater(this);
+    this.update_last_candle();
   },
   methods: {
     range_changed: function range_changed(r) {
