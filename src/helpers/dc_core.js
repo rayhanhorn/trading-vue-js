@@ -17,24 +17,26 @@ export default class DCCore extends DCEvents {
     }
 
     // Init Data Structure v1.1
-    init_data() {
+    init_data($root) {
 
-        if (!this.data.hasOwnProperty('chart')) {
+        if (!('chart' in this.data)) {
             this.tv.$set(this.data, 'chart', {
                 type: 'Candles',
                 data: this.data.ohlcv || [],  // TODO remove 'this.data.ohlcv' once old data format is fully deprecated
                 settings: {}
             })
-        } else if (!this.data.chart.hasOwnProperty('settings')) {
-            this.tv.$set(this.data.chart, 'settings', {})
         }
 
-        if (!this.data.hasOwnProperty('onchart')) {
+        if (!('onchart' in this.data)) {
             this.tv.$set(this.data, 'onchart', [])
         }
 
-        if (!this.data.hasOwnProperty('offchart')) {
+        if (!('offchart' in this.data)) {
             this.tv.$set(this.data, 'offchart', [])
+        }
+
+        if (!this.data.chart.settings) {
+            this.tv.$set(this.data.chart,'settings', {})
         }
 
         // Remove ohlcv cuz we have Data v1.1
@@ -42,58 +44,35 @@ export default class DCCore extends DCEvents {
         delete this.data.ohlcv
     }
 
-/**
-     * Provides a debouncing logic over our onRangeChanged function
-     * so it doesn't fire downstream logic too rapidly.
-     *
-     * First we wait for a base delay time, and then continue sleeping
-     * while cursor-lock is enabled.
-     * @returns {Promise<void>}
-     * @private
-     */
-    _pauseRangeLogic = async () => {
-        await Utils.pause(500)
-        while (this.dynamicData.cursorLock) {
-            await Utils.pause(50)
-        }
-    }
-
-
     // Range change callback (called by TradingVue)
-    async range_changed(range, tf) {
+    async range_changed(range, tf, check=false) {
 
-        if (typeof this.loader !== 'function') return
-        if (!this.loading) {  // avoid simultaneous fetches
-            const first = this.data.chart.data[0][0]
+        if (!this.loader) return
+        if (!this.loading) {
+            let first = this.data.chart.data[0][0]
             if (range[0] < first) {
                 this.loading = true
-                //  TODO: if I understand correctly, then sleep is not what we want here!
-                // consider lodash.debounce instead (w/ options.trailing = true);
-                // note there might be some issues considering it's async fun;
-                // eg see https://stackoverflow.com/a/50837389;
-                // (perhaps debounce this.loader instead?)
-                //
-                // maybe https://github.com/szchenghuang/debounce-async#readme ?
-                //await Utils.pause(250) // Load bigger chunks
-				await this._pauseRangeLogic()
-                range = range.slice(0)  // copy
+                await Utils.pause(250) // Load bigger chunks
+                range = range.slice()  // copy
                 range[0] = Math.floor(range[0])
                 range[1] = Math.floor(first)
-                const prom = this.loader(range, tf, d => {
+                let prom = this.loader(range, tf, d => {
                     // Callback way
                     this.chunk_loaded(d)
                 })
-                if (prom !== null && typeof prom === 'object' && typeof prom.then === 'function') {
+                if (prom && prom.then) {
                     // Promise way
-                    try {
-                        const d = await prom;
-                        this.chunk_loaded(d)
-                    } catch (e) {
-                        this.loading = false
-                    }
+                    this.chunk_loaded(await prom)
+                    // try {
+                    //     const d = await prom;
+                    //     this.chunk_loaded(d)
+                    // } catch (e) {
+                    //     this.loading = false
+                    // }
                 }
             }
         }
+        if (!check) this.last_chunk = [range, tf]
     }
 
     // A new chunk of data is loaded
@@ -285,18 +264,18 @@ export default class DCCore extends DCEvents {
             // If dst is totally contained in src
             if (!obj.v.length) { obj.v = data.splice(d2[0]) }
 			
-			this.combine(obj.v, od, data)
+			// this.combine(obj.v, od, data)
 
-            //this.tv.$set(
-            //   obj.p, obj.i, this.combine(obj.v, od, data)
-            //)
+            this.tv.$set(
+              obj.p, obj.i, this.combine(obj.v, od, data)
+            )
 
         } else {
 
-            //this.tv.$set(
-            //    obj.p, obj.i, this.combine(obj.v, [], data)
-            //)
-			this.combine(obj.v, [], data)
+            this.tv.$set(
+               obj.p, obj.i, this.combine(obj.v, [], data)
+            )
+			// this.combine(obj.v, [], data)
 
         }
 
