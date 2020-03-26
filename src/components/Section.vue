@@ -16,7 +16,8 @@
              v-on:cursor-locked="cursor_locked"
              v-on:layer-meta-props="emit_meta_props"
              v-on:custom-event="emit_custom_event"
-             v-on:sidebar-transform="sidebar_transform">
+             v-on:sidebar-transform="sidebar_transform"
+             v-on:chart-panned="chart_panned">
         </grid>
         <sidebar
             v-bind="sidebar_props"
@@ -45,6 +46,9 @@ export default {
         ChartLegend
     },
     methods: {
+        chart_panned() {
+            this.$emit('chart-panned')
+        },
         range_changed(r) {
             this.$emit('range-changed', r)
         },

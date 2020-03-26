@@ -65,6 +65,7 @@ export default class Grid {
                 y: event.center.y + this.offset_y
 			})
             this.comp.$emit('cursor-locked', true)
+            this.comp.$emit('chart-panned')
 		})
 		
         mc.on('panmove', event => {

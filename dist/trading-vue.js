@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.4 - Thu Mar 26 2020
+ * TradingVue.JS - v0.4.4 - Fri Mar 27 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -5484,7 +5484,8 @@ var Chartvue_type_template_id_4d06a4de_render = function() {
             "sidebar-transform": _vm.set_ytransform,
             "layer-meta-props": _vm.layer_meta_props,
             "custom-event": _vm.emit_custom_event,
-            "legend-button-click": _vm.legend_button_click
+            "legend-button-click": _vm.legend_button_click,
+            "chart-panned": _vm.chart_panned
           }
         })
       }),
@@ -6440,7 +6441,8 @@ var Sectionvue_type_template_id_8fbe9336_render = function() {
               "cursor-locked": _vm.cursor_locked,
               "layer-meta-props": _vm.emit_meta_props,
               "custom-event": _vm.emit_custom_event,
-              "sidebar-transform": _vm.sidebar_transform
+              "sidebar-transform": _vm.sidebar_transform,
+              "chart-panned": _vm.chart_panned
             }
           },
           "grid",
@@ -6565,6 +6567,8 @@ function () {
         });
 
         _this.comp.$emit('cursor-locked', true);
+
+        _this.comp.$emit('chart-panned');
       });
       mc.on('panmove', function (event) {
         if (_this.drug) {
@@ -10973,6 +10977,7 @@ Legend_component.options.__file = "src/components/Legend.vue"
 //
 //
 //
+//
 
 
 
@@ -10987,6 +10992,9 @@ Legend_component.options.__file = "src/components/Legend.vue"
     ChartLegend: Legend
   },
   methods: {
+    chart_panned: function chart_panned() {
+      this.$emit('chart-panned');
+    },
     range_changed: function range_changed(r) {
       this.$emit('range-changed', r);
     },
@@ -11529,6 +11537,7 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
 //
 //
 //
+//
 
 
 
@@ -11558,6 +11567,9 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
     this.update_last_candle();
   },
   methods: {
+    chart_panned: function chart_panned() {
+      this.haveMovedChart = true;
+    },
     range_changed: function range_changed(r) {
       // Overwite & keep the original references
       utils.overwrite(this.range, r);
@@ -11567,8 +11579,10 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
       this.$emit('range-changed', r);
     },
     "goto": function goto(t) {
-      var dt = this.range[1] - this.range[0];
-      this.range_changed([t - dt, t]);
+      if (!this.haveMovedChart) {
+        var dt = this.range[1] - this.range[0];
+        this.range_changed([t - dt, t]);
+      }
     },
     setRange: function setRange(t1, t2) {
       this.range_changed([t1, t2]);
@@ -11776,7 +11790,8 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
       settings_ohlcv: {},
       // Default overlay settings
       settings_ov: {},
-      last_candle: []
+      last_candle: [],
+      haveMovedChart: false
     };
   },
   watch: {
