@@ -10820,10 +10820,13 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
         var candlesIndex = this.json_data.findIndex(function (data) {
           return data.type == 'Candles';
         });
-        var candlesData = this.json_data[candlesIndex].data;
 
-        if (candlesData[candlesData.length - 1] != undefined) {
-          return [format(candlesData[candlesData.length - 1][1], prec), format(candlesData[candlesData.length - 1][2], prec), format(candlesData[candlesData.length - 1][3], prec), format(candlesData[candlesData.length - 1][4], prec), candlesData[candlesData.length - 1][5] ? format(candlesData[candlesData.length - 1][5], 2) : '0.00'];
+        if (this.json_data[candlesIndex].data.length != 0) {
+          var candlesData = this.json_data[candlesIndex].data;
+
+          if (candlesData[candlesData.length - 1] != undefined) {
+            return [format(candlesData[candlesData.length - 1][1], prec), format(candlesData[candlesData.length - 1][2], prec), format(candlesData[candlesData.length - 1][3], prec), format(candlesData[candlesData.length - 1][4], prec), candlesData[candlesData.length - 1][5] ? format(candlesData[candlesData.length - 1][5], 2) : '0.00'];
+          }
         }
 
         return Array(6).fill('n/a');
@@ -10841,16 +10844,23 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
         return x.settings.legend !== false && !x.main;
       }).map(function (x) {
         if (!(x.type in types)) types[x.type] = 0;
-        var id = x.type + "_".concat(types[x.type]++); // const numberOfValues = x.data[0].length - 1
+        var id = x.type + "_".concat(types[x.type]++);
 
-        var lastData = x.data[x.data.length - 1];
-        var lastValueArr = Object.values(lastData);
-        lastValueArr.shift();
-        var valuesArr = lastValueArr.map(function (value) {
-          return {
-            value: value
-          };
-        });
+        var valuesArr = _this.n_a(1);
+
+        if (x.data.length != 0) {
+          var lastData = x.data[x.data.length - 1];
+          var lastValueArr = Object.values(lastData);
+          lastValueArr.shift();
+          valuesArr = lastValueArr.map(function (value) {
+            return x.type == 'FundingRate' ? {
+              value: "".concat(value * 100, "%")
+            } : {
+              value: value.toFixed(2)
+            };
+          });
+        }
+
         return {
           v: 'display' in x.settings ? x.settings.display : true,
           name: x.name || id,

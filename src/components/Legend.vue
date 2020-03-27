@@ -54,16 +54,19 @@ export default {
 
             if (!this.$props.values || !this.$props.values.ohlcv) {
                 const candlesIndex = this.json_data.findIndex(data => data.type == 'Candles')
-                const candlesData = this.json_data[candlesIndex].data
 
-                if (candlesData[candlesData.length - 1] != undefined) {
-                    return [
-                        format(candlesData[candlesData.length - 1][1], prec),
-                        format(candlesData[candlesData.length - 1][2], prec),
-                        format(candlesData[candlesData.length - 1][3], prec),
-                        format(candlesData[candlesData.length - 1][4], prec),
-                        candlesData[candlesData.length - 1][5] ? format(candlesData[candlesData.length - 1][5], 2) : '0.00'
-                    ]
+                if (this.json_data[candlesIndex].data.length != 0) {
+                    const candlesData = this.json_data[candlesIndex].data
+
+                    if (candlesData[candlesData.length - 1] != undefined) {
+                        return [
+                            format(candlesData[candlesData.length - 1][1], prec),
+                            format(candlesData[candlesData.length - 1][2], prec),
+                            format(candlesData[candlesData.length - 1][3], prec),
+                            format(candlesData[candlesData.length - 1][4], prec),
+                            candlesData[candlesData.length - 1][5] ? format(candlesData[candlesData.length - 1][5], 2) : '0.00'
+                        ]
+                    }
                 }
                 return Array(6).fill('n/a')                
             }
@@ -87,13 +90,18 @@ export default {
             ).map(x => {
                 if (!(x.type in types)) types[x.type] = 0
                 const id = x.type + `_${types[x.type]++}`
-                // const numberOfValues = x.data[0].length - 1
-                const lastData = x.data[x.data.length - 1]
-                let lastValueArr = Object.values(lastData)
-                lastValueArr.shift()
-                const valuesArr = lastValueArr.map(value => {
-                    return {value}
-                })
+
+                let valuesArr = this.n_a(1)
+
+                if (x.data.length != 0) {
+                    const lastData = x.data[x.data.length - 1]
+                    let lastValueArr = Object.values(lastData)
+                    lastValueArr.shift()
+                    valuesArr = lastValueArr.map(value => {
+                        return x.type == 'FundingRate' ? {value: `${value * 100}%`} : {value: value.toFixed(2)}
+                    })
+                }
+                
 
                 return {
                     v: 'display' in x.settings ? x.settings.display : true,
