@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.4 - Fri Mar 27 2020
+ * TradingVue.JS - v0.4.4 - Sat Mar 28 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -10810,15 +10810,24 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
   },
   computed: {
     ohlcv: function ohlcv() {
-      if (!this.$props.values || !this.$props.values.ohlcv) {
-        return Array(6).fill('n/a');
-      }
-
       var prec = this.layout.prec;
 
       var format = function format(n, d) {
         return parseFloat(n.toFixed(d));
       };
+
+      if (!this.$props.values || !this.$props.values.ohlcv) {
+        var candlesIndex = this.json_data.findIndex(function (data) {
+          return data.type == 'Candles';
+        });
+        var candlesData = this.json_data[candlesIndex].data;
+
+        if (candlesData[candlesData.length - 1] != undefined) {
+          return [format(candlesData[candlesData.length - 1][1], prec), format(candlesData[candlesData.length - 1][2], prec), format(candlesData[candlesData.length - 1][3], prec), format(candlesData[candlesData.length - 1][4], prec), candlesData[candlesData.length - 1][5] ? format(candlesData[candlesData.length - 1][5], 2) : '0.00'];
+        }
+
+        return Array(6).fill('n/a');
+      }
 
       return [format(this.$props.values.ohlcv[1], prec), format(this.$props.values.ohlcv[2], prec), format(this.$props.values.ohlcv[3], prec), format(this.$props.values.ohlcv[4], prec), this.$props.values.ohlcv[5] ? format(this.$props.values.ohlcv[5], 2) : 'n/a'];
     },
@@ -10832,13 +10841,22 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
         return x.settings.legend !== false && !x.main;
       }).map(function (x) {
         if (!(x.type in types)) types[x.type] = 0;
-        var id = x.type + "_".concat(types[x.type]++);
+        var id = x.type + "_".concat(types[x.type]++); // const numberOfValues = x.data[0].length - 1
+
+        var lastData = x.data[x.data.length - 1];
+        var lastValueArr = Object.values(lastData);
+        lastValueArr.shift();
+        var valuesArr = lastValueArr.map(function (value) {
+          return {
+            value: value
+          };
+        });
         return {
           v: 'display' in x.settings ? x.settings.display : true,
           name: x.name || id,
           index: _this.json_data.indexOf(x),
           id: id,
-          values: values ? f(id, values) : _this.n_a(1),
+          values: values ? f(id, values) : valuesArr,
           unk: !(id in (_this.$props.meta_props || {}))
         };
       });
