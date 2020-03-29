@@ -5853,7 +5853,7 @@ function GridMaker(id, params) {
     var lens = subn.map(function (x) {
       return x[1].toFixed(self.prec).length;
     });
-    var str = '0'.repeat(Math.max.apply(Math, toConsumableArray_default()(lens))) + '    ';
+    var str = '0'.repeat(Math.max.apply(Math, toConsumableArray_default()(lens))) + '      ';
     self.sb = ctx.measureText(str).width;
     self.sb = Math.max(Math.floor(self.sb), $p.config.SBMIN);
   } // Calculate $ precision for the Y-axis
@@ -10218,7 +10218,7 @@ function () {
           side = this.side;
       var sb = this.layout.sb;
       this.ctx.fillStyle = this.$p.colors.colorBack;
-      this.ctx.font = this.$p.font;
+      this.ctx.font = "13px -apple-system,BlinkMacSystemFont, Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell, Fira Sans,Droid Sans,Helvetica Neue, sans-serif";
 
       switch (side) {
         case 'left':
@@ -11206,7 +11206,7 @@ function () {
       var height = this.layout.botbar.height;
       var sb = this.layout.grids[0].sb;
       this.ctx.fillStyle = this.$p.colors.colorBack;
-      this.ctx.font = this.$p.font;
+      this.ctx.font = "13px -apple-system,BlinkMacSystemFont, Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell, Fira Sans,Droid Sans,Helvetica Neue, sans-serif";
       this.ctx.fillRect(0, 0, width, height);
       this.ctx.strokeStyle = this.$p.colors.colorScale;
       this.ctx.beginPath();

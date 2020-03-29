@@ -89,7 +89,7 @@ function GridMaker(id, params, master_grid = null) {
         self.prec = calc_precision(sub)
         let subn = sub.filter(x => typeof x[1] === 'number')
         let lens = subn.map(x => x[1].toFixed(self.prec).length)
-        let str = '0'.repeat(Math.max(...lens)) + '    '
+        let str = '0'.repeat(Math.max(...lens)) + '      '
 
         self.sb = ctx.measureText(str).width
         self.sb = Math.max(Math.floor(self.sb), $p.config.SBMIN)

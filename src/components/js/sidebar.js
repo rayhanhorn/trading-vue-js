@@ -94,7 +94,7 @@ export default class Sidebar {
         var sb = this.layout.sb
 
         this.ctx.fillStyle = this.$p.colors.colorBack
-        this.ctx.font = this.$p.font
+        this.ctx.font = "13px -apple-system,BlinkMacSystemFont, Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell, Fira Sans,Droid Sans,Helvetica Neue, sans-serif"
 
         switch(side) {
             case 'left':

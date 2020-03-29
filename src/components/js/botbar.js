@@ -28,7 +28,7 @@ export default class Botbar {
         const sb = this.layout.grids[0].sb
 
         this.ctx.fillStyle = this.$p.colors.colorBack
-        this.ctx.font = this.$p.font
+        this.ctx.font = "13px -apple-system,BlinkMacSystemFont, Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell, Fira Sans,Droid Sans,Helvetica Neue, sans-serif"
         this.ctx.fillRect(0, 0, width, height)
 
         this.ctx.strokeStyle = this.$p.colors.colorScale
