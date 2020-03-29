@@ -169,13 +169,13 @@ export default {
 .trading-vue-ohlcv {
     pointer-events: none;
     margin-bottom: 0.5em;
-    font-size: 1.0em;
+    font-size: 1.1em;
     color: steelblue;
 }
 .t-vue-lspan {
     font-variant-numeric: tabular-nums;
     font-weight: 100;
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: #EEE; /* TODO: move => params */
     margin-left: 0.1em;
     margin-right: 0.2em;
@@ -193,7 +193,7 @@ export default {
 }
 .t-vue-ivalue {
     margin-left: 0.5em;
-    font-size: 0.8em;
+    font-size: 1.0em;
 }
 .t-vue-unknown {
     color: #999999; /* TODO: move => params */
