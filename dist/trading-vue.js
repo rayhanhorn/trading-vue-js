@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.4 - Sat Mar 28 2020
+ * TradingVue.JS - v0.4.4 - Sun Mar 29 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -5675,6 +5675,11 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
     }
 
     return delta;
+  },
+  changeNumberFormat: function changeNumberFormat(value, precision) {
+    // Nine Zeroes for Billions
+    return Math.abs(Number(value)) >= 1.0e+9 ? (Number(value) / 1.0e+9).toFixed(precision) + "B" // Six Zeroes for Millions 
+    : Math.abs(Number(value)) >= 1.0e+6 ? (Number(value) / 1.0e+6).toFixed(precision) + "M" : Number(value);
   }
 });
 // CONCATENATED MODULE: ./src/components/js/layout_fn.js
@@ -10260,7 +10265,8 @@ function () {
           var offst = side === 'left' ? -10 : 10;
           this.ctx.textAlign = side === 'left' ? 'end' : 'start';
           var d = this.layout.prec;
-          this.ctx.fillText(p[1].toFixed(d), x1 + offst, p[0] + 4);
+          var yValue = Math.abs(p[1]) >= 1.0e+6 ? utils.changeNumberFormat(p[1], d) : p[1].toFixed(d);
+          this.ctx.fillText(yValue, x1 + offst, p[0] + 4);
         }
       } catch (err) {
         _didIteratorError = true;

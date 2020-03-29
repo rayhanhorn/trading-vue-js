@@ -145,7 +145,8 @@ export default class Sidebar {
             var offst = side === 'left' ? - 10 : 10
             this.ctx.textAlign = side === 'left' ? 'end' : 'start'
             let d = this.layout.prec
-            this.ctx.fillText(p[1].toFixed(d), x1 + offst, p[0] + 4)
+            const yValue = Math.abs(p[1]) >= 1.0e+6 ? Utils.changeNumberFormat(p[1], d) : p[1].toFixed(d)
+            this.ctx.fillText(yValue, x1 + offst, p[0] + 4)
         }
 
         this.ctx.stroke()
