@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.4 - Sun Mar 29 2020
+ * TradingVue.JS - v0.4.4 - Mon Mar 30 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -16085,8 +16085,8 @@ function (_DCCore) {
 // CONCATENATED MODULE: ./src/components/primitives/oi_price.js
 
 
+ // OI Price bar & price line (shader)
 
-// OI Price bar & price line (shader)
 var oi_price_OIPrice =
 /*#__PURE__*/
 function () {
@@ -16118,8 +16118,9 @@ function () {
           if (!last_bar()) return;
           var bar = last_bar();
           var w = ctx.canvas.width;
-          var h = config.PANHEIGHT;
-          var lbl = bar.price.toFixed(layout.prec);
+          var h = config.PANHEIGHT; // let lbl = bar.price.toFixed(layout.prec)
+
+          var lbl = Math.abs(bar.price) >= 1.0e+6 ? utils.changeNumberFormat(bar.price, layout.prec) : bar.price.toFixed(layout.prec);
           ctx.fillStyle = bar.color;
           var x = -0.5;
           var y = bar.y - h * 0.5 - 0.5;

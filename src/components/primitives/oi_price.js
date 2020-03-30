@@ -1,3 +1,4 @@
+import Utils from '../../stuff/utils.js'
 
 // OI Price bar & price line (shader)
 
@@ -23,7 +24,8 @@ export default class OIPrice {
                 let bar = last_bar()
                 let w = ctx.canvas.width
                 let h = config.PANHEIGHT
-                let lbl = bar.price.toFixed(layout.prec)
+                // let lbl = bar.price.toFixed(layout.prec)
+                let lbl = Math.abs(bar.price) >= 1.0e+6 ? Utils.changeNumberFormat(bar.price, layout.prec) : bar.price.toFixed(layout.prec)
                 ctx.fillStyle = bar.color
 
                 let x = - 0.5
