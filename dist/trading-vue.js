@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.4 - Mon Mar 30 2020
+ * TradingVue.JS - v0.4.4 - Thu Apr 02 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -10334,7 +10334,10 @@ function () {
         return;
       }
 
-      var lbl = this.$p.cursor.y$.toFixed(this.layout.prec);
+      console.log(this.$p.cursor.y$);
+      var d = this.layout.prec; // let lbl = this.$p.cursor.y$.toFixed(this.layout.prec)
+
+      var lbl = Math.abs(this.$p.cursor.y$) >= 1.0e+6 ? utils.changeNumberFormat(this.$p.cursor.y$, d) : this.$p.cursor.y$.toFixed(d);
       this.ctx.fillStyle = this.$p.colors.colorPanel;
       var panwidth = this.layout.sb + 1;
       var x = -0.5;
@@ -15960,6 +15963,46 @@ function (_DCCore) {
       var t_next = last[0] + tf;
       var now = utils.now();
       var t = now >= t_next ? now - now % tf : last[0];
+
+      if (candle) {
+        // Update the entire candle
+        if (candle.length >= 6) {
+          t = candle[0];
+          this.merge('chart.data', [candle]);
+        } else {
+          this.merge('chart.data', [[t].concat(toConsumableArray_default()(candle))]);
+        }
+      } else if (t >= t_next && tick !== undefined) {
+        // And new zero-height candle
+        //console.log(tick+' merge1')
+        this.merge('chart.data', [[t, tick, tick, tick, tick, volume]]);
+      } else if (tick !== undefined) {
+        // Update an existing one
+        last[2] = Math.max(tick, last[2]);
+        last[3] = Math.min(tick, last[3]);
+        last[4] = tick;
+        last[5] += volume; //console.log(last+' merge2')
+
+        this.merge('chart.data', [last]);
+      }
+
+      this.update_overlays(data, t);
+      return t >= t_next;
+    } // Update/append data point, depending on timestamp
+
+  }, {
+    key: "ohlcvUpdate",
+    value: function ohlcvUpdate(data) {
+      var ohlcv = this.data.chart.data;
+      var last = ohlcv[ohlcv.length - 1];
+      var timestamp = data['timestamp'];
+      var tick = data['price'];
+      var volume = data['volume'] || 0;
+      var candle = data['candle'];
+      var tf = utils.detect_interval(ohlcv);
+      var t_next = last[0] + tf;
+      var now = utils.now();
+      var t = timestamp >= t_next ? now - now % tf : last[0];
 
       if (candle) {
         // Update the entire candle

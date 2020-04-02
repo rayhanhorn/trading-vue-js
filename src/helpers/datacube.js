@@ -143,6 +143,48 @@ export default class DataCube extends DCCore {
         this.update_overlays(data, t)
         return t >= t_next
     }
+
+    // Update/append data point, depending on timestamp
+    ohlcvUpdate(data) {
+        let ohlcv = this.data.chart.data
+        let last = ohlcv[ohlcv.length - 1]
+        let timestamp = data['timestamp']
+        let tick = data['price']
+        let volume = data['volume'] || 0
+        let candle = data['candle']
+        let tf = Utils.detect_interval(ohlcv)
+        let t_next = last[0] + tf
+        let now = Utils.now()
+        let t = timestamp >= t_next ? (now - now % tf) : last[0]
+
+        if (candle) {
+            // Update the entire candle
+            if (candle.length >= 6) {
+                t = candle[0]
+                this.merge('chart.data', [candle])
+            } else {
+                this.merge('chart.data', [[t, ...candle]])
+            }
+        } else if (t >= t_next && tick !== undefined) {
+            // And new zero-height candle
+			//console.log(tick+' merge1')
+            this.merge('chart.data', [[				
+                t, tick, tick, tick, tick, volume
+            ]])
+        } else if (tick !== undefined) {
+            // Update an existing one
+            last[2] = Math.max(tick, last[2])
+            last[3] = Math.min(tick, last[3])
+            last[4] = tick
+            last[5] += volume
+			//console.log(last+' merge2')
+            this.merge('chart.data', [last])
+        }
+
+        this.update_overlays(data, t)
+        return t >= t_next
+    }
+
 	oiupdate(data) {
         let ohlc = this.data.offchart[0].data
         let last = ohlc[ohlc.length - 1]
