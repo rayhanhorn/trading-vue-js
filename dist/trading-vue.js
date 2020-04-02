@@ -10335,7 +10335,6 @@ function () {
         return;
       }
 
-      console.log(this.$p.cursor.y$);
       var d = this.layout.prec >= 3 ? 3 : this.layout.prec; // Limit to 3 decimal places at most
       // let lbl = this.$p.cursor.y$.toFixed(this.layout.prec)
 

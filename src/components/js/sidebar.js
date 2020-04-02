@@ -182,7 +182,6 @@ export default class Sidebar {
             return
         }
 
-        console.log(this.$p.cursor.y$)
         let d = this.layout.prec >= 3 ? 3 : this.layout.prec // Limit to 3 decimal places at most
         // let lbl = this.$p.cursor.y$.toFixed(this.layout.prec)
         let lbl = Math.abs(this.$p.cursor.y$) >= 1.0e+6 ? Utils.changeNumberFormat(this.$p.cursor.y$, d) : this.$p.cursor.y$.toFixed(d)
