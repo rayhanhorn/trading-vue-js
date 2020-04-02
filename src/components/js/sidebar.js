@@ -144,7 +144,7 @@ export default class Sidebar {
 
             var offst = side === 'left' ? - 10 : 10
             this.ctx.textAlign = side === 'left' ? 'end' : 'start'
-            let d = this.layout.prec
+            let d = this.layout.prec >= 3 ? 3 : this.layout.prec // Limit to 3 decimal places at most
             const yValue = Math.abs(p[1]) >= 1.0e+6 ? Utils.changeNumberFormat(p[1], d) : p[1].toFixed(d)
             this.ctx.fillText(yValue, x1 + offst, p[0] + 4)
         }
@@ -183,7 +183,7 @@ export default class Sidebar {
         }
 
         console.log(this.$p.cursor.y$)
-        let d = this.layout.prec
+        let d = this.layout.prec >= 3 ? 3 : this.layout.prec // Limit to 3 decimal places at most
         // let lbl = this.$p.cursor.y$.toFixed(this.layout.prec)
         let lbl = Math.abs(this.$p.cursor.y$) >= 1.0e+6 ? Utils.changeNumberFormat(this.$p.cursor.y$, d) : this.$p.cursor.y$.toFixed(d)
         this.ctx.fillStyle = this.$p.colors.colorPanel

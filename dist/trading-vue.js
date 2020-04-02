@@ -10264,7 +10264,8 @@ function () {
           this.ctx.lineTo(x2, p[0] - 0.5);
           var offst = side === 'left' ? -10 : 10;
           this.ctx.textAlign = side === 'left' ? 'end' : 'start';
-          var d = this.layout.prec;
+          var d = this.layout.prec >= 3 ? 3 : this.layout.prec; // Limit to 3 decimal places at most
+
           var yValue = Math.abs(p[1]) >= 1.0e+6 ? utils.changeNumberFormat(p[1], d) : p[1].toFixed(d);
           this.ctx.fillText(yValue, x1 + offst, p[0] + 4);
         }
@@ -10335,7 +10336,8 @@ function () {
       }
 
       console.log(this.$p.cursor.y$);
-      var d = this.layout.prec; // let lbl = this.$p.cursor.y$.toFixed(this.layout.prec)
+      var d = this.layout.prec >= 3 ? 3 : this.layout.prec; // Limit to 3 decimal places at most
+      // let lbl = this.$p.cursor.y$.toFixed(this.layout.prec)
 
       var lbl = Math.abs(this.$p.cursor.y$) >= 1.0e+6 ? utils.changeNumberFormat(this.$p.cursor.y$, d) : this.$p.cursor.y$.toFixed(d);
       this.ctx.fillStyle = this.$p.colors.colorPanel;
@@ -10811,6 +10813,7 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
 //
 //
 
+
 /* harmony default export */ var Legendvue_type_script_lang_js_ = ({
   name: 'ChartLegend',
   props: ['common', 'values', 'grid_id', 'meta_props'],
@@ -10863,7 +10866,9 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
           lastValueArr.shift();
           valuesArr = lastValueArr.map(function (value) {
             return x.type == 'FundingRate' ? {
-              value: "".concat(value * 100, "%")
+              value: "".concat((value * 100).toFixed(3), "%")
+            } : Math.abs(value) >= 1.0e+6 ? {
+              value: utils.changeNumberFormat(value, 2)
             } : {
               value: value.toFixed(2)
             };
