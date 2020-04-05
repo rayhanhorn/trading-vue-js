@@ -153,7 +153,21 @@ export default {
         }
         return delta
     },
+    // Parse the original mouse event to find deltaX
+    get_deltaX(event) {
+        return event.originalEvent.deltaX / 12
+    },
 
+    // Parse the original mouse event to find deltaY
+    get_deltaY(event) {
+        return event.originalEvent.deltaY / 12
+    },
+
+    countDecimals(value) {
+        if(Math.floor(value) === value) return 0;
+        return value.toString().split(".")[1].length || 0; 
+    },
+	
     changeNumberFormat(value, precision) {
         // Nine Zeroes for Billions
         return Math.abs(Number(value)) >= 1.0e+9

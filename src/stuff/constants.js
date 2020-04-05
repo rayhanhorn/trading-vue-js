@@ -9,6 +9,7 @@ const HOUR4 = HOUR * 4
 const DAY = HOUR * 24
 const WEEK = DAY * 7
 const MONTH = WEEK * 4
+const MONTH6 = WEEK * 24
 const YEAR = MONTH * 12
 
 const MONTHMAP = [
@@ -47,7 +48,7 @@ const ChartConfig = {
     DEFAULT_LEN: 50,// candles
     MINIMUM_LEN: 5, // candles,
     MIN_ZOOM: 25,   // candles
-    MAX_ZOOM: 600, // candles,
+    MAX_ZOOM: 1000, // candles,
     VOLSCALE: 0.15  // %/100 of height
 }
 
