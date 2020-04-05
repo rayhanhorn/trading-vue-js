@@ -3,7 +3,6 @@
 
 import Utils from '../stuff/utils.js'
 import DCEvents from './dc_events.js'
-import { mergeWith } from 'lodash-es'
 
 export default class DCCore extends DCEvents {
 
@@ -22,8 +21,7 @@ export default class DCCore extends DCEvents {
         if (!('chart' in this.data)) {
             this.tv.$set(this.data, 'chart', {
                 type: 'Candles',
-                data: this.data.ohlcv || [],  // TODO remove 'this.data.ohlcv' once old data format is fully deprecated
-                settings: {}
+                data: this.data.ohlcv || []
             })
         }
 
@@ -40,8 +38,8 @@ export default class DCCore extends DCEvents {
         }
 
         // Remove ohlcv cuz we have Data v1.1
-        // TODO: remove this line at one point once old data format is fully deprecated:
         delete this.data.ohlcv
+
     }
 
     // Range change callback (called by TradingVue)
@@ -63,12 +61,6 @@ export default class DCCore extends DCEvents {
                 if (prom && prom.then) {
                     // Promise way
                     this.chunk_loaded(await prom)
-                    // try {
-                    //     const d = await prom;
-                    //     this.chunk_loaded(d)
-                    // } catch (e) {
-                    //     this.loading = false
-                    // }
                 }
             }
         }
@@ -107,18 +99,18 @@ export default class DCCore extends DCEvents {
             }
             let i = count[ov.type]++
             ov.id = `onchart.${ov.type}${i}`
-            if (!ov.name) ov.name = ov.type + ` ${i}`
+            if (!ov.name) ov.name = ov.id
             if (!ov.settings) ov.settings = {}
 
         }
         count = {}
-        for (var ov of this.data.offchart) {
+        for (ov of this.data.offchart) {
             if (count[ov.type] === undefined) {
                 count[ov.type] = 0
             }
             let i = count[ov.type]++
             ov.id = `offchart.${ov.type}${i}`
-            if (!ov.name) ov.name = ov.type + ` ${i}`
+            if (!ov.name) ov.name = ov.id
             if (!ov.settings) ov.settings = {}
         }
     }
@@ -143,7 +135,7 @@ export default class DCCore extends DCEvents {
     // Returns array of objects matching query.
     // Object contains { parent, index, value }
     // TODO: query caching
-        get_by_query(query, chuck = false) {
+    get_by_query(query, chuck) {
 
         let tuple = query.split('.')
 
@@ -175,7 +167,7 @@ export default class DCCore extends DCEvents {
                 break
         }
 
-		return chuck ? result : result.filter(x => !x.v.locked)
+        return result.filter(x => !x.v.locked || chuck)
     }
 
     chart_as_piv(tuple) {
@@ -192,14 +184,18 @@ export default class DCCore extends DCEvents {
         }]
     }
 
-    query_search(query, [side, path = '', field]) {
+    query_search(query, tuple) {
 
-        const arr = this.data[side].filter(
+        let side = tuple[0]
+        let path = tuple[1] || ''
+        let field = tuple[2]
+
+        let arr = this.data[side].filter(
             x => x.id && x.name && (
-                x.id === query ||
-                x.id.includes(path) ||
-                x.name === query ||
-                x.name.includes(path)
+                 x.id === query ||
+                 x.id.includes(path) ||
+                 x.name === query ||
+                 x.name.includes(path)
             ))
 
         if (field) {
@@ -212,28 +208,24 @@ export default class DCCore extends DCEvents {
 
         return arr.map(x => ({
             p: this.data[side],
-            i: undefined,  // TODO: consider null for indicating non-values? what does vue think when undefined is passed?
+            i: undefined,
             v: x
         }))
     }
-	
-	
-    _merge_customizer = (obj_val, src_val, key) => {
-        if (Array.isArray(obj_val) && obj_val[0] && obj_val[0].length >= 2 && isFinite(obj_val[0][0])) {
-            return this.merge_ts(obj_val, src_val)
-        }
+
+    merge_objects(obj, data, new_obj = {}) {
+
+        // The only way to get Vue to update all stuff
+        // reactively is to create a brand new object.
+        // TODO: Is there a simpler approach?
+        Object.assign(new_obj, obj.v)
+        Object.assign(new_obj, data)
+        this.tv.$set(obj.p, obj.i, new_obj)
+
     }
 
-    merge_objects(obj, data) {
-	//console.log('merge_objects '+data)
-        const new_obj = Array.isArray(obj.v) ? [] : {}
-        this.tv.$set(obj.p, obj.i, mergeWith(new_obj, obj.v, data, this._merge_customizer))
-    }
-	
-	
     // Merge overlapping time series
     merge_ts(obj, data) {
-	//console.log('merge_ts '+data)
 
         // Assume that both arrays are pre-sorted
 
@@ -263,95 +255,96 @@ export default class DCCore extends DCEvents {
 
             // If dst is totally contained in src
             if (!obj.v.length) { obj.v = data.splice(d2[0]) }
-			
-			// this.combine(obj.v, od, data)
 
             this.tv.$set(
-              obj.p, obj.i, this.combine(obj.v, od, data)
+                obj.p, obj.i, this.combine(obj.v, od, data)
             )
 
         } else {
 
             this.tv.$set(
-               obj.p, obj.i, this.combine(obj.v, [], data)
+                obj.p, obj.i, this.combine(obj.v, [], data)
             )
-			// this.combine(obj.v, [], data)
 
         }
 
         return obj.v
+
     }
 
     // TODO: review performance, move to worker
-    ts_overlap(arr1, arr2, [t1, t2]) {
+    ts_overlap(arr1, arr2, range) {
 
-        const filter_mutual_overlap = x => x[0] >= t1 && x[0] <= t2
+        const t1 = range[0]
+        const t2 = range[1]
 
-        const arr1_overlap = arr1.filter(filter_mutual_overlap)
-        const arr2_overlap = arr2.filter(filter_mutual_overlap)
+        let ts = {} // timestamp map
 
-        const ts = {}  // overlap range timestamp-to-datapoint map; note arr2 overrides timestamps of arr1
-
-        for (const data_point of arr1_overlap) {
-            ts[data_point[0]] = data_point
-        }
-
-        for (const data_point of arr2_overlap) {
-            ts[data_point[0]] = data_point
-        }
-
-        const ts_sorted = Object.keys(ts).sort()
+        let a1 = arr1.filter(x => x[0] >= t1 && x[0] <= t2)
+        let a2 = arr2.filter(x => x[0] >= t1 && x[0] <= t2)
 
         // Indices of segments
-        const arr1_overlap_start_index = arr1.indexOf(arr1_overlap[0])
-        const arr1_overlap_end_index = arr1.indexOf(arr1_overlap[arr1_overlap.length - 1])
-        const arr2_overlap_start_index = arr2.indexOf(arr2_overlap[0])
-        const arr2_overlap_end_index = arr2.indexOf(arr2_overlap[arr2_overlap.length - 1])
+        let id11 = arr1.indexOf(a1[0])
+        let id12 = arr1.indexOf(a1[a1.length - 1])
+        let id21 = arr2.indexOf(a2[0])
+        let id22 = arr2.indexOf(a2[a2.length - 1])
+
+        for (var i = 0; i < a1.length; i++) {
+            ts[a1[i][0]] = a1[i]
+        }
+
+        for (i = 0; i < a2.length; i++) {
+            ts[a2[i][0]] = a2[i]
+        }
+
+        let ts_sorted = Object.keys(ts).sort()
 
         return {
-            od: ts_sorted.map(x => ts[x]),  // normalized overlap range of full datapoints
-            d1: [arr1_overlap_start_index, arr1_overlap_end_index - arr1_overlap_start_index + 1],
-            d2: [arr2_overlap_start_index, arr2_overlap_end_index - arr2_overlap_start_index + 1]
+            od: ts_sorted.map(x => ts[x]),
+            d1: [id11, id12 - id11 + 1],
+            d2: [id21, id22 - id21 + 1]
         }
+
     }
 
     // Combine parts together:
     // (destination, overlap, source)
     combine(dst, o, src) {
 
-        const last = arr => arr[arr.length - 1][0]
-        const max_len_for_push = 100000
+        function last(arr) { return arr[arr.length - 1][0] }
 
         if (!dst.length) { dst = o; o = [] }
         if (!src.length) { src = o; o = [] }
 
-        // TODO: first if-block unreachable?
+        // The overlap right in the middle
         if (src[0][0] >= dst[0][0] && last(src) <= last(dst)) {
 
             return Object.assign(dst, o)
 
+        // The overlap is on the right
         } else if (last(src) > last(dst)) {
 
             // Psh(...) is faster but can overflow the stack
-            if (o.length < max_len_for_push && src.length < max_len_for_push) {
+            if (o.length < 100000 && src.length < 100000) {
                 dst.push(...o, ...src)
                 return dst
             } else {
                 return dst.concat(o, src)
             }
 
+        // The overlap is on the left
         } else if (src[0][0] < dst[0][0]) {
 
             // Push(...) is faster but can overflow the stack
-            if (o.length < max_len_for_push && src.length < max_len_for_push) {
+            if (o.length < 100000 && src.length < 100000) {
                 src.push(...o, ...dst)
                 return src
             } else {
                 return src.concat(o, dst)
             }
-        } else {
-            return []
-        }
+
+        } else {  return []  }
+
     }
 
 }

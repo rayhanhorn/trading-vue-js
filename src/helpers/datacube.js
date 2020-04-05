@@ -36,7 +36,6 @@ export default class DataCube extends DCCore {
     // Get first object matching the query
     get_one(query) {
         return this.get_by_query(query).map(x => x.v)[0]
-        // return this.get_by_query(query)[0].v
     }
 
     // Set data (reactively)
@@ -105,7 +104,12 @@ export default class DataCube extends DCCore {
 
     // Update/append data point, depending on timestamp
     update(data) {
-
+		//console.log('offchart')
+		//console.log(this.data.offchart[0].data)
+		//console.log('onchart')
+		//console.log(this.data.chart)
+		//console.log(data)
+		
         let ohlcv = this.data.chart.data
         let last = ohlcv[ohlcv.length - 1]
         let tick = data['price']
@@ -115,7 +119,7 @@ export default class DataCube extends DCCore {
         let t_next = last[0] + tf
         let now = Utils.now()
         let t = now >= t_next ? (now - now % tf) : last[0]
-
+		
         if (candle) {
             // Update the entire candle
             if (candle.length >= 6) {
@@ -126,8 +130,7 @@ export default class DataCube extends DCCore {
             }
         } else if (t >= t_next && tick !== undefined) {
             // And new zero-height candle
-			//console.log(tick+' merge1')
-            this.merge('chart.data', [[				
+            this.merge('chart.data', [[
                 t, tick, tick, tick, tick, volume
             ]])
         } else if (tick !== undefined) {
@@ -136,14 +139,12 @@ export default class DataCube extends DCCore {
             last[3] = Math.min(tick, last[3])
             last[4] = tick
             last[5] += volume
-			//console.log(last+' merge2')
             this.merge('chart.data', [last])
         }
 
         this.update_overlays(data, t)
         return t >= t_next
     }
-
     // Update/append data point, depending on timestamp
     ohlcvUpdate(data) {
         let ohlcv = this.data.chart.data
@@ -184,8 +185,8 @@ export default class DataCube extends DCCore {
         this.update_overlays(data, t)
         return t >= t_next
     }
-
-	oiupdate(data) {
+	// Update/append data point, depending on timestamp
+    oiupdate(data) {
         let ohlc = this.data.offchart[0].data
         let last = ohlc[ohlc.length - 1]
         let tick = data['oi']
@@ -214,6 +215,7 @@ export default class DataCube extends DCCore {
         this.update_overlays(data, t)
         return t >= t_next
     }
+
     // Lock overlays from being pulled by query_search
     // TODO: subject to review
     lock(query) {

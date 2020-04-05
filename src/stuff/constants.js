@@ -7,9 +7,14 @@ const MINUTE30 = MINUTE * 30
 const HOUR = MINUTE * 60
 const HOUR4 = HOUR * 4
 const DAY = HOUR * 24
+const DAY3 = DAY * 3
+const DAY6 = DAY * 6
+const DAY12 = DAY * 12
+const DAY300 = DAY * 300
+const DAY950 = DAY * 950
 const WEEK = DAY * 7
+const WEEK7 = WEEK * 7
 const MONTH = WEEK * 4
-const MONTH6 = WEEK * 24
 const YEAR = MONTH * 12
 
 const MONTHMAP = [
@@ -48,7 +53,7 @@ const ChartConfig = {
     DEFAULT_LEN: 50,// candles
     MINIMUM_LEN: 5, // candles,
     MIN_ZOOM: 25,   // candles
-    MAX_ZOOM: 1000, // candles,
+    MAX_ZOOM: 600, // candles,
     VOLSCALE: 0.15  // %/100 of height
 }
 
@@ -67,7 +72,13 @@ export default {
     HOUR: HOUR,
     HOUR4: HOUR4,
     DAY: DAY,
+    DAY3: DAY3,
+    DAY6: DAY6,
+    DAY12: DAY12,
+    DAY300: DAY300,
+    DAY950: DAY950,
     WEEK: WEEK,
+    WEEK7: WEEK7,
     MONTH: MONTH,
     YEAR: YEAR,
     MONTHMAP: MONTHMAP,
