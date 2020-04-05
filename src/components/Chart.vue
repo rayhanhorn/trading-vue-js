@@ -296,13 +296,9 @@ export default {
             // Default overlay settings
             settings_ov: {},
 
-<<<<<<< HEAD
             last_candle: [],
 
             haveMovedChart: false
-=======
-            last_candle: []
->>>>>>> b677b8afe0aff26176362429f5463e1a446787dc
         }
     },
     watch: {
