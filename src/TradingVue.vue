@@ -17,7 +17,11 @@
             v-bind:tv_id="id"
             v-bind:config="chart_config"
             v-on:custom-event="custom_event"
+<<<<<<< HEAD
 		    v-on:range-changed="range_changed"
+=======
+            v-on:range-changed="range_changed"
+>>>>>>> b677b8afe0aff26176362429f5463e1a446787dc
             v-on:legend-button-click="legend_button">
         </chart>
     </div>
@@ -227,7 +231,11 @@ export default {
                 data.on_custom_event(d.event, d.args)
             }
         },
+<<<<<<< HEAD
 		range_changed(r) {
+=======
+        range_changed(r) {
+>>>>>>> b677b8afe0aff26176362429f5463e1a446787dc
             this.$emit('range-changed', r)
         },
         set_loader(dc) {

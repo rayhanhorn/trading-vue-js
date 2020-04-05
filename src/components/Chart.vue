@@ -60,6 +60,8 @@ export default {
         this.updater = new CursorUpdater(this)
 		this.update_last_candle()
 
+        this.update_last_candle()
+
     },
     methods: {
         chart_panned() {
@@ -294,9 +296,13 @@ export default {
             // Default overlay settings
             settings_ov: {},
 
+<<<<<<< HEAD
             last_candle: [],
 
             haveMovedChart: false
+=======
+            last_candle: []
+>>>>>>> b677b8afe0aff26176362429f5463e1a446787dc
         }
     },
     watch: {
