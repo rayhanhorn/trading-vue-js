@@ -60,8 +60,6 @@ export default {
         this.updater = new CursorUpdater(this)
 		this.update_last_candle()
 
-        this.update_last_candle()
-
     },
     methods: {
         chart_panned() {

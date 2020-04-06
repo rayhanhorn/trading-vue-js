@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.5 - Sun Apr 05 2020
+ * TradingVue.JS - v0.4.5 - Mon Apr 06 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -11676,7 +11676,6 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
     this._layout = new js_layout(this); // Updates current cursor values
 
     this.updater = new updater(this);
-    this.update_last_candle();
     this.update_last_candle();
   },
   methods: {
