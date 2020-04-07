@@ -185,6 +185,7 @@ export default class Grid {
 	}
 	
     update() {
+		
         // Update reference to the grid
         // TODO: check what happens if data changes interval
         this.layout = this.$p.layout.grids[this.id]
@@ -192,51 +193,56 @@ export default class Grid {
 		
         if (!this.layout) return
 		
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+		this.ctx.fillStyle = 'black';
+		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+		
+		
+		//clearRect() uses a transparent fill
+        //this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
         this.grid()
 		
         this.overlays.slice(0)  // copy
-            .sort((l1, l2) => l1.z - l2.z)  // z-index sorting
-            .forEach(l => {
-                if (!l.display) return
-                this.ctx.save()
-                const r = l.renderer
-                if (r.hasOwnProperty('pre_draw') && typeof r.pre_draw === 'function') r.pre_draw(this.ctx)
-                r.draw(this.ctx)
-                if (r.hasOwnProperty('post_draw') && typeof r.post_draw === 'function') r.post_draw(this.ctx)
-                this.ctx.restore()
-            })
-
+		.sort((l1, l2) => l1.z - l2.z)  // z-index sorting
+		.forEach(l => {
+			if (!l.display) return
+			this.ctx.save()
+			const r = l.renderer
+			if (r.hasOwnProperty('pre_draw') && typeof r.pre_draw === 'function') r.pre_draw(this.ctx)
+			r.draw(this.ctx)
+			if (r.hasOwnProperty('post_draw') && typeof r.post_draw === 'function') r.post_draw(this.ctx)
+			this.ctx.restore()
+		})
+		
         if (this.crosshair) {
             this.crosshair.renderer.draw(this.ctx)
-        }
-    }
+		}
+	}
+	
+	// Actually draws the grid (for real)
+	grid() {
 		
-		// Actually draws the grid (for real)
-		grid() {
+		this.ctx.strokeStyle = this.$p.colors.colorGrid
+		this.ctx.beginPath()
+		
+		const ymax = this.layout.height
+		for (var [x, p] of this.layout.xs) {
 			
-			this.ctx.strokeStyle = this.$p.colors.colorGrid
-			this.ctx.beginPath()
+			this.ctx.moveTo(x - 0.5, 0)
+			this.ctx.lineTo(x - 0.5, ymax)
 			
-			const ymax = this.layout.height
-			for (var [x, p] of this.layout.xs) {
-				
-				this.ctx.moveTo(x - 0.5, 0)
-				this.ctx.lineTo(x - 0.5, ymax)
-				
-			}
+		}
+		
+		for (var [y, y$] of this.layout.ys) {
 			
-			for (var [y, y$] of this.layout.ys) {
-				
-				this.ctx.moveTo(0, y - 0.5)
-				this.ctx.lineTo(this.layout.width, y - 0.5)
-				
-			}
+			this.ctx.moveTo(0, y - 0.5)
+			this.ctx.lineTo(this.layout.width, y - 0.5)
 			
-			this.ctx.stroke()
-			
-			if (this.$p.grid_id) this.upper_border()
-			
+		}
+		
+		this.ctx.stroke()
+		
+		if (this.$p.grid_id) this.upper_border()
+		
 	}
 	
     upper_border() {
@@ -343,7 +349,7 @@ export default class Grid {
 		
 	}
 	
-    async change_range() {
+    change_range() {
 		
         // TODO: better way to limit the view. Problem:
         // when you are at the dead end of the data,
@@ -357,12 +363,12 @@ export default class Grid {
         let data = this.data
         let range = this.range
 		
-        range[0] = await Utils.clamp(
+        range[0] = Utils.clamp(
             range[0],
             -Infinity, data[l][0] - this.interval * 5.5,
 		)
 		
-        range[1] = await Utils.clamp(
+        range[1] = Utils.clamp(
             range[1],
             data[0][0] + this.interval * 5.5, Infinity
 		)
@@ -383,17 +389,17 @@ export default class Grid {
         for (const layer of this.overlays) {
             if (layer.renderer.hasOwnProperty(name) && typeof layer.renderer[name] === 'function') {
                 layer.renderer[name](event)
-            }
+			}
 			
             const mouse = layer.renderer.mouse
             if (mouse.listeners) {
                 mouse.emit(name, event)
-            }
-
+			}
+			
             const keys = layer.renderer.keys
             if (keys && keys.listeners) {
                 keys.emit(name, event)
-            }
+			}
 		}
 	}
 }

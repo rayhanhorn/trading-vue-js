@@ -9,7 +9,7 @@ export default class Botbar {
     constructor(canvas, comp) {
 
         this.canvas = canvas
-        this.ctx = canvas.getContext('2d', { alpha: false, desynchronized: true, preserveDrawingBuffer: false });
+        this.ctx = canvas.getContext('2d', { alpha: true, desynchronized: true, preserveDrawingBuffer: false });
         this.comp = comp
         this.$p = comp.$props
         this.data = this.$p.sub
