@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.5 - Tue Apr 07 2020
+ * TradingVue.JS - v0.4.5 - Thu Apr 09 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -5410,11 +5410,7 @@ Chartvue_type_template_id_4d06a4de_render._withStripped = true
 // Canvas context for text measurments
 function Context($p) {
   var el = document.createElement('canvas');
-  var ctx = el.getContext('2d', {
-    alpha: false,
-    desynchronized: true,
-    preserveDrawingBuffer: false
-  });
+  var ctx = el.getContext("2d");
   ctx.font = $p.font;
   return ctx;
 }
@@ -6410,7 +6406,7 @@ var grid_Grid = /*#__PURE__*/function () {
     //Turn off transparency
 
     this.ctx = canvas.getContext('2d', {
-      alpha: false,
+      alpha: true,
       desynchronized: true,
       preserveDrawingBuffer: false
     });
@@ -6841,11 +6837,7 @@ var grid_Grid = /*#__PURE__*/function () {
         var rect = canvas.getBoundingClientRect();
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
-        var ctx = canvas.getContext('2d', {
-          alpha: false,
-          desynchronized: true,
-          preserveDrawingBuffer: false
-        });
+        var ctx = canvas.getContext('2d');
         ctx.scale(dpr, dpr);
 
         _this.redraw();

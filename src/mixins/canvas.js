@@ -14,7 +14,7 @@ export default {
                 var rect = canvas.getBoundingClientRect()
                 canvas.width = rect.width * dpr
                 canvas.height = rect.height * dpr
-                const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true, preserveDrawingBuffer: false });
+                const ctx = canvas.getContext('2d')
                 ctx.scale(dpr, dpr)
                 this.redraw()
             })
