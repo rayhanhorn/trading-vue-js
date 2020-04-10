@@ -126,7 +126,7 @@ export default class Grid {
 	}
 	
     mousemove(event) {
-		//MouseEvent {isTrusted: true, screenX: 224, screenY: 455, clientX: 224, clientY: 385, …}
+		//MouseEvent {isTrusted: true, screenX: 224, screenY: 455, clientX: 224, clientY: 385, …}
         this.comp.$emit('cursor-changed', {
             grid_id: this.id,
             x: event.layerX,
@@ -193,7 +193,7 @@ export default class Grid {
 		
         if (!this.layout) return
 		
-		this.ctx.fillStyle = 'black';
+		this.ctx.fillStyle = '#131722';
 		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		
 		
@@ -272,7 +272,7 @@ export default class Grid {
 		
         if (this.trackpad) delta *= 0.032
 		
-        delta = Utils.smart_wheel(delta)
+        //delta = Utils.smart_wheel(delta)
 		
         // TODO: mouse zooming is a little jerky,
         // needs to follow f(mouse_wheel_speed) and

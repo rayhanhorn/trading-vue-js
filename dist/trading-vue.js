@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.5 - Thu Apr 09 2020
+ * TradingVue.JS - v0.4.5 - Fri Apr 10 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -5428,8 +5428,24 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 
 
 /* harmony default export */ var utils = ({
-  clamp: function clamp(num, min, max) {
-    return num <= min ? min : num >= max ? max : num;
+  ABS_INT: function ABS_INT(n) {
+    return (n ^ n >> 31) - (n >> 31);
+  },
+  MAX_INT: function MAX_INT(a, b) {
+    return a - (a - b & a - b >> 31); //return a ^ ((a ^ b) & -(a < b));
+    //  var c = a - b;
+    //  return a - ((c >> 31) & 0x1) * c;  
+  },
+  MIN_INT: function MIN_INT(a, b) {
+    return a - (a - b & b - a >> 31); // return b ^ ((a ^ b) & -(a < b));
+  },
+  CLAMP_INT: function CLAMP_INT(x, min, max) {
+    x = x - (x - max & max - x >> 31);
+    return x - (x - min & x - min >> 31); //return ( n > max ) ? max : ( n < min ) ? n : min;
+  },
+  clamp: function clamp(x, min, max) {
+    x = x - (x - max & max - x >> 31);
+    return x - (x - min & x - min >> 31); //return ( n > max ) ? max : ( n < min ) ? n : min;
   },
   add_zero: function add_zero(i) {
     if (i < 10) {
@@ -5516,7 +5532,7 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
   },
   // Detects candles interval
   detect_interval: function detect_interval(ohlcv) {
-    var len = Math.min(ohlcv.length - 1, 99);
+    var len = this.MIN_INT(ohlcv.length - 1, 99);
     var min = Infinity;
     ohlcv.slice(0, len).forEach(function (x, i) {
       var d = ohlcv[i + 1][0] - x[0];
@@ -5578,7 +5594,7 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
     return event.originalEvent.deltaY / 12;
   },
   countDecimals: function countDecimals(value) {
-    if (Math.floor(value) === value) return 0;
+    if ((value | 0) === value) return 0;
     return value.toString().split(".")[1].length || 0;
   },
   changeNumberFormat: function changeNumberFormat(value, precision) {
@@ -6268,8 +6284,12 @@ var updater_CursorUpdater = /*#__PURE__*/function () {
       var i = utils.nearest_a(e.x, xs)[0];
       if (!xs[i]) return {};
       return {
-        x: Math.floor(xs[i]) - 0.5,
-        y: Math.floor(e.y - 2) - 0.5 - grid.offset,
+        //Using bitwise OR 0 to floor a number
+        //bitwise of Math.floor
+        //x: Math.floor(xs[i]) - 0.5,
+        //y: Math.floor(e.y - 2) - 0.5 - grid.offset,
+        x: (xs[i] | 0) - 0.5,
+        y: (e.y - 2 | 0) - 0.5 - grid.offset,
         //round y$ value, no need to have 10 decimals
         // y$: Math.round(grid.screen2$(e.y - 2 - grid.offset)),
         // Edit: Ray (We need small decimals for funding rate, removed Math.round())
@@ -6285,13 +6305,18 @@ var updater_CursorUpdater = /*#__PURE__*/function () {
     key: "cursor_time",
     value: function cursor_time(grid, mouse, candle) {
       var t = grid.screen2t(mouse.x);
-      var r = Math.abs((t - candle.t) / this.comp.interval);
+      var n = (t - candle.t) / this.comp.interval; //bitwise of Math.abs
+
+      var r = n * (((n > 0) << 1) - 1);
       var sign = Math.sign(t - candle.t);
 
       if (r >= 0.5) {
-        // Outside the data range
-        var n = Math.round(r);
-        return candle.t + n * this.comp.interval * sign;
+        // Outside the data range            
+        //bitwise of Math.round
+        //let n = Math.round(r)
+        var _n = r / (1 << r);
+
+        return candle.t + _n * this.comp.interval * sign;
       } // Inside the data range
 
 
@@ -6514,7 +6539,7 @@ var grid_Grid = /*#__PURE__*/function () {
   }, {
     key: "mousemove",
     value: function mousemove(event) {
-      //MouseEvent {isTrusted: true, screenX: 224, screenY: 455, clientX: 224, clientY: 385, …}
+      //MouseEvent {isTrusted: true, screenX: 224, screenY: 455, clientX: 224, clientY: 385, …}
       this.comp.$emit('cursor-changed', {
         grid_id: this.id,
         x: event.layerX,
@@ -6593,7 +6618,7 @@ var grid_Grid = /*#__PURE__*/function () {
       this.layout = this.$p.layout.grids[this.id];
       this.interval = this.$p.interval;
       if (!this.layout) return;
-      this.ctx.fillStyle = 'black';
+      this.ctx.fillStyle = '#131722';
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height); //clearRect() uses a transparent fill
       //this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
@@ -6695,8 +6720,8 @@ var grid_Grid = /*#__PURE__*/function () {
         this.trackpad_scroll(event);
       }
 
-      if (this.trackpad) delta *= 0.032;
-      delta = utils.smart_wheel(delta); // TODO: mouse zooming is a little jerky,
+      if (this.trackpad) delta *= 0.032; //delta = Utils.smart_wheel(delta)
+      // TODO: mouse zooming is a little jerky,
       // needs to follow f(mouse_wheel_speed) and
       // if speed is low, scroll shoud be slower		
 

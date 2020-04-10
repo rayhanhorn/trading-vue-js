@@ -4,14 +4,14 @@
 import Utils from '../../stuff/utils.js'
 
 class CursorUpdater {
-
+	
     constructor(comp) {
         this.comp = comp, this.grids = comp._layout.grids,
         this.cursor = comp.cursor
-    }
-
+	}
+	
     sync(e) {
-
+		
         this.cursor.grid_id = e.grid_id
         let once = true
         for (var grid of this.grids) {
@@ -21,26 +21,26 @@ class CursorUpdater {
                 if (once) {
                     this.cursor.t = this.cursor_time(grid, e, c)
                     if (this.cursor.t) once = false
-                }
+				}
                 if(c.values) {
                     this.comp.$set(this.cursor.values, grid.id, c.values)
-                }
-            }
+				}
+			}
             if (grid.id !== e.grid_id) continue
             this.cursor.x = grid.t2screen(this.cursor.t)
             this.cursor.y = c.y
             this.cursor.y$ = c.y$
-        }
-    }
-
+		}
+	}
+	
     overlay_data(grid, e) {
-
+		
         const s = grid.id === 0 ? 'main_section' : 'sub_section'
         let data = this.comp[s].data
-
+		
         // Split offchart data between offchart grids
         if (grid.id > 0) data = [data[grid.id - 1]]
-
+		
         const t = grid.screen2t(e.x)
         let ids = {}, res = {}
         for (var d of data) {
@@ -48,22 +48,27 @@ class CursorUpdater {
             let i = Utils.nearest_a(t, ts)[0]
             d.type in ids ? (ids[d.type]++) : (ids[d.type] = 0)
             res[`${d.type}_${ids[d.type]}`] = d.data[i]
-        }
+		}
         return res
-
-    }
-
+		
+	}
+	
     // Nearest datapoints
     cursor_data(grid, e) {
-
+		
         const data = this.comp.main_section.sub
-
+		
         let xs = data.map(x => grid.t2screen(x[0]) + 0.5)
         let i = Utils.nearest_a(e.x, xs)[0]
         if (!xs[i]) return {}
         return {
-            x: Math.floor(xs[i]) - 0.5,
-            y: Math.floor(e.y - 2) - 0.5 - grid.offset,
+			//Using bitwise OR 0 to floor a number
+			//bitwise of Math.floor
+			//x: Math.floor(xs[i]) - 0.5,
+            //y: Math.floor(e.y - 2) - 0.5 - grid.offset,
+			
+            x: (xs[i] | 0) - 0.5,
+            y: (e.y - 2 | 0) - 0.5 - grid.offset,
 			//round y$ value, no need to have 10 decimals
             // y$: Math.round(grid.screen2$(e.y - 2 - grid.offset)),
             // Edit: Ray (We need small decimals for funding rate, removed Math.round())
@@ -71,25 +76,29 @@ class CursorUpdater {
             t: (data[i] || [])[0],
             values: Object.assign({
                 ohlcv: grid.id === 0 ? data[i] : undefined
-            },
+			},
             this.overlay_data(grid, e))
-        }
-    }
-
+		}
+	}
+	
     // Get cursor t-position (extended)
     cursor_time(grid, mouse, candle) {
         let t = grid.screen2t(mouse.x)
-        let r = Math.abs((t - candle.t) / this.comp.interval)
+		let n = ((t - candle.t) / this.comp.interval)
+		//bitwise of Math.abs
+		let r = n*(((n>0)<<1)-1)        
         let sign = Math.sign(t - candle.t)
         if (r >= 0.5) {
-            // Outside the data range
-            let n = Math.round(r)
+            // Outside the data range            
+			//bitwise of Math.round
+			//let n = Math.round(r)
+			let n = r / (1 << r)
             return candle.t + n * this.comp.interval * sign
-        }
+		}
         // Inside the data range
         return candle.t
-    }
-
+	}
+	
 }
 
 export default CursorUpdater
