@@ -1,4 +1,4 @@
-
+//bitwise test ok math.floor
 // OI Candle object for OI Candles overlay
 
 export default class OICandleExt {
@@ -25,7 +25,7 @@ export default class OICandleExt {
 		//Avoid floating-point coordinates and use integers instead
 		//Saving the browser to do extra calculations to create the anti-aliasing effect. 
         let w = Math.round(Math.max(data.w, 1))
-        let hw = Math.max(Math.floor(w * 0.5), 1)
+        let hw = Math.max(~~(w * 0.5), 1)
         let h = Math.round(Math.abs(data.o - data.c))
         let max_h = data.c === data.o ? 1 : 2
 
@@ -33,12 +33,12 @@ export default class OICandleExt {
 
         this.ctx.beginPath()
         this.ctx.moveTo(
-            Math.floor(data.x) - 0.5,
-            Math.floor(data.h)
+            ~~(data.x) - 0.5,
+            ~~(data.h)
         )
         this.ctx.lineTo(
-            Math.floor(data.x) - 0.5,
-            Math.floor(data.l)
+            ~~(data.x) - 0.5,
+            ~~(data.l)
         )
 
         this.ctx.stroke()
@@ -50,10 +50,10 @@ export default class OICandleExt {
             // TODO: Move common calculations to layout.js
             let s = data.c >= data.o ? 1 : -1
             this.ctx.fillRect(
-                Math.floor(data.x - hw -1),
-                Math.floor(data.o - 1),
-                Math.floor(hw * 2 + 1),
-                Math.floor(s * Math.max(h, max_h))
+                ~~(data.x - hw -1),
+                ~~(data.o - 1),
+                ~~(hw * 2 + 1),
+                ~~(s * Math.max(h, max_h))
             )
 
         } else {
@@ -62,12 +62,12 @@ export default class OICandleExt {
 
             this.ctx.beginPath()
             this.ctx.moveTo(
-                Math.floor(data.x) - 0.5,
-                Math.floor(Math.min(data.o, data.c)),
+                ~~(data.x) - 0.5,
+                ~~(Math.min(data.o, data.c)),
             )
             this.ctx.lineTo(
-                Math.floor(data.x) - 0.5,
-                Math.floor(Math.max(data.o, data.c)),
+                ~~(data.x) - 0.5,
+                ~~(Math.max(data.o, data.c)),
             )
 
             this.ctx.stroke()

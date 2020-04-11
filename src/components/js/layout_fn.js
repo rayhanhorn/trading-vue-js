@@ -1,3 +1,5 @@
+//bitwise test NOT ok ~~ and |0 math.floor -- BREAKS CROSSHAIR VERTICAL
+//works ok on price axis
 // Layout functional interface
 
 import Utils from '../../stuff/utils.js'
@@ -9,11 +11,11 @@ export default function(self, range) {
         t2screen: t => {
             const dt = range[1] - range[0]
             const r = self.spacex / dt
-            return Math.floor((t - range[0]) * r) - 0.5
+            return ~~((t - range[0]) * r) - 0.5
         },
         // $ to screen coordinates
         $2screen: y => {
-            return Math.floor(y * self.A + self.B) - 0.5
+            return ~~(y * self.A + self.B) - 0.5
         },
         // Time-axis nearest step
         t_magnet: t => {

@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.5 - Fri Apr 10 2020
+ * TradingVue.JS - v0.4.5 - Sat Apr 11 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -5604,6 +5604,8 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
   }
 });
 // CONCATENATED MODULE: ./src/components/js/layout_fn.js
+//bitwise test NOT ok ~~ and |0 math.floor -- BREAKS CROSSHAIR VERTICAL
+//works ok on price axis
 // Layout functional interface
 
 /* harmony default export */ var layout_fn = (function (self, range) {
@@ -5612,11 +5614,11 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
     t2screen: function t2screen(t) {
       var dt = range[1] - range[0];
       var r = self.spacex / dt;
-      return Math.floor((t - range[0]) * r) - 0.5;
+      return ~~((t - range[0]) * r) - 0.5;
     },
     // $ to screen coordinates
     $2screen: function $2screen(y) {
-      return Math.floor(y * self.A + self.B) - 0.5;
+      return ~~(y * self.A + self.B) - 0.5;
     },
     // Time-axis nearest step
     t_magnet: function t_magnet(t) {
@@ -5662,6 +5664,7 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 // CONCATENATED MODULE: ./src/components/js/grid_maker.js
 
 
+//bitwise test ok mathfloor
 
 
 
@@ -5776,7 +5779,7 @@ function GridMaker(id, params) {
     });
     var str = '0'.repeat(Math.max.apply(Math, toConsumableArray_default()(lens))) + '      ';
     self.sb = ctx.measureText(str).width;
-    self.sb = Math.max(Math.floor(self.sb), $p.config.SBMIN);
+    self.sb = Math.max(~~self.sb, $p.config.SBMIN);
   } // Calculate $ precision for the Y-axis
 
 
@@ -5877,7 +5880,7 @@ function GridMaker(id, params) {
         var p = sub[i];
 
         if (p[0] % self.t_step === 0) {
-          var x = Math.floor((p[0] - range[0]) * r);
+          var x = ~~((p[0] - range[0]) * r);
           self.xs.push([x, p]);
         }
       } // TODO: fix grid extention for bigger timeframes
@@ -5901,7 +5904,7 @@ function GridMaker(id, params) {
 
     while (true) {
       t -= self.t_step;
-      var x = Math.floor((t - range[0]) * r);
+      var x = ~~((t - range[0]) * r);
       if (x < 0) break;
 
       if (t % interval === 0) {
@@ -5916,7 +5919,7 @@ function GridMaker(id, params) {
 
     while (true) {
       t += self.t_step;
-      var x = Math.floor((t - range[0]) * r);
+      var x = ~~((t - range[0]) * r);
       if (x > self.spacex) break;
 
       if (t % interval === 0) {
@@ -5939,7 +5942,7 @@ function GridMaker(id, params) {
     }
 
     for (var y$ = y1; y$ <= self.$_hi; y$ += self.$_step) {
-      var y = Math.floor(y$ * self.A + self.B);
+      var y = ~~(y$ * self.A + self.B);
       if (y > height) continue;
       self.ys.push([y, utils.strip(y$)]);
     }
@@ -5993,6 +5996,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//bitwise test ok mathfloor
 // Calculates all necessary s*it to build the chart
 // Heights, widths, transforms, ... = everything
 // Why such a mess you ask? Well, that's because
@@ -6033,7 +6037,7 @@ function Layout(params) {
     var n = offsub.length;
     var off_h = 2 * Math.sqrt(n) / 7 / (n || 1); // Offchart grid height
 
-    var px = Math.floor(height * off_h); // Main grid height
+    var px = ~~(height * off_h); // Main grid height
 
     var m = height - px * n;
     return [m].concat(Array(n).fill(px));
@@ -6049,8 +6053,8 @@ function Layout(params) {
       return a + b;
     }, 0);
     hs = hs.map(function (x) {
-      return Math.floor(x / sum * height);
-    }); // Refine the height if Math.floor decreased px sum
+      return ~~(x / sum * height);
+    }); // Refine the height if ~~ decreased px sum
 
     sum = hs.reduce(function (a, b) {
       return a + b;
@@ -6066,7 +6070,7 @@ function Layout(params) {
   function t2screen(t) {
     var dt = range[1] - range[0];
     var r = self.spacex / dt;
-    return Math.floor((t - range[0]) * r);
+    return ~~((t - range[0]) * r);
   }
 
   function candles_n_vol() {
@@ -6099,8 +6103,8 @@ function Layout(params) {
         prev = null;
       }
 
-      x1 = prev || Math.floor(mid - self.px_step * 0.5);
-      x2 = Math.floor(mid + self.px_step * 0.5) - 0.5;
+      x1 = prev || ~~(mid - self.px_step * 0.5);
+      x2 = ~~(mid + self.px_step * 0.5) - 0.5;
       self.volume.push({
         x1: x1,
         x2: x2,
@@ -6193,6 +6197,7 @@ function updater_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typ
 
 function updater_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//bitwise test ok math.floor
 // Cursor updater: calculates current values for
 // OHLCV and all other indicators
 
@@ -6288,8 +6293,8 @@ var updater_CursorUpdater = /*#__PURE__*/function () {
         //bitwise of Math.floor
         //x: Math.floor(xs[i]) - 0.5,
         //y: Math.floor(e.y - 2) - 0.5 - grid.offset,
-        x: (xs[i] | 0) - 0.5,
-        y: (e.y - 2 | 0) - 0.5 - grid.offset,
+        x: ~~xs[i] - 0.5,
+        y: ~~(e.y - 2) - 0.5 - grid.offset,
         //round y$ value, no need to have 10 decimals
         // y$: Math.round(grid.screen2$(e.y - 2 - grid.offset)),
         // Edit: Ray (We need small decimals for funding rate, removed Math.round())
@@ -8098,6 +8103,7 @@ Segment_component.options.__file = "src/components/overlays/Segment.vue"
 /* harmony default export */ var Segment = (Segment_component.exports);
 // CONCATENATED MODULE: ./src/components/js/layout_cnv.js
 
+//bitwise test ok math.floor
 // Claculates postions and sizes for candlestick
 // and volume bars for the given subset of data
 
@@ -8135,8 +8141,8 @@ function layout_cnv(self) {
       prev = null;
     }
 
-    x1 = prev || Math.floor(mid - px_step2 * 0.5);
-    x2 = Math.floor(mid + px_step2 * 0.5) - 0.5;
+    x1 = prev || ~~(mid - px_step2 * 0.5);
+    x2 = ~~(mid + px_step2 * 0.5) - 0.5;
     candles.push({
       x: mid,
       w: layout.px_step * $p.config.CANDLEW * ratio,
@@ -8201,8 +8207,8 @@ function layout_vol(self) {
       prev = null;
     }
 
-    x1 = prev || Math.floor(mid - px_step2 * 0.5);
-    x2 = Math.floor(mid + px_step2 * 0.5) - 0.5;
+    x1 = prev || ~~(mid - px_step2 * 0.5);
+    x2 = ~~(mid + px_step2 * 0.5) - 0.5;
     volume.push({
       x1: x1,
       x2: x2,
@@ -8271,6 +8277,7 @@ var candle_CandleExt = /*#__PURE__*/function () {
 
 
 
+//bitwise test ok math.floor
 var volbar_VolbarExt = /*#__PURE__*/function () {
   function VolbarExt(overlay, ctx, data) {
     classCallCheck_default()(this, VolbarExt);
@@ -8287,9 +8294,9 @@ var volbar_VolbarExt = /*#__PURE__*/function () {
     value: function draw(data) {
       var y0 = this.$p.layout.height;
       var w = data.x2 - data.x1;
-      var h = Math.floor(data.h);
+      var h = ~~data.h;
       this.ctx.fillStyle = data.green ? this.style.colorVolUp : this.style.colorVolDw;
-      this.ctx.fillRect(Math.floor(data.x1), Math.floor(y0 - h - 0.5), Math.floor(w), Math.floor(h + 1));
+      this.ctx.fillRect(~~data.x1, ~~(y0 - h - 0.5), ~~w, ~~(h + 1));
     }
   }]);
 
@@ -11248,6 +11255,7 @@ function botbar_unsupportedIterableToArray(o, minLen) { if (!o) return; if (type
 
 function botbar_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//bitwise test ok mathfloor
 
 
 var botbar_MINUTE15 = constants.MINUTE15,
@@ -11288,7 +11296,7 @@ var botbar_Botbar = /*#__PURE__*/function () {
       this.ctx.strokeStyle = this.$p.colors.colorScale;
       this.ctx.beginPath();
       this.ctx.moveTo(0, 0.5);
-      this.ctx.lineTo(Math.floor(width + 1), 0.5);
+      this.ctx.lineTo(~~(width + 1), 0.5);
       this.ctx.stroke();
       this.ctx.fillStyle = this.$p.colors.colorText;
       this.ctx.beginPath();
@@ -11347,9 +11355,9 @@ var botbar_Botbar = /*#__PURE__*/function () {
       var lbl = this.format_cursor_x();
       this.ctx.fillStyle = this.$p.colors.colorPanel;
       var measure = this.ctx.measureText(lbl + '    ');
-      var panwidth = Math.floor(measure.width);
+      var panwidth = ~~measure.width;
       var cursor = this.$p.cursor.x;
-      var x = Math.floor(cursor - panwidth * 0.5);
+      var x = ~~(cursor - panwidth * 0.5);
       var y = -0.5;
       var panheight = this.comp.config.PANHEIGHT;
       this.ctx.fillRect(x, y, panwidth, panheight + 0.5);
@@ -13726,6 +13734,7 @@ var oi_price_OIPrice = /*#__PURE__*/function () {
 
 
 
+//bitwise test ok math.floor
 // OI Candle object for OI Candles overlay
 var oi_candle_OICandleExt = /*#__PURE__*/function () {
   function OICandleExt(overlay, ctx, data) {
@@ -13746,25 +13755,25 @@ var oi_candle_OICandleExt = /*#__PURE__*/function () {
       //Saving the browser to do extra calculations to create the anti-aliasing effect. 
 
       var w = Math.round(Math.max(data.w, 1));
-      var hw = Math.max(Math.floor(w * 0.5), 1);
+      var hw = Math.max(~~(w * 0.5), 1);
       var h = Math.round(Math.abs(data.o - data.c));
       var max_h = data.c === data.o ? 1 : 2;
       this.ctx.strokeStyle = w > 1 ? wick_color : wick_color_sm;
       this.ctx.beginPath();
-      this.ctx.moveTo(Math.floor(data.x) - 0.5, Math.floor(data.h));
-      this.ctx.lineTo(Math.floor(data.x) - 0.5, Math.floor(data.l));
+      this.ctx.moveTo(~~data.x - 0.5, ~~data.h);
+      this.ctx.lineTo(~~data.x - 0.5, ~~data.l);
       this.ctx.stroke();
 
       if (data.w > 1.5 || data.o === data.c) {
         this.ctx.fillStyle = body_color; // TODO: Move common calculations to layout.js
 
         var s = data.c >= data.o ? 1 : -1;
-        this.ctx.fillRect(Math.floor(data.x - hw - 1), Math.floor(data.o - 1), Math.floor(hw * 2 + 1), Math.floor(s * Math.max(h, max_h)));
+        this.ctx.fillRect(~~(data.x - hw - 1), ~~(data.o - 1), ~~(hw * 2 + 1), ~~(s * Math.max(h, max_h)));
       } else {
         this.ctx.strokeStyle = body_color;
         this.ctx.beginPath();
-        this.ctx.moveTo(Math.floor(data.x) - 0.5, Math.floor(Math.min(data.o, data.c)));
-        this.ctx.lineTo(Math.floor(data.x) - 0.5, Math.floor(Math.max(data.o, data.c)));
+        this.ctx.moveTo(~~data.x - 0.5, ~~Math.min(data.o, data.c));
+        this.ctx.lineTo(~~data.x - 0.5, ~~Math.max(data.o, data.c));
         this.ctx.stroke();
       }
     }

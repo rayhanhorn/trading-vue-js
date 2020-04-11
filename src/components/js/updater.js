@@ -1,3 +1,4 @@
+//bitwise test ok math.floor
 // Cursor updater: calculates current values for
 // OHLCV and all other indicators
 
@@ -67,8 +68,8 @@ class CursorUpdater {
 			//x: Math.floor(xs[i]) - 0.5,
             //y: Math.floor(e.y - 2) - 0.5 - grid.offset,
 			
-            x: (xs[i] | 0) - 0.5,
-            y: (e.y - 2 | 0) - 0.5 - grid.offset,
+            x: ~~(xs[i]) - 0.5,
+            y: ~~(e.y - 2) - 0.5 - grid.offset,
 			//round y$ value, no need to have 10 decimals
             // y$: Math.round(grid.screen2$(e.y - 2 - grid.offset)),
             // Edit: Ray (We need small decimals for funding rate, removed Math.round())

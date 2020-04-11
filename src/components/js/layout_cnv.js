@@ -1,3 +1,5 @@
+//bitwise test ok math.floor
+
 // Claculates postions and sizes for candlestick
 // and volume bars for the given subset of data
 
@@ -37,8 +39,8 @@ export function layout_cnv(self) {
             prev = null
         }
 
-        x1 = prev || Math.floor(mid - px_step2 * 0.5)
-        x2 = Math.floor(mid + px_step2 * 0.5) - 0.5
+        x1 = prev || ~~(mid - px_step2 * 0.5)
+        x2 = ~~(mid + px_step2 * 0.5) - 0.5
 
         candles.push({
             x: mid,
@@ -103,8 +105,8 @@ export function layout_vol(self) {
         if (sub[i-1] && p[0] - sub[i-1][0] > interval2) {
             prev = null
         }
-        x1 = prev || Math.floor(mid - px_step2 * 0.5)
-        x2 = Math.floor(mid + px_step2 * 0.5) - 0.5
+        x1 = prev || ~~(mid - px_step2 * 0.5)
+        x2 = ~~(mid + px_step2 * 0.5) - 0.5
 
         volume.push({
             x1: x1,

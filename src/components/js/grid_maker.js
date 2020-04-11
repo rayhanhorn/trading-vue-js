@@ -1,3 +1,5 @@
+//bitwise test ok mathfloor
+
 import Const from '../../stuff/constants.js'
 import Utils from '../../stuff/utils.js'
 
@@ -92,7 +94,7 @@ function GridMaker(id, params, master_grid = null) {
         let str = '0'.repeat(Math.max(...lens)) + '      '
 
         self.sb = ctx.measureText(str).width
-        self.sb = Math.max(Math.floor(self.sb), $p.config.SBMIN)
+        self.sb = Math.max(~~(self.sb), $p.config.SBMIN)
 
     }
 
@@ -198,7 +200,7 @@ function GridMaker(id, params, master_grid = null) {
             for (var i = 0; i < sub.length; i++) {
                 let p = sub[i]
                 if (p[0] % self.t_step === 0) {
-                    let x = Math.floor((p[0] - range[0]) * r)
+                    let x = ~~((p[0] - range[0]) * r)
                     self.xs.push([x, p])
                 }
             }
@@ -226,7 +228,7 @@ function GridMaker(id, params, master_grid = null) {
         let t = self.xs[0][1][0]
         while (true) {
             t -= self.t_step
-            let x = Math.floor((t  - range[0]) * r)
+            let x = ~~((t  - range[0]) * r)
             if (x < 0) break
             if (t % interval === 0) {
                 self.xs.unshift([x,[t]])
@@ -241,7 +243,7 @@ function GridMaker(id, params, master_grid = null) {
         let t = self.xs[self.xs.length - 1][1][0]
         while (true) {
             t += self.t_step
-            let x = Math.floor((t  - range[0]) * r)
+            let x = ~~((t  - range[0]) * r)
             if (x > self.spacex) break
             if (t % interval === 0) {
                 self.xs.push([x,[t]])
@@ -264,7 +266,7 @@ function GridMaker(id, params, master_grid = null) {
         }
         
         for (var y$ = y1; y$ <= self.$_hi; y$ += self.$_step) {
-            let y = Math.floor(y$ * self.A + self.B)
+            let y = ~~(y$ * self.A + self.B)
             if (y > height) continue
             self.ys.push([y, Utils.strip(y$)])
         }

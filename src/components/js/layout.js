@@ -1,3 +1,5 @@
+//bitwise test ok mathfloor
+
 // Calculates all necessary s*it to build the chart
 // Heights, widths, transforms, ... = everything
 // Why such a mess you ask? Well, that's because
@@ -37,7 +39,7 @@ function Layout(params) {
         const off_h = (2 * Math.sqrt(n) / 7) / (n || 1)
 
         // Offchart grid height
-        const px = Math.floor(height * off_h)
+        const px = ~~(height * off_h)
 
         // Main grid height
         const m = height - px * n
@@ -48,9 +50,9 @@ function Layout(params) {
     function weighted_hs(grid, height) {
         let hs = [{grid}, ...offsub].map(x => x.grid.height || 1)
         let sum = hs.reduce((a, b) => a + b, 0)
-        hs = hs.map(x => Math.floor((x / sum) * height))
+        hs = hs.map(x => ~~((x / sum) * height))
 
-        // Refine the height if Math.floor decreased px sum
+        // Refine the height if ~~ decreased px sum
         sum = hs.reduce((a, b) => a + b, 0)
         for (var i = 0; i < height - sum; i++) hs[i % hs.length]++
         return hs
@@ -59,7 +61,7 @@ function Layout(params) {
     function t2screen(t) {
         const dt = range[1] - range[0]
         const r = self.spacex / dt
-        return Math.floor((t - range[0]) * r)
+        return ~~((t - range[0]) * r)
     }
 
     function candles_n_vol() {
@@ -89,8 +91,8 @@ function Layout(params) {
             if (sub[i-1] && p[0] - sub[i-1][0] > interval) {
                 prev = null
             }
-            x1 = prev || Math.floor(mid - self.px_step * 0.5)
-            x2 = Math.floor(mid + self.px_step * 0.5) - 0.5
+            x1 = prev || ~~(mid - self.px_step * 0.5)
+            x2 = ~~(mid + self.px_step * 0.5) - 0.5
             self.volume.push({
                 x1: x1,
                 x2: x2,

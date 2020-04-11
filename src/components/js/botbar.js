@@ -1,3 +1,4 @@
+//bitwise test ok mathfloor
 
 import Const from '../../stuff/constants.js'
 import Utils from '../../stuff/utils.js'
@@ -35,7 +36,7 @@ export default class Botbar {
 
         this.ctx.beginPath()
         this.ctx.moveTo(0, 0.5)
-        this.ctx.lineTo(Math.floor(width + 1), 0.5)
+        this.ctx.lineTo(~~(width + 1), 0.5)
         this.ctx.stroke()
 
         this.ctx.fillStyle = this.$p.colors.colorText
@@ -79,9 +80,9 @@ export default class Botbar {
         this.ctx.fillStyle = this.$p.colors.colorPanel
 
         let measure = this.ctx.measureText(lbl + '    ')
-        let panwidth = Math.floor(measure.width)
+        let panwidth = ~~(measure.width)
         let cursor = this.$p.cursor.x
-        let x = Math.floor(cursor - panwidth * 0.5)
+        let x = ~~(cursor - panwidth * 0.5)
         let y = - 0.5
         let panheight = this.comp.config.PANHEIGHT
         this.ctx.fillRect(x, y, panwidth, panheight + 0.5)
