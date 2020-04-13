@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.5 - Sat Apr 11 2020
+ * TradingVue.JS - v0.4.5 - Mon Apr 13 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -97,23 +97,21 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 52);
+/******/ 	return __webpack_require__(__webpack_require__.s = 49);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithoutHoles = __webpack_require__(26);
+var arrayWithoutHoles = __webpack_require__(23);
 
-var iterableToArray = __webpack_require__(27);
+var iterableToArray = __webpack_require__(24);
 
-var unsupportedIterableToArray = __webpack_require__(22);
-
-var nonIterableSpread = __webpack_require__(28);
+var nonIterableSpread = __webpack_require__(25);
 
 function _toConsumableArray(arr) {
-  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
 }
 
 module.exports = _toConsumableArray;
@@ -2808,16 +2806,14 @@ if (true) {
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithHoles = __webpack_require__(29);
+var arrayWithHoles = __webpack_require__(26);
 
-var iterableToArrayLimit = __webpack_require__(30);
+var iterableToArrayLimit = __webpack_require__(27);
 
-var unsupportedIterableToArray = __webpack_require__(22);
-
-var nonIterableRest = __webpack_require__(31);
+var nonIterableRest = __webpack_require__(28);
 
 function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
 }
 
 module.exports = _slicedToArray;
@@ -2852,32 +2848,14 @@ module.exports = function (useSourceMap) {
   // eslint-disable-next-line func-names
 
 
-  list.i = function (modules, mediaQuery, dedupe) {
+  list.i = function (modules, mediaQuery) {
     if (typeof modules === 'string') {
       // eslint-disable-next-line no-param-reassign
       modules = [[null, modules, '']];
     }
 
-    var alreadyImportedModules = {};
-
-    if (dedupe) {
-      for (var i = 0; i < this.length; i++) {
-        // eslint-disable-next-line prefer-destructuring
-        var id = this[i][0];
-
-        if (id != null) {
-          alreadyImportedModules[id] = true;
-        }
-      }
-    }
-
-    for (var _i = 0; _i < modules.length; _i++) {
-      var item = [].concat(modules[_i]);
-
-      if (dedupe && alreadyImportedModules[item[0]]) {
-        // eslint-disable-next-line no-continue
-        continue;
-      }
+    for (var i = 0; i < modules.length; i++) {
+      var item = [].concat(modules[i]);
 
       if (mediaQuery) {
         if (!item[2]) {
@@ -2906,7 +2884,7 @@ function cssWithMappingToString(item, useSourceMap) {
   if (useSourceMap && typeof btoa === 'function') {
     var sourceMapping = toComment(cssMapping);
     var sourceURLs = cssMapping.sources.map(function (source) {
-      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot).concat(source, " */");
     });
     return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
   }
@@ -2927,11 +2905,7 @@ function toComment(sourceMap) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ addStylesClient; });
 
 // CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/listToStyles.js
 /**
@@ -2963,6 +2937,7 @@ function listToStyles (parentId, list) {
 }
 
 // CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/addStylesClient.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return addStylesClient; });
 /*
   MIT License http://www.opensource.org/licenses/mit-license.php
   Author Tobias Koppers @sokra
@@ -3189,16 +3164,19 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function _getPrototypeOf(o) {
-  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-module.exports = _getPrototypeOf;
+// load the styles
+var content = __webpack_require__(33);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(7).default
+var update = add("68f243ea", content, false, {});
+// Hot Module Replacement
+if(false) {}
 
 /***/ }),
 /* 9 */
@@ -3207,12 +3185,12 @@ module.exports = _getPrototypeOf;
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(36);
+var content = __webpack_require__(35);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(7).default
-var update = add("68f243ea", content, false, {});
+var update = add("9895d3a6", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3223,12 +3201,12 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(38);
+var content = __webpack_require__(37);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(7).default
-var update = add("9895d3a6", content, false, {});
+var update = add("1db01c0b", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3239,12 +3217,12 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(40);
+var content = __webpack_require__(39);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(7).default
-var update = add("1db01c0b", content, false, {});
+var update = add("12d2309d", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3255,12 +3233,12 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(42);
+var content = __webpack_require__(41);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(7).default
-var update = add("12d2309d", content, false, {});
+var update = add("1b34bfeb", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3271,12 +3249,12 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(44);
+var content = __webpack_require__(43);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(7).default
-var update = add("1b34bfeb", content, false, {});
+var update = add("604bf5ef", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3287,23 +3265,7 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(46);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(7).default
-var update = add("604bf5ef", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(48);
+var content = __webpack_require__(45);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -3313,12 +3275,12 @@ var update = add("f32fd36e", content, false, {});
 if(false) {}
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = __webpack_require__(18);
+var _typeof = __webpack_require__(19);
 
-var assertThisInitialized = __webpack_require__(49);
+var assertThisInitialized = __webpack_require__(46);
 
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
@@ -3331,10 +3293,23 @@ function _possibleConstructorReturn(self, call) {
 module.exports = _possibleConstructorReturn;
 
 /***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+
+/***/ }),
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var setPrototypeOf = __webpack_require__(50);
+var setPrototypeOf = __webpack_require__(47);
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
@@ -3355,11 +3330,16 @@ module.exports = _inherits;
 
 /***/ }),
 /* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(48);
+
+
+/***/ }),
+/* 19 */
 /***/ (function(module, exports) {
 
 function _typeof(obj) {
-  "@babel/helpers - typeof";
-
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     module.exports = _typeof = function _typeof(obj) {
       return typeof obj;
@@ -3376,7 +3356,7 @@ function _typeof(obj) {
 module.exports = _typeof;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 function _defineProperty(obj, key, value) {
@@ -3397,47 +3377,7 @@ function _defineProperty(obj, key, value) {
 module.exports = _defineProperty;
 
 /***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(51);
-
-
-/***/ }),
 /* 21 */
-/***/ (function(module, exports) {
-
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
-  return arr2;
-}
-
-module.exports = _arrayLikeToArray;
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayLikeToArray = __webpack_require__(21);
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(n);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
-}
-
-module.exports = _unsupportedIterableToArray;
-
-/***/ }),
-/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3447,9 +3387,9 @@ module.exports = _unsupportedIterableToArray;
 /**
  * Dependencies
  */
-var util = __webpack_require__(32),
-    cmp = __webpack_require__(33),
-    bin = __webpack_require__(34);
+var util = __webpack_require__(29),
+    cmp = __webpack_require__(30),
+    bin = __webpack_require__(31);
 
 /**
  * Module interface definition
@@ -3661,7 +3601,7 @@ IndexedArray.prototype.getRange = function (begin, end) {
 
 
 /***/ }),
-/* 24 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -3991,81 +3931,43 @@ if (typeof window.define === 'function' && window.define.amd) {
 
 
 /***/ }),
-/* 25 */
+/* 23 */
 /***/ (function(module, exports) {
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-module.exports = _asyncToGenerator;
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayLikeToArray = __webpack_require__(21);
-
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return arrayLikeToArray(arr);
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
 }
 
 module.exports = _arrayWithoutHoles;
 
 /***/ }),
-/* 27 */
+/* 24 */
 /***/ (function(module, exports) {
 
 function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
 }
 
 module.exports = _iterableToArray;
 
 /***/ }),
-/* 28 */
+/* 25 */
 /***/ (function(module, exports) {
 
 function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
 }
 
 module.exports = _nonIterableSpread;
 
 /***/ }),
-/* 29 */
+/* 26 */
 /***/ (function(module, exports) {
 
 function _arrayWithHoles(arr) {
@@ -4075,11 +3977,14 @@ function _arrayWithHoles(arr) {
 module.exports = _arrayWithHoles;
 
 /***/ }),
-/* 30 */
+/* 27 */
 /***/ (function(module, exports) {
 
 function _iterableToArrayLimit(arr, i) {
-  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
+    return;
+  }
+
   var _arr = [];
   var _n = true;
   var _d = false;
@@ -4108,17 +4013,17 @@ function _iterableToArrayLimit(arr, i) {
 module.exports = _iterableToArrayLimit;
 
 /***/ }),
-/* 31 */
+/* 28 */
 /***/ (function(module, exports) {
 
 function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  throw new TypeError("Invalid attempt to destructure non-iterable instance");
 }
 
 module.exports = _nonIterableRest;
 
 /***/ }),
-/* 32 */
+/* 29 */
 /***/ (function(module, exports) {
 
 /**
@@ -4163,7 +4068,7 @@ module.exports.isSortableArrayLike = function (o) {
 
 
 /***/ }),
-/* 33 */
+/* 30 */
 /***/ (function(module, exports) {
 
 /**
@@ -4198,7 +4103,7 @@ module.exports = {
 
 
 /***/ }),
-/* 34 */
+/* 31 */
 /***/ (function(module, exports) {
 
 /**
@@ -4260,168 +4165,154 @@ module.exports.search = search;
 
 
 /***/ }),
-/* 35 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 36 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.t-vue-lbtn {\n    z-index: 100;\n    width: 21px;\n    height: 21px;\n    margin-bottom: -6px;\n    pointer-events: all;\n    cursor: pointer;\n}\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 37 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 38 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.t-vue-lbtn-grp {\n    margin-left: 0.5em;\n}\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 39 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 40 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-legend {\n    position: relative;\n    z-index: 100;\n    font-size: 1.25em;\n    margin-left: 10px;\n    pointer-events: none;\n}\n.trading-vue-ohlcv {\n    pointer-events: none;\n    margin-bottom: 0.5em;\n    font-size: 1.1em;\n    color: steelblue;\n}\n.t-vue-lspan {\n    font-variant-numeric: tabular-nums;\n    font-weight: 100;\n    font-size: 1.3em;\n    color: #EEE; /* TODO: move => params */\n    margin-left: 0.1em;\n    margin-right: 0.2em;\n}\n.t-vue-title {\n    margin-right: 0.25em;\n    font-size: 2em;\n    font-weight: 200;\n}\n.t-vue-ind {\n    margin-left: 0.2em;\n    margin-bottom: 0.5em;\n    font-size: 1.2em;\n    color: steelblue;\n}\n.t-vue-ivalue {\n    margin-left: 0.5em;\n    font-size: 1.0em;\n}\n.t-vue-unknown {\n    color: #999999; /* TODO: move => params */\n}\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 41 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 42 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-section {\n    height: 0;\n    position: absolute;\n}\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 43 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 44 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-botbar {\n    position: relative !important;\n}\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 45 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 46 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-tbitem {\n}\n.trading-vue-tbitem:hover {\n    background-color: #76878319;\n}\n.trading-vue-tbicon {\n    position: absolute;\n}\n.trading-vue-tbitem.selected-item .trading-vue-tbicon {\n     filter: brightness(1.45) sepia(1) hue-rotate(90deg) saturate(4.5) !important;\n}\n.pixelated {\n    -ms-interpolation-mode: nearest-neighbor;\n    image-rendering: -webkit-optimize-contrast;\n    image-rendering: -webkit-crisp-edges;\n    image-rendering: -moz-crisp-edges;\n    image-rendering: -o-crisp-edges;\n    image-rendering: pixelated;\n}\n\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 47 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 48 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
-exports = ___CSS_LOADER_API_IMPORT___(false);
+exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-toolbar {\n    position: absolute;\n    border-right: 1px solid black;\n    z-index: 100;\n    padding-top: 3px;\n}\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
-/* 49 */
+/* 46 */
 /***/ (function(module, exports) {
 
 function _assertThisInitialized(self) {
@@ -4435,7 +4326,7 @@ function _assertThisInitialized(self) {
 module.exports = _assertThisInitialized;
 
 /***/ }),
-/* 50 */
+/* 47 */
 /***/ (function(module, exports) {
 
 function _setPrototypeOf(o, p) {
@@ -4450,7 +4341,7 @@ function _setPrototypeOf(o, p) {
 module.exports = _setPrototypeOf;
 
 /***/ }),
-/* 51 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4585,7 +4476,7 @@ var runtime = (function (exports) {
     return { __await: arg };
   };
 
-  function AsyncIterator(generator, PromiseImpl) {
+  function AsyncIterator(generator) {
     function invoke(method, arg, resolve, reject) {
       var record = tryCatch(generator[method], generator, arg);
       if (record.type === "throw") {
@@ -4596,14 +4487,14 @@ var runtime = (function (exports) {
         if (value &&
             typeof value === "object" &&
             hasOwn.call(value, "__await")) {
-          return PromiseImpl.resolve(value.__await).then(function(value) {
+          return Promise.resolve(value.__await).then(function(value) {
             invoke("next", value, resolve, reject);
           }, function(err) {
             invoke("throw", err, resolve, reject);
           });
         }
 
-        return PromiseImpl.resolve(value).then(function(unwrapped) {
+        return Promise.resolve(value).then(function(unwrapped) {
           // When a yielded Promise is resolved, its final value becomes
           // the .value of the Promise<{value,done}> result for the
           // current iteration.
@@ -4621,7 +4512,7 @@ var runtime = (function (exports) {
 
     function enqueue(method, arg) {
       function callInvokeWithMethodAndArg() {
-        return new PromiseImpl(function(resolve, reject) {
+        return new Promise(function(resolve, reject) {
           invoke(method, arg, resolve, reject);
         });
       }
@@ -4661,12 +4552,9 @@ var runtime = (function (exports) {
   // Note that simple async functions are implemented on top of
   // AsyncIterator objects; they just return a Promise for the value of
   // the final result produced by the iterator.
-  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
-    if (PromiseImpl === void 0) PromiseImpl = Promise;
-
+  exports.async = function(innerFn, outerFn, self, tryLocsList) {
     var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList),
-      PromiseImpl
+      wrap(innerFn, outerFn, self, tryLocsList)
     );
 
     return exports.isGeneratorFunction(outerFn)
@@ -5185,25 +5073,11 @@ try {
 
 
 /***/ }),
-/* 52 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "TradingVue", function() { return /* reexport */ TradingVue; });
-__webpack_require__.d(__webpack_exports__, "Overlay", function() { return /* reexport */ mixins_overlay; });
-__webpack_require__.d(__webpack_exports__, "Utils", function() { return /* reexport */ utils; });
-__webpack_require__.d(__webpack_exports__, "Constants", function() { return /* reexport */ constants; });
-__webpack_require__.d(__webpack_exports__, "Candle", function() { return /* reexport */ candle_CandleExt; });
-__webpack_require__.d(__webpack_exports__, "Volbar", function() { return /* reexport */ volbar_VolbarExt; });
-__webpack_require__.d(__webpack_exports__, "layout_cnv", function() { return /* reexport */ layout_cnv; });
-__webpack_require__.d(__webpack_exports__, "layout_vol", function() { return /* reexport */ layout_vol; });
-__webpack_require__.d(__webpack_exports__, "DataCube", function() { return /* reexport */ datacube_DataCube; });
-__webpack_require__.d(__webpack_exports__, "OICandle", function() { return /* reexport */ oi_candle_OICandleExt; });
-__webpack_require__.d(__webpack_exports__, "OIPrice", function() { return /* reexport */ oi_price_OIPrice; });
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/TradingVue.vue?vue&type=template&id=235c0ade&
 var TradingVuevue_type_template_id_235c0ade_render = function() {
@@ -5421,7 +5295,7 @@ var slicedToArray = __webpack_require__(5);
 var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // EXTERNAL MODULE: ./node_modules/arrayslicer/lib/index.js
-var lib = __webpack_require__(23);
+var lib = __webpack_require__(21);
 var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 
 // CONCATENATED MODULE: ./src/stuff/utils.js
@@ -5601,6 +5475,9 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
     // Nine Zeroes for Billions
     return Math.abs(Number(value)) >= 1.0e+9 ? (Number(value) / 1.0e+9).toFixed(precision) + "B" // Six Zeroes for Millions 
     : Math.abs(Number(value)) >= 1.0e+6 ? (Number(value) / 1.0e+6).toFixed(precision) + "M" : Number(value);
+  },
+  numberWithCommas: function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 });
 // CONCATENATED MODULE: ./src/components/js/layout_fn.js
@@ -5989,13 +5866,6 @@ function GridMaker(id, params) {
 // CONCATENATED MODULE: ./src/components/js/layout.js
 
 
-
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 //bitwise test ok mathfloor
 // Calculates all necessary s*it to build the chart
 // Heights, widths, transforms, ... = everything
@@ -6130,11 +6000,12 @@ function Layout(params) {
   };
   var gms = [new grid_maker(0, specs)]; // Sub grids
 
-  var _iterator = _createForOfIteratorHelper(offsub.entries()),
-      _step;
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
 
   try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+    for (var _iterator = offsub.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var _step$value = slicedToArray_default()(_step.value, 2),
           i = _step$value[0],
           data = _step$value[1].data;
@@ -6146,9 +6017,18 @@ function Layout(params) {
     } // Max sidebar among all grinds
 
   } catch (err) {
-    _iterator.e(err);
+    _didIteratorError = true;
+    _iteratorError = err;
   } finally {
-    _iterator.f();
+    try {
+      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+        _iterator["return"]();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
   }
 
   var sb = Math.max.apply(Math, toConsumableArray_default()(gms.map(function (x) {
@@ -6190,19 +6070,14 @@ var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 // CONCATENATED MODULE: ./src/components/js/updater.js
 
 
-
-function updater_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = updater_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function updater_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return updater_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return updater_arrayLikeToArray(o, minLen); }
-
-function updater_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 //bitwise test ok math.floor
 // Cursor updater: calculates current values for
 // OHLCV and all other indicators
 
 
-var updater_CursorUpdater = /*#__PURE__*/function () {
+var updater_CursorUpdater =
+/*#__PURE__*/
+function () {
   function CursorUpdater(comp) {
     classCallCheck_default()(this, CursorUpdater);
 
@@ -6214,12 +6089,12 @@ var updater_CursorUpdater = /*#__PURE__*/function () {
     value: function sync(e) {
       this.cursor.grid_id = e.grid_id;
       var once = true;
-
-      var _iterator = updater_createForOfIteratorHelper(this.grids),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.grids[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var grid = _step.value;
           var c = this.cursor_data(grid, e);
 
@@ -6241,9 +6116,18 @@ var updater_CursorUpdater = /*#__PURE__*/function () {
           this.cursor.y$ = c.y$;
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
     }
   }, {
@@ -6256,12 +6140,12 @@ var updater_CursorUpdater = /*#__PURE__*/function () {
       var t = grid.screen2t(e.x);
       var ids = {},
           res = {};
-
-      var _iterator2 = updater_createForOfIteratorHelper(data),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = data[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var d = _step2.value;
           var ts = d.data.map(function (x) {
             return x[0];
@@ -6271,9 +6155,18 @@ var updater_CursorUpdater = /*#__PURE__*/function () {
           res["".concat(d.type, "_").concat(ids[d.type])] = d.data[i];
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
 
       return res;
@@ -6405,19 +6298,12 @@ Sectionvue_type_template_id_8fbe9336_render._withStripped = true
 var hammer = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./node_modules/hamsterjs/hamster.js
-var hamsterjs_hamster = __webpack_require__(24);
+var hamsterjs_hamster = __webpack_require__(22);
 var hamster_default = /*#__PURE__*/__webpack_require__.n(hamsterjs_hamster);
 
 // CONCATENATED MODULE: ./src/components/js/grid.js
 
 
-
-
-function grid_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = grid_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function grid_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return grid_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return grid_arrayLikeToArray(o, minLen); }
-
-function grid_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 // Grid.js listens to various user-generated events,
 // emits Vue-events if something has changed (e.g. range)
@@ -6426,7 +6312,9 @@ function grid_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) 
 
  // Grid is good.
 
-var grid_Grid = /*#__PURE__*/function () {
+var grid_Grid =
+/*#__PURE__*/
+function () {
   function Grid(canvas, comp) {
     classCallCheck_default()(this, Grid);
 
@@ -6656,12 +6544,12 @@ var grid_Grid = /*#__PURE__*/function () {
       this.ctx.strokeStyle = this.$p.colors.colorGrid;
       this.ctx.beginPath();
       var ymax = this.layout.height;
-
-      var _iterator = grid_createForOfIteratorHelper(this.layout.xs),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.layout.xs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var _step$value = slicedToArray_default()(_step.value, 2),
               x = _step$value[0],
               p = _step$value[1];
@@ -6670,16 +6558,26 @@ var grid_Grid = /*#__PURE__*/function () {
           this.ctx.lineTo(x - 0.5, ymax);
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
-      var _iterator2 = grid_createForOfIteratorHelper(this.layout.ys),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = this.layout.ys[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var _step2$value = slicedToArray_default()(_step2.value, 2),
               y = _step2$value[0],
               y$ = _step2$value[1];
@@ -6688,9 +6586,18 @@ var grid_Grid = /*#__PURE__*/function () {
           this.ctx.lineTo(this.layout.width, y - 0.5);
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
 
       this.ctx.stroke();
@@ -6813,11 +6720,12 @@ var grid_Grid = /*#__PURE__*/function () {
   }, {
     key: "propagate",
     value: function propagate(name, event) {
-      var _iterator3 = grid_createForOfIteratorHelper(this.overlays),
-          _step3;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        for (var _iterator3 = this.overlays[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
           var layer = _step3.value;
 
           if (layer.renderer.hasOwnProperty(name) && typeof layer.renderer[name] === 'function') {
@@ -6837,9 +6745,18 @@ var grid_Grid = /*#__PURE__*/function () {
           }
         }
       } catch (err) {
-        _iterator3.e(err);
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
-        _iterator3.f();
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+            _iterator3["return"]();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
       }
     }
   }]);
@@ -6927,7 +6844,9 @@ var grid_Grid = /*#__PURE__*/function () {
 
 
 
-var crosshair_Crosshair = /*#__PURE__*/function () {
+var crosshair_Crosshair =
+/*#__PURE__*/
+function () {
   function Crosshair(comp) {
     classCallCheck_default()(this, Crosshair);
 
@@ -7111,7 +7030,7 @@ function normalizeComponent (
       // for template-only hot-reload because in that case the render fn doesn't
       // go through the normalizer
       options._injectStyles = hook
-      // register for functional component in vue file
+      // register for functioal component in vue file
       var originalRender = options.render
       options.render = function renderWithStyleInjection (h, context) {
         hook.call(context)
@@ -7219,14 +7138,10 @@ KeyboardListener_component.options.__file = "src/components/KeyboardListener.vue
 
 
 
-function mouse_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = mouse_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function mouse_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return mouse_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return mouse_arrayLikeToArray(o, minLen); }
-
-function mouse_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Mouse event handler for overlay
-var mouse_Mouse = /*#__PURE__*/function () {
+var mouse_Mouse =
+/*#__PURE__*/
+function () {
   function Mouse(comp) {
     classCallCheck_default()(this, Mouse);
 
@@ -7263,18 +7178,28 @@ var mouse_Mouse = /*#__PURE__*/function () {
       var l = this.comp.layout;
 
       if (this.map.hasOwnProperty(name)) {
-        var _iterator = mouse_createForOfIteratorHelper(this.map[name]),
-            _step;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
         try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          for (var _iterator = this.map[name][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var f = _step.value;
             f(event);
           }
         } catch (err) {
-          _iterator.e(err);
+          _didIteratorError = true;
+          _iteratorError = err;
         } finally {
-          _iterator.f();
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
         }
       }
 
@@ -7386,12 +7311,6 @@ var mouse_Mouse = /*#__PURE__*/function () {
   }
 });
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Spline.vue?vue&type=script&lang=js&
-function Splinevue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Splinevue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Splinevue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Splinevue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Splinevue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Splinevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Spline renderer. (SMAs, EMAs, TEMAs...
 // you know what I mean)
 // TODO: make a real spline, not a bunch of lines...
@@ -7431,21 +7350,30 @@ function Splinevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == n
       ctx.beginPath();
       var layout = this.$props.layout;
       var i = this.data_index;
-
-      var _iterator = Splinevue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var p = _step.value;
           var x = layout.t2screen(p[0]);
           var y = layout.$2screen(p[i]);
           ctx.lineTo(x, y);
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       ctx.stroke();
@@ -7514,12 +7442,6 @@ if (false) { var Spline_api; }
 Spline_component.options.__file = "src/components/overlays/Spline.vue"
 /* harmony default export */ var Spline = (Spline_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Splines.vue?vue&type=script&lang=js&
-function Splinesvue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Splinesvue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Splinesvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Splinesvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Splinesvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Splinesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Channel renderer. (Keltner, Bollinger)
 
 /* harmony default export */ var Splinesvue_type_script_lang_js_ = ({
@@ -7539,21 +7461,30 @@ function Splinesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == 
         ctx.strokeStyle = this.clrx[i];
         ctx.lineWidth = this.widths[i] || this.line_width;
         ctx.beginPath();
-
-        var _iterator = Splinesvue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
-            _step;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
         try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var p = _step.value;
             var x = layout.t2screen(p[0]);
             var y = layout.$2screen(p[i + 1]);
             ctx.lineTo(x, y);
           }
         } catch (err) {
-          _iterator.e(err);
+          _didIteratorError = true;
+          _iteratorError = err;
         } finally {
-          _iterator.f();
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
         }
 
         ctx.stroke();
@@ -7626,12 +7557,6 @@ if (false) { var Splines_api; }
 Splines_component.options.__file = "src/components/overlays/Splines.vue"
 /* harmony default export */ var Splines = (Splines_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Range.vue?vue&type=script&lang=js&
-function Rangevue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Rangevue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Rangevue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Rangevue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Rangevue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Rangevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // R S I . Because we love it
 // Adds all necessary stuff for you.
 
@@ -7671,21 +7596,30 @@ function Rangevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == nu
       ctx.lineWidth = this.line_width;
       ctx.strokeStyle = this.color;
       ctx.beginPath();
-
-      var _iterator = Rangevue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var p = _step.value;
           var x = layout.t2screen(p[0]);
           var y = layout.$2screen(p[1]);
           ctx.lineTo(x, y);
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       ctx.stroke();
@@ -7771,12 +7705,6 @@ if (false) { var Range_api; }
 Range_component.options.__file = "src/components/overlays/Range.vue"
 /* harmony default export */ var Range = (Range_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Trades.vue?vue&type=script&lang=js&
-function Tradesvue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Tradesvue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Tradesvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Tradesvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Tradesvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Tradesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 
 /* harmony default export */ var Tradesvue_type_script_lang_js_ = ({
   name: 'Trades',
@@ -7792,12 +7720,12 @@ function Tradesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == n
       var layout = this.$props.layout;
       ctx.lineWidth = 1.5;
       ctx.strokeStyle = 'black';
-
-      var _iterator = Tradesvue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var p = _step.value;
           ctx.fillStyle = p[1] ? this.buy_color : this.sell_color;
           ctx.beginPath();
@@ -7814,9 +7742,18 @@ function Tradesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == n
           }
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
     },
     draw_label: function draw_label(ctx, x, y, p) {
@@ -8225,8 +8162,67 @@ function layout_vol(self) {
 
 
 
+//bitwise mathfloor test ok
+// // Candle object for Candles overlay
+// export default class CandleExt {
+//     constructor(overlay, ctx, data) {
+//         this.ctx = ctx
+//         this.self = overlay
+//         this.style = data.raw[6] || this.self
+//         this.draw(data)
+//     }
+//     draw(data) {
+//         const body_color = data.c <= data.o ?
+//             this.style.colorCandleUp :
+//             this.style.colorCandleDw
+//         const wick_color = data.c <= data.o ?
+//             this.style.colorWickUp :
+//             this.style.colorWickDw
+//         const wick_color_sm = this.style.colorWickSm
+//         let w = Math.round(Math.max(data.w, 1))
+//         let hw = Math.max(~~(w * 0.5), 1)
+//         let h = Math.round(Math.abs(data.o - data.c))
+//         let max_h = data.c === data.o ? 1 : 2
+//         this.ctx.strokeStyle = w > 1 ? wick_color : wick_color_sm
+//         this.ctx.beginPath()
+//         this.ctx.moveTo(
+//             ~~(data.x) - 0.5,
+//             ~~(data.h)
+//         )
+//         this.ctx.lineTo(
+//             ~~(data.x) - 0.5,
+//             ~~(data.l)
+//         )
+//         this.ctx.stroke()
+//         if (data.w > 1.5 || data.o === data.c) {
+//             this.ctx.fillStyle = body_color
+//             // TODO: Move common calculations to layout.js
+//             let s = data.c >= data.o ? 1 : -1
+//             this.ctx.fillRect(
+//                 ~~(data.x - hw -1),
+//                 ~~(data.o - 1),
+//                 ~~(hw * 2 + 1),
+//                 ~~(s * Math.max(h, max_h))
+//             )
+//         } else {
+//             this.ctx.strokeStyle = body_color
+//             this.ctx.beginPath()
+//             this.ctx.moveTo(
+//                 ~~(data.x) - 0.5,
+//                 ~~(Math.min(data.o, data.c)),
+//             )
+//             this.ctx.lineTo(
+//                 ~~(data.x) - 0.5,
+//                 ~~(Math.max(data.o, data.c)),
+//             )
+//             this.ctx.stroke()
+//         }
+//     }
+// }
 // Candle object for Candles overlay
-var candle_CandleExt = /*#__PURE__*/function () {
+var candle_CandleExt =
+/*#__PURE__*/
+function () {
   function CandleExt(overlay, ctx, data) {
     classCallCheck_default()(this, CandleExt);
 
@@ -8245,25 +8241,25 @@ var candle_CandleExt = /*#__PURE__*/function () {
       //Saving the browser to do extra calculations to create the anti-aliasing effect. 
 
       var w = Math.round(Math.max(data.w, 1));
-      var hw = Math.max(Math.floor(w * 0.5), 1);
+      var hw = Math.max(~~(w * 0.5), 1);
       var h = Math.round(Math.abs(data.o - data.c));
       var max_h = data.c === data.o ? 1 : 2;
       this.ctx.strokeStyle = w > 1 ? wick_color : wick_color_sm;
       this.ctx.beginPath();
-      this.ctx.moveTo(Math.floor(data.x) - 0.5, Math.floor(data.h));
-      this.ctx.lineTo(Math.floor(data.x) - 0.5, Math.floor(data.l));
+      this.ctx.moveTo(~~data.x - 0.5, ~~data.h);
+      this.ctx.lineTo(~~data.x - 0.5, ~~data.l);
       this.ctx.stroke();
 
       if (data.w > 1.5 || data.o === data.c) {
         this.ctx.fillStyle = body_color; // TODO: Move common calculations to layout.js
 
         var s = data.c >= data.o ? 1 : -1;
-        this.ctx.fillRect(Math.floor(data.x - hw - 1), Math.floor(data.o - 1), Math.floor(hw * 2 + 1), Math.floor(s * Math.max(h, max_h)));
+        this.ctx.fillRect(~~(data.x - hw - 1), ~~(data.o - 1), ~~(hw * 2 + 1), ~~(s * Math.max(h, max_h)));
       } else {
         this.ctx.strokeStyle = body_color;
         this.ctx.beginPath();
-        this.ctx.moveTo(Math.floor(data.x) - 0.5, Math.floor(Math.min(data.o, data.c)));
-        this.ctx.lineTo(Math.floor(data.x) - 0.5, Math.floor(Math.max(data.o, data.c)));
+        this.ctx.moveTo(~~data.x - 0.5, ~~Math.min(data.o, data.c));
+        this.ctx.lineTo(~~data.x - 0.5, ~~Math.max(data.o, data.c));
         this.ctx.stroke();
       }
     }
@@ -8278,7 +8274,9 @@ var candle_CandleExt = /*#__PURE__*/function () {
 
 
 //bitwise test ok math.floor
-var volbar_VolbarExt = /*#__PURE__*/function () {
+var volbar_VolbarExt =
+/*#__PURE__*/
+function () {
   function VolbarExt(overlay, ctx, data) {
     classCallCheck_default()(this, VolbarExt);
 
@@ -8309,7 +8307,9 @@ var volbar_VolbarExt = /*#__PURE__*/function () {
 
 
 // Price bar & price line (shader)
-var price_Price = /*#__PURE__*/function () {
+var price_Price =
+/*#__PURE__*/
+function () {
   function Price(comp) {
     classCallCheck_default()(this, Price);
 
@@ -8407,13 +8407,6 @@ var price_Price = /*#__PURE__*/function () {
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Candles.vue?vue&type=script&lang=js&
 
-
-function Candlesvue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Candlesvue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Candlesvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Candlesvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Candlesvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Candlesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Renedrer for candlesticks + volume (optional)
 // It can be used as the main chart or an indicator
 
@@ -8447,33 +8440,53 @@ function Candlesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == 
       }
 
       if (this.show_volume) {
-        var _iterator = Candlesvue_type_script_lang_js_createForOfIteratorHelper(cnv.volume),
-            _step;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
         try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          for (var _iterator = cnv.volume[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var v = _step.value;
             new volbar_VolbarExt(this, ctx, v);
           }
         } catch (err) {
-          _iterator.e(err);
+          _didIteratorError = true;
+          _iteratorError = err;
         } finally {
-          _iterator.f();
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
         }
       }
 
-      var _iterator2 = Candlesvue_type_script_lang_js_createForOfIteratorHelper(cnv.candles),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = cnv.candles[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var c = _step2.value;
           new candle_CandleExt(this, ctx, c);
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
 
       if (this.price_line) this.price.draw(ctx);
@@ -8556,13 +8569,6 @@ Candles_component.options.__file = "src/components/overlays/Candles.vue"
 /* harmony default export */ var Candles = (Candles_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Volume.vue?vue&type=script&lang=js&
 
-
-function Volumevue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Volumevue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Volumevue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Volumevue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Volumevue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Volumevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Standalone renedrer for the volume
 
 
@@ -8580,18 +8586,28 @@ function Volumevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == n
     draw: function draw(ctx) {
       // TODO: volume average
       // TODO: Y-axis scaling
-      var _iterator = Volumevue_type_script_lang_js_createForOfIteratorHelper(layout_vol(this)),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = layout_vol(this)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var v = _step.value;
           new volbar_VolbarExt(this, ctx, v);
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
     },
     use_for: function use_for() {
@@ -8784,14 +8800,10 @@ Splitters_component.options.__file = "src/components/overlays/Splitters.vue"
 
 
 
-function keys_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = keys_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function keys_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return keys_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return keys_arrayLikeToArray(o, minLen); }
-
-function keys_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Keyboard event handler for overlay
-var keys_Keys = /*#__PURE__*/function () {
+var keys_Keys =
+/*#__PURE__*/
+function () {
   function Keys(comp) {
     classCallCheck_default()(this, Keys);
 
@@ -8814,18 +8826,28 @@ var keys_Keys = /*#__PURE__*/function () {
     key: "emit",
     value: function emit(name, event) {
       if (name in this.map) {
-        var _iterator = keys_createForOfIteratorHelper(this.map[name]),
-            _step;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
         try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          for (var _iterator = this.map[name][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var f = _step.value;
             f(event);
           }
         } catch (err) {
-          _iterator.e(err);
+          _didIteratorError = true;
+          _iteratorError = err;
         } finally {
-          _iterator.f();
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
         }
       }
 
@@ -8853,12 +8875,6 @@ var keys_Keys = /*#__PURE__*/function () {
 
 
 // CONCATENATED MODULE: ./src/mixins/tool.js
-function tool_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = tool_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function tool_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return tool_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return tool_arrayLikeToArray(o, minLen); }
-
-function tool_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Usuful stuff for creating tools. Include as mixin
 
 /* harmony default export */ var mixins_tool = ({
@@ -8926,18 +8942,28 @@ function tool_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) 
       // If layer $uuid is changed, then re-init
       // pins & collisions
       if (n.$uuid !== p.$uuid) {
-        var _iterator = tool_createForOfIteratorHelper(this.pins),
-            _step;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
         try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          for (var _iterator = this.pins[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var p = _step.value;
             p.re_init();
           }
         } catch (err) {
-          _iterator.e(err);
+          _didIteratorError = true;
+          _iteratorError = err;
         } finally {
-          _iterator.f();
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
         }
 
         this.collisions = [];
@@ -8987,7 +9013,7 @@ function tool_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) 
 var icons = __webpack_require__(3);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(19);
+var defineProperty = __webpack_require__(20);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // CONCATENATED MODULE: ./src/components/primitives/pin.js
@@ -8996,7 +9022,9 @@ var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 
 // Semi-automatic pin object. For stretching things.
-var pin_Pin = /*#__PURE__*/function () {
+var pin_Pin =
+/*#__PURE__*/
+function () {
   // (Comp reference, a name in overlay settings,
   // pin parameters)
   function Pin(comp, name) {
@@ -9256,7 +9284,9 @@ var pin_Pin = /*#__PURE__*/function () {
 // Draws a segment, adds corresponding collision f-n
 
 
-var seg_Seg = /*#__PURE__*/function () {
+var seg_Seg =
+/*#__PURE__*/
+function () {
   // Overlay ref, canvas ctx
   function Seg(overlay, ctx) {
     classCallCheck_default()(this, Seg);
@@ -9301,7 +9331,9 @@ var seg_Seg = /*#__PURE__*/function () {
 // Draws a line, adds corresponding collision f-n
 
 
-var line_Line = /*#__PURE__*/function () {
+var line_Line =
+/*#__PURE__*/
+function () {
   // Overlay ref, canvas ctx
   function Line(overlay, ctx) {
     classCallCheck_default()(this, Line);
@@ -9924,12 +9956,6 @@ if (false) { var FibonacciTime_api; }
 FibonacciTime_component.options.__file = "src/components/overlays/FibonacciTime.vue"
 /* harmony default export */ var FibonacciTime = (FibonacciTime_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Grid.vue?vue&type=script&lang=js&
-function Gridvue_type_script_lang_js_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = Gridvue_type_script_lang_js_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function Gridvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Gridvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Gridvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
-
-function Gridvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 // Sets up all layers/overlays for the grid with 'grid_id'
 
 
@@ -10046,12 +10072,12 @@ function Gridvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == nul
       // to this._registry; returns compo list
       var comp_list = [],
           count = {};
-
-      var _iterator = Gridvue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var d = _step.value;
           var comp = this._list[this._registry[d.type]];
 
@@ -10066,9 +10092,18 @@ function Gridvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == nul
           }
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       return comp_list.map(function (x, i) {
@@ -10201,17 +10236,12 @@ Grid_component.options.__file = "src/components/Grid.vue"
 
 
 
-function sidebar_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = sidebar_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function sidebar_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return sidebar_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return sidebar_arrayLikeToArray(o, minLen); }
-
-function sidebar_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-
 
 var PANHEIGHT;
 
-var sidebar_Sidebar = /*#__PURE__*/function () {
+var sidebar_Sidebar =
+/*#__PURE__*/
+function () {
   function Sidebar(canvas, comp) {
     var side = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'right';
 
@@ -10341,12 +10371,12 @@ var sidebar_Sidebar = /*#__PURE__*/function () {
 
       this.ctx.fillStyle = this.$p.colors.colorText;
       this.ctx.beginPath();
-
-      var _iterator = sidebar_createForOfIteratorHelper(points),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = points[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var p = _step.value;
           if (p[0] > this.layout.height) continue;
           var x1 = side === 'left' ? w - 0.5 : x - 0.5;
@@ -10361,9 +10391,18 @@ var sidebar_Sidebar = /*#__PURE__*/function () {
           this.ctx.fillText(yValue, x1 + offst, p[0] + 4);
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       this.ctx.stroke();
@@ -10374,20 +10413,30 @@ var sidebar_Sidebar = /*#__PURE__*/function () {
   }, {
     key: "apply_shaders",
     value: function apply_shaders() {
-      var _iterator2 = sidebar_createForOfIteratorHelper(this.$p.shaders),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = this.$p.shaders[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var s = _step2.value;
           this.ctx.save();
           s.draw(this.ctx);
           this.ctx.restore();
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
     }
   }, {
@@ -10759,7 +10808,7 @@ LegendButtonvue_type_template_id_1ad87362_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/LegendButton.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_LegendButtonvue_type_script_lang_js_ = (LegendButtonvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/LegendButton.vue?vue&type=style&index=0&lang=css&
-var LegendButtonvue_type_style_index_0_lang_css_ = __webpack_require__(35);
+var LegendButtonvue_type_style_index_0_lang_css_ = __webpack_require__(32);
 
 // CONCATENATED MODULE: ./src/components/LegendButton.vue
 
@@ -10817,7 +10866,7 @@ LegendButton_component.options.__file = "src/components/LegendButton.vue"
 // CONCATENATED MODULE: ./src/components/ButtonGroup.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_ButtonGroupvue_type_script_lang_js_ = (ButtonGroupvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/ButtonGroup.vue?vue&type=style&index=0&lang=css&
-var ButtonGroupvue_type_style_index_0_lang_css_ = __webpack_require__(37);
+var ButtonGroupvue_type_style_index_0_lang_css_ = __webpack_require__(34);
 
 // CONCATENATED MODULE: ./src/components/ButtonGroup.vue
 
@@ -11005,7 +11054,7 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
 // CONCATENATED MODULE: ./src/components/Legend.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Legendvue_type_script_lang_js_ = (Legendvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Legend.vue?vue&type=style&index=0&lang=css&
-var Legendvue_type_style_index_0_lang_css_ = __webpack_require__(39);
+var Legendvue_type_style_index_0_lang_css_ = __webpack_require__(36);
 
 // CONCATENATED MODULE: ./src/components/Legend.vue
 
@@ -11219,7 +11268,7 @@ Legend_component.options.__file = "src/components/Legend.vue"
 // CONCATENATED MODULE: ./src/components/Section.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Sectionvue_type_script_lang_js_ = (Sectionvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Section.vue?vue&type=style&index=0&lang=css&
-var Sectionvue_type_style_index_0_lang_css_ = __webpack_require__(41);
+var Sectionvue_type_style_index_0_lang_css_ = __webpack_require__(38);
 
 // CONCATENATED MODULE: ./src/components/Section.vue
 
@@ -11248,13 +11297,6 @@ Section_component.options.__file = "src/components/Section.vue"
 // CONCATENATED MODULE: ./src/components/js/botbar.js
 
 
-
-function botbar_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = botbar_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function botbar_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return botbar_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return botbar_arrayLikeToArray(o, minLen); }
-
-function botbar_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 //bitwise test ok mathfloor
 
 
@@ -11266,7 +11308,9 @@ var botbar_MINUTE15 = constants.MINUTE15,
     botbar_YEAR = constants.YEAR,
     botbar_MONTHMAP = constants.MONTHMAP;
 
-var botbar_Botbar = /*#__PURE__*/function () {
+var botbar_Botbar =
+/*#__PURE__*/
+function () {
   function Botbar(canvas, comp) {
     classCallCheck_default()(this, Botbar);
 
@@ -11300,12 +11344,12 @@ var botbar_Botbar = /*#__PURE__*/function () {
       this.ctx.stroke();
       this.ctx.fillStyle = this.$p.colors.colorText;
       this.ctx.beginPath();
-
-      var _iterator = botbar_createForOfIteratorHelper(this.layout.botbar.xs),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.layout.botbar.xs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var p = _step.value;
           var lbl = this.format_date(p[1][0]);
           if (p[0] > width - sb) continue;
@@ -11321,9 +11365,18 @@ var botbar_Botbar = /*#__PURE__*/function () {
           this.ctx.globalAlpha = 1;
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       this.ctx.stroke();
@@ -11333,20 +11386,30 @@ var botbar_Botbar = /*#__PURE__*/function () {
   }, {
     key: "apply_shaders",
     value: function apply_shaders() {
-      var _iterator2 = botbar_createForOfIteratorHelper(this.$p.shaders),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = this.$p.shaders[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var s = _step2.value;
           this.ctx.save();
           s.draw(this.ctx);
           this.ctx.restore();
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
     }
   }, {
@@ -11497,7 +11560,7 @@ var botbar_Botbar = /*#__PURE__*/function () {
 // CONCATENATED MODULE: ./src/components/Botbar.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Botbarvue_type_script_lang_js_ = (Botbarvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Botbar.vue?vue&type=style&index=0&lang=css&
-var Botbarvue_type_style_index_0_lang_css_ = __webpack_require__(43);
+var Botbarvue_type_style_index_0_lang_css_ = __webpack_require__(40);
 
 // CONCATENATED MODULE: ./src/components/Botbar.vue
 var Botbar_render, Botbar_staticRenderFns
@@ -12088,7 +12151,7 @@ ToolbarItemvue_type_template_id_227b3c2e_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/ToolbarItem.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_ToolbarItemvue_type_script_lang_js_ = (ToolbarItemvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/ToolbarItem.vue?vue&type=style&index=0&lang=css&
-var ToolbarItemvue_type_style_index_0_lang_css_ = __webpack_require__(45);
+var ToolbarItemvue_type_style_index_0_lang_css_ = __webpack_require__(42);
 
 // CONCATENATED MODULE: ./src/components/ToolbarItem.vue
 
@@ -12185,7 +12248,7 @@ ToolbarItem_component.options.__file = "src/components/ToolbarItem.vue"
 // CONCATENATED MODULE: ./src/components/Toolbar.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Toolbarvue_type_script_lang_js_ = (Toolbarvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Toolbar.vue?vue&type=style&index=0&lang=css&
-var Toolbarvue_type_style_index_0_lang_css_ = __webpack_require__(47);
+var Toolbarvue_type_style_index_0_lang_css_ = __webpack_require__(44);
 
 // CONCATENATED MODULE: ./src/components/Toolbar.vue
 
@@ -12496,15 +12559,15 @@ if (false) { var TradingVue_api; }
 TradingVue_component.options.__file = "src/TradingVue.vue"
 /* harmony default export */ var TradingVue = (TradingVue_component.exports);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
-var helpers_typeof = __webpack_require__(18);
+var helpers_typeof = __webpack_require__(19);
 var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(16);
+var possibleConstructorReturn = __webpack_require__(15);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(8);
+var getPrototypeOf = __webpack_require__(16);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
@@ -12512,28 +12575,19 @@ var inherits = __webpack_require__(17);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
-var regenerator = __webpack_require__(20);
+var regenerator = __webpack_require__(18);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__(25);
-var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
 
 // CONCATENATED MODULE: ./src/helpers/dc_events.js
 
-
-
-function dc_events_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = dc_events_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function dc_events_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return dc_events_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return dc_events_arrayLikeToArray(o, minLen); }
-
-function dc_events_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 // DataCube event handlers
 
 
 
-var dc_events_DCEvents = /*#__PURE__*/function () {
+var dc_events_DCEvents =
+/*#__PURE__*/
+function () {
   function DCEvents() {
     classCallCheck_default()(this, DCEvents);
   }
@@ -12602,20 +12656,29 @@ var dc_events_DCEvents = /*#__PURE__*/function () {
     key: "register_tools",
     value: function register_tools(tools) {
       var preset = {};
-
-      var _iterator = dc_events_createForOfIteratorHelper(this.data.tools || []),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = (this.data.tools || [])[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var tool = _step.value;
           preset[tool.type] = tool;
           delete tool.type;
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       this.data.tools = [];
@@ -12623,12 +12686,12 @@ var dc_events_DCEvents = /*#__PURE__*/function () {
         type: 'Cursor',
         icon: icons['cursor.png']
       }];
-
-      var _iterator2 = dc_events_createForOfIteratorHelper(tools),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = tools[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var tool = _step2.value;
           var proto = Object.assign({}, tool.info);
           var type = tool.info.type || 'Default';
@@ -12648,9 +12711,18 @@ var dc_events_DCEvents = /*#__PURE__*/function () {
           }
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
 
       this.tv.$set(this.data, 'tools', list);
@@ -12822,31 +12894,19 @@ var dc_events_DCEvents = /*#__PURE__*/function () {
 
 
 
-
-
-function dc_core_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = dc_core_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function dc_core_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return dc_core_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return dc_core_arrayLikeToArray(o, minLen); }
-
-function dc_core_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _createSuper(Derived) { return function () { var Super = getPrototypeOf_default()(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
 // DataCube private methods
 
 
 
-var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
+var dc_core_DCCore =
+/*#__PURE__*/
+function (_DCEvents) {
   inherits_default()(DCCore, _DCEvents);
-
-  var _super = _createSuper(DCCore);
 
   function DCCore() {
     classCallCheck_default()(this, DCCore);
 
-    return _super.apply(this, arguments);
+    return possibleConstructorReturn_default()(this, getPrototypeOf_default()(DCCore).apply(this, arguments));
   }
 
   createClass_default()(DCCore, [{
@@ -12888,86 +12948,78 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
 
   }, {
     key: "range_changed",
-    value: function () {
-      var _range_changed = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee(range, tf) {
-        var _this = this;
+    value: function range_changed(range, tf) {
+      var _this = this;
 
-        var check,
-            first,
-            prom,
-            _args = arguments;
-        return regenerator_default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                check = _args.length > 2 && _args[2] !== undefined ? _args[2] : false;
+      var check,
+          first,
+          prom,
+          _args = arguments;
+      return regenerator_default.a.async(function range_changed$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              check = _args.length > 2 && _args[2] !== undefined ? _args[2] : false;
 
-                if (this.loader) {
-                  _context.next = 3;
-                  break;
-                }
+              if (this.loader) {
+                _context.next = 3;
+                break;
+              }
 
-                return _context.abrupt("return");
+              return _context.abrupt("return");
 
-              case 3:
-                if (this.loading) {
-                  _context.next = 19;
-                  break;
-                }
+            case 3:
+              if (this.loading) {
+                _context.next = 19;
+                break;
+              }
 
-                first = this.data.chart.data[0][0];
+              first = this.data.chart.data[0][0];
 
-                if (!(range[0] < first)) {
-                  _context.next = 19;
-                  break;
-                }
+              if (!(range[0] < first)) {
+                _context.next = 19;
+                break;
+              }
 
-                this.loading = true;
-                _context.next = 9;
-                return utils.pause(250);
+              this.loading = true;
+              _context.next = 9;
+              return regenerator_default.a.awrap(utils.pause(250));
 
-              case 9:
-                // Load bigger chunks
-                range = range.slice(); // copy
+            case 9:
+              // Load bigger chunks
+              range = range.slice(); // copy
 
-                range[0] = Math.floor(range[0]);
-                range[1] = Math.floor(first);
-                prom = this.loader(range, tf, function (d) {
-                  // Callback way
-                  _this.chunk_loaded(d);
-                });
+              range[0] = Math.floor(range[0]);
+              range[1] = Math.floor(first);
+              prom = this.loader(range, tf, function (d) {
+                // Callback way
+                _this.chunk_loaded(d);
+              });
 
-                if (!(prom && prom.then)) {
-                  _context.next = 19;
-                  break;
-                }
+              if (!(prom && prom.then)) {
+                _context.next = 19;
+                break;
+              }
 
-                _context.t0 = this;
-                _context.next = 17;
-                return prom;
+              _context.t0 = this;
+              _context.next = 17;
+              return regenerator_default.a.awrap(prom);
 
-              case 17:
-                _context.t1 = _context.sent;
+            case 17:
+              _context.t1 = _context.sent;
 
-                _context.t0.chunk_loaded.call(_context.t0, _context.t1);
+              _context.t0.chunk_loaded.call(_context.t0, _context.t1);
 
-              case 19:
-                if (!check) this.last_chunk = [range, tf];
+            case 19:
+              if (!check) this.last_chunk = [range, tf];
 
-              case 20:
-              case "end":
-                return _context.stop();
-            }
+            case 20:
+            case "end":
+              return _context.stop();
           }
-        }, _callee, this);
-      }));
-
-      function range_changed(_x, _x2) {
-        return _range_changed.apply(this, arguments);
-      }
-
-      return range_changed;
-    }() // A new chunk of data is loaded
+        }
+      }, null, this);
+    } // A new chunk of data is loaded
     // TODO: bulletproof fetch
 
   }, {
@@ -12996,12 +13048,12 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
     value: function update_ids() {
       this.data.chart.id = "chart.".concat(this.data.chart.type);
       var count = {};
-
-      var _iterator = dc_core_createForOfIteratorHelper(this.data.onchart),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = this.data.onchart[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var ov = _step.value;
 
           if (count[ov.type] === undefined) {
@@ -13014,18 +13066,27 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
           if (!ov.settings) ov.settings = {};
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       count = {};
-
-      var _iterator2 = dc_core_createForOfIteratorHelper(this.data.offchart),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = this.data.offchart[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           ov = _step2.value;
 
           if (count[ov.type] === undefined) {
@@ -13039,9 +13100,18 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
           if (!ov.settings) ov.settings = {};
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
     } // Updates all overlays with given values.
 
@@ -13299,26 +13369,15 @@ var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
 
 
 
-
-function datacube_createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = datacube_unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function datacube_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return datacube_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return datacube_arrayLikeToArray(o, minLen); }
-
-function datacube_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function datacube_createSuper(Derived) { return function () { var Super = getPrototypeOf_default()(Derived), result; if (datacube_isNativeReflectConstruct()) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
-
-function datacube_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
 // Main DataHelper class. A container for data,
 // which works as a proxy and CRUD interface
 
  // Interface methods. Private methods in dc_core.js
 
-var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
+var datacube_DataCube =
+/*#__PURE__*/
+function (_DCCore) {
   inherits_default()(DataCube, _DCCore);
-
-  var _super = datacube_createSuper(DataCube);
 
   function DataCube() {
     var _this;
@@ -13327,7 +13386,7 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
 
     classCallCheck_default()(this, DataCube);
 
-    _this = _super.call(this);
+    _this = possibleConstructorReturn_default()(this, getPrototypeOf_default()(DataCube).call(this));
     _this.data = data;
     return _this;
   } // Add new overlay
@@ -13365,12 +13424,12 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
     key: "set",
     value: function set(query, data) {
       var objects = this.get_by_query(query);
-
-      var _iterator = datacube_createForOfIteratorHelper(objects),
-          _step;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (var _iterator = objects[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var obj = _step.value;
           var i = obj.i !== undefined ? obj.i : obj.p.indexOf(obj.v);
 
@@ -13379,9 +13438,18 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
           }
         }
       } catch (err) {
-        _iterator.e(err);
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        _iterator.f();
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
 
       this.update_ids();
@@ -13391,12 +13459,12 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
     key: "merge",
     value: function merge(query, data) {
       var objects = this.get_by_query(query);
-
-      var _iterator2 = datacube_createForOfIteratorHelper(objects),
-          _step2;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (var _iterator2 = objects[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var obj = _step2.value;
 
           if (Array.isArray(obj.v)) {
@@ -13413,9 +13481,18 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
           }
         }
       } catch (err) {
-        _iterator2.e(err);
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
-        _iterator2.f();
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
 
       this.update_ids();
@@ -13425,12 +13502,12 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
     key: "del",
     value: function del(query) {
       var objects = this.get_by_query(query);
-
-      var _iterator3 = datacube_createForOfIteratorHelper(objects),
-          _step3;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        for (var _iterator3 = objects[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
           var obj = _step3.value;
           // Find current index of the field (if not defined)
           var i = obj.i !== undefined ? obj.i : obj.p.indexOf(obj.v);
@@ -13440,9 +13517,18 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
           }
         }
       } catch (err) {
-        _iterator3.e(err);
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
-        _iterator3.f();
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+            _iterator3["return"]();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
       }
 
       this.update_ids();
@@ -13631,7 +13717,9 @@ var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
 
  // OI Price bar & price line (shader)
 
-var oi_price_OIPrice = /*#__PURE__*/function () {
+var oi_price_OIPrice =
+/*#__PURE__*/
+function () {
   function OIPrice(comp) {
     classCallCheck_default()(this, OIPrice);
 
@@ -13736,7 +13824,9 @@ var oi_price_OIPrice = /*#__PURE__*/function () {
 
 //bitwise test ok math.floor
 // OI Candle object for OI Candles overlay
-var oi_candle_OICandleExt = /*#__PURE__*/function () {
+var oi_candle_OICandleExt =
+/*#__PURE__*/
+function () {
   function OICandleExt(overlay, ctx, data) {
     classCallCheck_default()(this, OICandleExt);
 
@@ -13784,6 +13874,17 @@ var oi_candle_OICandleExt = /*#__PURE__*/function () {
 
 
 // CONCATENATED MODULE: ./src/index.js
+/* concated harmony reexport TradingVue */__webpack_require__.d(__webpack_exports__, "TradingVue", function() { return TradingVue; });
+/* concated harmony reexport Overlay */__webpack_require__.d(__webpack_exports__, "Overlay", function() { return mixins_overlay; });
+/* concated harmony reexport Utils */__webpack_require__.d(__webpack_exports__, "Utils", function() { return utils; });
+/* concated harmony reexport Constants */__webpack_require__.d(__webpack_exports__, "Constants", function() { return constants; });
+/* concated harmony reexport Candle */__webpack_require__.d(__webpack_exports__, "Candle", function() { return candle_CandleExt; });
+/* concated harmony reexport Volbar */__webpack_require__.d(__webpack_exports__, "Volbar", function() { return volbar_VolbarExt; });
+/* concated harmony reexport layout_cnv */__webpack_require__.d(__webpack_exports__, "layout_cnv", function() { return layout_cnv; });
+/* concated harmony reexport layout_vol */__webpack_require__.d(__webpack_exports__, "layout_vol", function() { return layout_vol; });
+/* concated harmony reexport DataCube */__webpack_require__.d(__webpack_exports__, "DataCube", function() { return datacube_DataCube; });
+/* concated harmony reexport OICandle */__webpack_require__.d(__webpack_exports__, "OICandle", function() { return oi_candle_OICandleExt; });
+/* concated harmony reexport OIPrice */__webpack_require__.d(__webpack_exports__, "OIPrice", function() { return oi_price_OIPrice; });
 
 
 
