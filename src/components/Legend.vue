@@ -99,7 +99,7 @@ export default {
                     let lastValueArr = Object.values(lastData)
                     lastValueArr.shift()
                     valuesArr = lastValueArr.map(value => {
-                        return x.type == 'FundingRate' ? {value: `${(value * 100).toFixed(3)}%`} : Math.abs(value) >= 1.0e+6 ? {value: Utils.changeNumberFormat(value, 2)} : {value: value.toFixed(2)}
+                        return x.type == 'FundingRate' || x.type == 'Volatility' ? {value: `${(value * 100).toFixed(3)}%`} : Math.abs(value) >= 1.0e+6 ? {value: Utils.changeNumberFormat(value, 2)} : {value: value.toFixed(2)}
                     })
                 }
                 

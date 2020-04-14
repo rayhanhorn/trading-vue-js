@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.5 - Mon Apr 13 2020
+ * TradingVue.JS - v0.4.5 - Tue Apr 14 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -10985,7 +10985,7 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
           var lastValueArr = Object.values(lastData);
           lastValueArr.shift();
           valuesArr = lastValueArr.map(function (value) {
-            return x.type == 'FundingRate' ? {
+            return x.type == 'FundingRate' || x.type == 'Volatility' ? {
               value: "".concat((value * 100).toFixed(3), "%")
             } : Math.abs(value) >= 1.0e+6 ? {
               value: utils.changeNumberFormat(value, 2)
