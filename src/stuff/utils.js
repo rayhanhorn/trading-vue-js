@@ -3,6 +3,11 @@ import IndexedArray from 'arrayslicer'
 
 export default {
 	
+	setImmediatePromise() {
+		return new Promise((resolve) => {
+			setImmediate(() => resolve());
+		});
+	},
 	
 	ABS_INT(n) {
 		return (n ^ (n >> 31)) - (n >> 31);
@@ -30,7 +35,7 @@ export default {
 		x = x - ((x - max) & ((max - x) >> 31));
 		return x - ((x - min) & ((x - min) >> 31));
 		//return ( n > max ) ? max : ( n < min ) ? n : min;
-		},
+	},
 	
     add_zero(i) {
         if (i < 10) {

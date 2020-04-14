@@ -4,11 +4,11 @@ import Utils from '../../stuff/utils.js'
 var PANHEIGHT
 
 export default class Sidebar {
-
+    
     constructor(canvas, comp, side = 'right') {
-
+        
         PANHEIGHT = comp.config.PANHEIGHT
-
+        
         this.canvas = canvas
         this.ctx = canvas.getContext('2d', { alpha: true, desynchronized: true, preserveDrawingBuffer: false });
         this.comp = comp
@@ -17,25 +17,25 @@ export default class Sidebar {
         this.range = this.$p.range
         this.id = this.$p.grid_id
         this.layout = this.$p.layout.grids[this.id]
-
+        
         this.side = side
         this.listeners()
-
+        
     }
-
+    
     listeners() {
         var mc = new Hammer.Manager(this.canvas)
         mc.add(new Hammer.Pan({
             direction: Hammer.DIRECTION_VERTICAL,
             threshold: 1
         }))
-
+        
         mc.add( new Hammer.Tap({ event: 'doubletap', taps: 2 }) );
-
+        
         mc.on('panstart', event => {
             if (this.$p.y_transform) {
                 this.zoom = this.$p.y_transform.zoom
-            } else {
+                } else {
                 this.zoom = 1.0
             }
             this.drug = {
@@ -47,7 +47,7 @@ export default class Sidebar {
                 this.layout.$_lo
             ]
         })
-
+        
         mc.on('panmove', event => {
             if (this.drug) {
                 this.zoom = this.calc_zoom(event)
@@ -61,7 +61,7 @@ export default class Sidebar {
                 this.update()
             }
         })
-
+        
         mc.on('panend', () => {
             this.drug = null
             this.comp.$emit('sidebar-transform', {
@@ -69,7 +69,7 @@ export default class Sidebar {
                 drugging: false
             })
         })
-
+        
         mc.on('doubletap', () => {
             this.comp.$emit('sidebar-transform', {
                 grid_id: this.id,
@@ -79,86 +79,90 @@ export default class Sidebar {
             this.zoom = 1.0
             this.update()
         })
-
+        
         // TODO: Do later for mobile version
-
+        
     }
-
+    
     update() {
-
+        
         // Update reference to the grid
         this.layout = this.$p.layout.grids[this.id]
-
+        
         var points = this.layout.ys
         var x, y, w, h, side = this.side
         var sb = this.layout.sb
-
+        
+        let dpr = window.devicePixelRatio || 1
+		if (dpr < 1) dpr = 1
+        
         this.ctx.fillStyle = this.$p.colors.colorBack
         this.ctx.font = "13px -apple-system,BlinkMacSystemFont, Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell, Fira Sans,Droid Sans,Helvetica Neue, sans-serif"
-
+        
         switch(side) {
             case 'left':
-                x = 0
-                y = 0
-                w = Math.floor(sb)
-                h = this.layout.height
+            x = 0
+            y = 0
+            w = (sb*dpr);
+            h = (this.layout.height*dpr);
 
-                this.ctx.fillRect(x, y, w, h)
-
-                this.ctx.strokeStyle = this.$p.colors.colorScale
-
-                this.ctx.beginPath()
-                this.ctx.moveTo(x + 0.5, 0)
-                this.ctx.lineTo(x + 0.5, h)
-                this.ctx.stroke()
-
-                break
+            this.ctx.fillRect(x, y, w, h)
+            
+            this.ctx.strokeStyle = this.$p.colors.colorScale
+            
+            this.ctx.beginPath()
+            this.ctx.moveTo(x + 0.5, 0)
+            this.ctx.lineTo(x + 0.5, h)
+            this.ctx.stroke()
+            
+            break
             case 'right':
-                x = 0
-                y = 0
-                w = Math.floor(sb)
-                h = this.layout.height
-                this.ctx.fillRect(x, y, w, h)
-
-                this.ctx.strokeStyle = this.$p.colors.colorScale
-
-                this.ctx.beginPath()
-                this.ctx.moveTo(x + 0.5, 0)
-                this.ctx.lineTo(x + 0.5, h)
-                this.ctx.stroke()
-                break
+            x = 0
+            y = 0
+            w = (sb*dpr);
+            h = (this.layout.height*dpr);
+            
+            this.ctx.fillRect(x, y, w, h)
+            
+            this.ctx.strokeStyle = this.$p.colors.colorScale
+            
+            this.ctx.beginPath()
+            this.ctx.moveTo(x + 0.5, 0)
+            this.ctx.lineTo(x + 0.5, h)
+            this.ctx.stroke()
+            break
         }
-
+        
         this.ctx.fillStyle = this.$p.colors.colorText
         this.ctx.beginPath()
-
+        
         for (var p of points) {
-
+            
             if (p[0] > this.layout.height) continue
-
+            
             var x1 = side === 'left' ? w - 0.5 : x - 0.5
             var x2 = side === 'left' ? x1 - 4.5 : x1 + 4.5
-
+            
             this.ctx.moveTo(x1, p[0] - 0.5)
             this.ctx.lineTo(x2, p[0] - 0.5)
-
+            
             var offst = side === 'left' ? - 10 : 10
             this.ctx.textAlign = side === 'left' ? 'end' : 'start'
             let d = this.layout.prec >= 3 ? 3 : this.layout.prec // Limit to 3 decimal places at most
             const yValue = Math.abs(p[1]) >= 1.0e+6 ? Utils.changeNumberFormat(p[1], d) : p[1].toFixed(d)
             this.ctx.fillText(yValue, x1 + offst, p[0] + 4)
         }
-
+        
         this.ctx.stroke()
-
+        
         if (this.$p.grid_id) this.upper_border()
-
+        
         this.apply_shaders()
-
+        
         if (this.$p.cursor.y && this.$p.cursor.y$) this.panel()
-
+        
     }
-
+    
     apply_shaders() {
         for (var s of this.$p.shaders) {
             this.ctx.save()
@@ -166,7 +170,7 @@ export default class Sidebar {
             this.ctx.restore()
         }
     }
-
+    
     upper_border() {
         this.ctx.strokeStyle = this.$p.colors.colorScale
         this.ctx.beginPath()
@@ -174,21 +178,21 @@ export default class Sidebar {
         this.ctx.lineTo(this.layout.width, 0.5)
         this.ctx.stroke()
     }
-
+    
     // A gray bar behind the current price
     panel() {
-
+        
         if (this.$p.cursor.grid_id !== this.layout.id) {
             return
         }
-
+        
         let d = this.layout.prec >= 3 ? 3 : this.layout.prec // Limit to 3 decimal places at most
         // let lbl = this.$p.cursor.y$.toFixed(this.layout.prec)
         let lbl = Math.abs(this.$p.cursor.y$) >= 1.0e+6 ? Utils.changeNumberFormat(this.$p.cursor.y$, d) : this.$p.cursor.y$.toFixed(d)
         this.ctx.fillStyle = this.$p.colors.colorPanel
-
+        
         let panwidth = this.layout.sb + 1
-
+        
         let x = - 0.5
         let y = this.$p.cursor.y - PANHEIGHT * 0.5 - 0.5
         let a = 7
@@ -196,34 +200,34 @@ export default class Sidebar {
         this.ctx.fillStyle = this.$p.colors.colorTextHL
         this.ctx.textAlign = 'left'
         this.ctx.fillText(lbl, a, y + 15)
-
+        
     }
-
+    
     calc_zoom(event) {
         let d = this.drug.y - event.center.y
         let speed = d > 0 ? 3 : 1
         let k = 1 + speed * d / this.layout.height
         return Utils.clamp(this.drug.z * k, 0.005, 100)
     }
-
+    
     // Not the best place to calculate y-range but
     // this is the simplest solution I found up to
     // date
     calc_range() {
         let z = this.zoom / this.drug.z
         let zk = (1 / z - 1) / 2
-
+        
         let range = this.y_range.slice()
         let delta = range[0] - range[1]
         range[0] = range[0] + delta * zk
         range[1] = range[1] - delta * zk
-
+        
         return range
     }
-
+    
     mousemove() { }
     mouseout() { }
     mouseup() { }
     mousedown() { }
-
+    
 }

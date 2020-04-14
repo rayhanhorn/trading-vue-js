@@ -135,8 +135,7 @@ export default class Grid {
         // TODO: Temp solution, need to implement
         // a proper way to get the chart el offset
         this.offset_x = event.layerX - event.pageX + window.scrollX
-        this.offset_y = event.layerY - event.pageY + this.layout.offset + window.scrollY
-		
+        this.offset_y = event.layerY - event.pageY + this.layout.offset + window.scrollY		
         this.propagate('mousemove', event)
 	}
 	
@@ -193,28 +192,44 @@ export default class Grid {
 		
         if (!this.layout) return
 		
-		this.ctx.fillStyle = '#131722';
-		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+		//clearRect() uses a transparent fill and breaks discord alerts, fixed by adding bgcolor
+        //this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)		
 		
+		//chrome 81 not working
+		//var bgcolor = this.$p.colors.colorBack
+		//this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height, bgcolor); 
 		
-		//clearRect() uses a transparent fill
-        //this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+		let dpr = window.devicePixelRatio || 1
+		if (dpr < 1) dpr = 1
+		
+		this.ctx.fillStyle = this.$p.colors.colorBack		
+		this.ctx.fillRect(0, 0, this.canvas.width*dpr, this.canvas.height*dpr);
+		
         this.grid()
+		
+		
+		
 		
         this.overlays.slice(0)  // copy
 		.sort((l1, l2) => l1.z - l2.z)  // z-index sorting
 		.forEach(l => {
 			if (!l.display) return
-			this.ctx.save()
+			//https://stackoverflow.com/questions/54852559/use-settransform1-0-0-1-0-0-vs-save-restore
+			//this.ctx.save()
+			this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 			const r = l.renderer
-			if (r.hasOwnProperty('pre_draw') && typeof r.pre_draw === 'function') r.pre_draw(this.ctx)
-			r.draw(this.ctx)
-			if (r.hasOwnProperty('post_draw') && typeof r.post_draw === 'function') r.post_draw(this.ctx)
-			this.ctx.restore()
+			//me: what is post_draw/pre_draw for?
+			//c4: just in case for now (for overlay devs)
+			//if (r.pre_draw) r.pre_draw(this.ctx, scale)
+			r.draw(this.ctx, dpr, false)			
+			//if (r.post_draw) r.post_draw(this.ctx, scale)
+			//this.ctx.restore() moved out of the loop
 		})
 		
-        if (this.crosshair) {
-            this.crosshair.renderer.draw(this.ctx)
+		//this.ctx.restore()
+		
+        if (this.crosshair) {			
+            this.crosshair.renderer.draw(this.ctx, dpr)
 		}
 	}
 	
@@ -246,11 +261,11 @@ export default class Grid {
 	}
 	
     upper_border() {
-        this.ctx.strokeStyle = this.$p.colors.colorScale
-        this.ctx.beginPath()
-        this.ctx.moveTo(0, 0.5)
-        this.ctx.lineTo(this.layout.width, 0.5)
-        this.ctx.stroke()
+		this.ctx.strokeStyle = this.$p.colors.colorScale
+		this.ctx.beginPath()
+		this.ctx.moveTo(0, 0.5)
+		this.ctx.lineTo(this.layout.width, 0.5)
+		this.ctx.stroke()
 	}
 	
     mousezoom(delta, event) {
@@ -262,34 +277,34 @@ export default class Grid {
 			event.preventDefault();
 		}
 		
-        if (event.deltaX !== 0) {
-            this.trackpad = true
-            if (Math.abs(event.deltaX) >= Math.abs(event.deltaY)) {
-                delta *= 0.1
+		if (event.deltaX !== 0) {
+			this.trackpad = true
+			if (Math.abs(event.deltaX) >= Math.abs(event.deltaY)) {
+				delta *= 0.1
 			}
-            this.trackpad_scroll(event)
+			this.trackpad_scroll(event)
 		}
 		
-        if (this.trackpad) delta *= 0.032
+		if (this.trackpad) delta *= 0.032
 		
-        //delta = Utils.smart_wheel(delta)
+		delta = Utils.smart_wheel(delta)
 		
-        // TODO: mouse zooming is a little jerky,
-        // needs to follow f(mouse_wheel_speed) and
-        // if speed is low, scroll shoud be slower		
-        if (delta < 0 && this.data.length <= this.MIN_ZOOM) return
-        if (delta > 0 && this.data.length > this.MAX_ZOOM) return
+		// TODO: mouse zooming is a little jerky,
+		// needs to follow f(mouse_wheel_speed) and
+		// if speed is low, scroll shoud be slower		
+		if (delta < 0 && this.data.length <= this.MIN_ZOOM) return
+		if (delta > 0 && this.data.length > this.MAX_ZOOM) return
 		
-        let k = this.interval / 1000
-        let diff = delta * k * this.data.length
-        if (event.originalEvent.ctrlKey) {
-            let offset = event.originalEvent.offsetX
-            let diff_x = offset / (this.canvas.width-1) * diff
-            let diff_y = diff - diff_x
-            this.range[0] -= diff_x
-            this.range[1] += diff_y
+		let k = this.interval / 1000
+		let diff = delta * k * this.data.length
+		if (event.originalEvent.ctrlKey) {
+			let offset = event.originalEvent.offsetX
+			let diff_x = offset / (this.canvas.width-1) * diff
+			let diff_y = diff - diff_x
+			this.range[0] -= diff_x
+			this.range[1] += diff_y
 			} else {
-            this.range[0] -= diff
+			this.range[0] -= diff
 		}
 		
 		this.change_range();
@@ -298,24 +313,24 @@ export default class Grid {
 	
     mousedrag(x, y) {
 		
-        let dt = this.drug.t * (this.drug.x - x) / this.layout.width
+		let dt = this.drug.t * (this.drug.x - x) / this.layout.width
 		
-        let d$ = this.layout.$_hi - this.layout.$_lo
-        d$ *= (this.drug.y - y) / this.layout.height
-        let offset = this.drug.o + d$
+		let d$ = this.layout.$_hi - this.layout.$_lo
+		d$ *= (this.drug.y - y) / this.layout.height
+		let offset = this.drug.o + d$
 		
-        if (this.$p.y_transform && !this.$p.y_transform.auto) {
-            this.comp.$emit('sidebar-transform', {
-                grid_id: this.id,
-                range: [
-                    this.drug.y_r[0] - offset,
-                    this.drug.y_r[1] - offset,
+		if (this.$p.y_transform && !this.$p.y_transform.auto) {
+			this.comp.$emit('sidebar-transform', {
+				grid_id: this.id,
+				range: [
+					this.drug.y_r[0] - offset,
+					this.drug.y_r[1] - offset,
 				]
 			})
 		}
 		
-        this.range[0] = this.drug.r[0] + dt
-        this.range[1] = this.drug.r[1] + dt
+		this.range[0] = this.drug.r[0] + dt
+		this.range[1] = this.drug.r[1] + dt
 		
 		this.change_range();
 		
@@ -323,14 +338,14 @@ export default class Grid {
 	
     pinchzoom(scale) {
 		
-        if (scale > 1 && this.data.length <= this.MIN_ZOOM) return
-        if (scale < 1 && this.data.length > this.MAX_ZOOM) return
+		if (scale > 1 && this.data.length <= this.MIN_ZOOM) return
+		if (scale < 1 && this.data.length > this.MAX_ZOOM) return
 		
-        let t = this.pinch.t
-        let nt = t * 1 / scale
+		let t = this.pinch.t
+		let nt = t * 1 / scale
 		
-        this.range[0] = this.pinch.r[0] - (nt - t) * 0.5
-        this.range[1] = this.pinch.r[1] + (nt - t) * 0.5
+		this.range[0] = this.pinch.r[0] - (nt - t) * 0.5
+		this.range[1] = this.pinch.r[1] + (nt - t) * 0.5
 		
 		this.change_range();
 		
@@ -338,12 +353,12 @@ export default class Grid {
 	
     trackpad_scroll(event) {
 		
-        let dt = this.range[1] - this.range[0]
+		let dt = this.range[1] - this.range[0]
 		
-        this.range[0] += event.deltaX * dt * 0.011
-        this.range[1] += event.deltaX * dt * 0.011
+		this.range[0] += event.deltaX * dt * 0.011
+		this.range[1] += event.deltaX * dt * 0.011
 		
-        
+		
 		this.change_range();
 		
 		
@@ -351,54 +366,54 @@ export default class Grid {
 	
     change_range() {
 		
-        // TODO: better way to limit the view. Problem:
-        // when you are at the dead end of the data,
-        // and keep scrolling,
-        // the chart continues to scale down a little.
-        // Solution: I don't know yet
+		// TODO: better way to limit the view. Problem:
+		// when you are at the dead end of the data,
+		// and keep scrolling,
+		// the chart continues to scale down a little.
+		// Solution: I don't know yet
 		
-        if (!this.range.length || this.data.length < 2) return
+		if (!this.range.length || this.data.length < 2) return
 		
-        let l = this.data.length - 1
-        let data = this.data
-        let range = this.range
+		let l = this.data.length - 1
+		let data = this.data
+		let range = this.range
 		
-        range[0] = Utils.clamp(
-            range[0],
-            -Infinity, data[l][0] - this.interval * 5.5,
+		range[0] = Utils.clamp(
+			range[0],
+			-Infinity, data[l][0] - this.interval * 5.5,
 		)
 		
-        range[1] = Utils.clamp(
-            range[1],
-            data[0][0] + this.interval * 5.5, Infinity
+		range[1] = Utils.clamp(
+			range[1],
+			data[0][0] + this.interval * 5.5, Infinity
 		)
 		
-        // TODO: IMPORTANT scrolling is jerky The Problem caused
-        // by the long round trip of 'range-changed' event.
-        // First it propagates up to update layout in Chart.vue,
-        // then it moves back as watch() update. It takes 1-5 ms.
-        // And because the delay is different each time we see
-        // the lag. No smooth movement and it's annoying.
-        // Solution: we could try to calc the layout immediatly
-        // somewhere here. Still will hurt the sidebar & bottombar
-        this.comp.$emit('range-changed', range)
+		// TODO: IMPORTANT scrolling is jerky The Problem caused
+		// by the long round trip of 'range-changed' event.
+		// First it propagates up to update layout in Chart.vue,
+		// then it moves back as watch() update. It takes 1-5 ms.
+		// And because the delay is different each time we see
+		// the lag. No smooth movement and it's annoying.
+		// Solution: we could try to calc the layout immediatly
+		// somewhere here. Still will hurt the sidebar & bottombar
+		this.comp.$emit('range-changed', range)
 	}
 	
     // Propagate mouse event to overlays
     propagate(name, event) {
-        for (const layer of this.overlays) {
-            if (layer.renderer.hasOwnProperty(name) && typeof layer.renderer[name] === 'function') {
-                layer.renderer[name](event)
+		for (const layer of this.overlays) {
+			if (layer.renderer.hasOwnProperty(name) && typeof layer.renderer[name] === 'function') {
+				layer.renderer[name](event)
 			}
 			
-            const mouse = layer.renderer.mouse
-            if (mouse.listeners) {
-                mouse.emit(name, event)
+			const mouse = layer.renderer.mouse
+			if (mouse.listeners) {
+				mouse.emit(name, event)
 			}
 			
-            const keys = layer.renderer.keys
-            if (keys && keys.listeners) {
-                keys.emit(name, event)
+			const keys = layer.renderer.keys
+			if (keys && keys.listeners) {
+				keys.emit(name, event)
 			}
 		}
 	}

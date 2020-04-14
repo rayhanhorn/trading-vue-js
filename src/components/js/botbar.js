@@ -4,11 +4,13 @@ import Const from '../../stuff/constants.js'
 import Utils from '../../stuff/utils.js'
 
 const { MINUTE15, MINUTE, HOUR, DAY, WEEK, YEAR, MONTHMAP } = Const
+const dpr = window.devicePixelRatio || 1
+if (dpr < 1) dpr = 1
 
 export default class Botbar {
-
+    
     constructor(canvas, comp) {
-
+        
         this.canvas = canvas
         this.ctx = canvas.getContext('2d', { alpha: true, desynchronized: true, preserveDrawingBuffer: false });
         this.comp = comp
@@ -16,69 +18,73 @@ export default class Botbar {
         this.data = this.$p.sub
         this.range = this.$p.range
         this.layout = this.$p.layout
-
+        
     }
-
-    update() {
-
+    
+    update() {        
+        
         this.grid_0 = this.layout.grids[0]
-
+        
         const width = this.layout.botbar.width
         const height = this.layout.botbar.height
-
+        
         const sb = this.layout.grids[0].sb
-
+        const sc = this.layout.height
+        
+        
         this.ctx.fillStyle = this.$p.colors.colorBack
         this.ctx.font = "13px -apple-system,BlinkMacSystemFont, Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell, Fira Sans,Droid Sans,Helvetica Neue, sans-serif"
-        this.ctx.fillRect(0, 0, width, height)
-
+        //this.ctx.fillRect(0, 0, width, height)
+        this.ctx.fillRect(0, 0, (width * dpr), (height * dpr));
+        
         this.ctx.strokeStyle = this.$p.colors.colorScale
-
+        
         this.ctx.beginPath()
         this.ctx.moveTo(0, 0.5)
         this.ctx.lineTo(~~(width + 1), 0.5)
         this.ctx.stroke()
-
+        
         this.ctx.fillStyle = this.$p.colors.colorText
         this.ctx.beginPath()
-
+        
         for (var p of this.layout.botbar.xs) {
-
+            
             let lbl = this.format_date(p[1][0])
-
+            
             if (p[0] > width - sb) continue
-
+            
             this.ctx.moveTo(p[0] - 0.5, 0)
             this.ctx.lineTo(p[0] - 0.5, 4.5)
-
+            
             if (!this.lbl_highlight(p[1][0])) {
                 this.ctx.globalAlpha = 0.85
             }
             this.ctx.textAlign = 'center'
             this.ctx.fillText(lbl, p[0], 18)
             this.ctx.globalAlpha = 1
-
+            
         }
-
+        
         this.ctx.stroke()
         this.apply_shaders()
         if (this.$p.cursor.x && this.$p.cursor.t) this.panel()
-
+        
     }
-
+    
     apply_shaders() {
         for (var s of this.$p.shaders) {
-            this.ctx.save()
+            //this.ctx.save()
+            this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             s.draw(this.ctx)
-            this.ctx.restore()
+            //this.ctx.restore()
         }
     }
-
+    
     panel() {
-
+        
         let lbl = this.format_cursor_x()
         this.ctx.fillStyle = this.$p.colors.colorPanel
-
+        
         let measure = this.ctx.measureText(lbl + '    ')
         let panwidth = ~~(measure.width)
         let cursor = this.$p.cursor.x
@@ -86,40 +92,40 @@ export default class Botbar {
         let y = - 0.5
         let panheight = this.comp.config.PANHEIGHT
         this.ctx.fillRect(x, y, panwidth, panheight + 0.5)
-
+        
         this.ctx.fillStyle = this.$p.colors.colorTextHL
         this.ctx.textAlign = 'center'
         this.ctx.fillText(lbl, cursor, y + 16)
-
+        
     }
-
+    
     // TODO: implement time zones
     format_date(t) {
         t += new Date(t).getTimezoneOffset() * MINUTE
         let d = new Date(t)
-
+        
         if (Utils.year_start(t) === t) return d.getFullYear()
         if (Utils.month_start(t) === t) return MONTHMAP[d.getMonth()]
         if (Utils.day_start(t) === t) return d.getDate()
-
+        
         let h = Utils.add_zero(d.getHours())
         let m = Utils.add_zero(d.getMinutes())
         return h + ":" + m
-
+        
     }
-
+    
     format_cursor_x() {
-
+        
         let t = this.$p.cursor.t
         let ti = this.$p.interval
-
+        
         t += new Date(t).getTimezoneOffset() * MINUTE
         let d = new Date(t)
-
+        
         if (ti === YEAR) {
             return d.getFullYear()
         }
-
+        
         if (ti < YEAR) {
             var yr = '`' + `${d.getFullYear()}`.slice(-2)
             var mo = MONTHMAP[d.getMonth()]
@@ -128,38 +134,38 @@ export default class Botbar {
         if (ti <= WEEK) dd = d.getDate()
         let date = `${dd} ${mo} ${yr}`
         let time = ''
-
+        
         if (ti < DAY) {
             let h = Utils.add_zero(d.getHours())
             let m = Utils.add_zero(d.getMinutes())
             time = h + ":" + m
         }
-
+        
         return `${date}  ${time}`
-
+        
     }
-
+    
     // Highlights the begining of a time interval
     // TODO: improve. Problem: let's say we have a new month,
     // but if there is no grid line in place, there
     // will be no month name on t-axis. Sad.
     // Solution: manipulate the grid, skew it, you know
     lbl_highlight(t) {
-
+        
         let ti = this.$p.interval
-
+        
         if (t === 0) return true
         if (Utils.month_start(t) === t) return true
         if (Utils.day_start(t) === t) return true
         if (ti <= MINUTE15 && t % HOUR === 0) return true
-
+        
         return false
-
+        
     }
-
+    
     mousemove() { }
     mouseout() { }
     mouseup() { }
     mousedown() { }
-
+    
 }

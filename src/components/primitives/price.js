@@ -46,7 +46,7 @@ export default class Price {
 
         let layout = this.comp.$props.layout
         let last = this.comp.$props.meta.last
-
+		if (!last[4]) return undefined
         let color = last[4] >= last[1] ? this.green() : this.red()
         let y = layout.$2screen(last[4]) - 1
 
@@ -59,11 +59,11 @@ export default class Price {
         ctx.setLineDash([])
     }
 
-    last_bar() {
-
+    last_bar() {		
         if (!this.data.length) return undefined
         let layout = this.comp.$props.layout
         let last = this.data[this.data.length - 1]
+		if (!last[4]) return undefined
         let y = layout.$2screen(last[4])
         let cndl = layout.c_magnet(last[0])
         
