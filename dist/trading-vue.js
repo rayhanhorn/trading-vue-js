@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.5 - Tue Apr 14 2020
+ * TradingVue.JS - v0.4.5 - Wed Apr 15 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -13577,8 +13577,8 @@ function (_DCCore) {
     } // Update/append data point, depending on timestamp
 
   }, {
-    key: "ohlcvUpdate",
-    value: function ohlcvUpdate(data) {
+    key: "customUpdate",
+    value: function customUpdate(data) {
       var ohlcv = this.data.chart.data;
       var last = ohlcv[ohlcv.length - 1];
       var timestamp = data['timestamp'];
@@ -13621,11 +13621,12 @@ function (_DCCore) {
     value: function oiupdate(data) {
       var ohlc = this.data.offchart[0].data;
       var last = ohlc[ohlc.length - 1];
+      var timestamp = data['timestamp'];
       var tick = data['oi'];
       var tf = utils.detect_interval(ohlc);
       var t_next = last[0] + tf;
       var now = utils.now();
-      var t = now >= t_next ? now - now % tf : last[0]; //console.log(ohlc)
+      var t = timestamp >= t_next ? now - now % tf : last[0]; //console.log(ohlc)
       //console.log(last)        
       //console.log(tick)
 
