@@ -22,6 +22,8 @@ export default class CandleExt {
 
         const wick_color_sm = this.style.colorWickSm
 
+		//Avoid floating-point coordinates and use integers instead
+		//Saving the browser to do extra calculations to create the anti-aliasing effect. 
         let w = Math.round(Math.max(data.w, 1))
         let hw = Math.max(~~(w * 0.5), 1)
         let h = Math.round(Math.abs(data.o - data.c))
