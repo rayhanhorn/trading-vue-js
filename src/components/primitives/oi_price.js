@@ -1,5 +1,4 @@
 import Utils from '../../stuff/utils.js'
-
 // OI Price bar & price line (shader)
 
 export default class OIPrice {
@@ -43,11 +42,12 @@ export default class OIPrice {
 
     // Regular draw call for overaly
     draw(ctx) {
-        if (!this.comp.$props.meta.last) return
+        if (!this.comp.$props.meta.last) return		
         if (!this.shader) this.init_shader()
 
         let layout = this.comp.$props.layout
         let last = this.comp.$props.data[this.comp.$props.data.length - 1]
+		if (!last[4]) return undefined
         // let last = this.comp.$props.data.map(x => x[4])
 
         let color = last[4] >= last[1] ? this.green() : this.red()
@@ -67,6 +67,7 @@ export default class OIPrice {
         if (!this.data.length) return undefined
         let layout = this.comp.$props.layout
         let last = this.comp.$props.data[this.comp.$props.data.length - 1]
+		if (!last[4]) return undefined
         let y = layout.$2screen(last[4])
         let cndl = layout.c_magnet(last[0])
         
@@ -80,7 +81,9 @@ export default class OIPrice {
     }
 
     last_price() {
-        return this.comp.$props.data[this.comp.$props.data.length - 1][4]
+        return this.comp.$props.data[this.comp.$props.data.length - 1][4] ?
+            this.comp.$props.data[this.comp.$props.data.length - 1][4] : undefined
+		
         // return this.comp.$props.data.map(x => x[4]) ?
             // this.comp.$props.meta.last[4] : undefined
     }
