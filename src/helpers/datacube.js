@@ -146,7 +146,7 @@ export default class DataCube extends DCCore {
         return t >= t_next
     }
     // Update/append data point, depending on timestamp
-    ohlcvUpdate(data) {
+    customUpdate(data) {
         let ohlcv = this.data.chart.data
         let last = ohlcv[ohlcv.length - 1]
         let timestamp = data['timestamp']
@@ -189,11 +189,12 @@ export default class DataCube extends DCCore {
     oiupdate(data) {
         let ohlc = this.data.offchart[0].data
         let last = ohlc[ohlc.length - 1]
+        let timestamp = data['timestamp']
         let tick = data['oi']
         let tf = Utils.detect_interval(ohlc)
         let t_next = last[0] + tf
         let now = Utils.now()
-        let t = now >= t_next ? (now - now % tf) : last[0]
+        let t = timestamp >= t_next ? (now - now % tf) : last[0]
 
 		//console.log(ohlc)
 		//console.log(last)        
