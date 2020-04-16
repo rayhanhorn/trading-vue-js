@@ -42,12 +42,13 @@ export default class OIPrice {
 
     // Regular draw call for overaly
     draw(ctx) {
-        if (!this.comp.$props.meta.last) return		
+        //if (!this.comp.$props.meta.last) return
+		if (!this.comp.$props.data[this.comp.$props.data.length - 1][4]) return
         if (!this.shader) this.init_shader()
 
         let layout = this.comp.$props.layout
         let last = this.comp.$props.data[this.comp.$props.data.length - 1]
-		if (!last[4]) return undefined
+		
         // let last = this.comp.$props.data.map(x => x[4])
 
         let color = last[4] >= last[1] ? this.green() : this.red()
@@ -67,7 +68,6 @@ export default class OIPrice {
         if (!this.data.length) return undefined
         let layout = this.comp.$props.layout
         let last = this.comp.$props.data[this.comp.$props.data.length - 1]
-		if (!last[4]) return undefined
         let y = layout.$2screen(last[4])
         let cndl = layout.c_magnet(last[0])
         
