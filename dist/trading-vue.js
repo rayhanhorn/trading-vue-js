@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.5 - Wed Apr 15 2020
+ * TradingVue.JS - v0.4.5 - Mon Apr 20 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -97,18 +97,217 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 49);
+/******/ 	return __webpack_require__(__webpack_require__.s = 56);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(setImmediate) {/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var arrayslicer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
+/* harmony import */ var arrayslicer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(arrayslicer__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  setImmediatePromise: function setImmediatePromise() {
+    return new Promise(function (resolve) {
+      setImmediate(function () {
+        return resolve();
+      });
+    });
+  },
+  ABS_INT: function ABS_INT(n) {
+    return (n ^ n >> 31) - (n >> 31);
+  },
+  MAX_INT: function MAX_INT(a, b) {
+    return a - (a - b & a - b >> 31); //return a ^ ((a ^ b) & -(a < b));
+    //  var c = a - b;
+    //  return a - ((c >> 31) & 0x1) * c;  
+  },
+  MIN_INT: function MIN_INT(a, b) {
+    return a - (a - b & b - a >> 31); // return b ^ ((a ^ b) & -(a < b));
+  },
+  CLAMP_INT: function CLAMP_INT(x, min, max) {
+    x = x - (x - max & max - x >> 31);
+    return x - (x - min & x - min >> 31); //return ( n > max ) ? max : ( n < min ) ? n : min;
+  },
+  clamp: function clamp(x, min, max) {
+    x = x - (x - max & max - x >> 31);
+    return x - (x - min & x - min >> 31); //return ( n > max ) ? max : ( n < min ) ? n : min;
+  },
+  add_zero: function add_zero(i) {
+    if (i < 10) {
+      i = "0" + i;
+    }
+
+    return i;
+  },
+  // Start of the day (zero millisecond)
+  day_start: function day_start(t) {
+    var start = new Date(t);
+    start.setHours(0, 0, 0, 0);
+    return start.getTime();
+  },
+  // Start of the month
+  month_start: function month_start(t) {
+    var date = new Date(t);
+    var start = new Date(date.getFullYear(), date.getMonth(), 1);
+    return start.getTime();
+  },
+  // Start of the year
+  year_start: function year_start(t) {
+    var start = new Date(new Date(t).getFullYear(), 0, 1);
+    return start.getTime();
+  },
+  // Nearest in array
+  nearest_a: function nearest_a(x, array) {
+    var dist = Infinity;
+    var val = null;
+    var index = -1;
+
+    for (var i = 0; i < array.length; i++) {
+      var xi = array[i];
+
+      if (Math.abs(xi - x) < dist) {
+        dist = Math.abs(xi - x);
+        val = xi;
+        index = i;
+      }
+    }
+
+    return [index, val];
+  },
+  round: function round(num) {
+    var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+    return parseFloat(num.toFixed(decimals));
+  },
+  // Strip? No, it's ugly floats in js
+  strip: function strip(number) {
+    return parseFloat(parseFloat(number).toPrecision(12));
+  },
+  get_day: function get_day(t) {
+    return t ? new Date(t).getDate() : null;
+  },
+  // Update array keeping the same reference
+  overwrite: function overwrite(arr, new_arr) {
+    arr.splice.apply(arr, [0, arr.length].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(new_arr)));
+  },
+  // Copy layout in reactive way
+  copy_layout: function copy_layout(obj, new_obj) {
+    for (var k in obj) {
+      if (Array.isArray(obj[k])) {
+        // (some offchart indicators are added/removed)
+        // we need to update layout in a reactive way
+        if (obj[k].length !== new_obj[k].length) {
+          this.overwrite(obj[k], new_obj[k]);
+          continue;
+        }
+
+        for (var m in obj[k]) {
+          Object.assign(obj[k][m], new_obj[k][m]);
+        }
+      } else {
+        Object.assign(obj[k], new_obj[k]);
+      }
+    }
+  },
+  // Checks if the ohlcv data is changed (given the new
+  // and old dataset values)
+  data_changed: function data_changed(n, p) {
+    n = n.ohlcv || (n.chart ? n.chart.data : []) || [];
+    p = p.ohlcv || (p.chart ? p.chart.data : []) || [];
+    return n.length !== p.length && n[0] !== p[0];
+  },
+  // Detects candles interval
+  detect_interval: function detect_interval(ohlcv) {
+    var len = this.MIN_INT(ohlcv.length - 1, 99);
+    var min = Infinity;
+    ohlcv.slice(0, len).forEach(function (x, i) {
+      var d = ohlcv[i + 1][0] - x[0];
+      if (d === d && d < min) min = d;
+    });
+    return min;
+  },
+  // Detects candles interval. (old version, slightly slower)
+
+  /*detect_interval(ohlcv) {
+      // Initial value of accumulator
+      let a0 = [Infinity, ohlcv[0][0]]
+      return ohlcv.slice(1, 99).reduce((a,x) =>
+      [Math.min(x[0] - a[1], a[0]), x[0]], a0)[0]
+  },*/
+  // Gets numberic part of overlay id (e.g 'EMA_1' = > 1)
+  get_num_id: function get_num_id(id) {
+    return parseInt(id.split('_').pop());
+  },
+  // Fast filter. Really fast, like 10X
+  fast_filter: function fast_filter(arr, t1, t2) {
+    if (!arr.length) return arr;
+
+    try {
+      var ia = new arrayslicer__WEBPACK_IMPORTED_MODULE_1___default.a(arr, "0");
+      return ia.getRange(t1, t2);
+    } catch (e) {
+      // Something wrong with fancy slice lib
+      // Fast fix: fallback to filter
+      return arr.filter(function (x) {
+        return x[0] >= t1 && x[0] <= t2;
+      });
+    }
+  },
+  now: function now() {
+    return new Date().getTime();
+  },
+  pause: function pause(delayMs) {
+    return new Promise(function (rs, rj) {
+      return setTimeout(rs, delayMs);
+    });
+  },
+  // Limit crazy wheel delta values
+  smart_wheel: function smart_wheel(delta) {
+    var abs = Math.abs(delta);
+
+    if (abs > 500) {
+      return (200 + Math.log(abs)) * Math.sign(delta);
+    }
+
+    return delta;
+  },
+  // Parse the original mouse event to find deltaX
+  get_deltaX: function get_deltaX(event) {
+    return event.originalEvent.deltaX / 12;
+  },
+  // Parse the original mouse event to find deltaY
+  get_deltaY: function get_deltaY(event) {
+    return event.originalEvent.deltaY / 12;
+  },
+  countDecimals: function countDecimals(value) {
+    if ((value | 0) === value) return 0;
+    return value.toString().split(".")[1].length || 0;
+  },
+  changeNumberFormat: function changeNumberFormat(value, precision) {
+    // Nine Zeroes for Billions
+    return Math.abs(Number(value)) >= 1.0e+9 ? (Number(value) / 1.0e+9).toFixed(precision) + "B" // Six Zeroes for Millions 
+    : Math.abs(Number(value)) >= 1.0e+6 ? (Number(value) / 1.0e+6).toFixed(precision) + "M" : Number(value);
+  },
+  numberWithCommas: function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(23).setImmediate))
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithoutHoles = __webpack_require__(23);
+var arrayWithoutHoles = __webpack_require__(28);
 
-var iterableToArray = __webpack_require__(24);
+var iterableToArray = __webpack_require__(29);
 
-var nonIterableSpread = __webpack_require__(25);
+var nonIterableSpread = __webpack_require__(30);
 
 function _toConsumableArray(arr) {
   return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
@@ -117,7 +316,7 @@ function _toConsumableArray(arr) {
 module.exports = _toConsumableArray;
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports) {
 
 function _classCallCheck(instance, Constructor) {
@@ -129,7 +328,7 @@ function _classCallCheck(instance, Constructor) {
 module.exports = _classCallCheck;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 function _defineProperties(target, props) {
@@ -151,13 +350,13 @@ function _createClass(Constructor, protoProps, staticProps) {
 module.exports = _createClass;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module) {
 
 module.exports = JSON.parse("{\"extended.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAQMAAAD+JxcgAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAATU1NkJ+rOQAAAAJ0Uk5TAP9bkSK1AAAANElEQVR4nGNggABGEMEEIlhABAeI+AASF0AlHmAqA4kzKAAx8wGQuAMKwd6AoYzBAWonAwAcLwTgNfJ3RQAAAABJRU5ErkJggg==\",\"segment.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAgMAAAC5h23wAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAlQTFRFAAAATU1NJCQkCxcHIQAAAAN0Uk5TAP8SmutI5AAAACxJREFUeJxjYMACGAMgNAsLdpoVKi8AVe8A1QblQlWRKt0AoULw2w1zGxoAABdiAviQhF/mAAAAAElFTkSuQmCC\",\"add.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAH5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAACgoKBgYGGxsbKioqPz8/Pj4+BQUFCQkJAQEBZGRkh4eHAgICEBAQNjY2g4ODgYGBAAAAAwMDeXl5d3d3GBgYERERgICAgICANDQ0PDw8Y2NjCAgIhYWFGhoaJycnOjo6YWFhgICAdXV14Y16sQAAACp0Uk5TAAILDxIKESEnJiYoKCgTKSkpKCAnKSkFKCkpJiDl/ycpKSA2JyYpKSkpOkQ+xgAAARdJREFUeJzllNt2gyAQRTWiRsHLoDU0GpPYmMv//2BMS+sgl6Z9bM8bi73gnJkBz/sn8lcBIUHofwtG8TpJKUuTLI6cYF7QEqRKynP71VX9AkhNXVlsbMQrLLQVGyPZLsGHWgPrCxMJwHUPlXa79NBp2et5d9f3u3m1XxatQNn7SagOXCUjCjYUDuqxcWlHj4MSfw12FDJchFViRN8+1qcQoUH6lR1L1mEMEErofB6WzEUwylzomfzOQGiOJdXiWH7mQoUyMa4WXJQWOBvLFvPCGxt6FSr5kyH0qi0YddNG2/pgCsOjff4ZTizXPNwKIzl56OoGg9d9Z/+5cs6On+CFCfevFQ3ZaTycx1YMbvDdRvjkp/lHdAcPXzokxcwfDwAAAABJRU5ErkJggg==\",\"cursor.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAgMAAAC5h23wAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAxQTFRFAAAATU1NTU1NTU1NwlMHHwAAAAR0Uk5TAOvhxbpPrUkAAAAkSURBVHicY2BgYHBggAByabxg1WoGBq2pRCk9AKUbcND43AEAufYHlSuusE4AAAAASUVORK5CYII=\",\"display_off.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAU1QTFRFAAAAh4eHh4eHAAAAAAAAAAAAAwMDAAAAAAAAhoaGGBgYgYGBAAAAPz8/AgICg4ODCQkJhISEh4eHh4eHPj4+NjY2gYGBg4ODgYGBgYGBgoKCAQEBJycngoKChYWFEBAQg4ODCAgIKioqZGRkCgoKBQUFERERd3d3gYGBGxsbNDQ0hISEgYGBPDw8gYGBgYGBh4eHh4eHhYWFh4eHgoKChYWFgYGBgYGBg4ODhoaGg4ODYWFhgoKCBgYGdXV1goKCg4ODgYGBgICAgYGBAAAAg4ODhYWFhISEh4eHgoKChYWFOjo6goKCGhoah4eHh4eHh4eHgoKCh4eHeXl5hoaGgoKChISEgYGBgYGBgoKCY2NjgYGBgoKCh4eHgoKCgYGBhoaGg4ODhoaGhYWFh4eHgYGBhoaGhoaGhoaGg4ODgoKChISEgoKChYWFh4eHfKktUwAAAG90Uk5TACn/AhEFKA8SLCbxCigoVBNKUTYoJ/lh3PyAKSaTNiBtICYpISggKSkmJ0LEKef3lGxA8rn//+pcMSkpnCcptHPJKe0LUjnx5LzKKaMnX73hl64pLnhkzNSgKeLv17LQ+liIzaLe7PfTw5tFpz3K1fXR/gAAAgBJREFUeJzllNdXwjAUxknB0lIoCKVsGTIFQRAZ7r333nuv///R3LZ4mlDQZ/0ekp7b37n5bnITk+mfyDxv5Tir3fwjaElO5BIOKZFLJS1dQVfI0Y809TtEV+elo95RpFPWG+1go4fdQ5QybI8haaNBkM2ANbM09bnrwaPY7iFKrz7EMBdu7CHdVruXIt0M1hb+GKA3LTRKkp5lTA6Dg6xIkhaHhvQ1IlW/UCouQdJNJTRIpk1qO7+wUpcfpl537oBc7VNip3Gi/AmVPBAC1UrL6HXtSGVT+k2Yz0Focad07OMRf3P5BEbd63PFQx7HN+w61JoAm+uBlV48O/0jkLSMmtPCmQ8HwlYdykFV4/LJPp7e3hVyFdapHNehLk6PSjhSkBvwu/cFyJGIYvOyhoc1jjYQFGbygD4CWjoAMla/og3YoSw+KPhjPNoFcim4iFD+pFYA8zZ9WeYU5OBjZ3ORWyCfG03E+47kKpCIJTpGO4KP8XMgtw990xG/PBNTgmPEEXwf7P42oOdFIRAoBCtqTKL6Rcwq4Xsgh5xYC/mmSs6yJKk1YbnVeTq1NaEpmlHbmVn2EORkW2trF2ZzmHGTSUMGl1a9hp4ySRpdQ8yKGURpMmRIYg9pb1YPzg6kO79cLlE6bYFjEtv91bLEUxvhwbWwjY13BxUb9l8+mn9EX8x3Nki8ff5wAAAAAElFTkSuQmCC\",\"display_on.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAR1QTFRFAAAAh4eHgYGBAAAAAAAAgYGBAAAAAwMDAAAAAAAAgYGBg4ODGBgYgYGBhISEAAAAPz8/AgIChoaGCQkJhYWFPj4+NjY2goKCgYGBAQEBJycngYGBgoKCEBAQCAgIhISEKioqZGRkCgoKBQUFERERd3d3gYGBg4ODgYGBGxsbNDQ0hISEgoKCgoKChYWFPDw8gYGBgYGBhoaGgoKCg4ODgoKCgYGBgoKCgoKCgoKCg4ODgoKChoaGgoKCgYGBhoaGg4ODYWFhBgYGdXV1gYGBg4ODgoKCgICAg4ODg4ODhISEAAAAg4ODOjo6gYGBGhoaeXl5goKCgYGBgoKChYWFgoKChISEgoKCY2NjgYGBg4ODgYGBgYGBg4ODgYGBo8n54AAAAF90Uk5TACn/AhH3BSgPEuhUJvFACigoLBM2KCeA6ykm+pMgIEkmKSEoICn9XCkmJ0u6nDop4sUypGuEzLZ6vmCYLZ/dLykpJynUYa8pcllCC1Ip2ycpisl1PadFsintbsPQZdi/bTW7AAAB4UlEQVR4nOWUZ1fCMBSGSSGWFiq0UDbIkr2XbBwMxS0b1P//M0xK9XSiftX7oel585zkvfcmMRj+SRhvzRRlthm/BU3Ry3TYzofTsajpIOjw2iNAjIiddehvHXSdA0mkXEEdG0fkE1DEKXmkSVqVIA6rBmsktUgAWLWHoGp30UNclbtLmwQgoyya91wPTbFy0mQXJ5zJQO6BgXRjfH0iSkX5stHIXr5r0bB/lu8syjR8rzsFbR2SpX+5J2eMP3csLtYsEY2K8BeTFuE2jaVCBw7bHOBuxq16AXmpbui3LtIfbRLUHMY2q4lcFo2WB4KA1SUAlWumNEKCzyxBKZxVHvYGaFguCBx1vM/x0IPzoqQoj5SdP4mns2cCGhBsrgj0uaeUBtzMyxQN8w4mYROTW8+r0oANp8W5mf6WQw5aCYJ2o7ymPaKMi2uVpmWM4TW6tdImgGo1bT4nK6DbbsCc0AZSdmLEFszzHrh6riVvRrNA3/9SE8QLWQu+Gjto9+gE9NBMwr9zi83gFeeFTe11zpm1CHE3HeyVCSknf3MIDcFTbfJKdbR1L4xX49L+/BoillV5uPJqkshD3JWSgpNMXP/lcrD8+hO84MnDr5YpFHv0Fe99VjJ0GBRs2H74aP6R+ACr+TFvZNAQ1wAAAABJRU5ErkJggg==\",\"down.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAKVQTFRFAAAAg4ODgICAAAAAAAAAAAAACAgIAAAAAAAAAAAAAAAAOTk5hYWFEBAQfHx8ODg4dnZ2NDQ0XV1dGxsbKCgogICAFBQUIiIiZGRkgICAgICAFRUVAAAAgICAgICAgICAf39/Li4ugICAcHBwgoKCgICAgoKCgICAg4ODgYGBPj4+goKCgICAhISEgYGBgICAgoKCgICAgYGBgYGBf39/gICAgICAIdPQHAAAADd0Uk5TACn/KAIRIBMFDwooKyApKSknKSYmzCcmKfL7JRCUi2L3J7IpcLUrr0VbKXntNEnkMbxrUcG56CMpi50AAAFZSURBVHic5ZRpf4MgDIeFKFatWm/tfW091u7evv9Hm1Acoujm2y0vFPH5Jf+EEE37J6bblmlatv4jaBCI4rMfR0CMXtAEJ0fccgfM7tAkQHXzArdDxggmqGETGCnJWROkNlOwOqhIhKCtgbSicw1uK/dATSK0aRatIzytA8ik4XSiyJnLSm+VPxULgeyLI3uHRJH+qcB4WZGrKb4c20WwI7b3iUt74OS6XD+xZWrXUCtme0uKTvfcJ65CZFa9VOebqwXmft+oT8yF+/VymT4XeGB+Xx8L+j4gBcoFIDT+oMz6Qp93Y74pCeBpUXaLuW0rUk6r1iv3nP322ewYkgv2nZIvgpSPQDrY5wTjRJDNg9XAE/+uSXIVX812GdKEmtvR2rtWaw+5MAOuofJy79SXu9TgBl4d9DZdI0NjgyiswNCB/qk1J5Bmvp+lQOa9IJNhW4bxm6H5R+wLQYMSQXZNzbcAAAAASUVORK5CYII=\",\"price_range.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAQMAAAD+JxcgAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAATU1NkJ+rOQAAAAJ0Uk5TAP9bkSK1AAAAIUlEQVR4nGNggAPm/w9gTA4QIQMitECEJ1yMEgLNDiAAADfgBMRu78GgAAAAAElFTkSuQmCC\",\"remove.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAK5QTFRFAAAAh4eHgICAAAAAAAAAh4eHAAAAAwMDAAAAAAAAgICAGBgYAAAAPz8/AgICgICACQkJhoaGhoaGgICAPj4+NjY2gYGBg4ODgYGBAQEBJycngoKCEBAQgICAgICACAgIKioqZGRkCgoKBQUFERERd3d3gYGBGxsbNDQ0gICAPDw8YWFhBgYGdXV1gICAg4ODgICAAAAAOjo6GhoaeXl5gICAhYWFY2NjhYWFgICA9O0oCgAAADp0Uk5TACn/AhErBSgPEvEmCigowxMuMcgoJ7hWrCkmdCD6vSAmKSEoICkpJie6KSknKSkp0wspJynCMik11rrLte8AAAFwSURBVHic5ZTXkoIwFIZNAAPSpKkoRQV7Wcva3v/FFiRmEwise7t7bs7MP98k/ylJq/VPQjjKiiJrwo+gON0uxro7XiRTsRHs+voE4JjoRrf+6sD7AFTMvaDGRht9glLMUJtLqmUwD5XDCohHAmBUPQSV27GHtFK7xycBWJab5uPaR+Hlmue7GfZxHwyWFHVMQghXFgD2A8IOZtfssdNJIXcyFEaSfchzp9BuMVP+Fhvr5Qh0nGfqYTGhm3BcYFUaQBKOhMWzRqHyGFRY03ppQ5lCFZ30RloVZGQTaa3QqEt0OyrQnkSkk8I1YJkvAwPCMgY0UpbzXRZhVbosIWGbZTLNQszGMCM42FJEjWDDjIAMtp+xj6x2K+/DqNDc0r4Yc8yGl3uer2aIyT1iyd8sYSuY8cldZbVrH4zPebTvP8OMNSoedj6XzDyk3pwG98u0/ufqGu7tBW5c1PxriXFyHq5PQxXFzeDThvbmp/lH4gt6WxfZ03H8DwAAAABJRU5ErkJggg==\",\"settings.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAW5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAACgoKBgYGGxsbKioqQEBAPj4+BQUFCAgIAQEBPz8/ZWVlh4eHZGRkAgICCQkJDw8PNjY2g4ODgoKCNTU1EBAQAAAAAwMDeXl5d3d3AAAAGBgYAAAAERERioqKgoKCgoKCgoKCgYGBgoKChISEhoaGNDQ0g4ODgICAgICAgICAgYGBgYGBhYWFgICAgICAPT09AAAAgYGBgICAgICAgICAgICAY2NjCAgIgICAgICAhYWFhYWFgYGBHBwcgICAhYWFGhoagYGBgYGBg4ODhoaGJycnAAAAhISEgICAg4ODPDw8AAAAgoKCgICAhISEOjo6h4eHgoKCgYGBgICAf39/gYGBgoKCgICAGBgYgYGBg4ODg4ODgICACwsLgYGBgICAgYGBgYGBgYGBgICAgYGBYWFhf39/g4ODPj4+gYGBg4ODgICAhYWFgoKCgYGBgICAgYGBgoKCdXV1T0kC9QAAAHp0Uk5TAAILDxMKESEnJiYpKSgTKSgpKSkoEyAnKSknIAYoKSkFJQEgKl94jYVvVC4nU9f/+K8pOu71KBCi3NPq/ikg0e01Nokm1UUnsZVqQSYOT9lrKRJz5lIpK12jyu+sesgnhGVLxCG55a6Um+GaKfJCKKRgKUt8ocergymDQ9knAAABsElEQVR4nOWUV1vCMBSGg1AQpBZrcVdE3KJxo4LgnuCoe4F7orjHv7doTk3bgF7rd5OnX94nZ+SkCP0TWQqsNpuVs/wI2h2FTleR2+XkHfa8YLHgKRGJSj2SN3fosvIKkVJlVXWONGrkWtEgn1zHJP1GMCs/g7XILFIUpXoTWmaKTnIImGovh72Gxqbmlta2dvgOGpsmQO0dnfhTXd3E6JH0pN1DNnr7MFE/HDsQ0qEO6Pxg9sCh4XDkGx2J6sovBD+G8eiYuo5PxLTKeLoJBZNgT2EcnjY0YYajUKsL7Fk1gcjU3PwChcYTFGorAnsRqlpa1tAVhUbdmr+6RtjIOlgbCjMBUdzc2t7ZzbJ7zAQ4p6GSfRVNwkeKLsvCg31w2JBdjlT0GDxZNzEnpcQ+xWfnFxeXVyp6Tay07gq+L/YUOoBvbomV0V8skiq//DutWfeEfJD1JPLCED4+Pb8kX986tApNQ4iqfSJT76bRzvlgBPODQXW/foYqK5lyeBeYJEL1gaoeGnwIBhjRoQ9SZgTAdEbO/9cKRfmZ+MpGPCVHQ3nBzzS4hKIkuNyh/5g+ALiAXSSas9hwAAAAAElFTkSuQmCC\",\"trash.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAQMAAAD+JxcgAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAATU1NkJ+rOQAAAAJ0Uk5TAP9bkSK1AAAALUlEQVR4nGNgAIN6ENHQACX4//9gYBBgYIESYC4LkA0lPEkmGFAI5v8PILYCAHygDJxlK0RUAAAAAElFTkSuQmCC\",\"up.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAMZQTFRFAAAAh4eHgICAAAAAAAAAAAAAAwMDAAAAAAAAGBgYAAAAPz8/AgICCQkJgICAh4eHPj4+NjY2AQEBJycnEBAQgICAgICACAgIKioqZGRkCgoKBQUFgYGBERERd3d3gYGBGxsbNDQ0gICAgYGBPDw8gYGBh4eHgICAYWFhBgYGgYGBdXV1goKCg4ODhYWFgICAgoKCAAAAhISEOjo6gICAGhoagYGBeXl5hoaGgICAY2Njg4ODgoKCgoKCgYGBgoKCg4ODgoKC64uw1gAAAEJ0Uk5TACn/AhEFKA8SJgooKBP7KignKSYg9c0gJikhKLQgKSkmJ7ywKY8s5SknlClxKTMpXwtFKe0neiku8ClKWmSbbFFjM5GHSgAAAW5JREFUeJzllGd/gjAQxk3AMFWWOHDvVa2rVbu//5cqhJWQQO3b9nkVjv/v7rnLKJX+iYS9JMuSKvwIiu3loKkZzYHXFgvBiqW1QKSWplfySzvmAyDUN50cG2X0DDLqoTKXVLJgIIXDCohHAqCzHhymeuShy/Ru8kkAhtmhWUTvW9fdEnPQaVLU0n8XF0L3kn5P6LTtZPKgNoK+RrUkcGtQ7S9TsgOxxinrkUPYD+LwLCIh7CTsWSVQqRmTuPqpitlZFLQlApXjrsYBc335wOw47ksmUSMMrgKi/gnAE/awCqNHmTUwDf5X34LlBuedsgbUsK15kPMxTIXzzvFSIdsSPBw7nGD1K+7bL3F9xStEnZhoCw71TbpL71GBBbUF1MZmZWTOi97PI3eIJn9zCEtOj0+umaOde2EszqW9/xr6rM54WFtc0vfQNak57Ibd/Jerohu3GFwYqPjVEhve2Z4cbQU1ikFsQ73z0fwj+ga3VBezGuggFQAAAABJRU5ErkJggg==\",\"fib.png\":\"data:image/png;base64,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\",\"fibtz.png\":\"data:image/png;base64,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\"}");
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*! Hammer.JS - v2.0.7 - 2016-04-22
@@ -2803,14 +3002,14 @@ if (true) {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithHoles = __webpack_require__(26);
+var arrayWithHoles = __webpack_require__(31);
 
-var iterableToArrayLimit = __webpack_require__(27);
+var iterableToArrayLimit = __webpack_require__(32);
 
-var nonIterableRest = __webpack_require__(28);
+var nonIterableRest = __webpack_require__(33);
 
 function _slicedToArray(arr, i) {
   return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
@@ -2819,7 +3018,7 @@ function _slicedToArray(arr, i) {
 module.exports = _slicedToArray;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2901,7 +3100,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3163,36 +3362,91 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(33);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(7).default
-var update = add("68f243ea", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
+"use strict";
+/* WEBPACK VAR INJECTION */(function(setImmediate) {/* harmony import */ var _stuff_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+// Interactive canvas-based component
+// Should implement: mousemove, mouseout, mouseup, mousedown, click
 
-// load the styles
-var content = __webpack_require__(35);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(7).default
-var update = add("9895d3a6", content, false, {});
-// Hot Module Replacement
-if(false) {}
+/* harmony default export */ __webpack_exports__["a"] = ({
+  methods: {
+    setup: function setup() {
+      var _this = this;
+
+      var id = "".concat(this.$props.tv_id, "-").concat(this._id, "-canvas");
+      var canvas = document.getElementById(id);
+      var dpr = window.devicePixelRatio || 1;
+      canvas.style.width = "".concat(this._attrs.width, "px");
+      canvas.style.height = "".concat(this._attrs.height, "px");
+      if (dpr < 1) dpr = 1; // Realy ? That's it? Issue #63
+
+      setImmediate(function () {
+        var rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        var ctx = canvas.getContext('2d', {
+          alpha: true,
+          desynchronized: true,
+          preserveDrawingBuffer: false
+        });
+        ctx.scale(dpr, dpr);
+
+        _this.redraw();
+      });
+    },
+    create_canvas: function create_canvas(h, id, props) {
+      var _this2 = this;
+
+      this._id = id;
+      this._attrs = props.attrs;
+      return h('div', {
+        "class": "trading-vue-".concat(id),
+        style: {
+          left: props.position.x + 'px',
+          top: props.position.y + 'px',
+          position: 'absolute'
+        }
+      }, [h('canvas', {
+        on: {
+          mousemove: function mousemove(e) {
+            return _this2.renderer.mousemove(e);
+          },
+          mouseout: function mouseout(e) {
+            return _this2.renderer.mouseout(e);
+          },
+          mouseup: function mouseup(e) {
+            return _this2.renderer.mouseup(e);
+          },
+          mousedown: function mousedown(e) {
+            return _this2.renderer.mousedown(e);
+          }
+        },
+        attrs: Object.assign({
+          id: "".concat(this.$props.tv_id, "-").concat(id, "-canvas")
+        }, props.attrs),
+        ref: 'canvas',
+        style: props.style
+      })].concat(props.hs || []));
+    },
+    redraw: function redraw() {
+      if (!this.renderer) return;
+      this.renderer.update();
+    }
+  },
+  watch: {
+    width: function width(val) {
+      this._attrs.width = val;
+      this.setup();
+    },
+    height: function height(val) {
+      this._attrs.height = val;
+      this.setup();
+    }
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(23).setImmediate))
 
 /***/ }),
 /* 10 */
@@ -3201,12 +3455,12 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(37);
+var content = __webpack_require__(40);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(7).default
-var update = add("1db01c0b", content, false, {});
+var add = __webpack_require__(8).default
+var update = add("68f243ea", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3217,12 +3471,12 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(39);
+var content = __webpack_require__(42);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(7).default
-var update = add("12d2309d", content, false, {});
+var add = __webpack_require__(8).default
+var update = add("9895d3a6", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3233,12 +3487,12 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(41);
+var content = __webpack_require__(44);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(7).default
-var update = add("1b34bfeb", content, false, {});
+var add = __webpack_require__(8).default
+var update = add("1db01c0b", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3249,12 +3503,12 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(43);
+var content = __webpack_require__(46);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(7).default
-var update = add("604bf5ef", content, false, {});
+var add = __webpack_require__(8).default
+var update = add("12d2309d", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3265,12 +3519,12 @@ if(false) {}
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(45);
+var content = __webpack_require__(48);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(7).default
-var update = add("f32fd36e", content, false, {});
+var add = __webpack_require__(8).default
+var update = add("1b34bfeb", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3278,9 +3532,41 @@ if(false) {}
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = __webpack_require__(19);
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-var assertThisInitialized = __webpack_require__(46);
+// load the styles
+var content = __webpack_require__(50);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(8).default
+var update = add("604bf5ef", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(52);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(8).default
+var update = add("f32fd36e", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(21);
+
+var assertThisInitialized = __webpack_require__(53);
 
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
@@ -3293,7 +3579,7 @@ function _possibleConstructorReturn(self, call) {
 module.exports = _possibleConstructorReturn;
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports) {
 
 function _getPrototypeOf(o) {
@@ -3306,10 +3592,10 @@ function _getPrototypeOf(o) {
 module.exports = _getPrototypeOf;
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var setPrototypeOf = __webpack_require__(47);
+var setPrototypeOf = __webpack_require__(54);
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
@@ -3329,14 +3615,14 @@ function _inherits(subClass, superClass) {
 module.exports = _inherits;
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(48);
+module.exports = __webpack_require__(55);
 
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports) {
 
 function _typeof(obj) {
@@ -3356,7 +3642,7 @@ function _typeof(obj) {
 module.exports = _typeof;
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports) {
 
 function _defineProperty(obj, key, value) {
@@ -3377,7 +3663,103 @@ function _defineProperty(obj, key, value) {
 module.exports = _defineProperty;
 
 /***/ }),
-/* 21 */
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
+            (typeof self !== "undefined" && self) ||
+            window;
+var apply = Function.prototype.apply;
+
+// DOM APIs, for completeness
+
+exports.setTimeout = function() {
+  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
+};
+exports.setInterval = function() {
+  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
+};
+exports.clearTimeout =
+exports.clearInterval = function(timeout) {
+  if (timeout) {
+    timeout.close();
+  }
+};
+
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+Timeout.prototype.close = function() {
+  this._clearFn.call(scope, this._id);
+};
+
+// Does not start the time, just sets up the members needed.
+exports.enroll = function(item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
+};
+
+exports.unenroll = function(item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
+};
+
+exports._unrefActive = exports.active = function(item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout)
+        item._onTimeout();
+    }, msecs);
+  }
+};
+
+// setimmediate attaches itself to the global object
+__webpack_require__(34);
+// On some exotic environments, it's not clear which object `setimmediate` was
+// able to install onto.  Search each possibility in the same order as the
+// `setimmediate` library.
+exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+                       (typeof global !== "undefined" && global.setImmediate) ||
+                       (this && this.setImmediate);
+exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+                         (typeof global !== "undefined" && global.clearImmediate) ||
+                         (this && this.clearImmediate);
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(24)))
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3387,9 +3769,9 @@ module.exports = _defineProperty;
 /**
  * Dependencies
  */
-var util = __webpack_require__(29),
-    cmp = __webpack_require__(30),
-    bin = __webpack_require__(31);
+var util = __webpack_require__(36),
+    cmp = __webpack_require__(37),
+    bin = __webpack_require__(38);
 
 /**
  * Module interface definition
@@ -3601,7 +3983,7 @@ IndexedArray.prototype.getRange = function (begin, end) {
 
 
 /***/ }),
-/* 22 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -3931,7 +4313,17 @@ if (typeof window.define === 'function' && window.define.amd) {
 
 
 /***/ }),
-/* 23 */
+/* 27 */
+/***/ (function(module, exports) {
+
+function _readOnlyError(name) {
+  throw new Error("\"" + name + "\" is read-only");
+}
+
+module.exports = _readOnlyError;
+
+/***/ }),
+/* 28 */
 /***/ (function(module, exports) {
 
 function _arrayWithoutHoles(arr) {
@@ -3947,7 +4339,7 @@ function _arrayWithoutHoles(arr) {
 module.exports = _arrayWithoutHoles;
 
 /***/ }),
-/* 24 */
+/* 29 */
 /***/ (function(module, exports) {
 
 function _iterableToArray(iter) {
@@ -3957,7 +4349,7 @@ function _iterableToArray(iter) {
 module.exports = _iterableToArray;
 
 /***/ }),
-/* 25 */
+/* 30 */
 /***/ (function(module, exports) {
 
 function _nonIterableSpread() {
@@ -3967,7 +4359,7 @@ function _nonIterableSpread() {
 module.exports = _nonIterableSpread;
 
 /***/ }),
-/* 26 */
+/* 31 */
 /***/ (function(module, exports) {
 
 function _arrayWithHoles(arr) {
@@ -3977,7 +4369,7 @@ function _arrayWithHoles(arr) {
 module.exports = _arrayWithHoles;
 
 /***/ }),
-/* 27 */
+/* 32 */
 /***/ (function(module, exports) {
 
 function _iterableToArrayLimit(arr, i) {
@@ -4013,7 +4405,7 @@ function _iterableToArrayLimit(arr, i) {
 module.exports = _iterableToArrayLimit;
 
 /***/ }),
-/* 28 */
+/* 33 */
 /***/ (function(module, exports) {
 
 function _nonIterableRest() {
@@ -4023,7 +4415,390 @@ function _nonIterableRest() {
 module.exports = _nonIterableRest;
 
 /***/ }),
-/* 29 */
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
+    "use strict";
+
+    if (global.setImmediate) {
+        return;
+    }
+
+    var nextHandle = 1; // Spec says greater than zero
+    var tasksByHandle = {};
+    var currentlyRunningATask = false;
+    var doc = global.document;
+    var registerImmediate;
+
+    function setImmediate(callback) {
+      // Callback can either be a function or a string
+      if (typeof callback !== "function") {
+        callback = new Function("" + callback);
+      }
+      // Copy function arguments
+      var args = new Array(arguments.length - 1);
+      for (var i = 0; i < args.length; i++) {
+          args[i] = arguments[i + 1];
+      }
+      // Store and register the task
+      var task = { callback: callback, args: args };
+      tasksByHandle[nextHandle] = task;
+      registerImmediate(nextHandle);
+      return nextHandle++;
+    }
+
+    function clearImmediate(handle) {
+        delete tasksByHandle[handle];
+    }
+
+    function run(task) {
+        var callback = task.callback;
+        var args = task.args;
+        switch (args.length) {
+        case 0:
+            callback();
+            break;
+        case 1:
+            callback(args[0]);
+            break;
+        case 2:
+            callback(args[0], args[1]);
+            break;
+        case 3:
+            callback(args[0], args[1], args[2]);
+            break;
+        default:
+            callback.apply(undefined, args);
+            break;
+        }
+    }
+
+    function runIfPresent(handle) {
+        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+        // So if we're currently running a task, we'll need to delay this invocation.
+        if (currentlyRunningATask) {
+            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+            // "too much recursion" error.
+            setTimeout(runIfPresent, 0, handle);
+        } else {
+            var task = tasksByHandle[handle];
+            if (task) {
+                currentlyRunningATask = true;
+                try {
+                    run(task);
+                } finally {
+                    clearImmediate(handle);
+                    currentlyRunningATask = false;
+                }
+            }
+        }
+    }
+
+    function installNextTickImplementation() {
+        registerImmediate = function(handle) {
+            process.nextTick(function () { runIfPresent(handle); });
+        };
+    }
+
+    function canUsePostMessage() {
+        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
+        // where `global.postMessage` means something completely different and can't be used for this purpose.
+        if (global.postMessage && !global.importScripts) {
+            var postMessageIsAsynchronous = true;
+            var oldOnMessage = global.onmessage;
+            global.onmessage = function() {
+                postMessageIsAsynchronous = false;
+            };
+            global.postMessage("", "*");
+            global.onmessage = oldOnMessage;
+            return postMessageIsAsynchronous;
+        }
+    }
+
+    function installPostMessageImplementation() {
+        // Installs an event handler on `global` for the `message` event: see
+        // * https://developer.mozilla.org/en/DOM/window.postMessage
+        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
+
+        var messagePrefix = "setImmediate$" + Math.random() + "$";
+        var onGlobalMessage = function(event) {
+            if (event.source === global &&
+                typeof event.data === "string" &&
+                event.data.indexOf(messagePrefix) === 0) {
+                runIfPresent(+event.data.slice(messagePrefix.length));
+            }
+        };
+
+        if (global.addEventListener) {
+            global.addEventListener("message", onGlobalMessage, false);
+        } else {
+            global.attachEvent("onmessage", onGlobalMessage);
+        }
+
+        registerImmediate = function(handle) {
+            global.postMessage(messagePrefix + handle, "*");
+        };
+    }
+
+    function installMessageChannelImplementation() {
+        var channel = new MessageChannel();
+        channel.port1.onmessage = function(event) {
+            var handle = event.data;
+            runIfPresent(handle);
+        };
+
+        registerImmediate = function(handle) {
+            channel.port2.postMessage(handle);
+        };
+    }
+
+    function installReadyStateChangeImplementation() {
+        var html = doc.documentElement;
+        registerImmediate = function(handle) {
+            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+            var script = doc.createElement("script");
+            script.onreadystatechange = function () {
+                runIfPresent(handle);
+                script.onreadystatechange = null;
+                html.removeChild(script);
+                script = null;
+            };
+            html.appendChild(script);
+        };
+    }
+
+    function installSetTimeoutImplementation() {
+        registerImmediate = function(handle) {
+            setTimeout(runIfPresent, 0, handle);
+        };
+    }
+
+    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
+    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
+    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+
+    // Don't get fooled by e.g. browserify environments.
+    if ({}.toString.call(global.process) === "[object process]") {
+        // For Node.js before 0.9
+        installNextTickImplementation();
+
+    } else if (canUsePostMessage()) {
+        // For non-IE10 modern browsers
+        installPostMessageImplementation();
+
+    } else if (global.MessageChannel) {
+        // For web workers, where supported
+        installMessageChannelImplementation();
+
+    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
+        // For IE 6–8
+        installReadyStateChangeImplementation();
+
+    } else {
+        // For older browsers
+        installSetTimeoutImplementation();
+    }
+
+    attachTo.setImmediate = setImmediate;
+    attachTo.clearImmediate = clearImmediate;
+}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(24), __webpack_require__(35)))
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 36 */
 /***/ (function(module, exports) {
 
 /**
@@ -4068,7 +4843,7 @@ module.exports.isSortableArrayLike = function (o) {
 
 
 /***/ }),
-/* 30 */
+/* 37 */
 /***/ (function(module, exports) {
 
 /**
@@ -4103,7 +4878,7 @@ module.exports = {
 
 
 /***/ }),
-/* 31 */
+/* 38 */
 /***/ (function(module, exports) {
 
 /**
@@ -4165,154 +4940,154 @@ module.exports.search = search;
 
 
 /***/ }),
-/* 32 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 33 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
 exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.t-vue-lbtn {\n    z-index: 100;\n    width: 21px;\n    height: 21px;\n    margin-bottom: -6px;\n    pointer-events: all;\n    cursor: pointer;\n}\n", ""]);
 
 
 /***/ }),
-/* 34 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 35 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
 exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.t-vue-lbtn-grp {\n    margin-left: 0.5em;\n}\n", ""]);
 
 
 /***/ }),
-/* 36 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 37 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
 exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-legend {\n    position: relative;\n    z-index: 100;\n    font-size: 1.25em;\n    margin-left: 10px;\n    pointer-events: none;\n}\n.trading-vue-ohlcv {\n    pointer-events: none;\n    margin-bottom: 0.5em;\n    font-size: 1.1em;\n    color: steelblue;\n}\n.t-vue-lspan {\n    font-variant-numeric: tabular-nums;\n    font-weight: 100;\n    font-size: 1.3em;\n    color: #EEE; /* TODO: move => params */\n    margin-left: 0.1em;\n    margin-right: 0.2em;\n}\n.t-vue-title {\n    margin-right: 0.25em;\n    font-size: 2em;\n    font-weight: 200;\n}\n.t-vue-ind {\n    margin-left: 0.2em;\n    margin-bottom: 0.5em;\n    font-size: 1.2em;\n    color: steelblue;\n}\n.t-vue-ivalue {\n    margin-left: 0.5em;\n    font-size: 1.0em;\n}\n.t-vue-unknown {\n    color: #999999; /* TODO: move => params */\n}\n", ""]);
 
 
 /***/ }),
-/* 38 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 39 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
 exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-section {\n    height: 0;\n    position: absolute;\n}\n", ""]);
 
 
 /***/ }),
-/* 40 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 41 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
 exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-botbar {\n    position: relative !important;\n}\n", ""]);
 
 
 /***/ }),
-/* 42 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 43 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
 exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-tbitem {\n}\n.trading-vue-tbitem:hover {\n    background-color: #76878319;\n}\n.trading-vue-tbicon {\n    position: absolute;\n}\n.trading-vue-tbitem.selected-item .trading-vue-tbicon {\n     filter: brightness(1.45) sepia(1) hue-rotate(90deg) saturate(4.5) !important;\n}\n.pixelated {\n    -ms-interpolation-mode: nearest-neighbor;\n    image-rendering: -webkit-optimize-contrast;\n    image-rendering: -webkit-crisp-edges;\n    image-rendering: -moz-crisp-edges;\n    image-rendering: -o-crisp-edges;\n    image-rendering: pixelated;\n}\n\n", ""]);
 
 
 /***/ }),
-/* 44 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 45 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(7);
 exports = module.exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-toolbar {\n    position: absolute;\n    border-right: 1px solid black;\n    z-index: 100;\n    padding-top: 3px;\n}\n", ""]);
 
 
 /***/ }),
-/* 46 */
+/* 53 */
 /***/ (function(module, exports) {
 
 function _assertThisInitialized(self) {
@@ -4326,7 +5101,7 @@ function _assertThisInitialized(self) {
 module.exports = _assertThisInitialized;
 
 /***/ }),
-/* 47 */
+/* 54 */
 /***/ (function(module, exports) {
 
 function _setPrototypeOf(o, p) {
@@ -4341,7 +5116,7 @@ function _setPrototypeOf(o, p) {
 module.exports = _setPrototypeOf;
 
 /***/ }),
-/* 48 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5073,7 +5848,7 @@ try {
 
 
 /***/ }),
-/* 49 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5141,7 +5916,7 @@ TradingVuevue_type_template_id_235c0ade_render._withStripped = true
 // CONCATENATED MODULE: ./src/TradingVue.vue?vue&type=template&id=235c0ade&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
-var toConsumableArray = __webpack_require__(0);
+var toConsumableArray = __webpack_require__(1);
 var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
 
 // CONCATENATED MODULE: ./src/stuff/constants.js
@@ -5291,195 +6066,12 @@ function Context($p) {
 
 /* harmony default export */ var context = (Context);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
-var slicedToArray = __webpack_require__(5);
+var slicedToArray = __webpack_require__(6);
 var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
-// EXTERNAL MODULE: ./node_modules/arrayslicer/lib/index.js
-var lib = __webpack_require__(21);
-var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
+// EXTERNAL MODULE: ./src/stuff/utils.js
+var utils = __webpack_require__(0);
 
-// CONCATENATED MODULE: ./src/stuff/utils.js
-
-
-/* harmony default export */ var utils = ({
-  ABS_INT: function ABS_INT(n) {
-    return (n ^ n >> 31) - (n >> 31);
-  },
-  MAX_INT: function MAX_INT(a, b) {
-    return a - (a - b & a - b >> 31); //return a ^ ((a ^ b) & -(a < b));
-    //  var c = a - b;
-    //  return a - ((c >> 31) & 0x1) * c;  
-  },
-  MIN_INT: function MIN_INT(a, b) {
-    return a - (a - b & b - a >> 31); // return b ^ ((a ^ b) & -(a < b));
-  },
-  CLAMP_INT: function CLAMP_INT(x, min, max) {
-    x = x - (x - max & max - x >> 31);
-    return x - (x - min & x - min >> 31); //return ( n > max ) ? max : ( n < min ) ? n : min;
-  },
-  clamp: function clamp(x, min, max) {
-    x = x - (x - max & max - x >> 31);
-    return x - (x - min & x - min >> 31); //return ( n > max ) ? max : ( n < min ) ? n : min;
-  },
-  add_zero: function add_zero(i) {
-    if (i < 10) {
-      i = "0" + i;
-    }
-
-    return i;
-  },
-  // Start of the day (zero millisecond)
-  day_start: function day_start(t) {
-    var start = new Date(t);
-    start.setHours(0, 0, 0, 0);
-    return start.getTime();
-  },
-  // Start of the month
-  month_start: function month_start(t) {
-    var date = new Date(t);
-    var start = new Date(date.getFullYear(), date.getMonth(), 1);
-    return start.getTime();
-  },
-  // Start of the year
-  year_start: function year_start(t) {
-    var start = new Date(new Date(t).getFullYear(), 0, 1);
-    return start.getTime();
-  },
-  // Nearest in array
-  nearest_a: function nearest_a(x, array) {
-    var dist = Infinity;
-    var val = null;
-    var index = -1;
-
-    for (var i = 0; i < array.length; i++) {
-      var xi = array[i];
-
-      if (Math.abs(xi - x) < dist) {
-        dist = Math.abs(xi - x);
-        val = xi;
-        index = i;
-      }
-    }
-
-    return [index, val];
-  },
-  round: function round(num) {
-    var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
-    return parseFloat(num.toFixed(decimals));
-  },
-  // Strip? No, it's ugly floats in js
-  strip: function strip(number) {
-    return parseFloat(parseFloat(number).toPrecision(12));
-  },
-  get_day: function get_day(t) {
-    return t ? new Date(t).getDate() : null;
-  },
-  // Update array keeping the same reference
-  overwrite: function overwrite(arr, new_arr) {
-    arr.splice.apply(arr, [0, arr.length].concat(toConsumableArray_default()(new_arr)));
-  },
-  // Copy layout in reactive way
-  copy_layout: function copy_layout(obj, new_obj) {
-    for (var k in obj) {
-      if (Array.isArray(obj[k])) {
-        // (some offchart indicators are added/removed)
-        // we need to update layout in a reactive way
-        if (obj[k].length !== new_obj[k].length) {
-          this.overwrite(obj[k], new_obj[k]);
-          continue;
-        }
-
-        for (var m in obj[k]) {
-          Object.assign(obj[k][m], new_obj[k][m]);
-        }
-      } else {
-        Object.assign(obj[k], new_obj[k]);
-      }
-    }
-  },
-  // Checks if the ohlcv data is changed (given the new
-  // and old dataset values)
-  data_changed: function data_changed(n, p) {
-    n = n.ohlcv || (n.chart ? n.chart.data : []) || [];
-    p = p.ohlcv || (p.chart ? p.chart.data : []) || [];
-    return n.length !== p.length && n[0] !== p[0];
-  },
-  // Detects candles interval
-  detect_interval: function detect_interval(ohlcv) {
-    var len = this.MIN_INT(ohlcv.length - 1, 99);
-    var min = Infinity;
-    ohlcv.slice(0, len).forEach(function (x, i) {
-      var d = ohlcv[i + 1][0] - x[0];
-      if (d === d && d < min) min = d;
-    });
-    return min;
-  },
-  // Detects candles interval. (old version, slightly slower)
-
-  /*detect_interval(ohlcv) {
-      // Initial value of accumulator
-      let a0 = [Infinity, ohlcv[0][0]]
-      return ohlcv.slice(1, 99).reduce((a,x) =>
-      [Math.min(x[0] - a[1], a[0]), x[0]], a0)[0]
-  },*/
-  // Gets numberic part of overlay id (e.g 'EMA_1' = > 1)
-  get_num_id: function get_num_id(id) {
-    return parseInt(id.split('_').pop());
-  },
-  // Fast filter. Really fast, like 10X
-  fast_filter: function fast_filter(arr, t1, t2) {
-    if (!arr.length) return arr;
-
-    try {
-      var ia = new lib_default.a(arr, "0");
-      return ia.getRange(t1, t2);
-    } catch (e) {
-      // Something wrong with fancy slice lib
-      // Fast fix: fallback to filter
-      return arr.filter(function (x) {
-        return x[0] >= t1 && x[0] <= t2;
-      });
-    }
-  },
-  now: function now() {
-    return new Date().getTime();
-  },
-  pause: function pause(delayMs) {
-    return new Promise(function (rs, rj) {
-      return setTimeout(rs, delayMs);
-    });
-  },
-  // Limit crazy wheel delta values
-  smart_wheel: function smart_wheel(delta) {
-    var abs = Math.abs(delta);
-
-    if (abs > 500) {
-      return (200 + Math.log(abs)) * Math.sign(delta);
-    }
-
-    return delta;
-  },
-  // Parse the original mouse event to find deltaX
-  get_deltaX: function get_deltaX(event) {
-    return event.originalEvent.deltaX / 12;
-  },
-  // Parse the original mouse event to find deltaY
-  get_deltaY: function get_deltaY(event) {
-    return event.originalEvent.deltaY / 12;
-  },
-  countDecimals: function countDecimals(value) {
-    if ((value | 0) === value) return 0;
-    return value.toString().split(".")[1].length || 0;
-  },
-  changeNumberFormat: function changeNumberFormat(value, precision) {
-    // Nine Zeroes for Billions
-    return Math.abs(Number(value)) >= 1.0e+9 ? (Number(value) / 1.0e+9).toFixed(precision) + "B" // Six Zeroes for Millions 
-    : Math.abs(Number(value)) >= 1.0e+6 ? (Number(value) / 1.0e+6).toFixed(precision) + "M" : Number(value);
-  },
-  numberWithCommas: function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-});
 // CONCATENATED MODULE: ./src/components/js/layout_fn.js
 //bitwise test NOT ok ~~ and |0 math.floor -- BREAKS CROSSHAIR VERTICAL
 //works ok on price axis
@@ -5503,7 +6095,7 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
       var arr = cn.map(function (x) {
         return x.raw[0];
       });
-      var i = utils.nearest_a(t, arr)[0];
+      var i = utils["a" /* default */].nearest_a(t, arr)[0];
       if (!cn[i]) return;
       return Math.floor(cn[i].x) - 0.5;
     },
@@ -5528,7 +6120,7 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
       var arr = cn.map(function (x) {
         return x.raw[0];
       });
-      var i = utils.nearest_a(t, arr)[0];
+      var i = utils["a" /* default */].nearest_a(t, arr)[0];
       return cn[i];
     },
     // Nearest data points
@@ -5727,7 +6319,7 @@ function GridMaker(id, params) {
     var xrange = range[1] - range[0];
     var m = xrange * ($p.config.GRIDX / $p.width);
     var s = grid_maker_TIMESCALES;
-    return utils.nearest_a(m, s)[1];
+    return utils["a" /* default */].nearest_a(m, s)[1];
   } // Select nearest good-loking $ step (m is target scale)
 
 
@@ -5741,7 +6333,7 @@ function GridMaker(id, params) {
     }); // TODO: center the range (look at RSI for eaxmple,
     // it looks ugly when "80" is near the top)
 
-    return utils.strip(utils.nearest_a(m, s)[1]);
+    return utils["a" /* default */].strip(utils["a" /* default */].nearest_a(m, s)[1]);
   }
 
   function grid_x() {
@@ -5821,7 +6413,7 @@ function GridMaker(id, params) {
     for (var y$ = y1; y$ <= self.$_hi; y$ += self.$_step) {
       var y = ~~(y$ * self.A + self.B);
       if (y > height) continue;
-      self.ys.push([y, utils.strip(y$)]);
+      self.ys.push([y, utils["a" /* default */].strip(y$)]);
     }
   }
 
@@ -6060,11 +6652,11 @@ function Layout(params) {
 
 /* harmony default export */ var js_layout = (Layout);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__(1);
+var classCallCheck = __webpack_require__(2);
 var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(2);
+var createClass = __webpack_require__(3);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // CONCATENATED MODULE: ./src/components/js/updater.js
@@ -6150,7 +6742,7 @@ function () {
           var ts = d.data.map(function (x) {
             return x[0];
           });
-          var i = utils.nearest_a(t, ts)[0];
+          var i = utils["a" /* default */].nearest_a(t, ts)[0];
           d.type in ids ? ids[d.type]++ : ids[d.type] = 0;
           res["".concat(d.type, "_").concat(ids[d.type])] = d.data[i];
         }
@@ -6179,7 +6771,7 @@ function () {
       var xs = data.map(function (x) {
         return grid.t2screen(x[0]) + 0.5;
       });
-      var i = utils.nearest_a(e.x, xs)[0];
+      var i = utils["a" /* default */].nearest_a(e.x, xs)[0];
       if (!xs[i]) return {};
       return {
         //Using bitwise OR 0 to floor a number
@@ -6295,10 +6887,10 @@ Sectionvue_type_template_id_8fbe9336_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Section.vue?vue&type=template&id=8fbe9336&
 
 // EXTERNAL MODULE: ./node_modules/hammerjs/hammer.js
-var hammer = __webpack_require__(4);
+var hammer = __webpack_require__(5);
 
 // EXTERNAL MODULE: ./node_modules/hamsterjs/hamster.js
-var hamsterjs_hamster = __webpack_require__(22);
+var hamsterjs_hamster = __webpack_require__(26);
 var hamster_default = /*#__PURE__*/__webpack_require__.n(hamsterjs_hamster);
 
 // CONCATENATED MODULE: ./src/components/js/grid.js
@@ -6510,31 +7102,37 @@ function () {
       // TODO: check what happens if data changes interval
       this.layout = this.$p.layout.grids[this.id];
       this.interval = this.$p.interval;
-      if (!this.layout) return;
-      this.ctx.fillStyle = '#131722';
-      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height); //clearRect() uses a transparent fill
-      //this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+      if (!this.layout) return; //clearRect() uses a transparent fill and breaks discord alerts, fixed by adding bgcolor
+      //this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)		
+      //chrome 81 not working
+      //var bgcolor = this.$p.colors.colorBack
+      //this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height, bgcolor); 
 
+      var dpr = window.devicePixelRatio || 1;
+      if (dpr < 1) dpr = 1;
+      this.ctx.fillStyle = this.$p.colors.colorBack;
+      this.ctx.fillRect(0, 0, this.canvas.width * dpr, this.canvas.height * dpr);
       this.grid();
       this.overlays.slice(0) // copy
       .sort(function (l1, l2) {
         return l1.z - l2.z;
       }) // z-index sorting
       .forEach(function (l) {
-        if (!l.display) return;
+        if (!l.display) return; //https://stackoverflow.com/questions/54852559/use-settransform1-0-0-1-0-0-vs-save-restore
+        //this.ctx.save()
 
-        _this2.ctx.save();
+        _this2.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        var r = l.renderer;
-        if (r.hasOwnProperty('pre_draw') && typeof r.pre_draw === 'function') r.pre_draw(_this2.ctx);
-        r.draw(_this2.ctx);
-        if (r.hasOwnProperty('post_draw') && typeof r.post_draw === 'function') r.post_draw(_this2.ctx);
+        var r = l.renderer; //me: what is post_draw/pre_draw for?
+        //c4: just in case for now (for overlay devs)
+        //if (r.pre_draw) r.pre_draw(this.ctx, scale)
 
-        _this2.ctx.restore();
-      });
+        r.draw(_this2.ctx, dpr, false); //if (r.post_draw) r.post_draw(this.ctx, scale)
+        //this.ctx.restore() moved out of the loop
+      }); //this.ctx.restore()
 
       if (this.crosshair) {
-        this.crosshair.renderer.draw(this.ctx);
+        this.crosshair.renderer.draw(this.ctx, dpr);
       }
     } // Actually draws the grid (for real)
 
@@ -6632,8 +7230,8 @@ function () {
         this.trackpad_scroll(event);
       }
 
-      if (this.trackpad) delta *= 0.032; //delta = Utils.smart_wheel(delta)
-      // TODO: mouse zooming is a little jerky,
+      if (this.trackpad) delta *= 0.032;
+      delta = utils["a" /* default */].smart_wheel(delta); // TODO: mouse zooming is a little jerky,
       // needs to follow f(mouse_wheel_speed) and
       // if speed is low, scroll shoud be slower		
 
@@ -6704,8 +7302,8 @@ function () {
       var l = this.data.length - 1;
       var data = this.data;
       var range = this.range;
-      range[0] = utils.clamp(range[0], -Infinity, data[l][0] - this.interval * 5.5);
-      range[1] = utils.clamp(range[1], data[0][0] + this.interval * 5.5, Infinity); // TODO: IMPORTANT scrolling is jerky The Problem caused
+      range[0] = utils["a" /* default */].clamp(range[0], -Infinity, data[l][0] - this.interval * 5.5);
+      range[1] = utils["a" /* default */].clamp(range[1], data[0][0] + this.interval * 5.5, Infinity); // TODO: IMPORTANT scrolling is jerky The Problem caused
       // by the long round trip of 'range-changed' event.
       // First it propagates up to update layout in Chart.vue,
       // then it moves back as watch() update. It takes 1-5 ms.
@@ -6765,81 +7363,9 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/mixins/canvas.js
-// Interactive canvas-based component
-// Should implement: mousemove, mouseout, mouseup, mousedown, click
-/* harmony default export */ var mixins_canvas = ({
-  methods: {
-    setup: function setup() {
-      var _this = this;
+// EXTERNAL MODULE: ./src/mixins/canvas.js
+var mixins_canvas = __webpack_require__(9);
 
-      var id = "".concat(this.$props.tv_id, "-").concat(this._id, "-canvas");
-      var canvas = document.getElementById(id);
-      var dpr = window.devicePixelRatio || 1;
-      canvas.style.width = "".concat(this._attrs.width, "px");
-      canvas.style.height = "".concat(this._attrs.height, "px");
-      if (dpr < 1) dpr = 1; // Realy ? That's it? Issue #63
-
-      this.$nextTick(function () {
-        var rect = canvas.getBoundingClientRect();
-        canvas.width = rect.width * dpr;
-        canvas.height = rect.height * dpr;
-        var ctx = canvas.getContext('2d');
-        ctx.scale(dpr, dpr);
-
-        _this.redraw();
-      });
-    },
-    create_canvas: function create_canvas(h, id, props) {
-      var _this2 = this;
-
-      this._id = id;
-      this._attrs = props.attrs;
-      return h('div', {
-        "class": "trading-vue-".concat(id),
-        style: {
-          left: props.position.x + 'px',
-          top: props.position.y + 'px',
-          position: 'absolute'
-        }
-      }, [h('canvas', {
-        on: {
-          mousemove: function mousemove(e) {
-            return _this2.renderer.mousemove(e);
-          },
-          mouseout: function mouseout(e) {
-            return _this2.renderer.mouseout(e);
-          },
-          mouseup: function mouseup(e) {
-            return _this2.renderer.mouseup(e);
-          },
-          mousedown: function mousedown(e) {
-            return _this2.renderer.mousedown(e);
-          }
-        },
-        attrs: Object.assign({
-          id: "".concat(this.$props.tv_id, "-").concat(id, "-canvas")
-        }, props.attrs),
-        ref: 'canvas',
-        style: props.style
-      })].concat(props.hs || []));
-    },
-    redraw: function redraw() {
-      if (!this.renderer) return;
-      this.renderer.update();
-    }
-  },
-  watch: {
-    width: function width(val) {
-      this._attrs.width = val;
-      this.setup();
-    },
-    height: function height(val) {
-      this._attrs.height = val;
-      this.setup();
-    }
-  }
-});
 // CONCATENATED MODULE: ./src/components/js/crosshair.js
 
 
@@ -6861,8 +7387,8 @@ function () {
   createClass_default()(Crosshair, [{
     key: "update",
     value: function update(x, y) {
-      this.x = this.$p.cursor.x;
-      this.y = y;
+      this.x = Math.round(this.$p.cursor.x);
+      this.y = Math.round(y);
     }
   }, {
     key: "draw",
@@ -6872,27 +7398,38 @@ function () {
       if (!this.visible) return; // Adjust x here cuz there is a delay between
       // update() and draw()
 
-      this.x = this.$p.cursor.x;
       ctx.save();
-      ctx.strokeStyle = this.$p.colors.colorCross;
-      ctx.beginPath();
-      ctx.setLineDash([5]); // H
+      var dpr = window.devicePixelRatio || 1;
+      if (dpr < 1) dpr = 1;
+      this.x = Math.round(this.$p.cursor.x);
+      this.y = Math.round(this.y);
+      this.w = this.layout.width * dpr;
+      this.h = this.layout.height * dpr;
 
       if (this.$p.cursor.grid_id === this.layout.id) {
+        // H
+        ctx.strokeStyle = this.$p.colors.colorCross;
+        ctx.beginPath();
+        ctx.setLineDash([5]);
         ctx.moveTo(0, this.y);
-        ctx.lineTo(this.layout.width - 0.5, this.y);
+        ctx.lineTo(this.w - 0.5, this.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.strokeStyle = undefined;
       }
 
-      ctx.stroke();
-      ctx.restore(); // V
+      if (this.x >= 0) {
+        // V
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.moveTo(this.x, 0);
+        ctx.lineTo(this.x, this.h);
+        ctx.stroke();
+        ctx.lineWidth = undefined;
+        ctx.strokeStyle = undefined;
+      }
 
-      ctx.save();
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-      ctx.lineWidth = 5;
-      ctx.moveTo(this.x, 0);
-      ctx.lineTo(this.x, this.layout.height);
-      ctx.stroke();
       ctx.restore();
     }
   }, {
@@ -8064,7 +8601,7 @@ function layout_cnv(self) {
       mid,
       prev = undefined; // Subset interval against main interval
 
-  var interval2 = utils.detect_interval(sub);
+  var interval2 = utils["a" /* default */].detect_interval(sub);
   var ratio = interval2 / $p.interval;
   var px_step2 = layout.px_step * ratio;
   var splitter = px_step2 > 5 ? 1 : 0; // A & B are current chart tranformations:
@@ -8130,7 +8667,7 @@ function layout_vol(self) {
       mid,
       prev = undefined; // Subset interval against main interval
 
-  var interval2 = utils.detect_interval(sub);
+  var interval2 = utils["a" /* default */].detect_interval(sub);
   var ratio = interval2 / $p.interval;
   var px_step2 = layout.px_step * ratio;
   var splitter = px_step2 > 5 ? 1 : 0; // A & B are current chart tranformations:
@@ -8163,62 +8700,6 @@ function layout_vol(self) {
 
 
 //bitwise mathfloor test ok
-// // Candle object for Candles overlay
-// export default class CandleExt {
-//     constructor(overlay, ctx, data) {
-//         this.ctx = ctx
-//         this.self = overlay
-//         this.style = data.raw[6] || this.self
-//         this.draw(data)
-//     }
-//     draw(data) {
-//         const body_color = data.c <= data.o ?
-//             this.style.colorCandleUp :
-//             this.style.colorCandleDw
-//         const wick_color = data.c <= data.o ?
-//             this.style.colorWickUp :
-//             this.style.colorWickDw
-//         const wick_color_sm = this.style.colorWickSm
-//         let w = Math.round(Math.max(data.w, 1))
-//         let hw = Math.max(~~(w * 0.5), 1)
-//         let h = Math.round(Math.abs(data.o - data.c))
-//         let max_h = data.c === data.o ? 1 : 2
-//         this.ctx.strokeStyle = w > 1 ? wick_color : wick_color_sm
-//         this.ctx.beginPath()
-//         this.ctx.moveTo(
-//             ~~(data.x) - 0.5,
-//             ~~(data.h)
-//         )
-//         this.ctx.lineTo(
-//             ~~(data.x) - 0.5,
-//             ~~(data.l)
-//         )
-//         this.ctx.stroke()
-//         if (data.w > 1.5 || data.o === data.c) {
-//             this.ctx.fillStyle = body_color
-//             // TODO: Move common calculations to layout.js
-//             let s = data.c >= data.o ? 1 : -1
-//             this.ctx.fillRect(
-//                 ~~(data.x - hw -1),
-//                 ~~(data.o - 1),
-//                 ~~(hw * 2 + 1),
-//                 ~~(s * Math.max(h, max_h))
-//             )
-//         } else {
-//             this.ctx.strokeStyle = body_color
-//             this.ctx.beginPath()
-//             this.ctx.moveTo(
-//                 ~~(data.x) - 0.5,
-//                 ~~(Math.min(data.o, data.c)),
-//             )
-//             this.ctx.lineTo(
-//                 ~~(data.x) - 0.5,
-//                 ~~(Math.max(data.o, data.c)),
-//             )
-//             this.ctx.stroke()
-//         }
-//     }
-// }
 // Candle object for Candles overlay
 var candle_CandleExt =
 /*#__PURE__*/
@@ -8273,7 +8754,7 @@ function () {
 
 
 
-//bitwise test ok math.floor
+//bitwise test NOT ok math.floor. too much for 32bit__int
 var volbar_VolbarExt =
 /*#__PURE__*/
 function () {
@@ -8292,9 +8773,9 @@ function () {
     value: function draw(data) {
       var y0 = this.$p.layout.height;
       var w = data.x2 - data.x1;
-      var h = ~~data.h;
+      var h = Math.floor(data.h);
       this.ctx.fillStyle = data.green ? this.style.colorVolUp : this.style.colorVolDw;
-      this.ctx.fillRect(~~data.x1, ~~(y0 - h - 0.5), ~~w, ~~(h + 1));
+      this.ctx.fillRect(Math.floor(data.x1), Math.floor(y0 - h - 0.5), Math.floor(w), Math.floor(h + 1));
     }
   }]);
 
@@ -8360,6 +8841,7 @@ function () {
       if (!this.shader) this.init_shader();
       var layout = this.comp.$props.layout;
       var last = this.comp.$props.meta.last;
+      if (!last[4]) return undefined;
       var color = last[4] >= last[1] ? this.green() : this.red();
       var y = layout.$2screen(last[4]) - 1;
       ctx.strokeStyle = color;
@@ -8376,6 +8858,7 @@ function () {
       if (!this.data.length) return undefined;
       var layout = this.comp.$props.layout;
       var last = this.data[this.data.length - 1];
+      if (!last[4]) return undefined;
       var y = layout.$2screen(last[4]);
       var cndl = layout.c_magnet(last[0]);
       return {
@@ -9010,10 +9493,10 @@ function () {
   }
 });
 // EXTERNAL MODULE: ./src/stuff/icons.json
-var icons = __webpack_require__(3);
+var icons = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(20);
+var defineProperty = __webpack_require__(22);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // CONCATENATED MODULE: ./src/components/primitives/pin.js
@@ -9977,7 +10460,7 @@ FibonacciTime_component.options.__file = "src/components/overlays/FibonacciTime.
 /* harmony default export */ var Gridvue_type_script_lang_js_ = ({
   name: 'Grid',
   props: ['sub', 'layout', 'range', 'interval', 'cursor', 'colors', 'overlays', 'width', 'height', 'data', 'grid_id', 'y_transform', 'font', 'tv_id', 'config', 'meta'],
-  mixins: [mixins_canvas],
+  mixins: [mixins_canvas["a" /* default */]],
   components: {
     Crosshair: components_Crosshair,
     KeyboardListener: KeyboardListener
@@ -10338,6 +10821,8 @@ function () {
           h,
           side = this.side;
       var sb = this.layout.sb;
+      var dpr = window.devicePixelRatio || 1;
+      if (dpr < 1) dpr = 1;
       this.ctx.fillStyle = this.$p.colors.colorBack;
       this.ctx.font = "13px -apple-system,BlinkMacSystemFont, Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell, Fira Sans,Droid Sans,Helvetica Neue, sans-serif";
 
@@ -10345,8 +10830,8 @@ function () {
         case 'left':
           x = 0;
           y = 0;
-          w = Math.floor(sb);
-          h = this.layout.height;
+          w = sb * dpr;
+          h = this.layout.height * dpr;
           this.ctx.fillRect(x, y, w, h);
           this.ctx.strokeStyle = this.$p.colors.colorScale;
           this.ctx.beginPath();
@@ -10358,8 +10843,8 @@ function () {
         case 'right':
           x = 0;
           y = 0;
-          w = Math.floor(sb);
-          h = this.layout.height;
+          w = sb * dpr;
+          h = this.layout.height * dpr;
           this.ctx.fillRect(x, y, w, h);
           this.ctx.strokeStyle = this.$p.colors.colorScale;
           this.ctx.beginPath();
@@ -10387,7 +10872,7 @@ function () {
           this.ctx.textAlign = side === 'left' ? 'end' : 'start';
           var d = this.layout.prec >= 3 ? 3 : this.layout.prec; // Limit to 3 decimal places at most
 
-          var yValue = Math.abs(p[1]) >= 1.0e+6 ? utils.changeNumberFormat(p[1], d) : p[1].toFixed(d);
+          var yValue = Math.abs(p[1]) >= 1.0e+6 ? utils["a" /* default */].changeNumberFormat(p[1], d) : p[1].toFixed(d);
           this.ctx.fillText(yValue, x1 + offst, p[0] + 4);
         }
       } catch (err) {
@@ -10459,7 +10944,7 @@ function () {
       var d = this.layout.prec >= 3 ? 3 : this.layout.prec; // Limit to 3 decimal places at most
       // let lbl = this.$p.cursor.y$.toFixed(this.layout.prec)
 
-      var lbl = Math.abs(this.$p.cursor.y$) >= 1.0e+6 ? utils.changeNumberFormat(this.$p.cursor.y$, d) : this.$p.cursor.y$.toFixed(d);
+      var lbl = Math.abs(this.$p.cursor.y$) >= 1.0e+6 ? utils["a" /* default */].changeNumberFormat(this.$p.cursor.y$, d) : this.$p.cursor.y$.toFixed(d);
       this.ctx.fillStyle = this.$p.colors.colorPanel;
       var panwidth = this.layout.sb + 1;
       var x = -0.5;
@@ -10476,7 +10961,7 @@ function () {
       var d = this.drug.y - event.center.y;
       var speed = d > 0 ? 3 : 1;
       var k = 1 + speed * d / this.layout.height;
-      return utils.clamp(this.drug.z * k, 0.005, 100);
+      return utils["a" /* default */].clamp(this.drug.z * k, 0.005, 100);
     } // Not the best place to calculate y-range but
     // this is the simplest solution I found up to
     // date
@@ -10517,7 +11002,7 @@ function () {
 /* harmony default export */ var Sidebarvue_type_script_lang_js_ = ({
   name: 'Sidebar',
   props: ['sub', 'layout', 'range', 'interval', 'cursor', 'colors', 'font', 'width', 'height', 'grid_id', 'rerender', 'y_transform', 'tv_id', 'config', 'shaders'],
-  mixins: [mixins_canvas],
+  mixins: [mixins_canvas["a" /* default */]],
   mounted: function mounted() {
     var el = this.$refs['canvas'];
     this.renderer = new sidebar_Sidebar(el, this);
@@ -10808,7 +11293,7 @@ LegendButtonvue_type_template_id_1ad87362_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/LegendButton.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_LegendButtonvue_type_script_lang_js_ = (LegendButtonvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/LegendButton.vue?vue&type=style&index=0&lang=css&
-var LegendButtonvue_type_style_index_0_lang_css_ = __webpack_require__(32);
+var LegendButtonvue_type_style_index_0_lang_css_ = __webpack_require__(39);
 
 // CONCATENATED MODULE: ./src/components/LegendButton.vue
 
@@ -10866,7 +11351,7 @@ LegendButton_component.options.__file = "src/components/LegendButton.vue"
 // CONCATENATED MODULE: ./src/components/ButtonGroup.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_ButtonGroupvue_type_script_lang_js_ = (ButtonGroupvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/ButtonGroup.vue?vue&type=style&index=0&lang=css&
-var ButtonGroupvue_type_style_index_0_lang_css_ = __webpack_require__(34);
+var ButtonGroupvue_type_style_index_0_lang_css_ = __webpack_require__(41);
 
 // CONCATENATED MODULE: ./src/components/ButtonGroup.vue
 
@@ -10984,15 +11469,32 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
           var lastData = x.data[x.data.length - 1];
           var lastValueArr = Object.values(lastData);
           lastValueArr.shift();
-          valuesArr = lastValueArr.map(function (value) {
-            return x.type == 'FundingRate' || x.type == 'Volatility' ? {
-              value: "".concat((value * 100).toFixed(3), "%")
-            } : Math.abs(value) >= 1.0e+6 ? {
-              value: utils.changeNumberFormat(value, 2)
-            } : {
-              value: value.toFixed(2)
-            };
-          });
+
+          if (x.type == 'OpenInterest') {
+            valuesArr = [{
+              value: 'Low: ' + utils["a" /* default */].changeNumberFormat(lastValueArr[2], 2)
+            }, {
+              value: 'High: ' + utils["a" /* default */].changeNumberFormat(lastValueArr[1], 2)
+            }];
+          } else {
+            valuesArr = lastValueArr.map(function (value) {
+              if (x.type == 'FundingRate' || x.type == 'Volatility') {
+                return {
+                  value: "".concat((value * 100).toFixed(3), "%")
+                };
+              } else {
+                if (Math.abs(value) >= 1.0e+6) {
+                  return {
+                    value: utils["a" /* default */].changeNumberFormat(value, 2)
+                  };
+                } else {
+                  return {
+                    value: value.toFixed(2)
+                  };
+                }
+              }
+            });
+          }
         }
 
         return {
@@ -11054,7 +11556,7 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
 // CONCATENATED MODULE: ./src/components/Legend.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Legendvue_type_script_lang_js_ = (Legendvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Legend.vue?vue&type=style&index=0&lang=css&
-var Legendvue_type_style_index_0_lang_css_ = __webpack_require__(36);
+var Legendvue_type_style_index_0_lang_css_ = __webpack_require__(43);
 
 // CONCATENATED MODULE: ./src/components/Legend.vue
 
@@ -11268,7 +11770,7 @@ Legend_component.options.__file = "src/components/Legend.vue"
 // CONCATENATED MODULE: ./src/components/Section.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Sectionvue_type_script_lang_js_ = (Sectionvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Section.vue?vue&type=style&index=0&lang=css&
-var Sectionvue_type_style_index_0_lang_css_ = __webpack_require__(38);
+var Sectionvue_type_style_index_0_lang_css_ = __webpack_require__(45);
 
 // CONCATENATED MODULE: ./src/components/Section.vue
 
@@ -11294,7 +11796,12 @@ var Section_component = normalizeComponent(
 if (false) { var Section_api; }
 Section_component.options.__file = "src/components/Section.vue"
 /* harmony default export */ var Section = (Section_component.exports);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/readOnlyError.js
+var readOnlyError = __webpack_require__(27);
+var readOnlyError_default = /*#__PURE__*/__webpack_require__.n(readOnlyError);
+
 // CONCATENATED MODULE: ./src/components/js/botbar.js
+
 
 
 //bitwise test ok mathfloor
@@ -11307,6 +11814,8 @@ var botbar_MINUTE15 = constants.MINUTE15,
     botbar_WEEK = constants.WEEK,
     botbar_YEAR = constants.YEAR,
     botbar_MONTHMAP = constants.MONTHMAP;
+var botbar_dpr = window.devicePixelRatio || 1;
+if (botbar_dpr < 1) botbar_dpr = (readOnlyError_default()("dpr"), 1);
 
 var botbar_Botbar =
 /*#__PURE__*/
@@ -11334,9 +11843,11 @@ function () {
       var width = this.layout.botbar.width;
       var height = this.layout.botbar.height;
       var sb = this.layout.grids[0].sb;
+      var sc = this.layout.height;
       this.ctx.fillStyle = this.$p.colors.colorBack;
-      this.ctx.font = "13px -apple-system,BlinkMacSystemFont, Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell, Fira Sans,Droid Sans,Helvetica Neue, sans-serif";
-      this.ctx.fillRect(0, 0, width, height);
+      this.ctx.font = "13px -apple-system,BlinkMacSystemFont, Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell, Fira Sans,Droid Sans,Helvetica Neue, sans-serif"; //this.ctx.fillRect(0, 0, width, height)
+
+      this.ctx.fillRect(0, 0, width * botbar_dpr, height * botbar_dpr);
       this.ctx.strokeStyle = this.$p.colors.colorScale;
       this.ctx.beginPath();
       this.ctx.moveTo(0, 0.5);
@@ -11393,9 +11904,9 @@ function () {
       try {
         for (var _iterator2 = this.$p.shaders[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var s = _step2.value;
-          this.ctx.save();
-          s.draw(this.ctx);
-          this.ctx.restore();
+          //this.ctx.save()
+          this.ctx.setTransform(botbar_dpr, 0, 0, botbar_dpr, 0, 0);
+          s.draw(this.ctx); //this.ctx.restore()
         }
       } catch (err) {
         _didIteratorError2 = true;
@@ -11434,11 +11945,11 @@ function () {
     value: function format_date(t) {
       t += new Date(t).getTimezoneOffset() * botbar_MINUTE;
       var d = new Date(t);
-      if (utils.year_start(t) === t) return d.getFullYear();
-      if (utils.month_start(t) === t) return botbar_MONTHMAP[d.getMonth()];
-      if (utils.day_start(t) === t) return d.getDate();
-      var h = utils.add_zero(d.getHours());
-      var m = utils.add_zero(d.getMinutes());
+      if (utils["a" /* default */].year_start(t) === t) return d.getFullYear();
+      if (utils["a" /* default */].month_start(t) === t) return botbar_MONTHMAP[d.getMonth()];
+      if (utils["a" /* default */].day_start(t) === t) return d.getDate();
+      var h = utils["a" /* default */].add_zero(d.getHours());
+      var m = utils["a" /* default */].add_zero(d.getMinutes());
       return h + ":" + m;
     }
   }, {
@@ -11464,8 +11975,8 @@ function () {
       var time = '';
 
       if (ti < botbar_DAY) {
-        var h = utils.add_zero(d.getHours());
-        var m = utils.add_zero(d.getMinutes());
+        var h = utils["a" /* default */].add_zero(d.getHours());
+        var m = utils["a" /* default */].add_zero(d.getMinutes());
         time = h + ":" + m;
       }
 
@@ -11481,8 +11992,8 @@ function () {
     value: function lbl_highlight(t) {
       var ti = this.$p.interval;
       if (t === 0) return true;
-      if (utils.month_start(t) === t) return true;
-      if (utils.day_start(t) === t) return true;
+      if (utils["a" /* default */].month_start(t) === t) return true;
+      if (utils["a" /* default */].day_start(t) === t) return true;
       if (ti <= botbar_MINUTE15 && t % botbar_HOUR === 0) return true;
       return false;
     }
@@ -11511,7 +12022,7 @@ function () {
 /* harmony default export */ var Botbarvue_type_script_lang_js_ = ({
   name: 'Botbar',
   props: ['sub', 'layout', 'range', 'interval', 'cursor', 'colors', 'font', 'width', 'height', 'rerender', 'tv_id', 'config', 'shaders'],
-  mixins: [mixins_canvas],
+  mixins: [mixins_canvas["a" /* default */]],
   mounted: function mounted() {
     var el = this.$refs['canvas'];
     this.renderer = new botbar_Botbar(el, this);
@@ -11560,7 +12071,7 @@ function () {
 // CONCATENATED MODULE: ./src/components/Botbar.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Botbarvue_type_script_lang_js_ = (Botbarvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Botbar.vue?vue&type=style&index=0&lang=css&
-var Botbarvue_type_style_index_0_lang_css_ = __webpack_require__(40);
+var Botbarvue_type_style_index_0_lang_css_ = __webpack_require__(47);
 
 // CONCATENATED MODULE: ./src/components/Botbar.vue
 var Botbar_render, Botbar_staticRenderFns
@@ -11735,9 +12246,9 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
     },
     range_changed: function range_changed(r) {
       // Overwite & keep the original references
-      utils.overwrite(this.range, r);
+      utils["a" /* default */].overwrite(this.range, r);
       var sub = this.subset();
-      utils.overwrite(this.sub, sub);
+      utils["a" /* default */].overwrite(this.sub, sub);
       this.update_layout();
       this.$emit('range-changed', r);
     },
@@ -11759,14 +12270,14 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
     },
     calc_interval: function calc_interval() {
       if (this.ohlcv.length < 2) return;
-      this.interval = utils.detect_interval(this.ohlcv);
+      this.interval = utils["a" /* default */].detect_interval(this.ohlcv);
     },
     set_ytransform: function set_ytransform(s) {
       var obj = this.y_transforms[s.grid_id] || {};
       Object.assign(obj, s);
       this.$set(this.y_transforms, s.grid_id, obj);
       this.update_layout();
-      utils.overwrite(this.range, this.range);
+      utils["a" /* default */].overwrite(this.range, this.range);
     },
     default_range: function default_range() {
       var dl = this.$props.config.DEFAULT_LEN;
@@ -11781,10 +12292,10 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
         s = l - dl, d = 0.5;
       }
 
-      utils.overwrite(this.range, [this.ohlcv[s][0] - this.interval * d, this.ohlcv[l][0] + this.interval * ml]);
+      utils["a" /* default */].overwrite(this.range, [this.ohlcv[s][0] - this.interval * d, this.ohlcv[l][0] + this.interval * ml]);
     },
     subset: function subset() {
-      return utils.fast_filter(this.ohlcv, this.range[0] - this.interval, this.range[1]);
+      return utils["a" /* default */].fast_filter(this.ohlcv, this.range[0] - this.interval, this.range[1]);
     },
     common_props: function common_props() {
       return {
@@ -11810,7 +12321,7 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
         return {
           type: d.type,
           name: d.name,
-          data: utils.fast_filter(d.data, _this.range[0] - _this.interval, _this.range[1]),
+          data: utils["a" /* default */].fast_filter(d.data, _this.range[0] - _this.interval, _this.range[1]),
           settings: d.settings || _this.settings_ov,
           grid: d.grid || {}
         };
@@ -11849,7 +12360,7 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
     update_layout: function update_layout(clac_tf) {
       if (clac_tf) this.calc_interval();
       var lay = new js_layout(this);
-      utils.copy_layout(this._layout, lay);
+      utils["a" /* default */].copy_layout(this._layout, lay);
     },
     legend_button_click: function legend_button_click(event) {
       this.$emit('legend-button-click', event);
@@ -11965,7 +12476,7 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
       this.update_layout();
     },
     colors: function colors() {
-      utils.overwrite(this.range, this.range);
+      utils["a" /* default */].overwrite(this.range, this.range);
     },
     data: {
       handler: function handler(n, p) {
@@ -11974,11 +12485,11 @@ Keyboard_component.options.__file = "src/components/Keyboard.vue"
         // TODO: Consider removing 'sub' from data entirely
 
         if (this.sub.length || sub.length) {
-          utils.overwrite(this.sub, sub);
+          utils["a" /* default */].overwrite(this.sub, sub);
         }
 
-        this.update_layout(utils.data_changed(n, p));
-        utils.overwrite(this.range, this.range);
+        this.update_layout(utils["a" /* default */].data_changed(n, p));
+        utils["a" /* default */].overwrite(this.range, this.range);
         this.cursor.scroll_lock = !!n.scrollLock;
 
         if (n.scrollLock && this.cursor.locked) {
@@ -12151,7 +12662,7 @@ ToolbarItemvue_type_template_id_227b3c2e_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/ToolbarItem.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_ToolbarItemvue_type_script_lang_js_ = (ToolbarItemvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/ToolbarItem.vue?vue&type=style&index=0&lang=css&
-var ToolbarItemvue_type_style_index_0_lang_css_ = __webpack_require__(42);
+var ToolbarItemvue_type_style_index_0_lang_css_ = __webpack_require__(49);
 
 // CONCATENATED MODULE: ./src/components/ToolbarItem.vue
 
@@ -12248,7 +12759,7 @@ ToolbarItem_component.options.__file = "src/components/ToolbarItem.vue"
 // CONCATENATED MODULE: ./src/components/Toolbar.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Toolbarvue_type_script_lang_js_ = (Toolbarvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Toolbar.vue?vue&type=style&index=0&lang=css&
-var Toolbarvue_type_style_index_0_lang_css_ = __webpack_require__(44);
+var Toolbarvue_type_style_index_0_lang_css_ = __webpack_require__(51);
 
 // CONCATENATED MODULE: ./src/components/Toolbar.vue
 
@@ -12559,23 +13070,23 @@ if (false) { var TradingVue_api; }
 TradingVue_component.options.__file = "src/TradingVue.vue"
 /* harmony default export */ var TradingVue = (TradingVue_component.exports);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
-var helpers_typeof = __webpack_require__(19);
+var helpers_typeof = __webpack_require__(21);
 var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(15);
+var possibleConstructorReturn = __webpack_require__(17);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
-var getPrototypeOf = __webpack_require__(16);
+var getPrototypeOf = __webpack_require__(18);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(17);
+var inherits = __webpack_require__(19);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
-var regenerator = __webpack_require__(18);
+var regenerator = __webpack_require__(20);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 
 // CONCATENATED MODULE: ./src/helpers/dc_events.js
@@ -12773,7 +13284,7 @@ function () {
           id: grid_id
         }
       });
-      sett.$uuid = "".concat(id, "-").concat(utils.now());
+      sett.$uuid = "".concat(id, "-").concat(utils["a" /* default */].now());
       this.tv.$set(this.data, 'selected', id);
       this.add_trash_icon();
     } // Remove selected / Remove all, etc
@@ -12862,7 +13373,7 @@ function () {
     value: function remove_trash_icon() {
       // TODO: Does not call Toolbar render (distr version)
       var type = 'System:Remove';
-      utils.overwrite(this.data.tools, this.data.tools.filter(function (x) {
+      utils["a" /* default */].overwrite(this.data.tools, this.data.tools.filter(function (x) {
         return x.type !== type;
       }));
     } // Clean-up unfinished business (tools)
@@ -12983,7 +13494,7 @@ function (_DCEvents) {
 
               this.loading = true;
               _context.next = 9;
-              return regenerator_default.a.awrap(utils.pause(250));
+              return regenerator_default.a.awrap(utils["a" /* default */].pause(250));
 
             case 9:
               // Load bigger chunks
@@ -13547,9 +14058,9 @@ function (_DCCore) {
       var tick = data['price'];
       var volume = data['volume'] || 0;
       var candle = data['candle'];
-      var tf = utils.detect_interval(ohlcv);
+      var tf = utils["a" /* default */].detect_interval(ohlcv);
       var t_next = last[0] + tf;
-      var now = utils.now();
+      var now = utils["a" /* default */].now();
       var t = now >= t_next ? now - now % tf : last[0];
 
       if (candle) {
@@ -13585,9 +14096,9 @@ function (_DCCore) {
       var tick = data['price'];
       var volume = data['volume'] || 0;
       var candle = data['candle'];
-      var tf = utils.detect_interval(ohlcv);
+      var tf = utils["a" /* default */].detect_interval(ohlcv);
       var t_next = last[0] + tf;
-      var now = utils.now();
+      var now = utils["a" /* default */].now();
       var t = timestamp >= t_next ? now - now % tf : last[0];
 
       if (candle) {
@@ -13623,9 +14134,9 @@ function (_DCCore) {
       var last = ohlc[ohlc.length - 1];
       var timestamp = data['timestamp'];
       var tick = data['oi'];
-      var tf = utils.detect_interval(ohlc);
+      var tf = utils["a" /* default */].detect_interval(ohlc);
       var t_next = last[0] + tf;
-      var now = utils.now();
+      var now = utils["a" /* default */].now();
       var t = timestamp >= t_next ? now - now % tf : last[0]; //console.log(ohlc)
       //console.log(last)        
       //console.log(tick)
@@ -13643,6 +14154,218 @@ function (_DCCore) {
 
       this.update_overlays(data, t);
       return t >= t_next;
+    }
+  }, {
+    key: "batchUpdate",
+    value: function batchUpdate(dataMap) {
+      if (dataMap.has('ohlcv')) {
+        var newOhlcv = dataMap.get('ohlcv');
+        var oldOhlcv = this.data.chart.data;
+        var last = oldOhlcv[oldOhlcv.length - 1];
+        var tf = utils["a" /* default */].detect_interval(oldOhlcv);
+        var t_next = last[0] + tf;
+        var now = utils["a" /* default */].now();
+        var newArr = [];
+        var existingCandleNeedsUpdate = false;
+        newOhlcv.forEach(function (data) {
+          var timestamp = data[0];
+          var price = data[1];
+          var volume = data[2];
+          var t = timestamp >= t_next ? now - now % tf : last[0];
+
+          if (t >= t_next && price !== undefined) {
+            // And new zero-height candle
+            if (newArr.length > 0) {
+              // Data exists in new array
+              var lastNewData = newArr[newArr.length - 1];
+
+              if (t == lastNewData[0]) {
+                // Check if last data in new array matches the new data timestamp
+                lastNewData[2] = Math.max(price, lastNewData[2]);
+                lastNewData[3] = Math.min(price, lastNewData[3]);
+                lastNewData[4] = price;
+                lastNewData[5] += volume;
+              } else {
+                newArr.push([t, price, price, price, price, volume]);
+              }
+            } else {
+              // No existing data in new array
+              newArr.push([t, price, price, price, price, volume]);
+            }
+          } else if (price !== undefined) {
+            // Update an existing one
+            existingCandleNeedsUpdate = true;
+            last[2] = Math.max(price, last[2]);
+            last[3] = Math.min(price, last[3]);
+            last[4] = price;
+            last[5] += volume;
+          }
+        });
+
+        if (existingCandleNeedsUpdate) {
+          newArr = [last].concat(toConsumableArray_default()(newArr));
+        }
+
+        this.merge('chart.data', newArr);
+      }
+
+      if (dataMap.has('oi')) {
+        var newOhlc = dataMap.get('oi');
+        var oiIndex = this.data.offchart.findIndex(function (value) {
+          return value.type == 'OpenInterest';
+        });
+
+        if (oiIndex !== -1) {
+          var oldOhlc = this.data.offchart[oiIndex].data;
+          var _last = oldOhlc[oldOhlc.length - 1];
+
+          var _tf = utils["a" /* default */].detect_interval(oldOhlc);
+
+          var _t_next = _last[0] + _tf;
+
+          var _now = utils["a" /* default */].now();
+
+          var _newArr = [];
+          var _existingCandleNeedsUpdate = false;
+          newOhlc.forEach(function (data) {
+            var timestamp = data[0];
+            var price = data[1];
+            var t = timestamp >= _t_next ? _now - _now % _tf : _last[0];
+
+            if (t >= _t_next && price !== undefined) {
+              // And new zero-height candle
+              if (_newArr.length > 0) {
+                // Data exists in new array
+                var lastNewData = _newArr[_newArr.length - 1];
+
+                if (t == lastNewData[0]) {
+                  // Check if last data in new array matches the new data timestamp
+                  lastNewData[2] = Math.max(price, lastNewData[2]);
+                  lastNewData[3] = Math.min(price, lastNewData[3]);
+                  lastNewData[4] = price;
+                } else {
+                  _newArr.push([t, price, price, price, price]);
+                }
+              } else {
+                // No existing data in new array
+                _newArr.push([t, price, price, price, price]);
+              }
+            } else if (price !== undefined) {
+              // Update an existing one
+              _existingCandleNeedsUpdate = true;
+              _last[2] = Math.max(price, _last[2]);
+              _last[3] = Math.min(price, _last[3]);
+              _last[4] = price;
+            }
+          });
+
+          if (_existingCandleNeedsUpdate) {
+            _newArr = [_last].concat(toConsumableArray_default()(_newArr));
+          }
+
+          this.merge('offchart.OpenInterest.data', _newArr);
+        }
+      }
+
+      if (dataMap.has('funding')) {
+        var newFunding = dataMap.get('funding');
+        var fundingIndex = this.data.offchart.findIndex(function (value) {
+          return value.type == 'FundingRate';
+        });
+
+        if (fundingIndex !== -1) {
+          var oldFunding = this.data.offchart[fundingIndex].data;
+          var _last2 = oldFunding[oldFunding.length - 1];
+
+          var _tf2 = utils["a" /* default */].detect_interval(oldFunding);
+
+          var _t_next2 = _last2[0] + _tf2;
+
+          var _now2 = utils["a" /* default */].now();
+
+          var _newArr2 = [];
+          newFunding.forEach(function (data) {
+            var timestamp = data[0];
+            var funding = data[1];
+            var t = timestamp >= _t_next2 ? _now2 - _now2 % _tf2 : _last2[0];
+
+            _newArr2.push([t, funding]);
+          });
+          this.merge('offchart.FundingRate.data', _newArr2);
+        }
+      }
+
+      if (dataMap.has('liq')) {
+        var newLiq = dataMap.get('liq');
+        var liqIndex = this.data.onchart.findIndex(function (value) {
+          return value.type == 'Liquidations';
+        });
+
+        if (liqIndex !== -1) {
+          var oldLiq = this.data.onchart[liqIndex].data;
+          var _last3 = oldLiq[oldLiq.length - 1];
+
+          var _tf3 = utils["a" /* default */].detect_interval(oldLiq);
+
+          var _t_next3 = _last3[0] + _tf3;
+
+          var _now3 = utils["a" /* default */].now();
+
+          var _newArr3 = [];
+          var _existingCandleNeedsUpdate2 = false;
+          newLiq.forEach(function (data) {
+            var timestamp = data[0];
+            var qty = data[1];
+            var side = data[2].toLowerCase();
+            var t = timestamp >= _t_next3 ? _now3 - _now3 % _tf3 : _last3[0];
+
+            if (t >= _t_next3 && qty !== undefined) {
+              // And new zero-height candle
+              if (_newArr3.length > 0) {
+                // Data exists in new array
+                var lastNewData = _newArr3[_newArr3.length - 1];
+
+                if (t == lastNewData[0]) {
+                  // Check if last data in new array matches the new data timestamp
+                  if (side == 'buy') {
+                    lastNewData[1] += qty;
+                  } else if (side == 'sell') {
+                    lastNewData[2] += qty;
+                  }
+                } else {
+                  if (side == 'buy') {
+                    _newArr3.push([t, qty, 0]);
+                  } else if (side == 'sell') {
+                    _newArr3.push([t, 0, qty]);
+                  }
+                }
+              } else {
+                // No existing data in new array
+                if (side == 'buy') {
+                  _newArr3.push([t, qty, 0]);
+                } else if (side == 'sell') {
+                  _newArr3.push([t, 0, qty]);
+                }
+              }
+            } else if (qty !== undefined) {
+              // Update an existing one
+              _existingCandleNeedsUpdate2 = true;
+
+              if (side == 'buy') {
+                _last3[1] += qty;
+              } else if (side == 'sell') {
+                _last3[2] += qty;
+              }
+            }
+          });
+
+          if (_existingCandleNeedsUpdate2) {
+            _newArr3 = [_last3].concat(toConsumableArray_default()(_newArr3));
+          }
+
+          this.merge('onchart.Liquidations.data', _newArr3);
+        }
+      }
     } // Lock overlays from being pulled by query_search
     // TODO: subject to review
 
@@ -13751,7 +14474,7 @@ function () {
           var w = ctx.canvas.width;
           var h = config.PANHEIGHT; // let lbl = bar.price.toFixed(layout.prec)
 
-          var lbl = Math.abs(bar.price) >= 1.0e+6 ? utils.changeNumberFormat(bar.price, layout.prec) : bar.price.toFixed(layout.prec);
+          var lbl = Math.abs(bar.price) >= 1.0e+6 ? utils["a" /* default */].changeNumberFormat(bar.price, layout.prec) : bar.price.toFixed(layout.prec);
           ctx.fillStyle = bar.color;
           var x = -0.5;
           var y = bar.y - h * 0.5 - 0.5;
@@ -13768,7 +14491,8 @@ function () {
   }, {
     key: "draw",
     value: function draw(ctx) {
-      if (!this.comp.$props.meta.last) return;
+      //if (!this.comp.$props.meta.last) return
+      if (!this.comp.$props.data[this.comp.$props.data.length - 1][4]) return;
       if (!this.shader) this.init_shader();
       var layout = this.comp.$props.layout;
       var last = this.comp.$props.data[this.comp.$props.data.length - 1]; // let last = this.comp.$props.data.map(x => x[4])
@@ -13800,7 +14524,7 @@ function () {
   }, {
     key: "last_price",
     value: function last_price() {
-      return this.comp.$props.data[this.comp.$props.data.length - 1][4]; // return this.comp.$props.data.map(x => x[4]) ?
+      return this.comp.$props.data[this.comp.$props.data.length - 1][4] ? this.comp.$props.data[this.comp.$props.data.length - 1][4] : undefined; // return this.comp.$props.data.map(x => x[4]) ?
       // this.comp.$props.meta.last[4] : undefined
     }
   }, {
@@ -13877,7 +14601,7 @@ function () {
 // CONCATENATED MODULE: ./src/index.js
 /* concated harmony reexport TradingVue */__webpack_require__.d(__webpack_exports__, "TradingVue", function() { return TradingVue; });
 /* concated harmony reexport Overlay */__webpack_require__.d(__webpack_exports__, "Overlay", function() { return mixins_overlay; });
-/* concated harmony reexport Utils */__webpack_require__.d(__webpack_exports__, "Utils", function() { return utils; });
+/* concated harmony reexport Utils */__webpack_require__.d(__webpack_exports__, "Utils", function() { return utils["a" /* default */]; });
 /* concated harmony reexport Constants */__webpack_require__.d(__webpack_exports__, "Constants", function() { return constants; });
 /* concated harmony reexport Candle */__webpack_require__.d(__webpack_exports__, "Candle", function() { return candle_CandleExt; });
 /* concated harmony reexport Volbar */__webpack_require__.d(__webpack_exports__, "Volbar", function() { return volbar_VolbarExt; });
@@ -13906,7 +14630,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.TradingVueLib = {
     TradingVue: TradingVue,
     Overlay: mixins_overlay,
-    Utils: utils,
+    Utils: utils["a" /* default */],
     Constants: constants,
     Candle: candle_CandleExt,
     Volbar: volbar_VolbarExt,

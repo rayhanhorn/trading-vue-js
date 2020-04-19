@@ -98,11 +98,30 @@ export default {
                     const lastData = x.data[x.data.length - 1]
                     let lastValueArr = Object.values(lastData)
                     lastValueArr.shift()
-                    valuesArr = lastValueArr.map(value => {
-                        return x.type == 'FundingRate' || x.type == 'Volatility' ? {value: `${(value * 100).toFixed(3)}%`} : Math.abs(value) >= 1.0e+6 ? {value: Utils.changeNumberFormat(value, 2)} : {value: value.toFixed(2)}
-                    })
+
+                    if (x.type == 'OpenInterest') {
+                        valuesArr = [
+                            {
+                                value: 'Low: '+Utils.changeNumberFormat(lastValueArr[2], 2)
+                            },
+                            {
+                                value: 'High: '+Utils.changeNumberFormat(lastValueArr[1], 2)
+                            }
+                        ]
+                    } else {
+                        valuesArr = lastValueArr.map(value => {
+                            if (x.type == 'FundingRate' || x.type == 'Volatility') {
+                                return {value: `${(value * 100).toFixed(3)}%`}
+                            } else {
+                                if (Math.abs(value) >= 1.0e+6) {
+                                    return {value: Utils.changeNumberFormat(value, 2)}
+                                } else {
+                                    return {value: value.toFixed(2)}
+                                }
+                            }
+                        })
+                    }
                 }
-                
 
                 return {
                     v: 'display' in x.settings ? x.settings.display : true,
