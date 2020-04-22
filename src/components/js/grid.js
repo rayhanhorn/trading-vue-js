@@ -215,15 +215,15 @@ export default class Grid {
 		.forEach(l => {
 			if (!l.display) return
 			//https://stackoverflow.com/questions/54852559/use-settransform1-0-0-1-0-0-vs-save-restore
-			//this.ctx.save()
-			this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+			this.ctx.save()
+			// this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 			const r = l.renderer
 			//me: what is post_draw/pre_draw for?
 			//c4: just in case for now (for overlay devs)
 			//if (r.pre_draw) r.pre_draw(this.ctx, scale)
 			r.draw(this.ctx, dpr, false)			
 			//if (r.post_draw) r.post_draw(this.ctx, scale)
-			//this.ctx.restore() moved out of the loop
+			this.ctx.restore()
 		})
 		
 		//this.ctx.restore()

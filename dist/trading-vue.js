@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.5 - Mon Apr 20 2020
+ * TradingVue.JS - v0.4.5 - Wed Apr 22 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -7119,16 +7119,17 @@ function () {
       }) // z-index sorting
       .forEach(function (l) {
         if (!l.display) return; //https://stackoverflow.com/questions/54852559/use-settransform1-0-0-1-0-0-vs-save-restore
-        //this.ctx.save()
 
-        _this2.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        _this2.ctx.save(); // this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
 
         var r = l.renderer; //me: what is post_draw/pre_draw for?
         //c4: just in case for now (for overlay devs)
         //if (r.pre_draw) r.pre_draw(this.ctx, scale)
 
         r.draw(_this2.ctx, dpr, false); //if (r.post_draw) r.post_draw(this.ctx, scale)
-        //this.ctx.restore() moved out of the loop
+
+        _this2.ctx.restore();
       }); //this.ctx.restore()
 
       if (this.crosshair) {
