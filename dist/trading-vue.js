@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v0.4.5 - Wed Apr 22 2020
+ * TradingVue.JS - v0.4.5 - Fri Apr 24 2020
  *     https://github.com/C451/trading-vue-js
  *     Copyright (c) 2019 c451 Code's All Right;
  *     Licensed under the MIT license
@@ -6215,7 +6215,7 @@ function GridMaker(id, params) {
         }
       } else {
         self.$_hi = hi + (hi - lo) * $p.config.EXPAND;
-        self.$_lo = lo - (hi - lo) * $p.config.EXPAND;
+        self.$_lo = lo == 0 ? 0 : lo - (hi - lo) * $p.config.EXPAND;
 
         if (self.$_hi === self.$_lo) {
           self.$_hi *= 1.05; // Expand if height range === 0
@@ -6404,7 +6404,9 @@ function GridMaker(id, params) {
     self.ys = [];
     var y1 = 0;
 
-    if (self.$_lo < 0) {
+    if (self.$_lo == 0) {
+      y1 = self.$_step;
+    } else if (self.$_lo < 0) {
       y1 = self.$_lo + self.$_lo % self.$_step;
     } else {
       y1 = self.$_lo - self.$_lo % self.$_step;
@@ -8689,6 +8691,55 @@ function layout_vol(self) {
       x2: x2,
       h: p[self._i1] * vs,
       green: self._i2(p),
+      raw: p
+    });
+    prev = x2 + splitter;
+  }
+
+  return volume;
+}
+function layout_liq_bar(self) {
+  var $p = self.$props;
+  var sub = $p.data;
+  var t2screen = $p.layout.t2screen;
+  var layout = $p.layout;
+  var volume = []; // Support special volume data (see API book), or OHLCV
+  // Data indices:
+
+  self._i1 = 1;
+  self._i2 = 2; // self._i2 = dim < 6 ? (p => p[2]) : (p => p[4] >= p[1])
+
+  var maxv = Math.max.apply(Math, toConsumableArray_default()(sub.map(function (x) {
+    return x[self._i1] > x[self._i2] ? x[self._i1] : x[self._i2];
+  })));
+  var volscale = self.volscale || $p.config.VOLSCALE;
+  var vs = volscale * layout.height / maxv;
+  var x1,
+      x2,
+      mid,
+      prev = undefined; // Subset interval against main interval
+
+  var interval2 = utils["a" /* default */].detect_interval(sub);
+  var ratio = interval2 / $p.interval;
+  var px_step2 = layout.px_step * ratio;
+  var splitter = px_step2 > 5 ? 1 : 0; // A & B are current chart tranformations:
+  // A === scale,  B === Y-axis shift
+
+  for (var i = 0; i < sub.length; i++) {
+    var p = sub[i];
+    mid = t2screen(p[0]) + 1; // Clear volume bar if there is a time gap
+
+    if (sub[i - 1] && p[0] - sub[i - 1][0] > interval2) {
+      prev = null;
+    }
+
+    x1 = prev || ~~(mid - px_step2 * 0.5);
+    x2 = ~~(mid + px_step2 * 0.5) - 0.5;
+    volume.push({
+      x1: x1,
+      x2: x2,
+      h1: p[self._i1] * vs,
+      h2: p[self._i2] * vs,
       raw: p
     });
     prev = x2 + splitter;
@@ -14599,6 +14650,49 @@ function () {
 }();
 
 
+// CONCATENATED MODULE: ./src/components/primitives/liqbar.js
+
+
+
+//bitwise test NOT ok math.floor. too much for 32bit__int
+var liqbar_LiqbarExt =
+/*#__PURE__*/
+function () {
+  function LiqbarExt(overlay, ctx, data) {
+    classCallCheck_default()(this, LiqbarExt);
+
+    this.ctx = ctx;
+    this.$p = overlay.$props;
+    this.self = overlay;
+    this.style = data.raw[6] || this.self;
+    this.draw(data);
+  }
+
+  createClass_default()(LiqbarExt, [{
+    key: "draw",
+    value: function draw(data) {
+      var y0 = this.$p.layout.height;
+      var w = (data.x2 - data.x1) / 2;
+      var h1 = data.h1;
+      var h2 = data.h2;
+      var top = h1 > h2 ? h1 : h2;
+      this.ctx.strokeStyle = "white";
+      this.ctx.lineWidth = 0.5;
+      this.ctx.strokeRect(data.x1, y0 - top - 1, w * 2 + 1, top + 1); // this.ctx.fillStyle = data.green ?
+      //     this.style.colorVolUp :
+      //     this.style.colorVolDw
+
+      this.ctx.fillStyle = this.style.colorVolUp;
+      this.ctx.fillRect(data.x1 + 0.5, y0 - h1 - 0.5, w - 0.5, h1 + 1);
+      this.ctx.fillStyle = this.style.colorVolDw;
+      this.ctx.fillRect(data.x1 + w, y0 - h2 - 0.5, w - 0.5, h2 + 1);
+    }
+  }]);
+
+  return LiqbarExt;
+}();
+
+
 // CONCATENATED MODULE: ./src/index.js
 /* concated harmony reexport TradingVue */__webpack_require__.d(__webpack_exports__, "TradingVue", function() { return TradingVue; });
 /* concated harmony reexport Overlay */__webpack_require__.d(__webpack_exports__, "Overlay", function() { return mixins_overlay; });
@@ -14606,11 +14700,14 @@ function () {
 /* concated harmony reexport Constants */__webpack_require__.d(__webpack_exports__, "Constants", function() { return constants; });
 /* concated harmony reexport Candle */__webpack_require__.d(__webpack_exports__, "Candle", function() { return candle_CandleExt; });
 /* concated harmony reexport Volbar */__webpack_require__.d(__webpack_exports__, "Volbar", function() { return volbar_VolbarExt; });
+/* concated harmony reexport Liqbar */__webpack_require__.d(__webpack_exports__, "Liqbar", function() { return liqbar_LiqbarExt; });
 /* concated harmony reexport layout_cnv */__webpack_require__.d(__webpack_exports__, "layout_cnv", function() { return layout_cnv; });
 /* concated harmony reexport layout_vol */__webpack_require__.d(__webpack_exports__, "layout_vol", function() { return layout_vol; });
+/* concated harmony reexport layout_liq_bar */__webpack_require__.d(__webpack_exports__, "layout_liq_bar", function() { return layout_liq_bar; });
 /* concated harmony reexport DataCube */__webpack_require__.d(__webpack_exports__, "DataCube", function() { return datacube_DataCube; });
 /* concated harmony reexport OICandle */__webpack_require__.d(__webpack_exports__, "OICandle", function() { return oi_candle_OICandleExt; });
 /* concated harmony reexport OIPrice */__webpack_require__.d(__webpack_exports__, "OIPrice", function() { return oi_price_OIPrice; });
+
 
 
 
@@ -14635,8 +14732,10 @@ if (typeof window !== 'undefined' && window.Vue) {
     Constants: constants,
     Candle: candle_CandleExt,
     Volbar: volbar_VolbarExt,
+    Liqbar: liqbar_LiqbarExt,
     layout_cnv: layout_cnv,
     layout_vol: layout_vol,
+    layout_liq_bar: layout_liq_bar,
     DataCube: datacube_DataCube,
     OICandle: oi_candle_OICandleExt,
     OIPrice: oi_price_OIPrice
